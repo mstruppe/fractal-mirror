@@ -3,5 +3,7 @@
 # created inside that environment — it never authenticates WHICH writer authored it (the author field
 # attributes, C-037; per-writer keys arm at the first writer outside this custody environment).
 # All three writer identities therefore share the single custody key below.
+# fractal@knet.network — the public identity address (C-105, 2026-08-16): Max's public-facing
+# identity on the mirror (the permanent public home); same custody environment, same key.
 # Bind locally after clone: git config gpg.ssh.allowedSignersFile <absolute-path-to-this-file>
-max.struppe@gmail.com,claude@fractal.local,codex@fractal.local ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHOQaxo9q0mqWsubXl1y0BmzSi5gmLLBymsSchMjl/gp
+max.struppe@gmail.com,claude@fractal.local,codex@fractal.local,fractal@knet.network ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHOQaxo9q0mqWsubXl1y0BmzSi5gmLLBymsSchMjl/gp
