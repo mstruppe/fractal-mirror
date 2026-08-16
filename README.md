@@ -9,7 +9,7 @@ You need **git** and the **Claude Code CLI** ([claude.com/claude-code](https://c
 **1. Get FRACTAL** (paste as one line):
 
 ```bash
-git clone https://github.com/mstruppe/fractal.git ~/Desktop/fractal && cd ~/Desktop/fractal && git checkout $(git describe --tags --abbrev=0)
+git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal && cd ~/Desktop/fractal && git checkout $(git describe --tags --abbrev=0)
 ```
 
 You will see a **"detached HEAD" notice — that's expected**: you are standing on the newest release, and you won't commit here, so ignore it (don't create a branch; this copy is a reference, not your project).
