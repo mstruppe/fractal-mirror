@@ -1,0 +1,83 @@
+# Fractal Context Index
+
+> **DERIVED PROJECTION — routing table, not a source of truth.** The lookup layer for the Context Persistence Workflow: it maps each domain to a short code, its canonical location, and its current context package, so a conversation resolves *exactly what to load* in one glance instead of scanning the folder. Living document: stable filename, version tracked below. Update it whenever a location or package changes — it is the single place routing is maintained. Canonical copy: `FRACTAL/Claude/Context Packages/`.
+
+**Version:** 0.33 · **Status:** Living (derived projection) · **Updated:** 2026-08-16 · **Document ID:** DOC-01KZVYP8MGAH66JSVDDPNZ1PTR
+**How to use:** identify the aspect/domain of your task → read its context package (or, if none yet, the canonical documents at its path) → load nothing outside that row unless a dependency requires it.
+
+**Route provenance (C-046, completed by C-053):** **all eight domain codes** — `KG`, `GOV`, `GBL`, `CTX`, `AST`, `ONT`, `WS`, `PROT` — are **live `alias(kind: route)` bindings in the Knowledge Graph Store**; this table projects them and cannot drift from their concepts (Schema v0.6 §5.3 rule 7).
+
+---
+
+## Behavioural entry points
+
+| Need | Read this |
+|---|---|
+| Orientation (vision + current realisation) | `Fractal_Global_Context.md` (`/Claude/Context Packages/Global/` — read in-repo, C-067) |
+| Where we're looking right now (active aspect) | the active Local Context, below |
+| How a conversation must behave | `Fractal_Conversation_Settings.md` (`/Claude/Project Governance/Governance Documents/`) |
+| The decision ledger (all numbered C-decisions, one index) | `Fractal_Decision_Register.md` (`/Claude/Project Governance/Governance Documents/` — read in-repo, C-067) |
+| The whole rule-set at a glance (one-page rule-book) | `Fractal_Rule_Overview.md` (`/Claude/Project Governance/Governance Documents/` — read in-repo, C-067) — part of the context package per C-036 |
+| Rebuilding FRACTAL from a bare clone (rehydrate + client adapters) | `BOOTSTRAP.md` (repo root — ships in-repo per C-020/C-038) |
+| **Starting a new project under FRACTAL's government** (birth an instance) | `GENESIS.md` (repo root — BOOTSTRAP's forward sibling, arc 1 of C-078) — **guided path: `Fractal_Onboarding_Protocol.md`** (Governance Documents, C-101; trigger `/begin`) |
+| **The repo gate for strangers** (what FRACTAL is, compressed) | `README.md` (repo root — derived projection, never a source; committed per Protocol v0.33) |
+| **The user guide** (day two onward, per-client driving, troubleshooting) | `GUIDE.md` (repo root — derived projection, never a source; landed per v0.45) |
+| **All session commands at a glance** (the sextet + the child tier) | `Fractal_Command_Index.md` (`/Claude/Context Packages/` — derived projection over the stamped command files; issued 2026-08-16; the move-2 website section projects from it) |
+| **The shipping page** (explanation + setup guide, for sharing by link) | `Site/fractal-site.html` (source of record; the live page is a private claude.ai artifact, per v0.33) |
+| Why the current state exists (history) | Governance Protocols (see PROT row) |
+
+## Active Local Context
+
+| Aspect | Canonical location | Document |
+|---|---|---|
+| **Knowledge Graph / code system** (current focus) | `/Claude/Context Packages/Local/` | `Fractal_Local_Context_Knowledge_Graph.md` |
+
+## Domain routing
+
+| Domain | Code | Canonical location | Context package | Status |
+|---|---|---|---|---|
+| Global / orientation (stable) | `GBL` ⚭ | `/Claude/Context Packages/Global/` | Fractal_Global_Context | Current |
+| Knowledge Graph | `KG` ⚭ | `/Claude/Architecture/Concepts/Knowledge Graph/` · store: `/Claude/Knowledge Graph Store/` | Local Context (KG) | Active — format v0.6, read side contracted (C-068–C-070), multi-writer safe (C-049–C-050); live store holds the canonical corpus (C-042) |
+| Governance & Workflow | `GOV` ⚭ | `/Claude/Project Governance/` · (ChatGPT-era: `/Archive/Foundation with ChatGPT/Project Governance/`) | Conversation Settings + Governance Protocols + Decision Register + Rule Overview | Active |
+| Architecture State (canonical current model) | `AST` ⚭ | `/Claude/Architecture/Architecture State/` (`Fractal_Architecture_State.md`) · (ChatGPT-era stub + Master Index: `/Archive/Foundation with ChatGPT/Architecture/`, pointer-only C-029) | Architecture State (living canonical map, C-051) | Active — forged clean 2026-08-13 |
+| Information / Context Packages | `CTX` ⚭ | `/Claude/Context Packages/` · (concept drafts: `/Architecture/Concepts/Information Package/`) | Global Context + this Index | Active |
+| Ontology & Shells (Galaxy / Operator) | `ONT` ⚭ | Architecture State §3 (`AST.ONT`) · (ChatGPT-era Parts IV–V: pointer-only) | — (within AST) | Settled — C-017 two-faces model; supersession recorded (C-052) |
+| Workspace, Navigation & UI | `WS` ⚭ | `/Claude/Architecture/Concepts/Workspace/` (`Fractal_Workspace_Foundation`, C-086 class) · Architecture State §4 (`AST.WS`) · (ChatGPT-era Parts VI–VIII + UI-vision note: pointer-only reservoir) | Workspace Foundation (concept, Draft) | **Active — forged (C-093, per v0.39):** OQ-23 fired on observed need; first build slice landed (`Workbench/` — working tool, homepage-nested) |
+| Protocols (development history) | `PROT` ⚭ | `/Claude/Project Governance/Governance Protocol/` (`GOV.PROT`) · (ChatGPT-era: `/Archive/Foundation with ChatGPT/Initial Protocols until v11/`) | n/a (history layer) | Series open (Claude v0.1–v0.30) |
+
+*Paths are relative to `Desktop/FRACTAL/`. Rows without a dedicated package resolve to their canonical location or the relevant Architecture State index range. ⚭ = route bound in the store via `alias(kind: route)` (C-046).*
+
+## Canonical documents of note
+
+| Document | Domain | Canonical location |
+|---|---|---|
+| Knowledge Path Foundation v0.1 | KG | `/Claude/Architecture/Concepts/Knowledge Graph/` |
+| Knowledge Network Foundation (living concept, **Draft — non-binding vision tier**, C-086; the network stack: profiles, verification gate, standards library, knowledge mining; **v0.2 — first external-evidence revision: the child's dragons, per v0.39**) | GBL | `/Claude/Architecture/Concepts/Knowledge Network/` |
+| Workspace Foundation (living concept, **Draft — non-binding vision tier**, C-086 second member; the WS forge of record — coupled panes over `resolve`, the archive reservoir governed, the workbench §7-landed; first build slice: `Workbench/` at the repo root, working tool; **v0.2 — first observed-use revision: §6 carries the vehicle decision's first datum, per v0.40**) | WS | `/Claude/Architecture/Concepts/Workspace/` |
+| Node & Event Schema **v0.6** (v0.1–v0.5 superseded, retained as history; every version its own DOC identity, C-061) | KG | `/Claude/Architecture/Concepts/Knowledge Graph/` |
+| Node Template **v0.5** (v0.1–v0.4 superseded, retained as history; every version its own DOC identity, C-061) | KG | `/Claude/Architecture/Concepts/Knowledge Graph/` |
+| Navigation Contract **v0.1** (the read-side companion of the Schema — entry, hops, trace, ranking, history; C-068–C-070) | KG | `/Claude/Architecture/Concepts/Knowledge Graph/` |
+| Knowledge Graph Store (live: nodes/ + _events/; canonical-corpus DOC nodes, facet layer, route bindings; seven tools `verify.py` + `mint.py` + `check_versions.py` + `close.py` + `genesis.py` + `doctor.py` + `fieldnote.py`, C-050/C-060/C-073/C-078/C-087/C-088/C-100) | KG | `/Claude/Knowledge Graph Store/` |
+| Architecture State (living canonical map; ONT §3, WS §4) | AST | `/Claude/Architecture/Architecture State/` |
+| Decision Register (C-001 → C-n) | GOV | `/Claude/Project Governance/Governance Documents/` |
+| Rule Overview (one-page rule-book; context package per C-036) | GOV | `/Claude/Project Governance/Governance Documents/` |
+| Bootstrap Protocol (`BOOTSTRAP.md`, stable root filename) | GOV | repo root (`Desktop/FRACTAL/`) |
+| Genesis Protocol (`GENESIS.md` **v0.6**, stable root filename; canonical, DOC-minted, STRICT-guarded — the forward sibling of BOOTSTRAP; §3 executable since `genesis.py`; the flip-preparation reissue per v0.45 — the fieldnote door in §1/§2/§3.6, the guided path in §0, the second-client shelf row) | GOV | repo root (`Desktop/FRACTAL/`) |
+| **Onboarding Protocol** (`Fractal_Onboarding_Protocol.md` — the guided first loop: the interview, the rail, the fade; C-101; `/begin` its command projection) | GOV | `/Claude/Project Governance/Governance Documents/` |
+| **Fieldnote Format v0.1** (the machine-parsable capture format — the friends-beta collection interface; C-100; reference implementation `fieldnote.py`) | GOV | `/Claude/Project Governance/Governance Documents/` |
+| **License layer** (C-099 — `LICENSE` Apache-2.0 · `LICENSE-docs` CC BY 4.0 · `NOTICE`; the name not licensed, stated in README; terms travel with newborns) | GOV | repo root (`Desktop/FRACTAL/`) |
+| Claude Code client adapter (`CLAUDE.md`, stable root filename; canonical per C-065 — content a C-035 compression of Conversation Settings) | GOV | repo root (`Desktop/FRACTAL/`) |
+| **Client Library** (canonical living catalog of vendor surfaces, **C-097** — per client: discovery convention, session-capable adapter template, mechanics; no runtime API — currency via the C-094 loop; Codex/ChatGPT entry harvest-pending on KNet's ratified adapter) | GOV | `/Claude/Project Governance/Governance Documents/` (`Fractal_Client_Library.md`) |
+| Codex drone adapter (`AGENTS.md`, stable root filename; canonical per C-065 class, installed per C-066 — drone-scoped C-035 compression) | GOV | repo root (`Desktop/FRACTAL/`) |
+| Loose-Ends Scans #1 (2026-08-12), #2 (2026-08-14), #3 & #4 (2026-08-15) — canonical reviews, sequential/dated (C-058; #3 carries the first Scan-riding restore drill, C-076; **#4 the pre-pack gate — the series' first birth test, full slate in-pass**) | GOV | `/Claude/Context Packages/Conversations/` |
+| **Release provenance anchors** (C-090 — per-release tag attestation + OpenTimestamps receipt pairs; first member `beta-0.1`; receipts upgrade to Bitcoin-final mechanically at any later session) | GOV | repo root (`Provenance/`) |
+
+*Every canonical document above carries a minted `DOC-…` identity in the Knowledge Graph Store (C-041/C-042); the store's alias events bind each `Fractal_<Name>` to its id — and, for versioned artifacts, each `Fractal_<Name>_vX.Y` to its own per-version DOC (C-061), the versionless alias staying on the series pointer. Facets themselves are minted under the `FACET` root (C-043).*
+
+## Naming convention (decision C-012)
+
+**Living projections** (Global Context, this Index, Conversation Settings, Architecture State, Local Contexts, Decision Register) use a **stable filename**; version lives inside the document. **Historical / sequential artifacts** (Governance Protocols, Return Packages) carry versioned or dated filenames. **Canonical specifications** (Schema, Template) are versioned artifacts: every substantive change is a new version/file (C-040), each version carrying its own DOC identity in the store while the versionless alias tracks the newest (C-061). **No living projection's filename carries a version token** — the grandfathered `_v0.1` orientation names were retired 2026-08-15 (C-080), and `check_versions.py` now errors on any that reappear. The ChatGPT-era files **were moved to the archive subfolder `Archive/` on 2026-08-14 (C-063, OQ-10 resolved)** — this file is the one place the paths are maintained, and it was updated in the same pass.
+
+---
+
+**Sources:** Fractal Global Context; Fractal Governance Protocol — Claude Series v0.1–v0.38; Fractal Decision Register (stamp inside, C-012); Fractal Conversation Settings v0.8; Fractal Node & Event Schema v0.6; Fractal Navigation Contract v0.1; Knowledge Graph Store route bindings (C-046/C-053); Fractal_Architecture_State (stamp inside, C-012); folder structure of `Desktop/FRACTAL/` as of 2026-08-15 (git-initialized, C-037; loose-ends pass per v0.17; checker close per v0.18; spec-version identity per v0.19; ChatGPT-era archive move per v0.20, C-063; adapter canonization per v0.21, C-065; drone tier per v0.22, C-066; mirrors retired per v0.23, C-067; navigation close per v0.24–v0.25, C-068–C-071; Cowork write capability per v0.26, C-072; close.py canonized per v0.27, C-073; custody session per v0.28, C-074–C-076; Scan #3 session per v0.29, C-077; the instantiation program per v0.30, C-078–C-079; GENESIS issued in arc 1, same protocol; **arc 1 completed per v0.31, C-081–C-083 — the genesis tool gated and merged, an instance birthed and a session closed inside it, the packaging unit resolved by retiring the queued `SKILL.md`**; the vision-whiteboard session per v0.33 — the public gate landed: `README.md` + `Site/`, OQ-32 opened, arc 2 re-framed as the shippable-beta test case; its postscript per v0.34 — C-086 concept foundations, the Knowledge Network Foundation issued; **the punch-list close per v0.35 — C-087 secrets doctrine, C-088 inherited biography as provenance, C-089 the Cowork surface retired; OQ-16/17/18/30 off the ledger; flight 4 (`doctor.py`) launched, landed, gated and merged in-session — six store tools**; **the ninth Code session per v0.36 — the beta-pack close: C-090 the legal identity layer (releases provenance-anchored; the ninth parameter; license + trademark postures), the first realisation transition (Global v0.4 — OQ-4's first declared datum), Scan #4 the pre-pack gate (7 findings, 0 High, full slate in-pass; GENESIS reissued behind S4-2.1; the birth test standing), and the pack: beta-0.1 tagged, signed, anchored (C-090's first execution)**; **the tenth Code session per v0.37 — the first shipping run: arc 2 opened by execution (KNet, the first real foreign instance, born from the anchored tag and §6-accepted the same day), the order of conduct ratified (engine first, then exterior), the Provenance row landed at its queued trigger, and the 28-entry pre-canon fieldnotes (`Site/`) standing as the phase-5 ingestion slate**; **the eleventh Code session per v0.38 — the phase-5 ingestion: C-091/C-092 adopted (reference copies govern nothing; adopt before invent — Settings v0.8, both adapters v0.8), the README quickstart-first, `/welcome` the third shipped command, `genesis.py` remote handling normalized (re-gated), the genesis document's fifth, batched reissue, and the pack: beta-0.2 tagged, signed, anchored (C-090's second execution)**; **the twelfth Code session per v0.39 — the workspace session: C-093 (the WS forge executed on observed need — `Fractal_Workspace_Foundation` issued, C-086 second member; the Workbench landed as the first build slice, homepage-nested; OQ-23 resolved), and the Knowledge Network Foundation's v0.2 first external-evidence revision from KNet's reported session two**; **the thirteenth Code session per v0.40 — the second-client trial: KNet's sessions board the ChatGPT desktop (advisory-as-bootstrap, fieldnotes entries 30–34, orientation green on the foreign engine), C-094 (field testing the standard proving process) and C-095 (remove on observed drag — the Local Context compacted 8,629 → ~2,300 words, the first exercise), Workspace Foundation v0.2 (the vehicle datum)**; **the fourteenth Code session per v0.45 — the flip preparation: the v0.44 bundle built and gated in one cycle — C-098 the flip shape (raw repo, phased mirror, the annex, in-repo curation), C-099 the license layer (Apache-2.0 + CC BY 4.0, terms travel), C-100 the testing pipeline (Fieldnote Format v0.1, fieldnote.py the seventh tool, the kernel door), C-101 the onboarding protocol (the interview, the rail, the fade, `/begin`), C-102 the board offered actively; GENESIS v0.6, GUIDE.md, the notebook to the annex, beta-0.2 Bitcoin-final, and the pack: beta-0.3 tagged, signed, anchored — C-090's third execution**).

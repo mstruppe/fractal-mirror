@@ -1,0 +1,146 @@
+# FRACTAL — Genesis Protocol
+
+> **CANONICAL DOCUMENT — this file is the source of truth for starting a *new* FRACTAL-governed project.** It is the forward sibling of `BOOTSTRAP.md`: that document answers *rebuild this instance from its own history*; this one answers **birth a new instance with an inherited constitution and an empty history**. Neither subsumes the other, and both ship at the repo root (C-020). Identity: `Fractal_Genesis_Protocol` — living document, stable root filename (C-012), version tracked below.
+
+**Version:** 0.6 · **Status:** Draft (first issue 2026-08-15, per Governance Protocol — Claude Series v0.30; arc 1 of C-078 · §3 made executable 2026-08-15, per v0.31 · secrets parameter + C-088 disposition 2026-08-15, per v0.35 · ninth parameter + clause currency 2026-08-15, Scan #4 — protocol at that session's close · first-real-instantiation reissue 2026-08-15, per v0.38 — the phase-5 ingestion of the shipping-run fieldnotes · flip-preparation reissue 2026-08-16 — the testing-pipeline door and the guided path, protocol at that session's close) · **Domain:** GOV · **Author:** Claude · **Parent:** Fractal Global Context · **Document ID:** DOC-01M0270TWM1YPA2Z8MTHBT6AW0
+
+---
+
+## 0 · What this document is for
+
+You want to run a project — research, an application, an investigation — that will outlive any single working session, and you want its *reasoning* preserved, not just its results. FRACTAL is the government for that. This document turns the FRACTAL you are holding into **a new, separate instance governing your project**.
+
+**What you are NOT doing:** copying FRACTAL's history. A new instance inherits FRACTAL's **constitution** — the format, the tools, the rituals, the conduct rules — and starts with an **empty ledger of its own**. FRACTAL's 92 decisions about how to build FRACTAL are not your decisions; the ~79 of them that are *substrate* (kernel + parameterized) are your inheritance, and you never re-argue them.
+
+**Shipment vs. inheritance (read this once — it answers the "what of this is mine?" question).** The clone you downloaded contains **all of FRACTAL** — its history, its vision documents, its research corpus — because a shipped release is the whole mother repository at tag time. Your project inherits **only its rules** (the §1 kernel). Everything else in the clone is **reference material you may read and cite, like any published source** — pinned at the release tag, whose provenance anchor (C-090) makes it a citable immutable edition. You are neither stealing the corpus nor acquiring it: mother content your instance builds on is cited literature, never inherited canon. And the clone itself is a **reference copy, not a governing surface** (Settings rule 9, C-091): sessions in it read, explain, and assist your birth — they never close, never push, never govern.
+
+**Acceptance test for this document:** a competent stranger with git, a text editor and (optionally) an AI client can birth a working, governed instance using only what is written here — and close their first session in it.
+
+**Status honesty (v0.2):** the steps below are the **manual path**, and the manual path is the real one (C-032's lesson: the system must work by hand before it works by tool). **The tool that automates §3 now exists** — `Claude/Knowledge Graph Store/genesis.py`, drone-built and gated by the governing surface in an independently birthed instance (per Protocol v0.31). It is dry-run by default; read its plan before you pass `--write`. The manual path below remains normative: the tool executes these steps, it does not replace them, and where the two ever disagree this document wins. The packaging unit is decided (C-083 — the adapter plus `.claude/commands/`, which §3.6 installs); the *plugin* tier remains queued behind a tier-1 index (C-079). **A guided path also exists (v0.6):** the **onboarding interview** — `Fractal_Onboarding_Protocol.md` (Governance Documents), triggered by `/begin` (or the word *begin*) in a clone session — runs §1–§3 conversationally and walks the newborn's first loops; it drives this document and never overrides it.
+
+## 1 · What you inherit (the kernel)
+
+Copy these from a FRACTAL clone into your new repository. This list is the **tier-0 set** — the smallest thing that still gives a project memory across sessions (C-079). Everything in §5 is optional and should be added only when you feel its absence.
+
+**Specifications** — `Claude/Architecture/Concepts/Knowledge Graph/`
+- `Fractal_Node_and_Event_Schema_v0.6.md` — what is written: identity, placements, the event log, facet codes, collision policy.
+- `Fractal_Node_Template_v0.5.md` — the node file's shape.
+- `Fractal_Navigation_Contract_v0.1.md` — how it is read: entry, hops, trace, ranking, history. **The contract is kernel; its implementations are not** (C-079).
+
+**Store tools** — `Claude/Knowledge Graph Store/`
+- `mint.py` (the mint guard — makes duplicate codes impossible, not merely forbidden) and `verify.py` (the fold verifier — red blocks a commit).
+- Since flight 4 (per v0.35), genesis also copies **`check_versions.py`** and **`doctor.py`** — *ready to adopt, never demanded*: the newborn is born with the checker's registry projected onto its own spine and the `.inherited` manifest written (C-088), so the tier-1 checker runs clean the day you choose to adopt it. **`verify.py` alone remains the gate** (§6, C-081).
+- Since the flip preparation (v0.6), genesis also copies **`fieldnote.py`** — the capture-and-intake tool behind `/fieldnote` (C-094): deterministic routing via `fieldnote_roster.json` (written at genesis, target `self`), immutable machine-format entries, and the `parse` intake half.
+- The store itself starts **empty**: `_events/part-0001.jsonl` with your own root mints, and an empty `nodes/`.
+
+**Governance** — `Claude/Project Governance/Governance Documents/`
+- `Fractal_Conversation_Settings.md` — how a conversation behaves (the sole normative source of conduct).
+- `Fractal_Rule_Overview.md` — the one-page rule-book.
+- `Fractal_Fieldnote_Format_v0.1.md` — the machine-parsable entry format your `FIELDNOTES.md` captures in (the testing pipeline's interface: report upstream by sending the file).
+- A **Decision Register**, seeded per §3.4 below.
+
+**Spine** — `Claude/Context Packages/`
+- `Fractal_Global_Context.md`, a `Local/` context, and `Fractal_Context_Index.md` — as a **shape**, with your content.
+
+**Adapter** — repo root: one client adapter (`CLAUDE.md` for Claude Code; `AGENTS.md` for a Codex drone), plus `.claude/commands/`. Adapters are canonical artifacts (C-065) whose content is a stamped compression of Conversation Settings (C-035) — **re-project, never hand-fork**. Together they *are* the packaging unit: there is no separate skill file, deliberately (C-083 — a second projection of the conduct source on one surface is the drift class C-067 retired). `genesis.py` writes both (§3.6).
+
+**A handover home** — `Claude/Context Packages/Conversations/`. Every close writes a record here (§3.8); an instance without them is a repository, not an instance.
+
+**This document and `BOOTSTRAP.md`**, both adapted per §3.
+
+## 2 · What you must supply (the parameters)
+
+The kernel is a set of rules; nine of them carry a value that is yours, not FRACTAL's. Decide these **before** step 3 — they are load-bearing and expensive to change later.
+
+| # | Kernel rule | Your value |
+|---|---|---|
+| 1 | **C-005** — artifact identity `<Name>_<Artifact>_v<major>.<minor>` | your project's name prefix (FRACTAL uses `Fractal_`) |
+| 2 | **C-037** — commit author = actual author; `[DOMAIN] imperative summary` | your writer identities, human and AI, mirrored as `AGENT.HUMAN.<name>` / `AGENT.AI.<name>`. **Email rule (learned from the first birth):** the human writer uses your **real email — the one your git host knows** (attribution doctrine wants real identity, and the off-site binding needs the match); a **synthetic stable address only for the AI writer** (the `claude@fractal.local` pattern). One privacy note: commit emails become public with the repo. |
+| 3 | **C-038** — a bootstrap ships at the root | your `BOOTSTRAP.md`'s content (the rehydrate path for *your* repo) |
+| 4 | **C-046** — routes are `alias(kind: route)` bindings over concepts | *which* routes — your domain codes (FRACTAL has eight; you likely need fewer) |
+| 5 | **C-056** — keep an off-site copy; the host is a swappable convenience | your remote (nothing may hard-bind to it) |
+| 6 | **C-059** — walk a refresh checklist at every close | *which rows* your checklist has — one per living projection you actually keep |
+| 7 | **C-062** — label pre-canon material at first contact | which of your files inform but never govern. **Your `FIELDNOTES.md` is written at genesis as this parameter's first member** — the instance friction ledger, with its capture door `/fieldnote` (target `self`) shipped beside it; declare any others |
+| 8 | **C-087** — secrets are never canonical: the *fact* of a credential is recorded, its **value** lives in the environment layer and is deliberately non-durable (re-issue, never restore) | your credential inventory — which secrets exist, named and recorded; the values in your `.gitignore`d env file or keychain, never in the repo |
+| 9 | **C-090** — releases are provenance-anchored: every shipped release tag carries an external timestamp attestation, the receipt committed into the repo | your anchor-authority set (FRACTAL uses OpenTimestamps; eIDAS / copyright-registration escalations at need) |
+
+**Root mints are the one irreversible choice here.** Root segments form a single global namespace across all facets (C-044), first-mint-wins (C-049), and codes are never reused. Pick your roots deliberately; `mint.py` will demand a recorded rationale for each (`--root`).
+
+## 3 · Genesis (the steps)
+
+**3.1 — Create the repository.** `git init`; `.gitignore` for OS/app noise **plus the secrets layer** (`.env`, `.env.*`, `secrets/` — a secret's value never enters the repo, C-087) — **knowledge is never ignored**, and a secret value is not knowledge, it is access. Copy in the §1 kernel.
+
+**3.2 — Write your Global Context.** Two things and no more: **§1 the vision** (why this project exists, in your words) and **§2 the current realisation** (what it concretely *is* right now). §2 changes only at genuine transitions; the ordered sequence of those changes becomes your project's phase history (C-010).
+
+**3.3 — Mint your roots and identities.** With `mint.py`: your writer agents (`AGENT.HUMAN.<you>`, `AGENT.AI.<client>`), your facets under the `FACET` root, and your domain roots. Then bind your routes (C-046). Run `verify.py` — green before the first commit.
+
+**3.4 — Seed the Decision Register with the inherited line.** This is the step that makes an instance an *instance* rather than a fork. Your Register opens with a single **inheritance clause**, not with 64 copied rows:
+
+> *Constitution inherited from FRACTAL (kernel per Architecture State §6, measured 2026-08-15 and maintained since): decisions C-001–C-092 of the Fractal Decision Register, excluding the instance class (C-002, C-007, C-013, C-021, C-029, C-032, C-051–C-054, C-063, C-064, C-072, C-078, C-089) and with the parameterized nine bound to this project's values (see §2 of this document). These are accepted as given and are not re-argued here. This project's own numbering begins at **P-001**.*
+
+Use a distinct prefix (`P-`, or your project's letter) so an inherited citation is never confused with one of your own. Your first decision is `P-001`, whatever it is.
+
+**3.5 — Write your first Local Context.** Open it by naming which aspect of the current realisation it addresses (C-011). That single convention is what keeps every working session locked to the vision.
+
+**3.6 — Install the adapter and the command tier.** For an **in-repo client** (Claude Code, Codex) the tool does this for you (C-083): `genesis.py` writes a parameterized root adapter whose stamp is **read live from your copied Conversation Settings**, plus the tier-0 commands under `.claude/commands/` — **`/orient`** (the entry ritual) and **`/fieldnote`** (the capture door, C-094; with it your `FIELDNOTES.md` ledger, the `fieldnote_roster.json` routing fact, and the self-retiring `First_Loops_Rail.md` the onboarding protocol's stage two reads). All tracked and auto-discovered — nothing to install, which is the whole point of the tier. On a client without a slash menu, **the words work** (*orient*, *fieldnote*, *close*): the ritual is kernel; each client's trigger for it is adapter-tier. `/close` is *not* shipped: it drives `close.py`, which is tier-1 (§5). For a **vendor surface with an instructions field**, this step stays manual — nothing in your repo can write into a vendor's container: paste a projection of the same source and stamp it by hand. Either way, **sync-check is stamp comparison, forever**, and the adapter is re-projected, never hand-forked.
+
+**3.7 — Bind the off-site copy** (parameter 5) and push. **The remote form matters (learned from the first birth, entry E):** `genesis.py` takes an explicit URL **verbatim**; given a scheme-less `host/owner/repo` (e.g. `github.com/you/project`) it normalizes to the **SSH form** (`git@host:owner/repo.git`), because a personal machine typically authenticates over SSH and an HTTPS remote fails at the push with no credentials. If you pass `https://…` explicitly, the tool honours it and says so in the plan — make sure a credential helper is configured first. If the push fails anyway: birth without remote, bind manually after (`git remote add origin <url>; git push -u origin main`) — the host is a swappable convenience (C-056), and a failed `--write` rolls the half-born repo back cleanly.
+
+**3.8 — Close your first session properly.** A handover record, the C-059 checklist walked, `verify.py` green. If you skip this, you have a repository, not an instance — the close is where memory is actually made.
+
+## 4 · What you deliberately do not inherit
+
+FRACTAL's **biography**: its Protocol series, Local Contexts, Return Packages, Scans, its Global Context §1–§2, its store contents, and the `KG`/`AST` roots that name FRACTAL's own architecture. Also its **instance-class decisions** (listed in §3.4) — those record what FRACTAL did, not how anything must be done.
+
+Taking the biography would not make your instance stronger; it would make it FRACTAL's fork, and every one of those records would be a claim your corpus cannot check.
+
+## 5 · Tiers — add these when you feel their absence, not before (C-079)
+
+Everything below is **kernel-optional**. Adding one is cheap; carrying one you don't need is the failure mode this section exists to prevent (OQ-28).
+
+| Tier-1 component | Add it when |
+|---|---|
+| `check_versions.py` — version-agreement checker | your corpus is large enough that prose claims drift out of agreement — **your instance is born with it re-pointed** (flight 4: registry projection + `.inherited` manifest, C-088); adopting it is a decision, not a job (see the note below) |
+| Governance Protocol series | decisions need a *why* that outlives the Register's one-line entry |
+| Agenda Board (a rendered projection) | you want single-glance state without reading the Local Context — **and the AI offers this row actively** when open threads accumulate (the speed asymmetry: agents work faster than human tracking; the board is the human's window — twice reinvented in the field, entry 22) |
+| Canonical review passes ("Scans") | the corpus is too large to hold in one head |
+| `close.py` — the close's mechanical ripple | closing by hand starts costing more than it teaches |
+| Restore drills | the off-site copy is load-bearing and untested |
+| Commit signing / custody ladder | more than one writer, or any writer outside your custody |
+| Drone tier (bounded-task executors on branches) | you want parallel capacity under the same governance |
+| The index server (`resolve`/`enter`/`trace`/`history`) | inverted-view reads become routine — grep is *correct*, not merely adequate, until then |
+| A second client adapter (the Client Library's recipe — `Fractal_Client_Library.md` in the release you were born from) | you work the instance from more than one vendor's client; field-forge the adapter in a real session, never author it from theory |
+
+**The rule of thumb:** a component earns its place by an observed problem, never by anticipation. That is recursive simplicity applied to the government itself.
+
+**Why `check_versions.py` cannot simply be copied (measured 2026-08-15, first birthed instance).** Run unmodified inside a newborn instance it reports **76 errors**, and the split is the instructive part:
+
+- **9 errors** — its registry hard-codes *FRACTAL's* living-document names and paths. Your instance's spine is named for your project, so those rows resolve nowhere. Fixable by re-pointing the registry at your documents.
+- **67 errors** — **the inherited kernel documents cite FRACTAL's own history.** The Rule Overview's revision history names every Protocol in FRACTAL's series; the Schema names its superseded versions; the Settings name the protocols that ratified them. Every such citation is a true statement about the instance you copied *from*, and a dangling reference in the instance you copied *to*. The checker's rule B is deliberately strict — *nothing may cite a phantom, frozen sources included* — so marking the inherited kernel "frozen" does **not** exempt it.
+
+That second number is the honest measure of how much upstream biography rides inside a "portable" kernel, and it is a live input to OQ-28. **The decision is now taken (C-088, 2026-08-15): inherited biography is provenance, not defect.** The cure is an **`INHERITED` source class** — citations from inherited kernel documents into the upstream history they came from are exempt from the phantom rule, while intra-instance claims still check; stripping revision histories on copy was **rejected** (it buys silence at the cost of the constitution's *why* and byte-identical provenance). The machinery **landed the same session** (drone flight 4, gated by the governing surface): the `INHERITED` class in `check_versions.py`, `genesis.py`'s registry projection and `.inherited` manifest — a scratch birth now runs the tier-1 checker at **0 errors** (from the measured 76). The gate rule is unchanged: a newborn is never *required* to run it (§6).
+
+## 6 · Acceptance
+
+Your instance is real when: a fresh clone plus your `BOOTSTRAP.md` rehydrates it; `verify.py` passes; a session can be opened, worked and closed with the loop intact; and the Register's first entries are *yours*, above an inherited line you never had to argue.
+
+**`verify.py` is the whole gate at genesis — `check_versions.py` is not, and must never be demanded of a newborn instance.** The fold verifier checks the thing that must be true from event one: that the store's log, nodes and hashes agree. The version-agreement checker is tier-1 (§5) and, run against a newborn, fails by construction for reasons that say nothing about the instance's health. This is written as a positive rule because the first drone brief for the genesis tool got it wrong — it demanded both checkers pass, which was unachievable, and the drone was right to report the raw failure rather than weaken the test to reach green.
+
+**Federation note (not yet supported).** Two FRACTAL instances merge cleanly at the identity layer — ULIDs never collide — but their **codes will collide by design** (C-044/C-049), and `verify.py` will refuse such a merge loudly and correctly. Merging instances requires an origin layer that does not yet exist (OQ-31). Nothing you do here forecloses it; do not attempt it by hand.
+
+## 7 · Your instance and upstream (the version relationship)
+
+**Your instance does not run on the download.** The kernel is *copied* at birth; your project is self-contained and sovereign from that moment. The four-part rule, learned at the first real birth:
+
+1. **Latest tag for births** — a new instance starts from the newest anchored release.
+2. **Pinned edition for citation** — cite mother content at the release tag you cloned; the anchor (C-090) makes it immutable and checkable.
+3. **Your own repo for your own work** — never work inside the clone; it is a reference copy (rule 9, C-091).
+4. **Upstream improvements adopted selectively, by recorded decision, on felt need** — no silent constitution changes; a never-upgraded instance works forever.
+
+**Why endless upstream updates cannot break you (the constitution model):** an instance calls nothing upstream at run time, so updates are structurally offers, never forced. Interoperation needs only the small **interchange layer** (Schema, log shape, identity scheme) — versioned, frozen per version, translation duty on the ingester (OQ-31). Divergence is sovereignty, not fragmentation: stable wire format, evolving practice — the git/browser/common-law pattern; append-only means old stores stay readable forever.
+
+---
+
+**Refresh triggers:** a change to the kernel/instance partition (Architecture State §6); a change to the parameterized set; a change to the shipped command tier or the birth path's tooling; the next real-instantiation experience that contradicts this document (the first fired at KNet, 2026-08-15, and was ingested at v0.5; the second class — the flip preparation's pipeline build — at v0.6).
+**Sources:** Fractal Architecture State §6 (the partition, measured 2026-08-15); Decision Register (stamp inside, C-012 — the kernel/instance/parameterized classes); Conversation Settings (stamp inside); `BOOTSTRAP.md` (stamp inside — the backward sibling); Node & Event Schema v0.6 §5 (roots, codes, collision policy); Navigation Contract v0.1; Governance Protocol — Claude Series v0.30 (C-078 arc 1, C-079 tiering), v0.31 (arc 1 completed — C-081 the gate + the 9/67 measurement, C-083 the packaging unit), v0.37 (the first shipping run — the fieldnotes this document's v0.5 ingests) and v0.38 (the phase-5 ingestion — C-091/C-092); Site/Fieldnotes_2026-08-15_First-Shipping-Run.md (pre-canon, C-062 — entries 8, 9, 12, 15, 27, 28 land here).
+**Revision history:** v0.1 (2026-08-15) first issue — arc 1 of the instantiation program (C-078, per Protocol v0.30): the forward sibling of `BOOTSTRAP.md`. Carries the measured three-way partition, the seven parameters as genesis's input form, the inheritance-clause pattern for seeding a new Register (an instance inherits a *clause*, not 64 copied rows), and the provisional tier-0/tier-1 split whose resolution belongs to OQ-28 and arc 2's lived experience. Manual path only — the executing tool is not built. · v0.2 (2026-08-15) arc 1's tool landed (per Protocol v0.31): §0 records `genesis.py` as executable and keeps the manual path normative; §1 tracks the Node Template to **v0.5**; §5 gains the measured reason `check_versions.py` cannot simply be copied (9 registry errors + **67 inherited-biography citations** in the first birthed instance — a live OQ-28 input, deliberately unresolved); §6 states as a positive rule that `verify.py` alone is the genesis gate, after the first drone brief demanded otherwise and proved unachievable. **§3.6 became executable and §1 gained two entries** (the adapter as *the* packaging unit, and the handover home) once **OQ-16 resolved as C-083** — findings surfaced by actually closing a session inside a birthed instance, which is the acceptance test this document names in §0 and had never been run. · v0.3 (2026-08-15) **the punch-list close (per v0.35):** §2 gains the **eighth parameter** — the secrets doctrine (C-087: values never canonical; the credential inventory is the instance value); §3.1's `.gitignore` line carries the secrets layer; §3.4's inheritance clause updated to C-089 with the instance-class exclusions current; §5's inherited-biography question moves from *deliberately unresolved* to **decided (C-088 — provenance, not defect; `INHERITED` class; strip-on-copy rejected)** — and the machinery **landed in the same close** (drone flight 4, gated 76 → 0 in an independent scratch birth): §1's copied tool set now includes `check_versions.py` + `doctor.py` (ready to adopt, never demanded — C-081's gate unchanged); §0's ledger numbers brought current (89 decisions, ~76 substrate). · v0.4 (2026-08-15) **Scan #4, the pre-pack gate:** §2 gains the **ninth parameter** — the provenance anchor (C-090: releases externally timestamped at pack time, receipt committed; the anchor-authority set is the instance value); §3.4's clause and §0's ledger numbers brought current (90 decisions, ~77 substrate). Behind the same scan's S4-2.1: `genesis.py` no longer carries its own copy of the §3.4 clause — it reads the blockquote from this document at run time, so a newborn can never again lag the constitution it copies (the tool had frozen at C-083 while this document moved to C-089; §0's where-they-disagree rule decided the cure's direction). · v0.5 (2026-08-15) **the first-real-instantiation reissue (per Protocol v0.38 — its trigger fired at KNet's birth, the reissue deliberately batched with the phase-5 ingestion so the document moves once, with the whole slate):** §0 gains the **shipment-vs-inheritance paragraph** (entry 9 — the clone is all of FRACTAL, the instance inherits only its rules; the rest is citable literature pinned at the anchored tag) and the reference-copy notice (C-091); §2 row 2 gains the **email rule** (entry 8 — real address for the human writer, synthetic for the AI); §3.4's clause current to **C-092** (exclusion list unchanged — both new decisions are kernel conduct); §3.7 documents the **remote form** (entry 12/E — verbatim URLs honoured, scheme-less input normalized to SSH, the failed-push recovery path); **§7 added** — the version relationship (entry 27's four-part rule: latest tag for births · pinned edition for citation · own repo for own work · upgrades by recorded decision) and the constitution model's eternal-updates answer (entry 28); §0 ledger numbers current (92 decisions, ~79 substrate). Refresh-trigger list rewritten — the spent triggers (tool landing, OQ-16) retired, the instantiation trigger re-armed for the *next* contradicting experience. · v0.6 (2026-08-16) **the flip-preparation reissue (the shipped-command-tier trigger fired; batched per the v0.5 precedent so the document moves once):** §1 store tools gain **`fieldnote.py`** and Governance gains the **Fieldnote Format v0.1** (the testing pipeline, C-094 generalized past the founder — fieldnotes entry 39); §2 parameter 7 is born concrete — **`FIELDNOTES.md` written at genesis with its capture door**; §3.6 becomes the full command-tier step (`/orient` + `/fieldnote`, the roster fact, the self-retiring First Loops Rail; the words-work clause from entries 32/36); §0 records the **guided path** (`Fractal_Onboarding_Protocol` v0.1, `/begin` — drives this document, never overrides it); §5's shelf gains the **second-client-adapter row** (the Client Library's recipe, the reminder recorded at Library §4.4).

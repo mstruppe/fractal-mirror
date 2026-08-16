@@ -1,0 +1,7 @@
+{
+  "instance": "FRACTAL",
+  "targets": {
+    "knet": "Site/Fieldnotes_2026-08-15_First-Shipping-Run.md",
+    "beta": "Site/Fieldnotes_2026-08-15_First-Shipping-Run.md"
+  }
+}

@@ -1,0 +1,19 @@
+# FRACTAL — .gitignore (C-037 hygiene: OS/app noise is not knowledge)
+# macOS Finder metadata
+.DS_Store
+# Microsoft Word owner/lock files
+~$*
+
+# Sandbox dumpster — files Claude cannot delete land here; emptied by Max (treated like the macOS bin)
+_to_delete/
+# Claude Code local session settings (app noise, not knowledge)
+.claude/settings.local.json
+
+# Secrets layer (C-087)
+.env
+.env.*
+secrets/
+
+# Workbench (first WS build slice) — dependencies and live working data, not knowledge
+Workbench/node_modules/
+Workbench/markings/

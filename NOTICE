@@ -1,0 +1,23 @@
+FRACTAL
+Copyright 2026 Max Struppe
+
+This product includes software and documents developed within the FRACTAL
+project (https://github.com/mstruppe/fractal).
+
+Licensing:
+- Code (the Python tools, Workbench/, and other executable sources) is
+  licensed under the Apache License, Version 2.0 — see LICENSE.
+- Documents (the governed corpus: Markdown documents, the knowledge store's
+  nodes and event log) are licensed under the Creative Commons Attribution
+  4.0 International license — see LICENSE-docs.
+- Personal pre-canon material (C-085 class) is not licensed for reuse.
+
+The name "FRACTAL" and the project's marks identify this project and its
+releases; neither license grants any rights to them (Apache License §6
+states this explicitly for the code; the same posture applies to the
+documents).
+
+An instance birthed by genesis.py inherits the kernel documents under
+CC BY 4.0 and the tools under Apache-2.0; the license files travel with
+the newborn, and the attribution carried in its Genesis Record and
+Register inheritance clause satisfies the attribution condition.
