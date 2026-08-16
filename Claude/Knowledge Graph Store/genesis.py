@@ -10,7 +10,8 @@ Stdlib-only. Dry-run by default — nothing is written without --write.
 Usage:
   python3 genesis.py --target <path> --name <ProjectName> \
       --human <AGENT.HUMAN.NAME> --ai <AGENT.AI.NAME> \
-      --route <CODE>[,<CODE>...] [--remote <url>] [--write]
+      --route <CODE>[,<CODE>...] [--remote <url>] \
+      [--vision <text>] [--focus <text>] [--human-email <addr>] [--write]
 """
 import argparse
 import datetime
@@ -46,6 +47,7 @@ KERNEL = (
     "Claude/Project Governance/Governance Documents/Fractal_Conversation_Settings.md",
     "Claude/Project Governance/Governance Documents/Fractal_Rule_Overview.md",
     "Claude/Project Governance/Governance Documents/Fractal_Fieldnote_Format_v0.1.md",
+    "Claude/Project Governance/Governance Documents/Fractal_Agenda_Board_Format_v0.1.md",
     "LICENSE",
     "LICENSE-docs",
     "NOTICE",
@@ -148,6 +150,18 @@ def validate(args):
         if "\n" in args.remote or "\r" in args.remote:
             die("--remote must be one line")
         args.remote = normalize_remote(args.remote.strip())
+    if args.vision is not None:
+        args.vision = args.vision.strip()
+        if not args.vision:
+            die("--vision cannot be empty when given")
+    if args.focus is not None:
+        args.focus = args.focus.strip()
+        if not args.focus:
+            die("--focus cannot be empty when given")
+    if args.human_email is not None:
+        args.human_email = args.human_email.strip()
+        if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", args.human_email):
+            die("--human-email must be a plausible address (user@host.tld)")
 
     target = os.path.abspath(os.path.expanduser(args.target))
     if os.path.lexists(target):
@@ -175,6 +189,29 @@ def markdown_header(title, status, domain, author, parent):
 
 
 def global_context(args, domain):
+    # The interview's §1.1 answers ride into the newborn here (Onboarding §0
+    # principle 2: nothing is asked twice, nothing is thrown away) — the
+    # stranger test's High finding. Without the flags, the placeholders stand.
+    if args.vision:
+        vision = (
+            f"{args.vision}\n\n"
+            "*(Recorded at genesis from the founder's own interview words — a "
+            "living text, revised freely as the vision sharpens.)*\n"
+        )
+    else:
+        vision = f"[Replace this placeholder with why {args.name} exists, in your words.]\n"
+    if args.focus:
+        realisation = (
+            f"At birth, the project's first working focus: {args.focus}\n\n"
+            "Change this section only at genuine transitions; its ordered revisions "
+            "become the project's phase history.\n"
+        )
+    else:
+        realisation = (
+            "[Replace this placeholder with what the project concretely is right now. "
+            "Change this section only at genuine transitions; its ordered revisions become "
+            "the project's phase history.]\n"
+        )
     return markdown_header(
         f"{args.name} — Global Context",
         "Draft",
@@ -183,15 +220,25 @@ def global_context(args, domain):
         "Instance root",
     ) + (
         "\n## 1 · Vision\n\n"
-        f"[Replace this placeholder with why {args.name} exists, in your words.]\n\n"
-        "## 2 · Current realisation\n\n"
-        "[Replace this placeholder with what the project concretely is right now. "
-        "Change this section only at genuine transitions; its ordered revisions become "
-        "the project's phase history.]\n"
+        + vision
+        + "\n## 2 · Current realisation\n\n"
+        + realisation
     )
 
 
 def local_context(args, domain):
+    if args.focus:
+        aspect = f"{args.focus}\n"
+        state = (
+            "At genesis: constitution inherited, store holds the root mints only, "
+            "no work recorded yet.\n"
+        )
+    else:
+        aspect = (
+            "[Replace this placeholder by naming which aspect of the current realisation "
+            "this context addresses.]\n"
+        )
+        state = "[Replace with the present state of that aspect.]\n"
     return markdown_header(
         f"{args.name} — Local Context",
         "Draft",
@@ -200,10 +247,10 @@ def local_context(args, domain):
         f"{args.name} Global Context",
     ) + (
         "\n## Aspect of the current realisation\n\n"
-        "[Replace this placeholder by naming which aspect of the current realisation "
-        "this context addresses.]\n\n"
-        "## Current state\n\n[Replace with the present state of that aspect.]\n\n"
-        "## Next\n\n[Replace with the next bounded work.]\n"
+        + aspect
+        + "\n## Current state\n\n"
+        + state
+        + "\n## Next\n\n[Replace with the next bounded work.]\n"
     )
 
 
@@ -266,7 +313,16 @@ def decision_register(args):
         f"- AI writer: `{args.ai}`\n"
         f"- Routes: `{args.route}`\n"
         f"- Off-site remote: `{args.remote if args.remote else 'not bound at genesis'}`\n"
-        "- Close checklist: Global Context, Local Context, Context Index, Decision "
+        + (
+            f"- Human commit identity: `{writer_name(args.human)} <{args.human_email}>` "
+            "(bound repo-locally at genesis; the AI writer commits under its own "
+            "synthetic identity)\n"
+            if args.human_email
+            else
+            "- Human commit identity: not bound at genesis — set `git config user.name` "
+            "and `git config user.email` in this repo before your first manual commit\n"
+        )
+        + "- Close checklist: Global Context, Local Context, Context Index, Decision "
         "Register, the client adapter (`CLAUDE.md` — stamp vs Conversation "
         "Settings), and both root protocols.\n"
         "- Pre-canon inputs: `FIELDNOTES.md` — the instance friction ledger "
@@ -352,8 +408,23 @@ def client_adapter(args, domain):
     )
 
 
+RESERVED_OPENERS = {
+    "orient", "close", "look", "fieldnote", "begin", "welcome",
+    "help", "config", "clear", "exit", "quit", "init", "compact",
+}
+
+
+def opener_word(args):
+    """The entry command is the project's own name (C-106): entry declares
+    jurisdiction, so it carries the name; the close stays universal. A name
+    colliding with the shipped tier or common client built-ins falls back to
+    the generic `orient`."""
+    word = args.name.lower()
+    return word if word not in RESERVED_OPENERS else "orient"
+
+
 def orient_command(args):
-    """`/orient` — the tier-0 entry command. Auto-discovered by Claude Code."""
+    """The named opener — the tier-0 entry command. Auto-discovered by Claude Code."""
     return (
         "---\n"
         f"description: Open a {args.name} working session — load the context spine\n"
@@ -382,7 +453,7 @@ def first_loops_rail(args):
         f"# {args.name} — First Loops Rail\n\n"
         "> **SCAFFOLDING — informs, never governs, and retires itself** "
         "(Fractal_Onboarding_Protocol §3–§4, in the FRACTAL release this instance "
-        "was born from). `/orient` surfaces **one move per loop, as an offer** — "
+        f"was born from). The opener (`/{opener_word(args)}`) surfaces **one move per loop, as an offer** — "
         "dropped without argument when the owner has their own agenda.\n\n"
         "- **Loop 1 — the first close.** Real work first: the project's actual "
         "first step. When the first real decision appears, record it as **P-001 "
@@ -390,7 +461,9 @@ def first_loops_rail(args):
         "reasoning's only home). Then close: a handover record in "
         "`Claude/Context Packages/Conversations/`, the checklist in the Decision "
         "Register walked, `verify.py` green. **The instance is real at its first "
-        "close** — say so when it happens.\n"
+        "close** — say so when it happens. A handover record is five short parts: "
+        "what was queued · what this session did · what changed · what stays open "
+        "· what comes next (home and naming: `Conversations/README.md`).\n"
         "- **Loop 2 — the capture habit.** `/fieldnote self <what happened>` "
         "whenever something grinds *or* shines — frictions and green data through "
         "one door. Reporting upstream = sending `FIELDNOTES.md`, any channel; "
@@ -532,7 +605,19 @@ def genesis_record(args, routes):
         f"- AI identity: `{args.ai}`\n"
         f"- Domain routes: `{', '.join(routes)}`\n"
         f"- Off-site remote: `{remote}`\n"
-        "- Close checklist: the living documents named in the Decision Register\n"
+        + (
+            f"- Human commit identity: `{writer_name(args.human)} <{args.human_email}>` "
+            "(repo-local git config, set at genesis)\n"
+            if args.human_email
+            else "- Human commit identity: not bound at genesis (see the Register's parameter row)\n"
+        )
+        + (
+            "- Seeded texts: Global Context §1/§2 and the Local aspect carried from "
+            "the genesis interview (`--vision` / `--focus`)\n"
+            if (args.vision or args.focus)
+            else "- Seeded texts: none — the context placeholders await your first session's words\n"
+        )
+        + "- Close checklist: the living documents named in the Decision Register\n"
         "- Pre-canon inputs: `FIELDNOTES.md` (the friction ledger, C-062 — "
         "capture door `/fieldnote`, report path: send the file)\n\n"
         "## First work\n\n"
@@ -720,7 +805,7 @@ def build_plan(args, target, routes):
         f"Claude/Project Governance/Governance Documents/{args.name}_Decision_Register.md": decision_register(args),
         "Claude/Context Packages/Conversations/README.md": conversations_home(args),
         "CLAUDE.md": client_adapter(args, domain),
-        ".claude/commands/orient.md": orient_command(args),
+        f".claude/commands/{opener_word(args)}.md": orient_command(args),
         ".claude/commands/fieldnote.md": fieldnote_command(args),
         RAIL_PATH: first_loops_rail(args),
         "FIELDNOTES.md": fieldnotes_ledger(args),
@@ -765,6 +850,16 @@ def print_plan(args, plan):
                   "personal-machine default (GENESIS §3.7)")
     else:
         print("  git remote: none requested")
+    if args.vision or args.focus:
+        seeded = [name for name, given in
+                  (("Global §1 vision (--vision)", args.vision),
+                   ("Global §2 + Local aspect (--focus)", args.focus)) if given]
+        print("  seeded texts: " + ", ".join(seeded))
+    if args.human_email:
+        print(f"  human commit identity: {writer_name(args.human)} "
+              f"<{args.human_email}> (repo-local git config)")
+    print(f"  entry command: /{opener_word(args)} — the project's name opens it "
+          "(C-106; the close stays universal)")
     print(f"Files to create ({len(plan['files'])} tracked files):")
     for relative in sorted(plan["files"]):
         suffix = "  [tier-0 copy, verbatim]" if relative in plan["copied"] else ""
@@ -805,6 +900,12 @@ def write_plan(args, plan):
                 handle.write(content)
 
         run(["git", "init", "--initial-branch=main"], staging)
+        if args.human_email:
+            # The human's commit identity binds repo-locally (stranger test,
+            # finding 3): manual commits attribute correctly from day one; the
+            # AI writer's commits override via environment, as below.
+            run(["git", "config", "user.name", writer_name(args.human)], staging)
+            run(["git", "config", "user.email", args.human_email], staging)
         if args.remote:
             run(["git", "remote", "add", "origin", args.remote], staging)
         verify_output = run([sys.executable, "verify.py"], os.path.join(staging, "Claude", "Knowledge Graph Store"))
@@ -863,6 +964,9 @@ def arguments():
     parser.add_argument("--ai", required=True, metavar="AGENT.AI.NAME")
     parser.add_argument("--route", required=True, metavar="CODE[,CODE...]")
     parser.add_argument("--remote", metavar="URL")
+    parser.add_argument("--vision", metavar="TEXT")
+    parser.add_argument("--focus", metavar="TEXT")
+    parser.add_argument("--human-email", dest="human_email", metavar="ADDR")
     parser.add_argument("--write", action="store_true")
     return parser.parse_args()
 

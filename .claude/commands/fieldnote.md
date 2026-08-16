@@ -13,6 +13,8 @@ The first word of the argument is the **target**; everything after it is **Max's
 |---|---|---|
 | `knet` | `Site/Fieldnotes_2026-08-15_First-Shipping-Run.md` | KNet's use **is** the shipped beta's field test — the entry lands in the running shipping-run ledger, context-tagged KNet (surface included, e.g. the ChatGPT desktop). KNet-internal *research* frictions may additionally live in the child's own ledger (GENESIS parameter 7); the mother ingests both at a phase boundary. |
 | `beta` | `Site/Fieldnotes_2026-08-15_First-Shipping-Run.md` | The shipped release under field test directly (kernel, onboarding, commands, tooling). Same ledger as `knet` while the beta is the one running subject. |
+| `publish` | `Site/Fieldnotes_2026-08-16_Publishing.md` | The publishing lane (opened 2026-08-16 on Max's word): what the website and the onboarding must explain — the public-identity explanation burden. Feeds move 2 (site, tutorials, GUIDE) and the Onboarding Protocol's revisions. |
+| `general` | `Site/Fieldnotes_2026-08-16_General.md` | The catch-all lane (opened 2026-08-16 on Max's word): ideas and observations fitting no registered subject — research-program seeds, vision-class captures. Entries graduate to the Register, a foundation, or their own instance on Max's word. |
 
 An unlisted target: say so, print the roster (`--list`), stop. Adding a target (a new test subject = a new ledger) is an ordinary edit to the roster JSON, on Max's word — friend instances join here as the friends-beta grows.
 

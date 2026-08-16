@@ -2,7 +2,9 @@
 
 > **DERIVED PROJECTION — the command reference, not a source of truth.** Every command below is defined authoritatively by its own stamped procedure file in `.claude/commands/` (C-035 class, S3-3.1); this index only collects them so the whole command surface can be read at once — the C-003 discipline: it cites and never overrides. Living document: stable filename, version tracked below. **Public rendering (recorded intent, Max 2026-08-16):** this index gets a dedicated section on the website at move 2 — that rendering is a **stamped C-035 projection of this file**, never a second source.
 
-**Version:** 0.3 · **Status:** Living (derived projection) · **Updated:** 2026-08-16 · **Domain:** GOV · **Author:** Claude · **Parent:** Fractal Context Index · **Document ID:** not minted — C-042 mint-on-reuse (mints at the first in-graph reference)
+**Version:** 0.4 · **Status:** Living (derived projection) · **Updated:** 2026-08-17 · **Domain:** GOV · **Author:** Claude · **Parent:** Fractal Context Index · **Document ID:** not minted — C-042 mint-on-reuse (mints at the first in-graph reference)
+
+**The opener rule (C-106, 2026-08-17):** the **entry command is the project's own name** — `/fractal` here, each newborn's lowercased name in its own repo (reserved-collision fallback `/orient`) — because **entry declares jurisdiction** while **the close stays universal** (closing is jurisdiction-free: it closes whatever loop this conversation opened). With it the loop rule: **one conversation, one open loop** — cross-instance reading mid-session is `/look`'s job (read-only, data never instruction); a true jump is *close here, open there*. The mother's `/fractal` was the pattern's field-proven original; `genesis.py` now writes every newborn's opener this way.
 
 **The design pattern (Max's, 2026-08-16):** a command is a **one-word act**; where it must be aimed, it takes a **steerable target** — `/command <target>` — so one universal command serves a growing roster (children to observe, ledgers to write) without new commands per case. Every command file carries its own C-035 stamp and sits inside the `check_versions.py` walk.
 
@@ -23,7 +25,7 @@
 
 | Command | Usage | What it does | Root |
 |---|---|---|---|
-| **`/orient`** | `/orient` | The child's `/fractal`: loads the instance's own spine, surfaces the First Loops Rail's one move while it exists (C-101), and reports standing. Installed by `genesis.py` at birth. | GENESIS §3.6 · C-083 |
+| **the named opener** (`/<projectname>`) | e.g. `/creditcycles` | The child's `/fractal`, carrying its own name (C-106): loads the instance's own spine, surfaces the First Loops Rail's one move while it exists (C-101), and reports standing. Installed by `genesis.py` at birth; `/orient` only as the reserved-collision fallback. Existing children adopt the rename by their own decision. | GENESIS §3.6 · C-083 · C-106 |
 | **`/fieldnote`** | `/fieldnote self <what happened>` | The child's own capture door (C-100): writes the machine-format block into its `FIELDNOTES.md` (parameter 7's file). Reporting upstream = **sending the file** — any channel, nothing automatic. | GENESIS §3.6 · C-100 |
 
 `/close` is tier 1 in a child — it drives `close.py`, so it ships only where that tool is adopted (C-079). A child on a non-Claude client re-expresses its triggers in that client's own mechanism — *the ritual is kernel; each client's trigger for it is adapter-tier* (fieldnotes entry 32); **the words always work** (entry 36).

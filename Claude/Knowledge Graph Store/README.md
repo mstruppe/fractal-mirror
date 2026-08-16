@@ -24,6 +24,12 @@ Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero inf
   identity, allowed-signers binding (`--write` rebinds), signing shape, tier detection (absence of a
   tier-1 component is information, never failure — C-081), the C-087 secrets guard (ignore entries +
   tracked-file secret scan, values redacted), remote, and privileged-posture instructions.
+- `fieldnote.py` — the seventh tool (C-100, the flip preparation): the capture-and-intake halves of
+  the testing pipeline — deterministic routing via `fieldnote_roster.json`, immutable machine-format
+  blocks (Fieldnote Format v0.1), and `parse` for whole-or-nothing intake of a returned ledger.
+- `stats.py` — **a convenience utility, not a canonized tool** (the first drone flight's drill
+  artifact, 2026-08-14): a read-only fold counter whose output cross-checks `verify.py`'s totals.
+  Canonization on observed need; it carries no invariant of its own.
 
 ## Rules in force (C-022–C-027, C-043–C-046, C-049–C-050, C-055)
 - Identity = `TYPE-ULID`, immutable. Names/codes are aliases (kinds: `label` / `route` / `redirect`).

@@ -3,7 +3,7 @@ id: DOC-01KZVYPMBGEY2HV35F32631G0C
 type: DOC
 created: 2026-08-12T21:40:22Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:efd0b97ee0a708c2481dc6f923781817a3fd31be91fcd7388dc8fe241d6534e1
+content_hash: sha256:fc0f84cd5119b7703335528428d2be836cfa491639b8baadc85f468db7e15baa
 title: "Fractal Rule Overview"
 aliases: ["Fractal_Rule_Overview", "Fractal Rule Overview"]
 placements:

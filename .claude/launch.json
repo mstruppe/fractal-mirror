@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "workbench",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["Workbench/server.js"],
-      "port": 4321
+      "name": "site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "Site"],
+      "port": 8123
     }
   ]
 }
