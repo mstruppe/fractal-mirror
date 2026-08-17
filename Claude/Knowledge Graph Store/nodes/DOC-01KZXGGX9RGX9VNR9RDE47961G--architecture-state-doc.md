@@ -3,7 +3,7 @@ id: DOC-01KZXGGX9RGX9VNR9RDE47961G
 type: DOC
 created: 2026-08-13T12:11:03Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:529ed54dd2cc1e672000c80c4a14edce844ce6b875674a0c1f4740c8e54ad47d
+content_hash: sha256:a9f20b3c8364557955d5487353d2e5cf1371f9322c259301fa13cc0b3eb23737
 title: "Fractal Architecture State"
 aliases: ["route:Fractal_Architecture_State"]
 placements:

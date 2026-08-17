@@ -1,18 +1,18 @@
 ---
-id: DOC-01M0270TWM1YPA2Z8MTHBT6AW0
+id: DOC-01M084YBNH6B261H40Y3KZRSY3
 type: DOC
-created: 2026-08-15T08:01:11Z
+created: 2026-08-17T15:20:19Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:7b76dcce60e9878b642391871762b4ec35c06e75468a6b22ac854457852e77a6
-title: "Fractal Genesis Protocol"
-aliases: ["route:Fractal_Genesis_Protocol"]
+content_hash: sha256:8e4a0fbc478bb1f23274e8da149c0635d4f487120ce0be2dd5eab7ab00bc436c
+title: "Fractal Registry — the standards library"
+aliases: ["route:Fractal_Registry"]
 placements:
   - {facet: topic, code: GOV, role: about, weight: 1.0}
   - {facet: agent, code: AGENT.AI.CLAUDE, role: by, weight: 1.0}
 ---
 
-DOC node for the canonical document **Fractal_Genesis_Protocol** (C-041 identity bridge).
+DOC node for the canonical document **Fractal_Registry** (C-041 identity bridge).
 
-Repo-relative path: `GENESIS.md`
+Repo-relative path: `Registry/README.md`
 `content_hash` = sha256 of that file's committed bytes at minting (Schema v0.6 §3.7). The
 `placements:`/`aliases:` blocks are a materialized fold of the log — the log is canonical (C-024).

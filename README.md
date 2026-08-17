@@ -67,6 +67,7 @@ FRACTAL is built to become **the government of any project**, not just itself �
 - The decision corpus partitions into **kernel (~80%)** — inherited by any new instance as constitution — plus a small parameterized set (kernel rule, instance value: exactly the input form of genesis) and pure biography, which stays home.
 - **`BOOTSTRAP.md`** answers the backward question: rebuild *this* instance from a bare clone (drill-proven). **`GENESIS.md`** answers the forward one: birth a *new* instance with an inherited constitution and an empty history — executed by `genesis.py`; the newborn ships with the secrets layer, its provenance manifest, and the tier-1 checkers ready to adopt.
 - A distribution clone knows it is a distribution clone: sessions in it are **reference surfaces** by constitution — they read, explain, and assist births; they never govern (Settings rule 9).
+- A **standards registry** rides the kernel (`Registry/`): adoptable procedures, formats, and content conventions — the scholarly-source shape, the flight and review procedures, the capture format — each adopted by an instance's own recorded decision, never imposed. Demand that isn't built yet is listed honestly as *forging* or *named*.
 
 ## The substrate is deliberately thin
 
@@ -85,8 +86,10 @@ Git + plain-text files + a compliant AI surface. No database, no server, no prop
 | `Claude/Architecture/` | The canonical architecture: Architecture State (the map), Schema, Template, Navigation Contract |
 | `Claude/Project Governance/` | Conversation Settings, Decision Register, Rule Overview, the Governance Protocol series |
 | `Claude/Context Packages/` | The context spine: Global Context, Local Contexts, the routing Index, Agenda Board, Return Packages |
+| `Registry/` | **The standards library** — adoptable procedures, formats, and content conventions; every entry an offer with an honest status (*shipped · forging · named*) |
 | `Provenance/` | Release provenance anchors — tag attestations + OpenTimestamps receipts |
 | `Archive/` | The ChatGPT-era foundation — preserved intact, pointer-only |
+| `Site/` · `Workbench/` | The mother's working surfaces (site sources, field ledgers, a workbench tool) — **excluded from release copies**; if you're reading a release and these are absent or empty, that's curation, not error |
 
 ## License
 
@@ -100,4 +103,4 @@ The foundational architecture is complete — the knowledge core specified on bo
 
 ---
 
-*Derived projection (C-035 class) — a compression for the repo gate, never a source, committed per Protocol v0.33. Sources: Fractal Global Context §1; Fractal_Architecture_State; the active Local Context (stamps inside each, C-012). Stamped 2026-08-15; rewritten quickstart-first the same day at the phase-5 ingestion (fieldnotes entries 1–6: the user path leads, the evaluator content follows); guide split out + command tier grown 2026-08-16 (the flip-preparation session); quickstart retargeted to the mirror — the permanent public home — 2026-08-16 (C-105). Refresh triggers: a Global §2 realisation transition, an Architecture State reissue that moves a section summarized here, a change to the quickstart path (commands, adapter, GENESIS §0–§2), or a C-059 walk finding this stale.*
+*Derived projection (C-035 class) — a compression for the repo gate, never a source, committed per Protocol v0.33. Sources: Fractal Global Context §1; Fractal_Architecture_State; the active Local Context (stamps inside each, C-012). Stamped 2026-08-15; rewritten quickstart-first the same day at the phase-5 ingestion (fieldnotes entries 1–6: the user path leads, the evaluator content follows); guide split out + command tier grown 2026-08-16 (the flip-preparation session); quickstart retargeted to the mirror — the permanent public home — 2026-08-16 (C-105); the Registry row + the working-surfaces map note added at the registry release 2026-08-17 (beta-0.5 — RF1-13's cure). Refresh triggers: a Global §2 realisation transition, an Architecture State reissue that moves a section summarized here, a change to the quickstart path (commands, adapter, GENESIS §0–§2), or a C-059 walk finding this stale.*

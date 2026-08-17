@@ -27,6 +27,11 @@ Checks, over the full store:
   E. Hashes          — store-node body hashes recompute; external canonical-file
                        hashes recompute against the repo (Schema v0.6 §3.7).
 
+Instance vocabulary: an optional vocabulary_local.json beside the store extends
+the placement-role set governedly (each role names its adopting decision — see
+Fractal_Vocabulary_Extension_Procedure v0.1; roles only, the interchange layer
+stays frozen). Absent file = inherited vocabulary exactly.
+
 Usage:  python3 verify.py [<store-dir>] [<repo-root>]
         Defaults: store-dir = this script's directory; repo-root = two levels up.
 Exit 0 = PASS (warnings allowed) · exit 1 = FAIL (at least one error).
@@ -110,11 +115,46 @@ def parse_node(path):
                 d[k] = parse_scalar(v)
     return d
 
+ROLE_TOKEN_RE = re.compile(r"^[a-z][a-z0-9-]*[a-z0-9]$")
+
+def load_local_vocabulary(store):
+    """Instance vocabulary extension (Fractal_Vocabulary_Extension_Procedure v0.1, RF1-2).
+
+    An instance may extend the placement-role vocabulary without forking this
+    checker: vocabulary_local.json beside the store, {"roles": {"<token>":
+    "<adopting decision + one-line meaning>"}}. Every role must name the
+    decision that adopted it — vocabulary never grows silently. Roles only:
+    verbs and alias kinds are interchange-layer and stay frozen (§1 of the
+    procedure). Absent file = inherited vocabulary exactly.
+    """
+    path = os.path.join(store, "vocabulary_local.json")
+    if not os.path.exists(path): return
+    try:
+        vl = json.load(open(path, encoding="utf-8"))
+    except Exception as ex:
+        err(f"vocabulary_local.json: unreadable ({ex})"); return
+    extra = vl.get("roles")
+    if not isinstance(extra, dict):
+        err("vocabulary_local.json: 'roles' must be a map of token -> adopting-decision rationale"); return
+    added = []
+    for tok, ref in sorted(extra.items()):
+        if not ROLE_TOKEN_RE.match(tok):
+            err(f"vocabulary_local.json: role {tok!r} is not a lowercase-hyphen token")
+        elif tok in ROLES:
+            err(f"vocabulary_local.json: role {tok!r} collides with an inherited role (extension, never redefinition)")
+        elif not (isinstance(ref, str) and ref.strip()):
+            err(f"vocabulary_local.json: role {tok!r} carries no adopting decision ref (the gate: no silent vocabulary growth)")
+        else:
+            ROLES.add(tok); added.append(tok)
+    if added:
+        info(f"local vocabulary: {len(added)} role(s) adopted by recorded decision — {', '.join(added)}")
+
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     store = sys.argv[1] if len(sys.argv) > 1 else here
     repo = sys.argv[2] if len(sys.argv) > 2 else os.path.normpath(os.path.join(store, "..", ".."))
     evdir, nodedir = os.path.join(store,"_events"), os.path.join(store,"nodes")
+    load_local_vocabulary(store)
 
     # ---------- A. log integrity ----------
     events, seen_ids, per_file = [], set(), {}

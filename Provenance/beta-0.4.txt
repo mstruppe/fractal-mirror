@@ -1,0 +1,16 @@
+FRACTAL release provenance attestation (C-090)
+
+Release tag:  beta-0.4
+Tag object:   b6930b633ad2024bde053655dc2263e07176199a
+Commit:       ff7214f7c2742cb62c30d07fadbb3716ea5013b5
+Tagged:       2026-08-17, at the publishing-identity close — the stranger-test
+              cures, the public identity layer (C-105), and the named opener
+              (C-106) ship from this tag; the permanent public home (the
+              mirror) rebuilds from it
+Repository:   FRACTAL - private origin mstruppe/fractal (host swappable, C-018)
+Custody:      signed tag, key G per .allowed_signers (C-074)
+
+Verification: "ots verify beta-0.4.txt.ots" proves this file existed no later
+than the attested time; the tag object hash commits the entire repository
+content and history at beta-0.4 by construction. The receipt is pending at
+issue and upgrades to Bitcoin-final via "ots upgrade" (C-090).

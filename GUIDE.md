@@ -4,6 +4,16 @@
 
 ---
 
+## The session card — the whole ritual on one screen
+
+| | You do | The session does |
+|---|---|---|
+| **Open** | `cd <your-project> && claude`, then type your project's opener (or `orient`) | reads your project's spine, reports where things stand |
+| **Work** | one aspect at a time; say what you want | asks before executing; capture asides with `/fieldnote` |
+| **Close** | say **`close`** | writes the handover, walks the checklist, runs the checker green |
+
+That's all of it. Everything else in the repository is reference, not homework.
+
 ## 1 · Day one
 
 Follow the README quickstart (clone → `claude` → `/welcome`). The session explains where you're standing and offers two paths. If you pick **"start my own project"**, say **`begin`** — the onboarding interview takes about ten minutes: five real questions (what you're working on · what it's called · who writes here, you and a named AI · what kinds of work it holds · where the backup copy lives), everything else takes sensible defaults you can override. Your answers *are* the project — nothing is a rehearsal, nothing is asked twice. At the end a **new repository of your own** exists; the clone you downloaded stays behind as reference material.
@@ -38,7 +48,8 @@ Then type **`orient`** (or `/orient`) — the session reads your project's spine
 - **Minting** (you'll meet this word): your repo is the library shelf; the knowledge store is the catalog. Minting a document = writing its catalog card, so other knowledge can point at it. Defer freely — the moment that matters is the first time something in your graph must cite the document.
 - **Updates can't break you.** Your instance doesn't run on the download — the rules were *copied* at birth. Upstream releases are offers; a never-upgraded instance works forever. Adopt improvements selectively, by your own recorded decision.
 - **`FIELDNOTES.md` informs, never governs.** It's your friction ledger — observations, not rules.
-- **Adopt before invent.** Before building any tracker, board, or tool: the tier table in `GENESIS.md` §5 lists what's already specified. Your AI is instructed to offer the **Agenda Board** actively once your open threads accumulate — a single-glance view of queued work, refreshed at every close. AI sessions move fast; the board is the human's window.
+- **Sources of any medium — the file is material, the repo holds the card.** A PDF, a two-hour lecture video, a dataset: the *file* lives outside your repo (reference manager, drive, URL); your repo holds its **catalog card** — an entry with the URL or content hash — plus everything you extracted from it. Git carries what you write, not what you watch; nothing about your sources being video or audio makes them second-class.
+- **Adopt before invent.** Before building any tracker, board, or tool: the tier table in `GENESIS.md` §5 and the **Registry** (`Registry/README.md` — the standards library: procedures, formats, content conventions like the scholarly-source shape, each marked *shipped*, *forging*, or *named*) list what's already worked out. Adopting an entry is one recorded decision; every entry is an offer, never a mandate. Your AI is instructed to offer the **Agenda Board** actively once your open threads accumulate — a single-glance view of queued work, refreshed at every close. AI sessions move fast; the board is the human's window.
 
 ## 5 · When something looks wrong
 
@@ -63,4 +74,4 @@ It lands in your `FIELDNOTES.md` as a timestamped, attributed entry (frictions a
 
 ---
 
-*Derived projection (C-035 class) — the user-facing compression of the canon, committed at the flip-preparation session (2026-08-16). Sources: README.md (the gate; quickstart is owned there, not here); GENESIS.md v0.6 (§0 shipment-vs-inheritance, §2 parameters, §3.6 command tier, §5 shelf, §7 versions); Fractal_Onboarding_Protocol v0.1 (the interview and the fade); Fractal_Client_Library (per-client mechanics and the words-work doctrine); Fractal_Fieldnote_Format_v0.1 (§6's claims); Site fieldnotes entries 7, 19, 20, 22, 27–29, 31, 36, 39 (every section here pre-answers a recorded friction). Refresh triggers: any source reissue that moves a compressed claim; a new client entering the Library; a friends-beta fieldnote showing a section misses or misleads; a C-059 walk finding this stale.*
+*Derived projection (C-035 class) — the user-facing compression of the canon, committed at the flip-preparation session (2026-08-16); session card + media rule + registry row added at the registry release (2026-08-17, beta-0.5 — RF1-8/16/17 cures). Sources: README.md (the gate; quickstart is owned there, not here); GENESIS.md v0.8 (§0 shipment-vs-inheritance, §2 parameters, §3.1 materials line, §3.6 command tier, §5 shelf, §7 versions); Fractal_Onboarding_Protocol (stamp inside — the interview and the fade); Fractal_Client_Library (per-client mechanics and the words-work doctrine); Fractal_Fieldnote_Format_v0.1 (§6's claims); Registry/README.md (the standards library §4 routes to); Site fieldnotes entries 7, 19, 20, 22, 27–29, 31, 36, 39 (every section here pre-answers a recorded friction; **annex-held in release copies** — the field ledgers are the mother's private working material (C-098), so in a release these citations are provenance, not links). Refresh triggers: any source reissue that moves a compressed claim; a new client entering the Library; a registry entry a section should route to; a friends-beta fieldnote showing a section misses or misleads; a C-059 walk finding this stale.*
