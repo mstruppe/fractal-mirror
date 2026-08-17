@@ -1,0 +1,26 @@
+FRACTAL public-home release provenance attestation (C-090 pattern — the public chain, C-105)
+
+Release tag:  beta-0.5 (the mirror's own chain, third member) — the registry release
+Tag object:   50734f83431ada3f2200d83231a75bb3c4aa5a25
+Commit:       402052e0c37968343a28cdd8d443306a216ddb55
+Tagged:       2026-08-17, mid-twentieth session — the public home rebuilt
+              from the mother's beta-0.5 under the C-116 standing rider
+              (its first execution)
+Repository:   FRACTAL public home — github.com/mstruppe/fractal-mirror
+              (host swappable, C-018)
+Identity:     fractal@knet.network (the public contact identity, C-105)
+Custody:      signed tag, key G per .allowed_signers (C-074)
+
+Relation:     curated public build derived from the private mother
+              repository's anchored beta-0.5 release (mother tag object
+              896db467744912daeab207172b5a81e5e83ea23c, C-090). Two chains
+              by design (C-105): this public chain is checkable in its own
+              domain; the mother's chain remains the priority proof in
+              reserve. From this release the mirror updates with every
+              beta as a standing ritual (C-116).
+
+Verification: "ots verify beta-0.5-public.txt.ots" proves this file existed
+no later than the attested time; the tag object hash commits the entire
+public repository content and history at beta-0.5 by construction. The
+receipt is pending at issue and upgrades to Bitcoin-final via "ots upgrade"
+(C-090).
