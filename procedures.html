@@ -192,6 +192,7 @@
   <a href="blog.html">Blog</a>
 </nav>
 <nav class="subnav" aria-label="Procedures sections">
+  <a href="#gas">The gas gauge</a>
   <a href="#adaptive-close">The close</a>
   <a href="#diet">The diet</a>
   <a href="#scan">The scan</a>
@@ -201,10 +202,25 @@
 <header id="top">
   <p class="kicker">Procedures</p>
   <h1>Methods for AI-assisted work, proven on the system that wrote them.</h1>
-  <p class="lede">Every procedure here was forged the same way: a friction observed in real use, measured, cured, and only then written down as a standard &mdash; distilled from the record, never invented. They run FRACTAL&rsquo;s own development, and they generalize to any AI-agent-assisted workflow. This section will grow: next up, measuring context rot itself &mdash; how project memory degrades and what structure provably protects.</p>
+  <p class="lede">Every procedure here was forged the same way: a friction observed in real use, measured, cured, and only then written down as a standard &mdash; distilled from the record, never invented. They run FRACTAL&rsquo;s own development, and they generalize to any AI-agent-assisted workflow. This section will grow &mdash; the context-rot program has its first measurement below (the gas gauge); next, how memory degrades across long horizons and what structure provably protects.</p>
 </header>
 
 <main>
+
+<article id="gas" class="float">
+  <p class="post-date">2026&#8211;08&#8211;18</p>
+  <h2>The gas gauge: what governance actually costs, measured.</h2>
+  <p class="voice">The question every structured-memory skeptic asks &mdash; <em>doesn&rsquo;t all this ritual burn tokens?</em> &mdash; answered with real numbers instead of vibes.</p>
+  <p>The method: no estimates. A fresh FRACTAL instance was born in a sandbox by the real genesis tool, worked one real first session, closed by its own ritual, and opened a second session &mdash; while the mother project, twenty-four closed sessions old, had its newest close and its newest session-opening measured from the same raw material: the actual session transcripts, token by token. Every number was computed twice by independent agents; the computations matched exactly.</p>
+  <ul class="plain">
+    <li><strong>An empty instance closes on ~11,000 fresh tokens.</strong> The whole ritual &mdash; handover record, checklist, checkers, commits &mdash; is cheap when the project is young.</li>
+    <li><strong>The 24-session mother closed on ~316,000</strong> &mdash; about 28&times; more. And the mass is not the ritual&rsquo;s mechanics: ~123,000 of it is <em>writing</em> &mdash; the protocol, the handover, the register rows that make the session recoverable tomorrow.</li>
+    <li><strong>The governed context spine weighs ~1,750 tokens at birth and ~16,400 after 24 sessions</strong> (&asymp;9&times;), growing ~450 words per session. Orientation &mdash; the price of a new session knowing exactly where it stands &mdash; loads ~6,000 vs ~30,000 tokens (&asymp;5&times;).</li>
+    <li><strong>The diet has a price tag now.</strong> Every 1,000 words evicted from the spine into pointers saves &asymp;1,350 tokens on <em>every</em> future session&rsquo;s orientation. Compaction isn&rsquo;t housekeeping; it is the single largest lever on what a session costs.</li>
+  </ul>
+  <p>One measurement, honestly bounded: one instance per side, and a simulated harness differs from an interactive one &mdash; so the comparison leans on context growth and output, the two figures cache mechanics can&rsquo;t distort. But the shape is already load-bearing: <strong>structure is cheap when empty, and its cost grows exactly where the diet procedure cuts.</strong> The measurement ran inside a Scan flight, and its numbers turned a standing advisory (&ldquo;these two documents are over budget&rdquo;) into an invoice &mdash; the very next act was a diet.</p>
+  <p class="standard-note">Of record: the Scan #5 flight record (2026-08-18, the gas-metering lane) &mdash; the context-rot metrology program&rsquo;s first executed measurement; methodology and the full table live there.</p>
+</article>
 
 <article id="adaptive-close" class="float">
   <p class="post-date">2026&#8211;08&#8211;17</p>
@@ -255,7 +271,7 @@
     <li><strong>Non-findings are recorded.</strong> What was checked and found sound is stated as precisely as the defects &mdash; a review that only lists problems can&rsquo;t tell you what it covered.</li>
   </ul>
   <p>Across four Scans the finding count fell 26 &rarr; 24 &rarr; 8 &rarr; 7 while the corpus tripled &mdash; the trajectory of drift being converted, catch by catch, into mechanical guarantees.</p>
-  <p>And the standard holds itself to the discipline it preaches. In FRACTAL, a standard ships in <strong>two halves: the prose and the checker</strong> &mdash; a standard without a checker is a norm, not a gate. When the prose is ready before the machine half, that is said honestly (<em>prose-first</em>) and the checker's build trigger is armed as a hard condition: the Scan standard shipped with the rule that <strong>the next Scan cannot close until its conformance checker exists</strong> &mdash; a tool that mechanically validates the report's grammar, its evidence block, and that every finding actually landed in the project's ledger with a disposition. Until that trigger fires, the obligation sits visibly in the queue; it cannot be quietly forgotten, because forgetting it is exactly the drift a Scan exists to hunt. The standard refuses to become its own blind spot.</p>
+  <p>And the standard holds itself to the discipline it preaches. In FRACTAL, a standard ships in <strong>two halves: the prose and the checker</strong> &mdash; a standard without a checker is a norm, not a gate. When the prose is ready before the machine half, that is said honestly (<em>prose-first</em>) and the checker's build trigger is armed as a hard condition: the Scan standard shipped with the rule that <strong>the next Scan cannot close until its conformance checker exists</strong> &mdash; a tool that mechanically validates the report's grammar, its evidence block, and that every finding actually landed in the project's ledger with a disposition. Until that trigger fires, the obligation sits visibly in the queue; it cannot be quietly forgotten, because forgetting it is exactly the drift a Scan exists to hunt. (The trigger has since been discharged: the checker, <span class="mono">check_scan.py</span>, shipped the same day the rule was written &mdash; and the fifth Scan became the first to land against a live machine gate.) The standard refuses to become its own blind spot.</p>
   <p class="standard-note">Of record: <em>Fractal_Scan_Procedure_v0.1</em> (decision C-108), distilled from the four executed Scans of 2026&#8211;08; the checker gate is its &sect;12.</p>
 </article>
 
@@ -271,7 +287,7 @@
     <li><strong>Landings are proposal-only.</strong> A flight lands a frozen, dated record; findings enter the ledger; nothing in canon moves without the commissioner&rsquo;s adoption.</li>
   </ul>
   <p>The procedures on this page compose with it: a Scan, a diet, a behaviour experiment can each run standalone &mdash; or plug into a flight when the job needs a fleet. The protocol itself was distilled from the programs that preceded it, frictions included: it exists <em>because</em> an early program launched undeclared, and the record of that friction is cited in the standard.</p>
-  <p class="standard-note">Of record: <em>Fractal_Ultracode_Flight_Protocol_v0.1</em> (decision C-108), distilled from the flight programs of 2026&#8211;08 &mdash; including a 67-agent adversarially verified capture program and the experiments described above.</p>
+  <p class="standard-note">Of record: <em>Fractal_Ultracode_Flight_Protocol_v0.2</em> (decision C-108; v0.1 since reissued with four cures from its own first flights), distilled from the flight programs of 2026&#8211;08 &mdash; including a 67-agent adversarially verified capture program and the experiments described above.</p>
 </article>
 
 </main>
