@@ -1,0 +1,43 @@
+name: "Fieldnote — friction"
+description: "Something didn't work, confused you, or blocked you. The project improves through exactly these — frictions are cured in the generator, never papered over."
+title: "[friction] "
+labels: ["fieldnote", "friction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **This is a fieldnote door.** FRACTAL runs a standing loop: frictions observed in real use are recorded, verified, and cured at the source — then ship in the next anchored release. Your report enters that loop. Verbatim beats summary everywhere below.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where were you?
+      options:
+        - The website (name the page below)
+        - The setup path / the guide
+        - A birthed instance (GENESIS / the onboarding interview)
+        - A shipped standard (Registry / a standards download)
+        - The baseline repository itself
+        - Somewhere else
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: "What you did, what you saw — paste the actual output or wording where you can."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: "Terminal output, screenshots, the exact file or page — whatever lets us reproduce your view."
+  - type: input
+    id: setup
+    attributes:
+      label: Your setup
+      description: "OS + which AI client (Claude Code, ChatGPT desktop, Codex, other) — if it applies."

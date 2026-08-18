@@ -1,0 +1,29 @@
+name: "Fieldnote — green datum"
+description: "Something worked, held up, or surprised you positively. Most projects only collect failures; here a confirmation is data too — the record calls it a green datum."
+title: "[green] "
+labels: ["fieldnote", "green-datum"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Confirmations steer as much as frictions.** A claim that survived contact with your real use — a birth that worked, a standard that transferred, a guide step that landed — is evidence the record wants. One line is enough; detail is welcome.
+  - type: dropdown
+    id: where
+    attributes:
+      label: What held up?
+      options:
+        - The setup path — it worked end to end
+        - A birthed instance — it runs
+        - A shipped standard — adopted or transferred into my own work
+        - The website / guide — it taught what it claimed
+        - A verification claim I checked myself (tag signature, timestamp receipt)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: "What you tried and what confirmed itself — with your context (project type, AI client) if it applies."
+    validations:
+      required: true

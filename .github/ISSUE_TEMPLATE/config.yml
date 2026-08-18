@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions, ideas, concepts — Discussions
+    url: https://github.com/mstruppe/fractal-mirror/discussions
+    about: Anything conversation-shaped — questions about the method, concepts you're building, things you want to share.
+  - name: The website — explanation, guide, standards
+    url: https://mstruppe.github.io/fractal-mirror/
+    about: What FRACTAL is, the setup path, and the downloadable working standards.
