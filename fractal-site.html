@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL</title>
+<meta name="description" content="Project memory for AI-assisted work that outlives every chat: decisions, reasoning, and next steps as plain text in a git repo you own — read at the start of every session, written back at the end.">
+<link rel="stylesheet" href="site.css">
+<!-- Site source of record (Site/fractal-site.html) — the HOME section of the fractal layout
+     (structure pass 2026-08-17: top menu = Home · Concepts · Blog · Guide; each page
+     carries its own subnav in the same pattern — the navigation itself recurses;
+     contact lives as a Home section and in every footer, not in the top menu).
+     ENGINE-SKETCH PRINCIPLE (Max's direction, 2026-08-18): the site is FRACTAL's engine
+     sketch — the machine dissected, its real parts exposed verbatim; it lives and develops
+     in lockstep with the public fractal-mirror by system design. Its working rules:
+     1 — every command that exists in the live fractal-mirror (.claude/commands/, tracked
+     files) has an entry in the command library (concepts.html#commands; per-command anchors
+     id="cmd-<name>"; the mirror's /fractal is represented by the abstract /<yourproject>
+     door). 2 — every command mentioned anywhere on the site links to its library anchor;
+     prose mentions only — terminal/UI illustrations and copy-blocks stay plain text.
+     3 — the blog holds the parts themselves, verbatim from the shipped baseline and
+     downloadable: Site/commands/ (blog.html#commands, rows id="src-<name>"; each library
+     door carries a door-src reference) and Site/standards/ (blog.html#standards, rows
+     id="std-<slug>"; each bibliography entry carries a bib-src reference; a standard
+     ratified after the newest anchored release gets an honest "ships with the next
+     release" note instead of a download). Refresh both folders from the fresh mirror at
+     each tagging close (rides the C-116 seam). 4 — the rule register stays concept-level
+     (Max, 2026-08-18): the register file is project-individual, the site explains the
+     mechanism only; revisit narrowed general rules at a later point. -->
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a class="mark" href="fractal-site.html">FRACTAL</a>
+  <a href="fractal-site.html" aria-current="page">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="blog.html">Blog</a>
+</nav>
+
+<nav class="subnav reveal" aria-label="Home sections">
+  <a href="#setup">Setup</a>
+  <a href="#idea">The idea</a>
+  <a href="#model">The model</a>
+  <a href="#discover">Go deeper</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header class="hero" id="top">
+  <h1 class="wordmark">FRACTAL</h1>
+  <p class="tagline"><span class="t-half">AI agents forget.</span> <span class="t-half">Your project won&rsquo;t.</span></p>
+  <p class="subline">Your project gets a memory that survives every session: decisions recorded with their reasoning, work handed over so any future session picks up cold &mdash; all plain text in git that you own.</p>
+  <p class="hero-cue"><a href="#setup">Set up in three steps&thinsp;&darr;</a></p>
+</header>
+
+<main>
+
+<section id="setup" class="float">
+  <p class="kicker">Setup</p>
+  <h2>Three steps. The session does the rest.</h2>
+  <p>You need <strong><a href="https://github.com/signup">git</a></strong> and an <strong>AI coding agent</strong> &mdash; anything that can hold a session in a folder, read and write files, and run terminal commands. The kernel is client-neutral; <a href="https://claude.com/claude-code">Claude Code</a> is the tested reference, and any agent meeting those minimums works in plain words.</p>
+  <p class="step-note">One thing you&rsquo;ll notice inside the repository: a <span class="mono">Claude/</span> folder. That name is heritage, not a dependency &mdash; FRACTAL was built with Claude Code, and the folder keeps the name of the era that built it. Any capable agent reads it exactly the same. FRACTAL is an independent project with no affiliation with Anthropic.</p>
+  <p class="step-note">Operating systems: <strong>macOS</strong> (the tested reference) and <strong>Linux</strong> run the lines below verbatim. On <strong>Windows</strong>, run them in <em>Git Bash</em> &mdash; it ships with <a href="https://github.com/git-for-windows/git">Git for Windows</a> &mdash; and where a command says <span class="mono">python3</span>, Windows spells it <span class="mono">py</span>. Nothing else differs: the memory is plain files, the same on every system.</p>
+
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <p class="step-title">Get FRACTAL</p>
+      <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <p class="step-note">A &ldquo;detached HEAD&rdquo; notice is expected &mdash; you are standing on the newest release. This clone is a reference, not your project.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <p class="step-title">Open a session in that folder</p>
+      <div class="cmd">claude<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <p class="step-note">That is the reference client&rsquo;s command &mdash; with another agent, open this folder the way that client opens projects.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <p class="step-title">Type exactly this as your first message</p>
+      <div class="cmd">/welcome<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <p class="step-note">The session takes it from there: it explains what you&rsquo;re looking at and offers the two paths &mdash; start your own FRACTAL-governed project, or look around first. If <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> doesn&rsquo;t autocomplete in your agent, the plain words do the same: <em>&ldquo;I&rsquo;m new here &mdash; welcome me.&rdquo;</em> Your project will not live in this folder; the birth creates a new repository of your own.</p>
+      <p style="margin-top: 1.2rem;"><a class="btn" href="guide.html#birth">What <span class="mono">/begin</span> will ask you &mdash; the birth, explained &rarr;</a></p>
+    </div>
+  </div>
+
+  <p style="margin-top: 2.8rem;"><a class="btn" href="guide.html">The full step-by-step guide &rarr;</a></p>
+</section>
+
+<section id="idea" class="float">
+  <p class="kicker">The idea</p>
+  <h2>The repository is the product.</h2>
+  <p class="voice">The README&rsquo;s own words: &ldquo;This repository does not implement FRACTAL. It <strong>is</strong> FRACTAL&rdquo; &mdash; the first living instance, a project that governs itself with its own machinery.</p>
+  <p>Weeks of context accumulate in one chat thread; the thread hits its limit and dies. The next session starts ignorant &mdash; you paste summaries, re-explain old decisions, watch the AI contradict things it settled last week. FRACTAL moves the memory out of the chat entirely: no server to run, no database, and nothing phones home.</p>
+  <p>The wider frame: real investigation is fragmented &mdash; every switch between web, AI, literature, data, notebooks, code, and prose forces context to be rebuilt from nothing. FRACTAL folds that lifecycle into one continuous workflow and preserves the entire reasoning process, not just results.</p>
+  <p>Its governing philosophy is <strong>recursive simplicity</strong>: complex understanding emerges from repeatedly applying a small set of simple, composable rules. Begin from the smallest abstraction; add only what an observed problem requires.</p>
+  <p>Context is an external dependency that is loaded &mdash; not history carried in the chat. The memory lives in your repo, not in any vendor&rsquo;s product.</p>
+</section>
+
+<section id="model" class="float">
+  <p class="kicker">The model</p>
+  <h2>A copy, not an account.</h2>
+  <p>FRACTAL is not a service you connect to. Birthing a project copies the constitution into a repository you own &mdash; no login, no tenant, no home server. <strong>Your copy is yours forever.</strong> An instance calls nothing upstream at run time; no vendor &mdash; including FRACTAL&rsquo;s own author &mdash; can break, deprecate, or surveil it. A never-upgraded instance works forever.</p>
+  <p><strong>Updates are offers.</strong> Publishing a new kernel updates no one; a living instance adopts a release only by its own recorded decision. Staying current is a decision you make, never a default you suffer. And &ldquo;true&rdquo; means the anchored lineage: the signed, externally anchored release chain, verifiable from any clone &mdash; with one home address for the baseline.</p>
+</section>
+
+<section id="discover" class="float">
+  <p class="kicker">Go deeper</p>
+  <h2>One public home.</h2>
+  <p>The mirror is the permanent public version of FRACTAL &mdash; a stable, standardized, versioned form anyone can take and make their own. The anchored private history stands in reserve as the priority proof.</p>
+  <ul class="doors">
+    <li><a href="https://github.com/mstruppe/fractal-mirror"><span class="door-name">The repository</span><span class="door-what">the public home &mdash; the baseline, versioned</span></a></li>
+    <li><a href="https://github.com/mstruppe/fractal-mirror/blob/main/README.md"><span class="door-name">README</span><span class="door-what">the front door, quickstart first</span></a></li>
+    <li><a href="guide.html"><span class="door-name">The guide</span><span class="door-what">day two onward</span></a></li>
+    <li><a href="https://github.com/mstruppe/fractal-mirror/blob/main/GENESIS.md"><span class="door-name">GENESIS</span><span class="door-what">birth your own instance</span></a></li>
+    <li><a href="https://github.com/mstruppe/fractal-mirror/tree/main/Provenance"><span class="door-name">Provenance</span><span class="door-what">the proof chain</span></a></li>
+  </ul>
+  <p class="caveat tight">Where it heads, on the record&rsquo;s own terms: the public home is designed to one day become a service surface &mdash; a guide plus a registry of standards and skills that any instance resolves by pointer, so starting a governed project approaches the cost of one address. That layer is vision, banked, not built &mdash; the record&rsquo;s own rule is that nothing is built before its trigger fires &mdash; and its first candidate entry is being forged in real use right now.</p>
+</section>
+
+<section id="contact" class="float">
+  <p class="kicker">Contact</p>
+  <h2>One address.</h2>
+  <p>Questions, frictions, field reports &mdash; the project reads its mail: <a href="mailto:fractal@knet.network" class="mono">fractal@knet.network</a></p>
+  <p>The public home on GitHub: <a href="https://github.com/mstruppe/fractal-mirror" class="mono">github.com/mstruppe/fractal-mirror</a></p>
+</section>
+
+</main>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>

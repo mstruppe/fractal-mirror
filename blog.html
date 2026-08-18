@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — Blog</title>
+<meta name="description" content="Working standards, field studies, experimental designs, and results — from FRACTAL's own record.">
+<link rel="stylesheet" href="site.css">
+<!-- BLOG section — deliberately rendered as FRACTAL's wiki (Max's direction, 2026-08-18):
+     plain, dense, made for overview, the way developer and researcher environments look.
+     The seriousness is shown by the rendering, never claimed by the copy.
+     TARGET RENDERING (Max's direction, same date): the central-bank release page model —
+     serious, stripped, navigable; in place of policy notes, AI working standards presented
+     like research papers in a blog. The Working standards feed below is that model's seed;
+     per-standard paper pages land in the content pass. -->
+<style>
+  /* wiki mode: document rendering, no reveal theatrics */
+  .wiki { max-width: 52rem; margin: 0 auto; padding: 7.5rem 1.5rem 5rem; font-size: 0.95rem; line-height: 1.6; }
+  .wiki h1 {
+    font-size: 1.85rem; font-weight: 650; letter-spacing: -0.01em; line-height: 1.2;
+    border-bottom: 1px solid var(--hairline); padding-bottom: 0.55rem; margin: 0 0 0.5rem;
+  }
+  .wiki-sub { color: var(--muted); font-size: 0.88rem; margin: 0 0 1.9rem; }
+  .toc {
+    display: inline-block;
+    border: 1px solid var(--hairline-soft);
+    background: var(--code-bg);
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem 0.85rem 1.1rem;
+    font-size: 0.85rem;
+    margin: 0 0 2.4rem;
+  }
+  .toc .toc-title { font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .toc ol { margin: 0.5rem 0 0; padding-left: 1.5rem; }
+  .toc li { margin: 0.22rem 0; }
+  .toc a { border-bottom: none; }
+  .toc a:hover { border-bottom: 1px solid var(--hairline); }
+  .wiki h2 {
+    font-size: 1.3rem; font-weight: 600; letter-spacing: 0;
+    border-bottom: 1px solid var(--hairline-soft); padding-bottom: 0.3rem;
+    margin: 2.8rem 0 1rem;
+  }
+  .wiki h3 { font-size: 1rem; font-weight: 600; margin: 1.7rem 0 0.35rem; }
+  .wiki p { margin: 0 0 0.85rem; color: var(--muted); }
+  .wiki p strong, .wiki p b { color: var(--ink); font-weight: 550; }
+  .wiki .check { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; color: var(--muted); margin: 0.3rem 0 0.9rem; }
+  .wiki .status { font-size: 0.82rem; color: var(--faint); font-style: italic; }
+  .wiki .rule-note { font-size: 0.85rem; color: var(--faint); border-top: 1px solid var(--hairline-soft); margin-top: 2.6rem; padding-top: 1rem; }
+  /* the publications feed (release-page model) */
+  .pubs { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.4rem 0 0.9rem; }
+  .pubs td { padding: 0.55rem 1rem 0.55rem 0; border-bottom: 1px solid var(--hairline-soft); vertical-align: baseline; }
+  .pubs td.d { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
+  .pubs td.t a { border-bottom: none; font-weight: 550; }
+  .pubs td.t a:hover { border-bottom: 1px solid var(--hairline); }
+  .pubs td.v { color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
+  .pubs td.s { color: var(--faint); font-size: 0.82rem; font-style: italic; white-space: nowrap; text-align: right; }
+  .pubs td.w { color: var(--muted); font-size: 0.85rem; }
+  .pubs td.d a { border-bottom: none; }
+  .pubs td.d a:hover { border-bottom: 1px solid var(--hairline); }
+  .pubs-wrap { overflow-x: auto; }
+</style>
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a class="mark" href="fractal-site.html">FRACTAL</a>
+  <a href="fractal-site.html">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="blog.html" aria-current="page">Blog</a>
+</nav>
+
+<nav class="subnav" aria-label="Blog sections">
+  <a href="value-model.html">Value model</a>
+  <a href="#standards">Standards</a>
+  <a href="#commands">Commands</a>
+  <a href="#proof">Proof</a>
+  <a href="#field">Field studies</a>
+  <a href="#experiments">Experiments</a>
+  <a href="#results">Results</a>
+</nav>
+
+<div class="wiki">
+  <h1>FRACTAL Blog</h1>
+  <p class="wiki-sub">Working standards, field studies, experimental designs, and results — from the project&rsquo;s own record. What lands here has already happened, and cites where it happened.</p>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#standards">Working standards</a></li>
+      <li><a href="#commands">Command sources</a></li>
+      <li><a href="#proof">Proof — claims you can check</a></li>
+      <li><a href="#field">Field studies</a></li>
+      <li><a href="#experiments">Experimental designs</a></li>
+      <li><a href="#results">Results</a></li>
+    </ol>
+  </div>
+
+  <h2 id="standards">Working standards</h2>
+  <p>Ratified standards for AI-assisted work, in order of release. Each was distilled from executed history and ratified on the record; full texts ship in the public baseline. Per-standard paper presentations — abstract, method, provenance — land here in the content pass.</p>
+  <div class="pubs-wrap"><table class="pubs">
+    <tr id="std-migration"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-migration">Kernel Migration Procedure</a></td><td class="v">v0.1</td><td class="s">ships with the next release</td></tr>
+    <tr id="std-scholarly"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-scholarly">Scholarly Source Convention</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Scholarly_Source_Convention_v0.1.md" download>full text &darr;</a></td></tr>
+    <tr id="std-vocabulary"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-vocabulary">Vocabulary Extension Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Vocabulary_Extension_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
+    <tr id="std-onboarding"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-onboarding">Onboarding Protocol</a></td><td class="v">v0.3</td><td class="s"><a href="standards/Fractal_Onboarding_Protocol.md" download>full text &darr;</a></td></tr>
+    <tr id="std-diet"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-diet">Diet Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Diet_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
+    <tr id="std-flight"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-flight">Ultracode Flight Protocol</a></td><td class="v">v0.2</td><td class="s"><a href="standards/Fractal_Ultracode_Flight_Protocol_v0.2.md" download>full text &darr;</a></td></tr>
+    <tr id="std-scan"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-scan">Scan Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Scan_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
+    <tr id="std-board"><td class="d">2026-08-16</td><td class="t"><a href="concepts.html#bib-board">Agenda Board Format</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Agenda_Board_Format_v0.1.md" download>full text &darr;</a></td></tr>
+    <tr id="std-fieldnote"><td class="d">2026-08-16</td><td class="t"><a href="concepts.html#bib-fieldnote">Fieldnote Format</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Fieldnote_Format_v0.1.md" download>full text &darr;</a></td></tr>
+  </table></div>
+  <p class="status">Full texts are the shipped baseline&rsquo;s files, verbatim and downloadable; a standard ratified after the newest anchored release ships with the next one.</p>
+
+  <h2 id="commands">Command sources</h2>
+  <p>A command is a small markdown file the agent reads — the procedure written down in plain language, shipped in the baseline&rsquo;s <span class="mono">.claude/commands/</span> folder and stamped like everything else. These are the six from the newest anchored release, verbatim and downloadable: read one to see exactly what a session is told, or drop it into your own instance&rsquo;s folder and adapt it. The dictionary view — what each does, in one line — is the <a href="concepts.html#commands">command library</a>.</p>
+  <div class="pubs-wrap"><table class="pubs">
+    <tr id="src-welcome"><td class="d"><a href="concepts.html#cmd-welcome">/welcome</a></td><td class="w">the scripted first contact — the standing check, the explanation, the two paths out</td><td class="s"><a href="commands/welcome.md" download>welcome.md &darr;</a></td></tr>
+    <tr id="src-begin"><td class="d"><a href="concepts.html#cmd-begin">/begin</a></td><td class="w">the trigger of the onboarding interview — the protocol is the script, the birth is its product</td><td class="s"><a href="commands/begin.md" download>begin.md &darr;</a></td></tr>
+    <tr id="src-fractal"><td class="d"><a href="concepts.html#cmd-yourproject">/fractal</a></td><td class="w">the baseline&rsquo;s own opener — the living specimen of your project&rsquo;s named command</td><td class="s"><a href="commands/fractal.md" download>fractal.md &darr;</a></td></tr>
+    <tr id="src-close"><td class="d"><a href="concepts.html#cmd-close">/close</a></td><td class="w">the close ritual orchestrated — checklist, checkers, ripple, commit and push</td><td class="s"><a href="commands/close.md" download>close.md &darr;</a></td></tr>
+    <tr id="src-fieldnote"><td class="d"><a href="concepts.html#cmd-fieldnote">/fieldnote</a></td><td class="w">deterministic capture — one line into the right ledger, then straight back to the work</td><td class="s"><a href="commands/fieldnote.md" download>fieldnote.md &darr;</a></td></tr>
+    <tr id="src-look"><td class="d"><a href="concepts.html#cmd-look">/look</a></td><td class="w">the observation window — boundaries first, read-only always, report and withdraw</td><td class="s"><a href="commands/look.md" download>look.md &darr;</a></td></tr>
+  </table></div>
+  <p class="status">Verbatim copies of the shipped baseline&rsquo;s files; refreshed with each release.</p>
+
+  <h2 id="proof">Proof — claims you can check</h2>
+
+  <h3>The memory survives a vendor swap</h3>
+  <p>The first project born from FRACTAL&rsquo;s kernel was birthed and run through Claude Code, then continued its working sessions in the ChatGPT desktop app — zero kernel changes, because the memory lives in the repo. The protocol of record states: <em>&ldquo;Client-neutrality moved from claim to observed fact.&rdquo;</em> In the founder&rsquo;s words: <em>&ldquo;usually you&rsquo;re vendor bound to get memory within projects.&rdquo;</em></p>
+
+  <h3>Integrity is machine-verified, not asserted</h3>
+  <p>Two dependency-free checkers block red: one verifies the knowledge store&rsquo;s invariants before every store-touching commit; one reads the corpus&rsquo;s own prose claims about itself — versions, pointers, counts — against reality at every close. Both have caught real defects, and each catch becomes a mechanical rule. The tools refuse, never degrade. Where the checkers don&rsquo;t reach, verification stays on humans — the machine-checked claims run in minutes; the rest is reviewed on the record, and drift is measured, not denied.</p>
+
+  <h3>Total machine loss is drilled, not promised</h3>
+  <p>A fresh clone on a clean machine rebuilds the working system from the bootstrap document alone — verified, byte-parity, three green drills on the record. The record&rsquo;s own words: <em>&ldquo;&lsquo;Laptop in the ocean&rsquo; is demonstrated fact.&rdquo;</em></p>
+
+  <h3>Priority is mathematics, not testimony</h3>
+  <p>Every release ships as a signed tag with an independent OpenTimestamps receipt committed in the repository itself, so any clone carries the full proof chain; the earliest anchors are Bitcoin-final. This is the one claim a stranger can check without reading anything:</p>
+  <p class="check">git tag -v beta-0.4 &nbsp;&middot;&nbsp; ots verify Provenance/beta-0.3-public.txt.ots</p>
+
+  <h3>A stranger can birth a working instance</h3>
+  <p>The path the <a href="fractal-site.html#setup">setup</a> describes has been walked twice under stranger conditions: once when the first child project was born from an anchored release tag, and once in a simulated onboarding of the public mirror itself — a scripted non-programmer ran the quickstart verbatim through to a real birth, both integrity checkers passing, with no outside knowledge needed at any step.</p>
+
+  <h3>Limits, stated</h3>
+  <p>FRACTAL does not abolish context limits — sessions read a compressed spine; the claim is owned, verifiable, vendor-independent memory, never infinite memory. No auto-updates into living instances — by design; sovereignty is the trade, named plainly. No adoption path for existing projects yet — the paved path births new projects. No UI — terminal and files, with one honestly failed experiment on the books. The network layers are unbuilt and trigger-armed, constitutionally barred from binding a build.</p>
+
+  <h2 id="field">Field studies</h2>
+  <p>Whole episodes from the record, told with their evidence attached: the first child project&rsquo;s birth from an anchored tag; the vendor-swap trial; the first kernel migration, executed under the child&rsquo;s own protocol with every gate on the record; the close that survived its own client archiving the chat.</p>
+  <p class="status">The first written studies land with the content pass; their raw material exists as flight records, protocols, and fieldnote ledgers in the baseline.</p>
+
+  <h2 id="experiments">Experimental designs</h2>
+  <p>The claims worth making are the ones that can fail: whether structured context keeps agents <em>right</em> (a context-fidelity experiment with blinded scoring is running in the first child project now), whether it keeps them <em>cheap</em> (the tokens-on-new-context claim, designed to be measured against a bare-conversation baseline), and which engine at which capacity suffices for which use intensity.</p>
+  <p class="status">Designs are published here when they freeze; results follow when they exist — including the ones that come back negative.</p>
+
+  <h2 id="results">Results</h2>
+  <p class="status">Nothing to report yet — by honesty, not by accident: the first experiment is still in the field. Results land here as experiments close, whichever way they land.</p>
+
+  <p class="rule-note">Editorial rule of this page: everything cites the record; nothing is written here first.</p>
+</div>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — Concepts</title>
+<meta name="description" content="The system explained piece by piece: the in-depth guide, the command library, and the bibliography of AI workflow standards — with downloads as sandbox extensions.">
+<link rel="stylesheet" href="site.css">
+<!-- CONCEPTS section of the fractal layout (structure pass 2026-08-17).
+     The command library projects the Command Index; the bibliography projects the Registry —
+     this page cites the kernel, it never becomes a second source (C-035 discipline). -->
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a class="mark" href="fractal-site.html">FRACTAL</a>
+  <a href="fractal-site.html">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="concepts.html" aria-current="page">Concepts</a>
+  <a href="blog.html">Blog</a>
+</nav>
+
+<nav class="subnav" aria-label="Concepts sections">
+  <a href="#guide">The guide</a>
+  <a href="#commands">Command library</a>
+  <a href="#rules">Rule register</a>
+  <a href="#bibliography">Bibliography</a>
+  <a href="#extensions">Extensions</a>
+</nav>
+
+<header class="hero-lite">
+  <h1>Concepts</h1>
+  <p class="lede">The system explained piece by piece &mdash; each concept described, proven where proof exists, reasoned where it doesn&rsquo;t yet. The same pattern as everywhere in FRACTAL: a small set of ideas, applied recursively.</p>
+</header>
+
+<main>
+
+<section id="guide" class="float">
+  <p class="kicker">The guide</p>
+  <h2>From zero to a governed project.</h2>
+  <p>The in-depth path &mdash; installing nothing, birthing your own instance, driving sessions, closing them &mdash; lives on its own page, step by step.</p>
+  <p style="margin-top: 2rem;"><a class="btn" href="guide.html">Open the guide &rarr;</a></p>
+</section>
+
+<section id="commands" class="float">
+  <p class="kicker">Command library</p>
+  <h2>A command is a one-word act.</h2>
+  <p>Sessions are driven by a handful of commands &mdash; and where one must be aimed, it takes a target (<span class="mono">/command &lt;target&gt;</span>), so a few words serve a growing project. The words always work even where slash-commands don&rsquo;t: each is plain language a session understands.</p>
+  <p>Every command is a compressed projection of a standard &mdash; the dictionary entry links to the source it compresses, in the <a href="#bibliography">bibliography</a> below.</p>
+  <ul class="doors">
+    <li id="cmd-welcome"><a href="#bib-onboarding"><span class="door-name">/welcome</span><span class="door-what">first contact &mdash; what FRACTAL is, where you&rsquo;re standing, the paths out</span></a><span class="door-src">source: <a href="blog.html#src-welcome">welcome.md</a></span></li>
+    <li id="cmd-begin"><a href="#bib-onboarding"><span class="door-name">/begin</span><span class="door-what">the onboarding interview &mdash; five real questions, then the birth of your own instance</span></a><span class="door-src">source: <a href="blog.html#src-begin">begin.md</a></span></li>
+    <li id="cmd-yourproject"><a href="#bibliography"><span class="door-name">/&lt;yourproject&gt;</span><span class="door-what">your instance&rsquo;s opener, carrying its own name &mdash; loads the memory, reports where things stand, waits for direction</span></a><span class="door-src">specimen: <a href="blog.html#src-fractal">fractal.md</a> &mdash; the baseline&rsquo;s own</span></li>
+    <li id="cmd-close"><a href="#bibliography"><span class="door-name">/close</span><span class="door-what">ends a working cycle &mdash; the handover written, the checkers run, the memory saved</span></a><span class="door-src">source: <a href="blog.html#src-close">close.md</a></span></li>
+    <li id="cmd-fieldnote"><a href="#bib-fieldnote"><span class="door-name">/fieldnote</span><span class="door-what">one-line capture of a friction or a win, mid-work &mdash; recorded, then straight back to the task</span></a><span class="door-src">source: <a href="blog.html#src-fieldnote">fieldnote.md</a></span></li>
+    <li id="cmd-look"><a href="#bibliography"><span class="door-name">/look</span><span class="door-what">a read-only window into another of your instances &mdash; observation, never interference</span></a><span class="door-src">source: <a href="blog.html#src-look">look.md</a></span></li>
+  </ul>
+  <p class="step-note" style="margin-top: 1.4rem;">Entry declares the project (each instance&rsquo;s opener is its own name); closing is universal. One conversation, one open loop.</p>
+
+  <h3 style="margin-top: 3.5rem;">Hardwired and taught</h3>
+  <p>The commands above ship in the public baseline &mdash; hardwired in the mirror, born into every new instance. Beyond them, an instance can grow its own: a custom command is a small stamped file teaching the session a procedure in your project&rsquo;s own words. <em>How to teach a command &mdash; the recipe and its rules &mdash; lands here in the content pass.</em></p>
+</section>
+
+<section id="rules" class="float">
+  <p class="kicker">The rule register</p>
+  <h2>Rules are made by talking, kept by the record.</h2>
+  <p>Every FRACTAL project carries a <strong>rule register</strong> &mdash; a numbered ledger of every rule and decision the project has ever made, each row carrying its reasoning. It is one of FRACTAL&rsquo;s backbones: nothing governs because the AI happens to remember it. A thing governs because it stands in the register &mdash; and every session reads the register.</p>
+  <p>You make a rule by saying it. <em>&ldquo;From now on, we do X&rdquo;</em> &mdash; the session records it as a numbered decision with its why, and every session after honors it. Change your mind later and the register records that too: decisions supersede one another on the record, nothing is overwritten &mdash; the same never-lose-anything mechanic as the <a href="guide.html#birth">canonical documents</a>.</p>
+  <p>This is also how you tune the language itself: if your agent ever misreads a command, or you simply want your own words for things, establish the rule once &mdash; <em>&ldquo;in this project, wrap up means close&rdquo;</em> &mdash; and it is law from then on, in every session, whichever agent drives. Your project is born with its register seeded; by tradition its first entry is your first real decision.</p>
+</section>
+
+<section id="bibliography" class="float">
+  <p class="kicker">Bibliography</p>
+  <h2>A bibliography of AI workflow standards.</h2>
+  <p>Every procedure FRACTAL runs on is a written, versioned, ratified standard &mdash; distilled from executed history, never designed in the abstract. This section catalogs them the way a paper cites its sources: identity, version, status, claim. The commands above are their compressed spoken forms; together they grow toward a shared working language for AI agents &mdash; naturally born from use.</p>
+  <p>Four of these already have their stories told on the <a href="procedures.html">procedures blog</a>; each standard&rsquo;s full text ships in the public baseline.</p>
+
+  <div class="bib" id="bib-flight">
+    <h3>Ultracode Flight Protocol <span class="vtag">v0.2 &middot; ratified</span></h3>
+    <p>The container for multi-agent work: commissioning contract, launch sequence, verification tiers, landing and cost honesty. When one session isn&rsquo;t enough, this is how a fleet flies without losing the record.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-flight">Fractal_Ultracode_Flight_Protocol_v0.2.md</a></span>
+  </div>
+  <div class="bib" id="bib-scan">
+    <h3>Scan Procedure <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>The loose-end review: how a project audits itself for drift, with a machine gate (<span class="mono">check_scan.py</span>) that blocks red. Distilled from four executed scans.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-scan">Fractal_Scan_Procedure_v0.1.md</a></span>
+  </div>
+  <div class="bib" id="bib-diet">
+    <h3>Diet Procedure <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>Working-set eviction: what a living project may forget, and how it proves the forgetting is safe. The answer to context that only ever grows.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-diet">Fractal_Diet_Procedure_v0.1.md</a></span>
+  </div>
+  <div class="bib" id="bib-vocabulary">
+    <h3>Vocabulary Extension Procedure <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>How an instance extends the shared vocabulary under governance &mdash; new roles by recorded decision, checker-enforced.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-vocabulary">Fractal_Vocabulary_Extension_Procedure_v0.1.md</a></span>
+  </div>
+  <div class="bib" id="bib-scholarly">
+    <h3>Scholarly Source Convention <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>The first content convention: how papers enter the knowledge store &mdash; identity, identifier routes, authorship shape.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-scholarly">Fractal_Scholarly_Source_Convention_v0.1.md</a></span>
+  </div>
+  <div class="bib" id="bib-migration">
+    <h3>Kernel Migration Procedure <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>How a living instance adopts a newer kernel release: pin, decide per change, validate, land &mdash; sovereignty preserved at every gate. Distilled from the first executed migration, not designed on paper.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-migration">ships with the next release</a></span>
+  </div>
+  <div class="bib" id="bib-onboarding">
+    <h3>Onboarding Protocol <span class="vtag">v0.3 &middot; ratified</span></h3>
+    <p>The guided first loop behind <a class="mono" href="#cmd-welcome">/welcome</a> and <a class="mono" href="#cmd-begin">/begin</a>: the interview that drives a birth, the rail that offers one move per loop and then retires itself.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-onboarding">Fractal_Onboarding_Protocol.md</a></span>
+  </div>
+  <div class="bib" id="bib-fieldnote">
+    <h3>Fieldnote Format <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>The capture format behind <a class="mono" href="#cmd-fieldnote">/fieldnote</a>: immutable machine-parsable entries, whole-or-nothing intake &mdash; the field-test loop&rsquo;s interface.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-fieldnote">Fractal_Fieldnote_Format_v0.1.md</a></span>
+  </div>
+  <div class="bib" id="bib-board">
+    <h3>Agenda Board Format <span class="vtag">v0.1 &middot; ratified</span></h3>
+    <p>The at-a-glance board standard: contract, section grammar, instance-neutral skeleton. Adopted by decision, never imposed.</p>
+    <span class="bib-src">full text: <a href="blog.html#std-board">Fractal_Agenda_Board_Format_v0.1.md</a></span>
+  </div>
+
+  <p class="caveat tight">The catalog&rsquo;s substrate is the Registry that ships in the baseline &mdash; honest statuses, provenance attached. As standards mature they gain their entry here; nothing is listed before it is ratified in the record.</p>
+</section>
+
+<section id="extensions" class="float">
+  <p class="kicker">Extensions</p>
+  <h2>The sandbox shelf.</h2>
+  <p>Concepts proven here become things you can take: a standard&rsquo;s full text, a command file to teach your instance, a procedure to adopt &mdash; <strong>fractal sandbox extensions</strong>, downloadable, versioned, signed with the release they ship in.</p>
+  <p class="caveat tight">The shelf opens with the content pass &mdash; its first stock is the eight standards above, each as an adoptable file. Until then, everything listed ships inside <a href="https://github.com/mstruppe/fractal-mirror">the public baseline</a> itself.</p>
+</section>
+
+</main>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>

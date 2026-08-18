@@ -1,0 +1,406 @@
+/* FRACTAL site — shared design system (extracted from fractal-site.html at the structure pass, 2026-08-17).
+   Black & white, luxury-minimal, sans, both modes, content floating in space.
+   The navigation is fractal: the top menu's pattern repeats one level down as each page's subnav. */
+:root {
+  --bg: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #6e6e73;
+  --faint: #a1a1a6;
+  --hairline: rgba(10, 10, 10, 0.12);
+  --hairline-soft: rgba(10, 10, 10, 0.06);
+  --code-bg: rgba(10, 10, 10, 0.035);
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --sheen-a: #0a0a0a;
+  --sheen-b: #5c5c60;
+  --subnav-scrim: linear-gradient(to bottom, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 55%, rgba(255, 255, 255, 0) 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --ink: #f5f5f7;
+    --muted: #86868b;
+    --faint: #58585c;
+    --hairline: rgba(245, 245, 247, 0.16);
+    --hairline-soft: rgba(245, 245, 247, 0.08);
+    --code-bg: rgba(245, 245, 247, 0.055);
+    --nav-bg: rgba(0, 0, 0, 0.65);
+    --sheen-a: #f5f5f7;
+    --sheen-b: #86868b;
+    --subnav-scrim: linear-gradient(to bottom, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0) 100%);
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: rgba(128, 128, 132, 0.25); }
+
+a { color: var(--ink); text-decoration: none; }
+p a, li a { border-bottom: 1px solid var(--hairline); transition: border-color 0.2s ease; }
+p a:hover, li a:hover { border-color: var(--ink); }
+
+/* ---------- nav (the mother menu) ---------- */
+nav.top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center; gap: 2.25rem;
+  height: 46px;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  backdrop-filter: saturate(1.6) blur(18px);
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+nav.top a { color: var(--muted); transition: color 0.2s ease; white-space: nowrap; }
+nav.top a:hover { color: var(--ink); }
+nav.top a[aria-current="page"] { color: var(--ink); }
+nav.top .mark { color: var(--ink); font-weight: 600; letter-spacing: 0.08em; }
+
+/* ---------- subnav (the same pattern, one level down — borderless, the words float) ---------- */
+nav.subnav {
+  position: fixed; top: 46px; left: 0; right: 0; z-index: 9;
+  display: flex; align-items: center; justify-content: center; gap: 1.8rem;
+  height: 40px;
+  padding-bottom: 4px;
+  pointer-events: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.01em;
+  background: var(--subnav-scrim);
+}
+/* anchored targets clear the two fixed bars (top 46px + subnav 40px) */
+[id] { scroll-margin-top: 100px; }
+nav.subnav a { color: var(--faint); transition: color 0.2s ease; white-space: nowrap; pointer-events: auto; }
+nav.subnav a:hover { color: var(--ink); }
+nav.subnav a.active { color: var(--ink); }
+/* on the home page the subnav appears once you scroll into the sections */
+nav.subnav.reveal { transform: translateY(-100%); opacity: 0; transition: transform 0.35s ease, opacity 0.35s ease; }
+nav.subnav.reveal.show { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { nav.subnav.reveal { transition: none; } }
+/* attention-follow (JS adds .auto): hidden at rest, slides down out of the top on cursor
+   movement, slides back up into it when the cursor rests. No JS -> no .auto -> always visible. */
+nav.subnav.auto { transform: translateY(-100%); opacity: 0; transition: transform 0.35s ease, opacity 0.35s ease; }
+nav.subnav.auto.shown { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { nav.subnav.auto { transition: none; } }
+
+@media (max-width: 900px) {
+  nav.top, nav.subnav {
+    justify-content: flex-start;
+    gap: 1.4rem;
+    padding: 0 1.1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav.top::-webkit-scrollbar, nav.subnav::-webkit-scrollbar { display: none; }
+}
+
+/* ---------- hero (full, home) ---------- */
+header.hero {
+  min-height: 100vh;   /* fallback for browsers without svh */
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+}
+.wordmark {
+  margin: 0;
+  font-size: clamp(4rem, 14vw, 11rem);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1;
+  background: linear-gradient(115deg, var(--sheen-a) 0%, var(--sheen-a) 38%, var(--sheen-b) 50%, var(--sheen-a) 62%, var(--sheen-a) 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: sheen 2.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s 1 both;
+}
+@keyframes sheen { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce) { .wordmark { animation: none; background-position: 50% 0; } }
+
+.tagline {
+  margin: 1.75rem 0 0;
+  font-size: clamp(1.15rem, 2.6vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+@media (max-width: 600px) {
+  /* the tagline breaks into its two halves, centered */
+  .tagline .t-half { display: block; }
+}
+.subline {
+  margin: 1.1rem auto 0;
+  max-width: 34rem;
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+.hero-cue {
+  margin-top: 3.5rem;
+  font-size: 0.8rem;
+  color: var(--faint);
+  letter-spacing: 0.02em;
+}
+.hero-cue a { color: var(--muted); border-bottom: 1px solid var(--hairline); }
+.hero-cue a:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ---------- hero (compact, section pages) ---------- */
+header.hero-lite {
+  padding: 10.5rem 1.5rem 1rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+header.hero-lite h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+header.hero-lite .lede {
+  margin: 1.2rem 0 0;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+/* ---------- floating sections ---------- */
+main { display: block; }
+section {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 7rem 1.5rem 0;
+}
+section:last-of-type { padding-bottom: 8rem; }
+
+.kicker {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0 0 1rem;
+}
+h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+h3 { margin: 0 0 0.6rem; font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; }
+p { margin: 0 0 1.1rem; color: var(--muted); }
+p strong, p b { color: var(--ink); font-weight: 550; }
+.voice { color: var(--ink); }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+/* reveal on scroll */
+.float { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.float.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .float { opacity: 1; transform: none; transition: none; } }
+html.nofade .float { opacity: 1; transform: none; transition: none; }
+
+/* ---------- setup steps ---------- */
+.step { display: flex; gap: 1.4rem; margin-top: 2.6rem; align-items: baseline; }
+.step-n {
+  font-size: 0.8rem; font-weight: 600; color: var(--faint);
+  min-width: 1.4rem; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.step-body { flex: 1; min-width: 0; }
+.step-title { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 600; color: var(--ink); }
+.step-note { font-size: 0.9rem; color: var(--muted); margin-top: 0.55rem; }
+
+.cmd {
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--hairline-soft);
+  border-radius: 12px;
+  padding: 0.85rem 3rem 0.85rem 1.1rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink);
+  overflow-x: auto;
+  white-space: pre;
+}
+.copy {
+  position: absolute; top: 0.55rem; right: 0.55rem;
+  border: 1px solid var(--hairline); border-radius: 8px;
+  background: transparent; color: var(--muted);
+  font: inherit; font-size: 0.72rem;
+  padding: 0.25rem 0.6rem; cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.copy:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ---------- terminal mockup (the guide's "what you'll see" windows) ---------- */
+.term {
+  margin: 1.4rem 0 0;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0d0d0f;
+}
+.term-bar {
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid rgba(245, 245, 247, 0.08);
+}
+.term-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(245, 245, 247, 0.18); }
+.term-bar .term-title {
+  margin-left: 0.4rem;
+  font-size: 0.72rem;
+  color: rgba(245, 245, 247, 0.4);
+  letter-spacing: 0.02em;
+}
+.term-body {
+  padding: 0.9rem 1.1rem 1rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #e8e8ea;
+  overflow-x: auto;
+  white-space: pre;
+}
+.term-body .tp { color: #8a8a8f; }      /* prompt */
+.term-body .tc { color: #f5f5f7; }      /* the command you type */
+.term-body .to { color: #a8a8ad; }      /* output */
+.term-body .tb { color: #d6d6da; }      /* the agent's action marker */
+.term-note {
+  font-size: 0.78rem;
+  color: var(--faint);
+  margin-top: 0.5rem;
+}
+
+/* ---------- desktop-app mockup (the familiar agent UI, Claude Code as the example) ---------- */
+.app {
+  margin: 1.6rem 0 0;
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #161618;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+}
+.app .term-bar { border-bottom: 1px solid rgba(245, 245, 247, 0.08); }
+.app-body { padding: 1.5rem 1.4rem 1.2rem; }
+.app-greet { margin: 0 0 1.2rem; font-size: 1.02rem; font-weight: 600; color: #f5f5f7; }
+.app-greet .spark { color: #e08767; margin-right: 0.45rem; }
+.app .msg { margin: 0 0 0.9rem; font-size: 0.85rem; line-height: 1.55; }
+.app .msg.you {
+  display: inline-block;
+  background: rgba(245, 245, 247, 0.07);
+  border-radius: 10px;
+  padding: 0.45rem 0.8rem;
+  color: #f5f5f7;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+.app .msg.ai { color: #a8a8ad; }
+.app .msg.ai b { color: #f5f5f7; font-weight: 550; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; }
+.app-chips { display: flex; gap: 0.5rem; margin: 1.5rem 0 0.7rem; flex-wrap: wrap; }
+.app-chips .chip {
+  border: 1px solid rgba(245, 245, 247, 0.13);
+  background: rgba(245, 245, 247, 0.05);
+  color: #a8a8ad;
+  border-radius: 9px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.72rem;
+}
+.app-input {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  border: 1px solid rgba(245, 245, 247, 0.13);
+  background: rgba(245, 245, 247, 0.04);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  color: #6f6f74;
+  font-size: 0.85rem;
+}
+.app-input .ret { color: #58585c; }
+.app-foot { display: flex; justify-content: space-between; margin-top: 0.65rem; color: #58585c; font-size: 0.72rem; }
+
+/* ---------- button link ---------- */
+.btn {
+  display: inline-block;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.85rem;
+  font-weight: 550;
+  color: var(--ink);
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+.btn:hover { border-color: var(--ink); }
+
+/* ---------- proof ---------- */
+.proof { margin-top: 3rem; }
+.proof + .proof { margin-top: 3.4rem; }
+.proof p { margin: 0; font-size: 0.98rem; }
+.proof .check {
+  margin-top: 0.8rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.caveat {
+  margin-top: 4.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--hairline-soft);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.caveat.tight { margin-top: 2.2rem; }
+
+/* ---------- door lists ---------- */
+.doors { margin: 2.5rem 0 0; padding: 0; list-style: none; }
+.doors li { border-top: 1px solid var(--hairline-soft); }
+.doors li:last-child { border-bottom: 1px solid var(--hairline-soft); }
+.doors a, .doors .door-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: 1.15rem 0.2rem;
+  transition: opacity 0.2s ease;
+  border-bottom: none;
+}
+.doors a:hover .door-name { opacity: 0.55; }
+.door-name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; transition: opacity 0.2s ease; }
+.door-what { font-size: 0.85rem; color: var(--muted); text-align: right; }
+.door-meta { font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
+/* the little source reference under a command door (rule 2's file trail) */
+.door-src { display: block; font-size: 0.72rem; color: var(--faint); text-align: right; margin-top: -0.85rem; padding: 0 0.2rem 0.9rem; }
+.door-src a { display: inline; padding: 0; color: var(--faint); border-bottom: 1px solid var(--hairline-soft); }
+.door-src a:hover { color: var(--ink); }
+/* its sibling under a bibliography entry (the engine-sketch file trail) */
+.bib-src { display: block; font-size: 0.72rem; color: var(--faint); margin-top: 0.3rem; }
+.bib-src a { color: var(--faint); border-bottom: 1px solid var(--hairline-soft); }
+.bib-src a:hover { color: var(--ink); }
+
+/* ---------- bibliography entries ---------- */
+.bib { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--hairline-soft); }
+.bib h3 .vtag { font-size: 0.75rem; font-weight: 500; color: var(--faint); margin-left: 0.6rem; letter-spacing: 0.02em; }
+.bib p { font-size: 0.95rem; }
+
+/* ---------- footer ---------- */
+footer {
+  border-top: 1px solid var(--hairline-soft);
+  padding: 2.5rem 1.5rem 3.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+footer a { color: var(--muted); border-bottom: 1px solid var(--hairline); }
+footer a:hover { color: var(--ink); border-color: var(--ink); }
+footer .row { margin-top: 0.4rem; }

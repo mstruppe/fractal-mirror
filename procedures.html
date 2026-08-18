@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — Procedures</title>
+<meta name="description" content="Governed procedures for AI-agent-assisted work, distilled from real use and ratified as standards: multi-agent flight programs, commissioned reviews, and memory diets with measured safety.">
+<style>
+  /* Procedures blog (Site/procedures.html) — sibling of the site source of record (Site/fractal-site.html),
+     same design brief: black & white, luxury-minimal, sans, both modes, content floating in space. */
+  :root {
+    --bg: #ffffff;
+    --ink: #0a0a0a;
+    --muted: #6e6e73;
+    --faint: #a1a1a6;
+    --hairline: rgba(10, 10, 10, 0.12);
+    --hairline-soft: rgba(10, 10, 10, 0.06);
+    --code-bg: rgba(10, 10, 10, 0.035);
+    --nav-bg: rgba(255, 255, 255, 0.72);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --ink: #f5f5f7;
+      --muted: #86868b;
+      --faint: #58585c;
+      --hairline: rgba(245, 245, 247, 0.16);
+      --hairline-soft: rgba(245, 245, 247, 0.08);
+      --code-bg: rgba(245, 245, 247, 0.055);
+      --nav-bg: rgba(0, 0, 0, 0.65);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: rgba(128, 128, 132, 0.25); }
+
+  a { color: var(--ink); text-decoration: none; }
+  p a, li a { border-bottom: 1px solid var(--hairline); transition: border-color 0.2s ease; }
+  p a:hover, li a:hover { border-color: var(--ink); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: center; gap: 2.25rem;
+    height: 46px;
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: saturate(1.6) blur(18px);
+    backdrop-filter: saturate(1.6) blur(18px);
+    border-bottom: 1px solid var(--hairline-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+  }
+  nav a { color: var(--muted); transition: color 0.2s ease; white-space: nowrap; }
+  nav a:hover { color: var(--ink); }
+  nav .mark { color: var(--ink); font-weight: 600; letter-spacing: 0.08em; }
+  @media (max-width: 900px) {
+    nav {
+      justify-content: flex-start;
+      gap: 1.4rem;
+      padding: 0 1.1rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+  }
+
+  header {
+    padding: 9rem 1.5rem 0;
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+  .kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 1rem;
+  }
+  h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .lede { color: var(--muted); }
+
+  main { display: block; }
+  article {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 6.5rem 1.5rem 0;
+  }
+  article:last-of-type { padding-bottom: 8rem; }
+
+  .post-date {
+    font-size: 0.78rem;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin: 0 0 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+  h2 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  h3 { margin: 2.2rem 0 0.6rem; font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; }
+  p { margin: 0 0 1.1rem; color: var(--muted); }
+  p strong, p b, li strong { color: var(--ink); font-weight: 550; }
+  .voice { color: var(--ink); }
+  ul.plain { margin: 0 0 1.1rem; padding-left: 1.2rem; color: var(--muted); }
+  ul.plain li { margin-bottom: 0.45rem; }
+
+  .figure {
+    background: var(--code-bg);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin: 1.6rem 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .figure .figure-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 0.5rem;
+  }
+  .figure p { margin: 0 0 0.5rem; }
+  .figure p:last-child { margin: 0; }
+
+  .standard-note {
+    margin-top: 2.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--hairline-soft);
+    font-size: 0.88rem;
+    color: var(--faint);
+  }
+
+  .float { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .float.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .float { opacity: 1; transform: none; transition: none; } }
+  html.nofade .float { opacity: 1; transform: none; transition: none; }
+
+  footer {
+    border-top: 1px solid var(--hairline-soft);
+    padding: 2.5rem 1.5rem 3.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--faint);
+  }
+  footer a { color: var(--muted); border-bottom: 1px solid var(--hairline); }
+  footer a:hover { color: var(--ink); border-color: var(--ink); }
+  footer .row { margin-top: 0.4rem; }
+</style>
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<style>
+  /* structure pass 2026-08-17: the two-tier fractal nav — this page is a Concepts child */
+  nav.subnav { top: 46px; height: 40px; padding-bottom: 4px; z-index: 9; font-size: 0.72rem; border-bottom: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 55%, rgba(255, 255, 255, 0) 100%); }
+  @media (prefers-color-scheme: dark) {
+    nav.subnav { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0) 100%); }
+  }
+  nav.subnav a { color: var(--faint); }
+  nav.subnav a:hover { color: var(--ink); }
+  nav.subnav .submark { color: var(--faint); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.66rem; }
+</style>
+<nav aria-label="Site">
+  <a class="mark" href="fractal-site.html">FRACTAL</a>
+  <a href="fractal-site.html">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="blog.html">Blog</a>
+</nav>
+<nav class="subnav" aria-label="Procedures sections">
+  <a href="#adaptive-close">The close</a>
+  <a href="#diet">The diet</a>
+  <a href="#scan">The scan</a>
+  <a href="#flight">Flights</a>
+</nav>
+
+<header id="top">
+  <p class="kicker">Procedures</p>
+  <h1>Methods for AI-assisted work, proven on the system that wrote them.</h1>
+  <p class="lede">Every procedure here was forged the same way: a friction observed in real use, measured, cured, and only then written down as a standard &mdash; distilled from the record, never invented. They run FRACTAL&rsquo;s own development, and they generalize to any AI-agent-assisted workflow. This section will grow: next up, measuring context rot itself &mdash; how project memory degrades and what structure provably protects.</p>
+</header>
+
+<main>
+
+<article id="adaptive-close" class="float">
+  <p class="post-date">2026&#8211;08&#8211;17</p>
+  <h2>Nobody needs a micro-close.</h2>
+  <p class="voice">A wish from a simulated user became a better ritual &mdash; by deleting the feature the user asked for.</p>
+  <p>FRACTAL sessions end with a <strong>close</strong>: a checklist walked over the living documents, two machine checkers, a handover for the next session, and &mdash; when decisions were made &mdash; a protocol recording the reasoning. It is the ritual that makes project memory trustworthy. And it has a price, sized for sessions where real decisions land.</p>
+  <p>During a simulation program, a synthetic user &mdash; a content creator running many small sessions &mdash; hit exactly that price: for a five-minute session, the full ritual felt absurd. The wish was recorded faithfully: <em>give us a micro-close.</em> A lighter tier, fewer steps, for small sessions.</p>
+  <p>The obvious cure is a second ritual. The better question, asked by the founder, was: <strong>could the close automatically touch only what needs renewal, so that a small session&rsquo;s close turns out to be a micro-close by itself?</strong></p>
+  <h3>The close was conditional all along</h3>
+  <p>Reading the ritual closely: every row of the closing checklist already carries a refresh trigger; the protocol rule already contains an escape (&ldquo;or a recorded reason none was issued&rdquo;); the store checker only fires when the store was touched. The design was adaptive from birth. What made every close cost the same was two <em>manual habits</em> sitting on top: verifying that nothing changed costs as much as changing, and the narrative artifacts default to full size.</p>
+  <div class="figure">
+    <div class="figure-label">The adaptive close, in three rules</div>
+    <p><strong>File hashes drive the mechanical half.</strong> The close tooling knows exactly which files changed; unchanged checklist rows mark themselves.</p>
+    <p><strong>The decision ledger is the judgment flag.</strong> Machines prove what <em>did</em> change, never what <em>should</em> have &mdash; but the should-questions are only hard when something decision-shaped happened, and that is mechanically detectable: the ledger moved, or it didn&rsquo;t. Ledger untouched &rArr; the recorded-reason line is offered automatically. Ledger moved &rArr; full protocol, as ever.</p>
+    <p><strong>Narration scales with the change-set.</strong> A session that changed three files hands over in six lines &mdash; and that is a conformant handover.</p>
+  </div>
+  <p>Under these rules there is no micro-close to build &mdash; and nothing to choose. A small session&rsquo;s close <em>emits</em> the small shape; a decision-heavy session gets the full ritual it deserves. One mechanism, scale-invariant. The feature request was cured by deletion.</p>
+  <p>The boundary that stays: a close of any size ends its conversation &mdash; adaptivity changes the close&rsquo;s cost, never its meaning. And the judgment on rows that <em>did</em> change stays human; the mechanization program drew that line deliberately.</p>
+  <p class="standard-note">Of record: decision C-112, riding the diet program&rsquo;s mechanization slate (C-110). The micro-close wish: finding RF1, refinement simulation, 2026&#8211;08&#8211;17.</p>
+</article>
+
+<article id="diet" class="float">
+  <p class="post-date">2026&#8211;08&#8211;17</p>
+  <h2>Put the memory on a diet &mdash; then prove the pointers hold.</h2>
+  <p class="voice">Living documents accrete. The cure is eviction to pointers &mdash; adopted only after a blind experiment showed agents actually follow them.</p>
+  <p>A project memory has two tiers: a <strong>frozen record</strong> (protocols, dated reports &mdash; append-only, complete) and a <strong>living tier</strong> the agent reads at session start. The living tier accretes: histories re-narrate what the frozen record already holds, ledger rows grow annotations, one decision re-tells itself across six surfaces. Measured on FRACTAL&rsquo;s own corpus: one register grew <strong>19&thinsp;KB to 200&thinsp;KB in five days</strong>; one paragraph was growing 460 words a day.</p>
+  <p>The instinct &mdash; write everything compactly from day one &mdash; is wrong. Early in a project, rich clustered prose is what lets an agent interpret anything at all. The correct model is a <strong>cache</strong>: accretion is the default mode at every age, and a <em>diet</em> is the callable eviction pass &mdash; cold entries compact down to pointers into the frozen record. Nothing is deleted; the trade is ambient availability for efficiency.</p>
+  <h3>The experiment: do agents follow pointers?</h3>
+  <p>Eviction is provably lossless on disk. The open question was behaviour: does an agent reading a compacted row <em>follow</em> the pointer into the frozen record when depth is needed &mdash; or does it stop at the pointer and improvise? So before adopting, the compaction was gated on a blind two-arm test: identical corpora, one with the evictions applied; twelve gold-answer questions across three depth classes; six agents, told nothing of the design, answering from whichever corpus they got; every answer scored for correctness and for whether the frozen evidence was actually opened.</p>
+  <div class="figure">
+    <div class="figure-label">Result</div>
+    <p><strong>23 of 24 correct.</strong> On every task requiring depth, lean-arm agents followed the pointers into the frozen record and matched gold &mdash; twice exceeding it. The single failure was the shallowest task: a headline row informative enough to <em>feel</em> like an answer got quoted instead of followed.</p>
+  </div>
+  <p>The two failure modes the experiment surfaced became the standard&rsquo;s two gates. <strong>The pointer grammar:</strong> every compacted row names the concrete file holding its narration, and index tables declare themselves index-only &mdash; a row that says <em>what</em> without flagging that the <em>why</em> lives elsewhere invites being treated as the answer. <strong>The fact-presence gate:</strong> before any row compacts, verify the target actually <em>holds</em> the narration &mdash; the adversarial verifier caught one row whose content existed nowhere else; file-existence checks pass exactly this defect. Content born in a living row relocates into the frozen record first, or the row keeps its prose: eviction waits, never forces.</p>
+  <p>The phase answer falls out of the same gate: a young project has almost no frozen record, so almost nothing may be evicted &mdash; rich prose is protected structurally, and the pointer form becomes <em>reachable</em> region by region as the record matures. No mode switch; the gates simply become satisfiable.</p>
+  <p class="standard-note">Of record: <em>Fractal_Diet_Procedure_v0.1</em> (decision C-111), distilled from the diet measurement flight (DF1) and the compaction-behaviour experiment (CB1), adversarially verified before ratification &mdash; 22 findings, all cured in draft.</p>
+</article>
+
+<article id="scan" class="float">
+  <p class="post-date">2026&#8211;08&#8211;17</p>
+  <h2>The Scan: hunting what the machines can&rsquo;t see.</h2>
+  <p class="voice">Checkers guard what they were built to guard. Drift lives in their declared blind spots &mdash; so a commissioned review hunts exactly there.</p>
+  <p>A governed project runs mechanical checkers &mdash; but a checker only guards claims someone taught it. What about contradictions between documents, present-tense claims that quietly became false, mechanisms relied upon but never defined? For that, FRACTAL runs <strong>Scans</strong>: whole-project adversarial reviews for loose ends not explicitly stated.</p>
+  <ul class="plain">
+    <li><strong>Commissioned, never scheduled.</strong> Every Scan is fired by an explicit request, with a recorded mandate. No calendar &mdash; a watched date is itself the kind of ritual that silently rots.</li>
+    <li><strong>Frozen at issue.</strong> A Scan is a dated observation of the project at one commit; it is never revised. Corrections land in later records &mdash; destroying what a review said would destroy the ability to learn from it.</li>
+    <li><strong>Findings, not fixes.</strong> Every finding carries a stable id, severity, file-and-line evidence, and &mdash; where a checker exists &mdash; the reason the machine missed it. Fixes are proposals until the commissioner adopts them; each adopted catch tends to become a new mechanical rule, moving the frontier of what the machines guard.</li>
+    <li><strong>Non-findings are recorded.</strong> What was checked and found sound is stated as precisely as the defects &mdash; a review that only lists problems can&rsquo;t tell you what it covered.</li>
+  </ul>
+  <p>Across four Scans the finding count fell 26 &rarr; 24 &rarr; 8 &rarr; 7 while the corpus tripled &mdash; the trajectory of drift being converted, catch by catch, into mechanical guarantees.</p>
+  <p>And the standard holds itself to the discipline it preaches. In FRACTAL, a standard ships in <strong>two halves: the prose and the checker</strong> &mdash; a standard without a checker is a norm, not a gate. When the prose is ready before the machine half, that is said honestly (<em>prose-first</em>) and the checker's build trigger is armed as a hard condition: the Scan standard shipped with the rule that <strong>the next Scan cannot close until its conformance checker exists</strong> &mdash; a tool that mechanically validates the report's grammar, its evidence block, and that every finding actually landed in the project's ledger with a disposition. Until that trigger fires, the obligation sits visibly in the queue; it cannot be quietly forgotten, because forgetting it is exactly the drift a Scan exists to hunt. The standard refuses to become its own blind spot.</p>
+  <p class="standard-note">Of record: <em>Fractal_Scan_Procedure_v0.1</em> (decision C-108), distilled from the four executed Scans of 2026&#8211;08; the checker gate is its &sect;12.</p>
+</article>
+
+<article id="flight" class="float">
+  <p class="post-date">2026&#8211;08&#8211;17</p>
+  <h2>Multi-agent work under a contract.</h2>
+  <p class="voice">Dozens of agents are cheap. Ungoverned, so are their mistakes. The flight protocol makes the swarm accountable to one commissioning contract.</p>
+  <p>Modern agent tooling will happily launch a fleet &mdash; parallel readers, adversarial verifiers, judge panels. The failure mode isn&rsquo;t capability; it&rsquo;s governance: programs that launch before anyone agreed what they may touch, scopes that grow silently mid-run, results that arrive as assertions nobody can audit. FRACTAL runs multi-agent programs as <strong>ultracode flights</strong> under a ratified protocol:</p>
+  <ul class="plain">
+    <li><strong>The commissioning contract, declared before launch:</strong> scope, phases, agent structure, per-phase effort, the verification tier, and what the landing may claim &mdash; all stated to the commissioner first.</li>
+    <li><strong>A fixed launch sequence:</strong> game plan proposed &rarr; agreement &rarr; an explicit arming step &mdash; <em>the next go starts the flight</em> &mdash; with effort locked at launch. Changing effort mid-flight is prohibited; the contract is sized for the hardest phase before anything flies.</li>
+    <li><strong>Verification is a declared choice, and it caps the claims.</strong> A single-pass work-over may not claim what only an adversarial multi-agent verification earns. The strongest results here paired every finder with independent skeptics prompted to refute.</li>
+    <li><strong>Landings are proposal-only.</strong> A flight lands a frozen, dated record; findings enter the ledger; nothing in canon moves without the commissioner&rsquo;s adoption.</li>
+  </ul>
+  <p>The procedures on this page compose with it: a Scan, a diet, a behaviour experiment can each run standalone &mdash; or plug into a flight when the job needs a fleet. The protocol itself was distilled from the programs that preceded it, frictions included: it exists <em>because</em> an early program launched undeclared, and the record of that friction is cited in the standard.</p>
+  <p class="standard-note">Of record: <em>Fractal_Ultracode_Flight_Protocol_v0.1</em> (decision C-108), distilled from the flight programs of 2026&#8211;08 &mdash; including a 67-agent adversarially verified capture program and the experiments described above.</p>
+</article>
+
+</main>
+
+<footer>
+  <div><a href="fractal-site.html">FRACTAL</a> &middot; <a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>

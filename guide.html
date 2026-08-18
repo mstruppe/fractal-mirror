@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — Guide</title>
+<meta name="description" content="The in-depth step-by-step guide: from nothing installed to your own governed project, and how to drive it from day two onward.">
+<link rel="stylesheet" href="site.css">
+<!-- GUIDE section of the fractal layout (structure pass 2026-08-17):
+     the in-depth path — reachable from the top menu and from Home's setup button.
+     Skeleton now; the content pass fills each step from GUIDE.md and the onboarding script. -->
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a class="mark" href="fractal-site.html">FRACTAL</a>
+  <a href="fractal-site.html">Home</a>
+  <a href="guide.html" aria-current="page">Guide</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="blog.html">Blog</a>
+</nav>
+
+<nav class="subnav" aria-label="Guide sections">
+  <a href="#before">Before you start</a>
+  <a href="#first-contact">First contact</a>
+  <a href="#birth">The birth</a>
+  <a href="#driving">Driving</a>
+  <a href="#closing">Closing</a>
+  <a href="#growing">Growing</a>
+</nav>
+
+<header class="hero-lite">
+  <h1>The guide</h1>
+  <p class="lede">From nothing installed to a governed project of your own &mdash; and how to drive it every day after. Step by step, nothing assumed.</p>
+</header>
+
+<main>
+
+<section id="before" class="float">
+  <p class="kicker">Step 0</p>
+  <h2>Before you start.</h2>
+  <p>Two things on your machine: <strong>git</strong>, and an <strong>AI coding agent</strong> that can hold a session in a folder, read and write files, and run terminal commands. <a href="https://claude.com/claude-code">Claude Code</a> is the tested reference; any agent meeting those minimums works &mdash; the commands are plain language underneath.</p>
+  <p>Nothing else: no account with FRACTAL, no server, no database. What you build here is yours.</p>
+  <p class="step-note">Any operating system works &mdash; the memory is plain files. macOS is the tested reference and Linux runs the same lines verbatim; on Windows, use <em>Git Bash</em> (ships with <a href="https://git-scm.com/download/win">Git for Windows</a>) for the setup lines, and read <span class="mono">python3</span> as <span class="mono">py</span> wherever a tool is invoked.</p>
+</section>
+
+<section id="first-contact" class="float">
+  <p class="kicker">Step 1</p>
+  <h2>First contact.</h2>
+
+  <p class="voice">Clone the public baseline, stand on the newest release&hellip;</p>
+  <p>Open a terminal: on <strong>macOS</strong>, press <span class="mono">&#8984;&thinsp;Space</span> and type &ldquo;Terminal&rdquo;; on <strong>Windows</strong>, open <em>Git Bash</em> from the Start menu; on <strong>Linux</strong>, your terminal of choice. Then paste the one line from the <a href="fractal-site.html#setup">setup</a>:</p>
+  <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+  <div class="term" role="img" aria-label="Terminal after cloning: git reports the detached HEAD notice — expected.">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Terminal &mdash; what you&rsquo;ll see</span></div>
+    <div class="term-body"><span class="tp">$</span> <span class="tc">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal</span>
+<span class="to">Cloning into '&#8230;/Desktop/fractal'&#8230;
+Receiving objects: 100% &#8230; done.</span>
+<span class="tp">$</span> <span class="tc">cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)</span>
+<span class="to">Note: switching to 'beta-0.5'.
+You are in 'detached HEAD' state. &#8230;</span></div>
+  </div>
+  <p class="term-note">The &ldquo;detached HEAD&rdquo; notice is the good sign, not an error &mdash; it means you are standing exactly on the newest anchored release. The windows on this page are condensed illustrations; version numbers advance with releases.</p>
+
+  <p class="voice" style="margin-top: 3rem;">&hellip;open a session&hellip;</p>
+  <p>In the same terminal, in that folder, start your agent &mdash; the reference client&rsquo;s command is one word:</p>
+  <div class="cmd">claude<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+  <div class="term" role="img" aria-label="Terminal with a fresh agent session opened in the fractal folder.">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Claude Code &mdash; a session, waiting</span></div>
+    <div class="term-body"><span class="tp">$</span> <span class="tc">claude</span>
+<span class="to">Claude Code &middot; ~/Desktop/fractal</span>
+<span class="tp">&#10095;</span> <span class="tc">_</span></div>
+  </div>
+  <p class="term-note">Another agent opens the folder its own way &mdash; any client that can read files and run commands in a folder serves.</p>
+
+  <p class="voice" style="margin-top: 3rem;">&hellip;type <a class="mono" href="concepts.html#cmd-welcome">/welcome</a>.</p>
+  <div class="cmd">/welcome<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+  <div class="term" role="img" aria-label="The session answering /welcome: it explains the reference copy and offers two paths.">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Claude Code &mdash; first contact</span></div>
+    <div class="term-body"><span class="tp">&#10095;</span> <span class="tc">/welcome</span>
+<span class="to">You&rsquo;re standing in a reference copy of FRACTAL &mdash; the public
+baseline at its newest anchored release. Nothing here is your
+project yet; this copy explains itself, and it can birth yours.
+
+Two paths from here:
+  1 &middot; Look around &mdash; ask anything about what you see.
+  2 &middot; Start your own project &mdash; type /begin.</span></div>
+  </div>
+  <p class="term-note">Condensed &mdash; the real session says more, in plain words. If <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> doesn&rsquo;t autocomplete in your agent, the plain sentence does the same: <em>&ldquo;I&rsquo;m new here &mdash; welcome me.&rdquo;</em></p>
+
+  <p class="voice" style="margin-top: 3.5rem;">The comfortable road: one line of terminal, then your UI.</p>
+  <p>Let&rsquo;s be explicit about the honest split. The terminal is needed <strong>exactly once</strong> &mdash; one copy, one paste, one enter. Everything after that happens in whatever agent interface you&rsquo;re comfortable in.</p>
+
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <p class="step-title">One time: paste this in a terminal, press enter, close it</p>
+      <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <p class="step-note">That is the terminal&rsquo;s entire role in your FRACTAL life. (An agent with desktop access can even run this line for you &mdash; paste it into the chat instead.)</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <p class="step-title">Open your comfortable UI</p>
+      <p class="step-note">Any <strong>agent interface that can connect to your desktop</strong> &mdash; read files, run commands. Claude Code is the reference example; its desktop app opens like any app.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <p class="step-title">Connect it to FRACTAL</p>
+      <p class="step-note">Open <span class="mono">~/Desktop/fractal</span> as the project folder (in Claude Code&rsquo;s desktop app: open that folder; in any agent: make it the working folder). <strong>The folder is the connection</strong> &mdash; FRACTAL&rsquo;s memory is the folder, so an agent standing in it is an agent connected to it.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body">
+      <p class="step-title">Start the loop</p>
+      <p class="step-note">Type <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> &mdash; first contact, the two paths. <a class="mono" href="concepts.html#cmd-begin">/begin</a> births your own project. From then on the loop is always the same: open a session with your project&rsquo;s own command, work, <a class="mono" href="concepts.html#cmd-close">/close</a>.</p>
+    </div>
+  </div>
+
+  <div class="app" role="img" aria-label="The Claude Code desktop app connected to the FRACTAL folder \u2014 first contact and the loop, in the familiar chat interface.">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Claude Code &mdash; the desktop app</span></div>
+    <div class="app-body">
+      <p class="app-greet"><span class="spark">&#10059;</span> What&rsquo;s up next?</p>
+      <div><div class="msg you">/welcome</div></div>
+      <div class="msg ai">You&rsquo;re standing in a reference copy of FRACTAL &mdash; the public baseline at its newest anchored release. Two paths from here: look around, or start your own project &mdash; type <b>/begin</b>.</div>
+      <div><div class="msg you">/begin</div></div>
+      <div class="msg ai">Five questions, then the birth: your project gets its own repository, memory, and opening command &mdash; <b>/yourproject</b>. From then on the loop is always the same: <b>/yourproject</b> &middot; work &middot; <b>/close</b>.</div>
+      <div class="app-chips"><span class="chip">Local</span><span class="chip">fractal</span><span class="chip">main</span></div>
+      <div class="app-input"><span>Describe a task or ask a question</span><span class="ret">&#9166;</span></div>
+      <div class="app-foot"><span>Auto&ensp;+</span><span>your model &middot; ready</span></div>
+    </div>
+  </div>
+  <p class="term-note">Condensed &mdash; the real sessions say more. The point of the picture: after the one terminal line, the whole FRACTAL life &mdash; first contact, the birth, every working loop &mdash; happens inside the interface you already like.</p>
+
+  <p style="margin-top: 3rem;">The session explains where you&rsquo;re standing and offers the two paths: look around, or start your own project. The short form of these steps lives on the <a href="fractal-site.html#setup">home page</a>.</p>
+</section>
+
+<section id="birth" class="float">
+  <p class="kicker">Step 2</p>
+  <h2>The birth.</h2>
+  <p class="voice">A project can only be born with facts that belong to its owner: what it is, what to call it, who writes in it, what kinds of work it will hold, where its off-site copy should live. The interview exists to collect exactly those facts &mdash; once, in your own words &mdash; and to carry them mechanically into the birth: <strong>your answers become the project&rsquo;s founding documents</strong>, not notes about them. Nothing is asked twice, nothing is thrown away, nothing is invented on your behalf.</p>
+  <p>You follow it by typing <a class="mono" href="concepts.html#cmd-begin">/begin</a> in the reference copy, where first contact left you. It is a conversation, not a form: one question at a time, and after each answer the session drafts what your words feed and reads it back for your confirmation. At the end it shows you the whole birth plan &mdash; the files, the names, the remote &mdash; and writes your repository only after your yes.</p>
+  <p><strong>You are not expected to understand FRACTAL to answer any of this.</strong> The questions start simple and deepen as the conversation goes; the session explains each concept at the exact moment it matters, and you find the flow together, naturally. Understanding grows through use &mdash; nobody starts by understanding FRACTAL, its founder included.</p>
+
+  <h3 style="margin-top: 3rem;">The five questions, and why each is asked</h3>
+
+  <div class="step">
+    <div class="step-n">1</div>
+    <div class="step-body">
+      <p class="step-title">&ldquo;What&rsquo;s your project about?&rdquo;</p>
+      <p class="step-note">That simple. From your answer the conversation deepens on its own &mdash; what is it concretely, right now? why does it deserve a memory that outlives any chat? &mdash; and what you say becomes the project&rsquo;s <strong>vision</strong> and <strong>current focus</strong>: the two poles every future session reads first to orient.</p>
+      <p class="step-note"><strong>Behind the question:</strong> this writes your <strong>Global Context</strong> &mdash; the central explanation you normally re-type into every new chat. Here it is written once, stays stable, and is read at the start of every session: always in sight, never re-explained again &mdash; unless you need to update it. At any depth of the project, simply ask your agent whether the global context still fits, or tell it to change &mdash; and it is updated, for every session after. All of FRACTAL&rsquo;s governing documents work this way: <strong>living files your agent maintains with you in plain words</strong>. Knowing you can talk <em>about</em> the documents, not just within them, is where the real power sits &mdash; and it costs one sentence. And an update is minted <em>on top of</em> the record, never over it: the old version stays in the history together with the reasoning that changed it. Everything a session knows evolves only through such recorded changes &mdash; which is why nothing is ever lost, and nothing ever changes invisibly.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">2</div>
+    <div class="step-body">
+      <p class="step-title">&ldquo;What should it be called?&rdquo;</p>
+      <p class="step-note">The name becomes the prefix every governed artifact carries &mdash; one stable identity from day one. The identity name wants letters and digits (the session derives one and confirms it with you); your <em>folder</em> can keep any name you like.</p>
+      <p class="step-note"><strong>Behind the question:</strong> the name is also your <strong>way back</strong>. It becomes your project&rsquo;s own opening command &mdash; however long you&rsquo;ve been away, that one word loads the memory and reports where things stand. (Right now, in the reference copy, your project has no name yet &mdash; that is exactly why the universal commands <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> and <a class="mono" href="concepts.html#cmd-begin">/begin</a> exist; the birth writes your named command into the newborn, so your first real loop already opens with it.)</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">3</div>
+    <div class="step-body">
+      <p class="step-title">&ldquo;Your name, and the email your git host knows?&rdquo;</p>
+      <p class="step-note">And then: <em>name your AI collaborator.</em> Everything ever written in the project is attributed &mdash; you under your real address (one honest footnote the session gives you at this exact moment: commit emails become public with the repo), the AI under a name of your choosing with a synthetic address. Authorship stays meaningful forever; if you defer on the AI&rsquo;s name, the session proposes one from your project&rsquo;s own domain.</p>
+      <p class="step-note"><strong>Behind the question:</strong> attribution is the door to <strong>how any of this can work: git</strong>. Git is the standard way software keeps a complete history of plain-text files &mdash; every change recorded with its author, nothing ever overwritten. A host like GitHub keeps a copy of that history on the web. FRACTAL&rsquo;s memory is exactly such files &mdash; which is why it needs writers with names. <a href="https://github.com/signup">Create your own git home &mdash; a free GitHub account</a> is all the setup this needs.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">4</div>
+    <div class="step-body">
+      <p class="step-title">&ldquo;What kinds of work will live here?&rdquo;</p>
+      <p class="step-note">From your answer the session proposes two to four <strong>territories</strong> in your own vocabulary &mdash; the top-level domains your knowledge will sort into. The honest rule, stated in the same breath: root names are forever and fewer is better &mdash; but everything <em>under</em> a root moves freely later, and adding a root later is cheap. You are naming territories, not committing to a taxonomy. Start minimal.</p>
+      <p class="step-note"><strong>Behind the question:</strong> the territories are how FRACTAL <strong>branches</strong> &mdash; each kind of work becomes a domain, and the work in focus gets its own <strong>Local Context</strong>: the &ldquo;where we&rsquo;re looking right now&rdquo; beside the stable global one. Underneath sits a knowledge graph &mdash; think of it as a network of small cards: every idea, decision, and document gets a card, and cards point to each other. Sessions follow the pointers instead of re-reading everything, which is how a project grows large while every session stays light.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-n">5</div>
+    <div class="step-body">
+      <p class="step-title">&ldquo;Where should the off-site copy live?&rdquo;</p>
+      <p class="step-note">A memory should survive your machine. The usual answer is an <em>empty</em> repository on your git host (the session tells you exactly how empty). And <strong>birth without a remote is a fine answer</strong> &mdash; you can bind one later; the host is a swappable convenience, never a dependency.</p>
+      <p class="step-note"><strong>Behind the question:</strong> this is what makes the memory <strong>machine-loss-proof</strong>, and it rounds the whole picture: every working cycle ends with the <strong>close</strong> &mdash; the handover written, the checkers run green, and everything pushed to the off-site copy (the same git home from question three &mdash; no new concept). Lose the laptop, and a fresh clone rebuilds the working system; that claim is drilled, not promised. Other shapes work too: any git host, a self-hosted server, or none yet &mdash; the protection begins the day you add one.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 2.6rem;">What is deliberately <strong>not</strong> asked: the technical defaults &mdash; the rebuild document, the close checklist, the capture door &mdash; are written for you and stated, not questioned. One more one-liner only: <em>will this project touch credentials?</em> Names get recorded, values never enter the repo, and &ldquo;none yet&rdquo; is the usual answer. Push back on any default and it becomes a real question.</p>
+  <p>The birth ends with a handoff: your project lives at its own path, and the reference copy governs nothing there &mdash; from that moment, only your project&rsquo;s own sessions act inside it. And one honest line the record insists on: <strong>a birthed repository is not yet an instance &mdash; the instance is real at its first close.</strong> Which is exactly where the next step takes you.</p>
+  <p class="term-note">This walkthrough projects the Onboarding Protocol &mdash; the ratified interview script; its <a href="concepts.html#bib-onboarding">bibliography entry</a> names the source of record.</p>
+</section>
+
+<section id="driving" class="float">
+  <p class="kicker">Step 3</p>
+  <h2>Driving a session.</h2>
+  <p>Every working session opens with your project&rsquo;s own command and closes with <a class="mono" href="concepts.html#cmd-close">/close</a>. Between the two you just work &mdash; the session reads the memory at the start, and what matters is written back at the end. Mid-work, <a class="mono" href="concepts.html#cmd-fieldnote">/fieldnote</a> captures a friction or a win in one line without leaving the task.</p>
+  <p>And feel free to browse the <a href="concepts.html">concepts</a> and <a href="blog.html">blog</a> pages along the way &mdash; that&rsquo;s where the inspiration lives, along with useful interaction and procedure tips.</p>
+</section>
+
+<section id="closing" class="float">
+  <p class="kicker">Step 4</p>
+  <h2>Closing the loop.</h2>
+  <p>Every loop ends the same way: <strong>the close</strong>. In Claude Code it is the <a href="concepts.html#commands">command</a> <a class="mono" href="concepts.html#cmd-close">/close</a>; in the ChatGPT desktop app you simply say <em>close</em> &mdash; or, the founder&rsquo;s usual phrase, <em>&ldquo;let&rsquo;s close this session.&rdquo;</em> Other agents may differ in surface, but the word itself is the trigger: <strong>close</strong>, said in context, starts the process anywhere. The close is where the memory is actually made: the handover written for the next session, the checkers run green, the work committed and pushed. A session that closed can be picked up cold by any future session &mdash; that is the whole point. The chat window itself is disposable after that &mdash; some clients even tidy their own artifacts away when you close, and it costs nothing: <strong>the memory never lived in the chat.</strong></p>
+  <p>And what is true of <em>close</em> is true of <strong>every command</strong>: the slash form belongs to the client, the word belongs to the system. <span class="mono">welcome</span>, <span class="mono">begin</span>, <span class="mono">fieldnote</span>, your project&rsquo;s own name &mdash; each is plain language any capable agent understands*. Which closes this guide the way FRACTAL closes everything: the same small rule, applied at every scale.</p>
+  <p class="term-note">* And if an agent ever misreads a word &mdash; or you want your own vocabulary &mdash; you don&rsquo;t adapt to the agent; you talk to it: establish the rule once, in plain conversation, and it is recorded in your project&rsquo;s <a href="concepts.html#rules">rule register</a> &mdash; honored by every session after, whichever agent drives.</p>
+  <p class="step-note">And &ldquo;picked up cold&rdquo; means exactly what it says. You can close the chat, throw your laptop into the ocean, go hiking in the rainforest, eat street food in India, survive a plane crash in the Himalayas, get hospitalized, recover, go back home, get bored, find life meaningless, start drinking, get addicted, lose your job, go to rehab, get a new job, fall in love with a stranger from rehab, have three kids, get divorced, have your heart broken, lose your home, join the army, live through World War III, get ambushed with your squad, lose your mate, promise to take care of his dog &mdash; and one evening, with the dog on your lap, your new laptop on the dog&rsquo;s belly, and a cat purring behind you, you remember FRACTAL, set it up again, and continue your project exactly where you left off. Only with an updated FRACTAL, and better AI agents.</p>
+</section>
+
+<section id="growing" class="float">
+  <p class="kicker">Step 5</p>
+  <h2>Growing.</h2>
+  <p>More instances (<a class="mono" href="concepts.html#cmd-look">/look</a> observes them read-only), adopting newer kernel releases by your own decision (the migration standard), adopting standards from the registry, teaching your own commands. Each of these is its own concept &mdash; the depth lives on the <a href="concepts.html">concepts page</a>.</p>
+  <p class="caveat tight">This page is the guide&rsquo;s skeleton &mdash; each step gains its full walkthrough in the content pass. Until then, the practical companion is <a href="https://github.com/mstruppe/fractal-mirror/blob/main/GUIDE.md">GUIDE.md in the baseline</a>, which covers day two onward in detail today.</p>
+</section>
+
+</main>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>
