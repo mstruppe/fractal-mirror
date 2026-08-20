@@ -73,6 +73,7 @@
   <a href="#idea">The idea</a>
   <a href="#origins">How it started</a>
   <a href="#development">How it developed</a>
+  <a href="#memory">The memory</a>
   <a href="#proof">Proof</a>
   <a href="#stories">Stories</a>
   <a href="#value-model">Where it is heading</a>
@@ -107,6 +108,12 @@
   <h2 id="development">How it developed</h2>
   <p>The system&rsquo;s first real test was reproducing itself. The kernel &mdash; the constitution, formats, procedures, and tools a project needs from day one &mdash; was extracted into an executable genesis, and the stranger&rsquo;s path from a bare clone to a working instance was drilled until it held. The first child followed: a research project born from an anchored release tag, governed by its own record from its first session. It later crossed a release boundary under its own migration protocol, every gate on the record &mdash; and along the way it swapped AI vendors mid-life without touching the kernel.</p>
   <p>Releases became provenance events: each one a signed tag with an independent OpenTimestamps receipt committed beside it, the earliest anchors Bitcoin-final. Five betas shipped that way. On 18 August 2026 the proven parts went public &mdash; a mirror serving the anchored releases, this site explaining the machine from its real parts, one permanent address as the door. Live is deliberately not official: no announcement, no launch. The system keeps improving the way it always has &mdash; by being used, now in the open.</p>
+  <h2 id="memory">One log &mdash; how the memory is built</h2>
+  <p>Underneath everything this site describes sits one shape. Everything the system remembers &mdash; a decision, a document, a person&rsquo;s authorship, a rule &mdash; is an <em>entity</em> with a permanent identity, and every statement about it (belongs to governance, written by this agent, is exactly these bytes) is one <em>event</em>, appended to a single log that only grows. Nothing is ever edited in place. The current state of the whole memory is a replay of that log, from the first line to the newest &mdash; which means the question &ldquo;how did this come to be?&rdquo; always has a mechanical answer: read forward.</p>
+  <p>The grammar of that log is written down as a versioned specification &mdash; the Node &amp; Event Schema, the write side &mdash; and reading has a specification of its own, the Navigation Contract: how a query enters the structure, how a trace walks its relationships, how ranking and history behave. Two documents, one guarantee from both ends: whatever is written can be found again, and every reader &mdash; a human with grep today, an index server later, an interface someday &mdash; walks the same structure and gets the same answer. Both ship frozen and versioned; changing either one is a new edition with its own identity, never a quiet rewrite.</p>
+  <p>What an event actually looks like is unglamorous, and that is the point. When a document enters the canon, the log gains a line binding its identity to the SHA-256 of its exact bytes. From that moment the document cannot drift unnoticed: change one character and the hash no longer matches the record. The same shape carries authorship, classification, supersession &mdash; the entire biography of the project, one plain-text line at a time, in a repository the owner holds.</p>
+  <p>The grammar is not left to good intentions. Before every commit that touches the store, a dependency-free verifier replays the invariants and refuses on any disagreement; at every session close, a second checker reads the corpus&rsquo;s own prose claims &mdash; versions, pointers, counts &mdash; against reality. The founder has never opened either specification, and has never needed to: every close that ends green is direct contact with them. And because both documents ship in the public mirror, downloadable beside the store they govern, the arrangement is inspectable from the outside &mdash; clone the repository, run the verifier, watch it hold.</p>
+
   <p>What follows are the claims that record can already back.</p>
 
   <h2 id="proof">Proof &mdash; claims you can check</h2>
