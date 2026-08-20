@@ -74,6 +74,7 @@
   <a href="#origins">How it started</a>
   <a href="#development">How it developed</a>
   <a href="#proof">Proof</a>
+  <a href="#stories">Stories</a>
   <a href="#value-model">Where it is heading</a>
 </nav>
 
@@ -88,6 +89,7 @@
       <li><a href="#origins">How it started</a></li>
       <li><a href="#development">How it developed</a></li>
       <li><a href="#proof">Proof &mdash; claims you can check</a></li>
+      <li><a href="#stories">Stories from the record</a></li>
       <li><a href="#value-model">Where it is heading: three branches and a shooting star</a></li>
     </ol>
   </div>
@@ -127,6 +129,17 @@
 
   <h3>Limits, stated</h3>
   <p>FRACTAL does not abolish context limits &mdash; sessions read a compressed spine; the claim is owned, verifiable, vendor-independent memory, never infinite memory. No auto-updates into living instances &mdash; by design; sovereignty is the trade, named plainly. No adoption path for existing projects yet &mdash; the paved path births new projects. No UI &mdash; terminal and files, with one honestly failed experiment on the books. The network layers are unbuilt and trigger-armed, constitutionally barred from binding a build.</p>
+
+  <h2 id="stories">Stories from the record</h2>
+  <p class="status">Dated episodes from the project&rsquo;s own history, told with their evidence attached &mdash; appended as they happen, never rewritten.</p>
+
+  <h3>2026-08-20 &mdash; The release that caught itself</h3>
+  <p>Shipping beta-0.6, the release ritual made a mistake and then caught it, inside the same sitting. Both halves belong in the story.</p>
+  <p>The public home keeps two proof chains by design: every release of the private repository is signed and externally timestamped, and the public mirror carries its own timestamp receipts on top &mdash; checkable in their own domain, without access to anything private. Those public receipts live <em>only</em> in the mirror; a release tree structurally cannot contain the attestations of its own chain. The rebuild step didn&rsquo;t know that. Its sync mirrors the fresh release exactly and deletes whatever isn&rsquo;t in it &mdash; so it swept away the public chain&rsquo;s three receipt pairs, and the rebuild commit dutifully recorded their deletion.</p>
+  <p>The catch came one step later, because the ritual&rsquo;s next step is a reader. Writing a new release&rsquo;s attestation starts by reading the previous one, to reproduce its exact shape. The read came back empty. The mirror&rsquo;s own history showed the three commits that had anchored those receipts; a diff of the fresh rebuild showed it deleting them. The automation made the mistake; the ritual caught it, because every step reads the record before it writes.</p>
+  <p>The cure took minutes, and the reason it could is the system&rsquo;s oldest rule: nothing is ever overwritten. Nothing had been pushed yet &mdash; the gates run before anything leaves the machine &mdash; so the defect existed only in one local commit. The receipts were restored straight out of the parent commit&rsquo;s tree, the rebuild was amended, the release tag re-signed on the corrected state, the pack gate re-run green, and only then did anything publish. The public history never carried the defect; the shipped beta-0.6 chain contains all four public receipts, and this paragraph is checkable against it.</p>
+  <p>What remains is the lesson, written down: the rebuild&rsquo;s preservation duties named two protected classes, and reality holds a third &mdash; the mirror&rsquo;s own receipts. The finding stands on the record with a named cure: the pack gate grows that third check the next time the tooling moves. A mistake, a catch, a clean recovery, and a rule that got sharper &mdash; that is the loop this whole system is built to run.</p>
+  <p class="check">of record: Governance Protocol v0.64 &sect;3 &nbsp;&middot;&nbsp; the shipped chain: mirror commits 6dabeea &rarr; ee4c174, tag beta-0.6</p>
 
   <h2 id="value-model">Where it is heading: three branches and a shooting star</h2>
   <p>The forward path is written the same way as the history above &mdash; with statuses attached. Its core is the <strong>value model</strong>: what FRACTAL is worth, and to whom. Deliberately <strong>not a business model</strong> &mdash; business implies cash flow, and none of the branches below carries one. It is a <strong>value promise</strong>: the structure of what the project delivers before, and independent of, any money changing hands.</p>
