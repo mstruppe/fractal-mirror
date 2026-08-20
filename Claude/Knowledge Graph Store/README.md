@@ -13,9 +13,28 @@ Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero inf
 - `verify.py` / `mint.py` / `check_versions.py` / `close.py` — the canonized tools (C-050, C-060, C-073):
   fold verifier, mint guard, version-agreement checker, and close-ripple generator (dry-run by default;
   judgment never delegated). Stdlib-only; code artifacts (C-006 exception), not DOC-minted.
+  Since the C-110/C-112 mechanization, `close.py` also carries the close's mechanical half: the dry
+  run (and `--walk`) pre-fills the C-059 walk table from the hash-diff + git signal, flags the
+  Register as the judgment dirty-bit (C-112 — unchanged Register ⇒ the recorded-reason line offered
+  mechanically), and reads the drag gauge (advisory word budgets, C-110 proposal 10); `--stamp`
+  (applied at `--write`) bumps stale version headers, mints revision-history rows from each
+  document's `--note`, and writes store counts at predicted post-ripple totals *before* hashing;
+  `--pack` runs the tagging-close gate — the GENESIS §3.4 clause-span check (Migration Procedure
+  §7.3), the mirror's post-rebuild cleanliness + duplicate scan (the C-116 amendment), and the
+  serving-layer preservation checks (`.github/` · `gh-pages` · `CNAME`, C-120). The `--create`
+  alias grammar's prefix follows the instance's own `.version-registry` (TF1-4's cure; mother
+  default `Fractal_`). Judgment on what a change *means* stays manual (C-110 proposal 14).
   `check_versions.py` carries the **`INHERITED` source class (C-088)**: in a birthed instance, a
   `.inherited` manifest + `.version-registry` projection exempt inherited kernel documents' upstream
-  citations (counted, never hidden); with no manifest — this repo — behavior is unchanged.
+  citations (counted, never hidden); with no manifest — this repo — behavior is unchanged. **The
+  manifest grows only by governed adoption** (the Kernel Migration Procedure): every newly adopted
+  kernel file is appended in the same change-set, each line paired to an adoption-matrix row;
+  instance-authored files never enter it — an exemption without a pairing is itself a finding, and
+  the manifest is never a way to silence the checker. (Mechanics: the manifest lives beside
+  `check_versions.py` as `.inherited`, one repo-relative path per line, `#` comments permitted.)
+- `check_scan.py` — the Scan conformance checker (C-118, the Scan Procedure's §12 gate): validates a
+  Scan report (filename/header/state-block/id grammar/seed table) and its C-058 ledger integration;
+  red-blocks Scan #5 onward, historical scans grandfathered WARN-only. Same family rules as above.
 - `genesis.py` — dry-run-first executor that births a separate FRACTAL-governed repository from the
   tier-0 kernel, parameterized spine, and a new instance ledger; `--write` creates and commits it.
   Since flight 4 it also writes the newborn's `.inherited` manifest, its checker-registry projection,
@@ -24,9 +43,11 @@ Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero inf
   identity, allowed-signers binding (`--write` rebinds), signing shape, tier detection (absence of a
   tier-1 component is information, never failure — C-081), the C-087 secrets guard (ignore entries +
   tracked-file secret scan, values redacted), remote, and privileged-posture instructions.
-- `fieldnote.py` — the seventh tool (C-100, the flip preparation): the capture-and-intake halves of
-  the testing pipeline — deterministic routing via `fieldnote_roster.json`, immutable machine-format
-  blocks (Fieldnote Format v0.1), and `parse` for whole-or-nothing intake of a returned ledger.
+- `fieldnote.py` — the seventh tool (C-100, the flip preparation; the RAM model since C-121): the
+  capture, depth, and intake halves of the testing pipeline — one buffer per instance via the
+  single-buffer config `fieldnote_roster.json` (targets retired), content-immutable machine-format
+  blocks (Fieldnote Format v0.2), the `--depth` pressure reading (budget + high-water in the buffer
+  header), and `parse` for whole-or-nothing intake — both grammars accepted (v0.1 child ledgers).
 - `stats.py` — **a convenience utility, not a canonized tool** (the first drone flight's drill
   artifact, 2026-08-14): a read-only fold counter whose output cross-checks `verify.py`'s totals.
   Canonization on observed need; it carries no invariant of its own.

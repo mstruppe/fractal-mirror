@@ -3,7 +3,7 @@ id: DOC-01M084YBNH6B261H40Y3KZRSY3
 type: DOC
 created: 2026-08-17T15:20:19Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:8e4a0fbc478bb1f23274e8da149c0635d4f487120ce0be2dd5eab7ab00bc436c
+content_hash: sha256:80a57c78a9a57e650641fb53d4036df9a2300ff14caf81f2e3a45118bd5bcbad
 title: "Fractal Registry — the standards library"
 aliases: ["route:Fractal_Registry"]
 placements:

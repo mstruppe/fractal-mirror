@@ -17,3 +17,4 @@ secrets/
 # Workbench (first WS build slice) — dependencies and live working data, not knowledge
 Workbench/node_modules/
 Workbench/markings/
+__pycache__/

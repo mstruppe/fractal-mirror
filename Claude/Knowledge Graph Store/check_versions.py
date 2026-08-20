@@ -38,8 +38,10 @@ Source classes (Max's calls, 2026-08-14):
   STRICT   — the pointer surfaces where every claim should be current: Context
              Index, BOOTSTRAP, GENESIS, the root adapters CLAUDE.md + AGENTS.md
              (canonical since C-065/C-066), Architecture State, Global + Local
-             Context, Agenda Board, store README and tools. Living-doc
-             mismatches here are the drift class itself.
+             Context, Agenda Board, the store README and the three original
+             tools (verify.py · mint.py · check_versions.py — the newer tools
+             hold TOLERANT currency; growing the set stays an open offer,
+             S5-6.4). Living-doc mismatches here are the drift class itself.
   TOLERANT — living documents whose body narrates history (Decision Register,
              Rule Overview, Conversation Settings, the newest file of each
              series): existence-checked everywhere; currency of living-doc
@@ -143,7 +145,7 @@ STRICT = {
     "CLAUDE.md",
     "AGENTS.md",
     "Claude/Context Packages/Fractal_Context_Index.md",
-    "Claude/Context Packages/Fractal_Agenda_Board.html",
+    "User Documents/Fractal_Agenda_Board.html",
     "Claude/Context Packages/Global/Fractal_Global_Context.md",
     "Claude/Context Packages/Local/Fractal_Local_Context_Knowledge_Graph.md",
     "Claude/Architecture/Architecture State/Fractal_Architecture_State.md",
@@ -182,6 +184,19 @@ SUPPRESS = [
     # (the self-scan entry for this file retired at Scan #4 — the filename
     # heuristic no longer reads .py sources at all, S4-3.1)
 ]
+
+# Files that BY DESIGN exist only in newborn instances, or optionally (the
+# S5-6.5 declared class, ratified at the Scan #5 slate — the S4-3.1
+# WARN-drowning cure's second round): genesis writes them into a child, or an
+# instance opts into them; the mother's documents describe them without
+# holding them. INFO, never WARN — the WARN channel stays signal.
+INSTANCE_ONLY = {
+    "FIELDNOTES.md",          # genesis-written capture door (C-100)
+    "First_Loops_Rail.md",    # genesis-written onboarding rail (C-101)
+    "vocabulary_local.json",  # optional instance-side vocabulary (C-114)
+    "KNet_Fractal_Kernel_Migration_Protocol.md",  # child-jurisdiction file the
+                              # migration standard cites (KNet's P-007 record)
+}
 
 SCAN_EXT  = {".md", ".html", ".py"}
 SKIP_DIRS = {".git", "_to_delete", "Archive", "_events"}
@@ -316,6 +331,22 @@ def main():
         sum(1 for ln in open(os.path.join(_events_dir, f), encoding="utf-8") if ln.strip())
         for f in sorted(os.listdir(_events_dir)) if f.endswith(".jsonl")
     ) if os.path.isdir(_events_dir) else None
+
+    # -- protocol DOC coverage (S5-2.1 tripwire): the C-041 per-version mint
+    # lapsed silently for v0.50–v0.54 and resumed silently at v0.55. Every
+    # Governance Protocol series file must be named in the event log (its
+    # create/alias events carry the version-labeled name); WARN, never ERR —
+    # a retro mint is a governed act, not a mechanical one.
+    _proto_dir = os.path.join(repo, "Claude", "Project Governance", "Governance Protocol")
+    if os.path.isdir(_proto_dir) and os.path.isdir(_events_dir):
+        _log_text = "".join(
+            open(os.path.join(_events_dir, f), encoding="utf-8").read()
+            for f in sorted(os.listdir(_events_dir)) if f.endswith(".jsonl"))
+        for _pf in sorted(os.listdir(_proto_dir)):
+            if _pf.startswith("Fractal_Governance_Protocol_") and _pf.endswith(".md") \
+               and _pf[:-3] not in _log_text:
+                warn(f"Governance Protocol/{_pf}: no store event names this file — "
+                     "the C-041 per-version DOC mint is missing (S5-2.1 tripwire)")
 
     # -- living stamps
     stamps = {}
@@ -473,6 +504,10 @@ def main():
             if inherited_source:
                 n_inherited += 1
                 continue
+            if s in INSTANCE_ONLY or os.path.basename(s) in INSTANCE_ONLY:
+                info(f"{rel}: instance-only/optional artifact {s} — lives in "
+                     "newborns or by opt-in, not the mother (S5-6.5 declared class)")
+                continue
             warn(f"{rel}: named file exists nowhere in the repo: {s} (heuristic)")
 
         # ---- A9. store-count claims (S4-1.2): "N nodes / M events" was the one
@@ -617,4 +652,5 @@ def main():
     print(f"\nPASS — every attributable version claim agrees "
           f"({len(warns)} warning(s)). Safe to close (C-059).")
 
-main()
+if __name__ == "__main__":       # close.py imports this module for the LIVING/SERIES
+    main()                       # registry — one registry home (C-092, the C-110 tool work)

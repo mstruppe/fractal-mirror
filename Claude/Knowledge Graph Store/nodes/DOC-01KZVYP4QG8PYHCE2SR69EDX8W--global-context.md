@@ -3,7 +3,7 @@ id: DOC-01KZVYP4QG8PYHCE2SR69EDX8W
 type: DOC
 created: 2026-08-12T21:40:06Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:2505b33bf5a696347cc44adedc0e26fddc6afcbacd2b5c0ac7955b851aad526c
+content_hash: sha256:3e3099ab9fe04782976a00533c97882b3e0f5fd9d90525de0dc81b4267a309f3
 title: "Fractal Global Context (v0.2)"
 aliases: ["Fractal_Global_Context"]
 placements:

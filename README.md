@@ -82,7 +82,7 @@ Git + plain-text files + a compliant AI surface. No database, no server, no prop
 | `GENESIS.md` | Birth a new instance under FRACTAL's government |
 | `GUIDE.md` | The user guide — day two onward, per-client driving, troubleshooting |
 | `.claude/commands/` | The shipped session commands — `/welcome` (first contact), `/begin` (the onboarding interview), `/fractal` (open a working session), `/close` (the close ritual), `/look` + `/fieldnote` (the observation and capture tier) |
-| `Claude/Knowledge Graph Store/` | The live graph — nodes, the event log, and the seven tools (`verify.py`, `mint.py`, `check_versions.py`, `close.py`, `genesis.py`, `doctor.py`, `fieldnote.py`) |
+| `Claude/Knowledge Graph Store/` | The live graph — nodes, the event log, and the eight tools (`verify.py`, `mint.py`, `check_versions.py`, `close.py`, `genesis.py`, `doctor.py`, `fieldnote.py`, `check_scan.py`) |
 | `Claude/Architecture/` | The canonical architecture: Architecture State (the map), Schema, Template, Navigation Contract |
 | `Claude/Project Governance/` | Conversation Settings, Decision Register, Rule Overview, the Governance Protocol series |
 | `Claude/Context Packages/` | The context spine: Global Context, Local Contexts, the routing Index, Agenda Board, Return Packages |

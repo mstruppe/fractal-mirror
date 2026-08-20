@@ -3,7 +3,7 @@ id: DOC-01KZVYP0TGSQ1WEZ67V9HXCWTG
 type: DOC
 created: 2026-08-12T21:40:02Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:4a1044f6a79591c46bf4a09c4c6b860853899c324b51a0eb1532665d5833dfc6
+content_hash: sha256:5019a14995f9dcfe2e9676f71abeafdf08629ef34b0ebd91498b46beb2b0f698
 title: "FRACTAL — Bootstrap Protocol"
 aliases: ["Fractal_Bootstrap_Protocol", "FRACTAL — Bootstrap Protocol"]
 placements:

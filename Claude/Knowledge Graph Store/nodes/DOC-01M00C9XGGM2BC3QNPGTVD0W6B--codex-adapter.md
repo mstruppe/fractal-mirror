@@ -3,7 +3,7 @@ id: DOC-01M00C9XGGM2BC3QNPGTVD0W6B
 type: DOC
 created: 2026-08-14T14:55:03Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:d7cfa7409ba21b660bcf94add85fcb5579e97b83470171281c27e631f339f1fa
+content_hash: sha256:2ec6ebfd5573bde5233204cac47441fb010a7207ac7bcfc91f1398c77b46ea3d
 title: "Fractal Codex Adapter"
 aliases: ["route:Fractal_Codex_Adapter"]
 placements:

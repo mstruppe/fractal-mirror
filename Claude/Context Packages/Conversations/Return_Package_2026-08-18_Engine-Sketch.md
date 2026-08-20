@@ -1,0 +1,28 @@
+# Return Package — 2026-08-18 · The twenty-second Code session (the engine-sketch session)
+
+> **DERIVED PROJECTION — handover record (C-001).** Frozen at issue; not minted (C-042 mint-on-reuse). The reasoning of record is Protocol v0.56; the decision lives in the Register (v0.74, C-119).
+
+**Parent:** Return_Package_2026-08-18_Public-Identity-Build.md · **Local Context:** v0.73 (this close's walk) · **Close commit:** the `[GOV]` close of 2026-08-18, pushed per C-064
+
+---
+
+## 1 · Handover (the auditable line)
+
+**Opened `/fractal` on the post-identity queue; Max opened with the avatar done (his hand), drove the site content pass from a lazy cut to a ratified model, and closed with C-119 on the record and the mirror's working tree cured.** The arc, each act on his word: the **git-setup guide resolved by deletion** (the appendix cut; question three now links `github.com/signup`; the home page's first "git" likewise, "Git for Windows" retargeted to the project's GitHub home) → **step 3 deepened one notch** (`/close` + `/fieldnote` linked to the library; the concepts/blog invitation) → the **command rules made** ("let's make this rule about working on the website") **+ the commissioned drone flight** (37 mentions across six pages cataloged; 14 prose links applied; per-command anchors `cmd-*`; the site-wide scroll-margin cure; two recorded exceptions) → the **command sources exposed** (his md-file idea + "downloadable": `Site/commands/`, the blog's Command sources section, door-src back-references) → the **engine-sketch principle declared** ("the website is fractal's engine sketch … develops by system design with the public fractal mirror") **and applied to the bibliography** (`Site/standards/` — eight ratified standards, feed downloads, bib-src references; the Kernel Migration Procedure honestly *ships with the next release*; **the rule register stays concept-level**, his call) → mid-lane the **mirror hygiene episode** (285 iCloud-conflict duplicates found — mirror only; 265 deleted on per-file byte-identity proof; the 20 divergent ones proven beta-0.4 content and removed by **his hand**; 5 extensionless stragglers cured; end state: zero duplicates, `git status` empty) → the **C-116 rider amendment ratified** ("is ratified": the post-rebuild cleanliness check folds into the mirror rider when the C-110/C-112 mechanization touches it). **C-119** ratified as the one number; the close fired on his "let's close this session."
+
+## 2 · The working set for the next session (offers, C-031)
+
+1. **The queue's head (unchanged):** the **C-110/C-112 mechanization** (history rows at `--write` · the `--stamp` pass · the walk pre-fill · the drag gauge · C-117's §7.3 pack-time check · **+ the C-116 post-rebuild cleanliness check**, per v0.56); **beta-0.6 forms behind it** (first content: C-116–C-119 + the migration standard).
+2. **The site content pass (standing lane, now under the C-119 model):** guide steps 3–5 deepened in the two-road style · the teach-a-command recipe (its landing place is pre-named in the library's *Hardwired and taught* passage) · the **FAQ section** (publish FN-0008) · per-standard **paper pages** (the Fed-release model, banked in `blog.html`'s source comment) · the first written field studies. The git-setup item left the list — solved by deletion.
+3. **The C-119 refresh duty (rides every C-116 execution):** at each tagging close, refresh `Site/commands/` + `Site/standards/` from the fresh mirror; the migration standard's row flips from *next-release* note to download at beta-0.6; the cleanliness check joins the rider mechanically at the mechanization.
+4. **Pending on Max now:** the profile's remaining own-hand acts (display name · bio · contributions toggle — the avatar done) · the annex remote (optional) · the flip riders whenever necessity fires (RP 2026-08-18 Public-Identity-Build §2 stays the list of record).
+5. **Banked for their named moments:** the Onboarding v0.4 reissue · the Client Library's Codex close-scope line (FN-0006) · OQ-34's first act · capture v1.2 held · the five conduct candidates (Settings v0.8 unchanged — C-119 ruled a working-material model, not conduct).
+6. **KNet (arc 2, its jurisdiction):** on the beta-0.5 kernel, Q07 running; untouched this session (`/look` on Max's word). A recurrence note stands: if the Desktop is iCloud-synced, the duplicate artifact can reappear at the beta-0.6 rebuild — the banked cleanliness check is its standing cure.
+
+## 3 · What this session proved (the green data)
+
+**The engine-sketch model costs almost nothing to honor** — the site already *was* the machine's explanation; exposing the real files behind it (six commands, eight standards) took two subfolders and a feed column, because the parts were already stamped, versioned, and shippable. **The honest-absence pattern held its first test:** the one standard missing from the shipped baseline got a truthful *next-release* note instead of a quiet copy from the living tree — the C-116 lag made visible instead of papered over. **The byte-identity cure beat bulk deletion:** 285 conflict copies left the mirror with a per-file proof trail and zero information risk, and the one divergent class (20 files) turned out to be the previous release's own content — the release seam's history covering for the filesystem's accident. And the linking pass ran as commissioned orchestration: one drone flight, one catalog, one deterministic application — the site's first conformance sweep under its own new rules.
+
+---
+
+*Author: Claude (AGENT.AI.CLAUDE) · Twenty-second Code session, opened `/fractal`, closed `/close` on Max's command ("let's close this session"). Next: `/fractal` → the mechanization, the site content pass, or any standing offer.*

@@ -3,7 +3,7 @@ id: DOC-01M052MNTZCKNK2XTRAD2GT8CN
 type: DOC
 created: 2026-08-16T10:42:22Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:69a0bf70da69e0317b0ad10d2d64dba1c58b95a26d3d5e5174c666207d0ed504
+content_hash: sha256:1fa583d885d9b095286dc84eafc751d7c5f28258dde866b800762cf2c32e8a24
 title: "Fractal Client Library"
 aliases: ["route:Fractal_Client_Library"]
 placements:

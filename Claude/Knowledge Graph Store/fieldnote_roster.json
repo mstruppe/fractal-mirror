@@ -1,9 +1,4 @@
 {
   "instance": "FRACTAL",
-  "targets": {
-    "knet": "Site/Fieldnotes_2026-08-15_First-Shipping-Run.md",
-    "beta": "Site/Fieldnotes_2026-08-15_First-Shipping-Run.md",
-    "publish": "Site/Fieldnotes_2026-08-16_Publishing.md",
-    "general": "Site/Fieldnotes_2026-08-16_General.md"
-  }
+  "buffer": "Site/Fieldnotes.md"
 }

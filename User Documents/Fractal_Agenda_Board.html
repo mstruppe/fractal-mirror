@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRACTAL — Agenda Overview</title>
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --card: #ffffff;
+    --ink: #1a1a1e;
+    --muted: #6b6b74;
+    --line: #e6e4de;
+    --accent: #2f6fed;
+    --done: #3a9d6e;
+    --high: #c0563a;
+    --med: #c78a2d;
+    --low: #8a8a94;
+    --offer: #7a5fb5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a;
+      --card: #202024;
+      --ink: #ececef;
+      --muted: #9b9ba5;
+      --line: #313138;
+      --accent: #6b9bff;
+      --done: #55b98a;
+      --high: #e07a5c;
+      --med: #d9a44a;
+      --low: #8a8a94;
+      --offer: #a68ae0;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 40px 24px 56px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header { margin-bottom: 28px; }
+  .kicker {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+  .donebar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 16px; margin: 22px 0 26px; font-size: 13.5px;
+  }
+  .donebar .label { color: var(--muted); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: color-mix(in srgb, var(--done) 12%, transparent);
+    color: var(--done); border-radius: 999px; padding: 3px 11px;
+    font-weight: 600; font-size: 12.5px;
+  }
+  .chip::before { content: "✓"; font-size: 11px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 24px; margin-bottom: 18px;
+  }
+  .card.next { border-left: 4px solid var(--accent); }
+  .card-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .ws-letter {
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  h2 { font-size: 17.5px; font-weight: 650; }
+  .badge {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 999px; padding: 3px 10px; margin-left: auto;
+  }
+  .b-next { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+  .b-queued { background: color-mix(in srgb, var(--high) 13%, transparent); color: var(--high); }
+  .b-parked { background: color-mix(in srgb, var(--low) 16%, transparent); color: var(--low); }
+  .b-offer { background: color-mix(in srgb, var(--offer) 14%, transparent); color: var(--offer); }
+  .sev { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+  ul { list-style: none; margin-top: 10px; }
+  li {
+    padding: 7px 0 7px 22px; position: relative; font-size: 14.5px;
+    border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  }
+  li:first-child { border-top: none; }
+  li::before {
+    content: ""; position: absolute; left: 4px; top: 15px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--muted);
+  }
+  .card.next li::before { background: var(--accent); }
+  .trio {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 0 0 20px; font-size: 12.5px;
+  }
+  .trio .lbl {
+    color: var(--muted); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 2px;
+  }
+  .trio a, .trio .here {
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px;
+    color: var(--muted); text-decoration: none; background: var(--card);
+  }
+  .trio a:hover { color: var(--ink); border-color: var(--muted); }
+  .trio .here { color: var(--accent); border-color: var(--accent); font-weight: 650; }
+  .ref { color: var(--muted); font-size: 13px; }
+  .note {
+    margin-top: 12px; font-size: 13.5px; color: var(--muted);
+    background: color-mix(in srgb, var(--line) 40%, transparent);
+    border-radius: 8px; padding: 9px 13px;
+  }
+  .opening {
+    margin-top: 14px; font-size: 13.5px;
+    border-top: 1px dashed var(--line); padding-top: 12px; color: var(--muted);
+  }
+  .opening b { color: var(--ink); font-weight: 600; }
+  footer { margin-top: 26px; font-size: 12.5px; color: var(--muted); }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.92em;
+    background: color-mix(in srgb, var(--line) 50%, transparent);
+    padding: 1px 5px; border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">FRACTAL · Agenda Board (C-047)</div>
+    <h1>Agenda Overview</h1>
+    <div class="sub">Projection of Fractal_Local_Context (Knowledge Graph) <b>v0.81</b>, 2026-08-20 (the thirtieth session's close — <b>beta-0.6 packed</b>: the section contract C-130, the KMR review return, the advisory, both diets, the pack + the new site live, per v0.64) — derived, never authoritative (C-003); stale stamp = divergence (C-035); format per <b>Fractal_Agenda_Board_Format_v0.3</b> (C-104/C-126/C-128) · <b>the dynamic pole of the user spine (C-122/C-124)</b></div>
+  </header>
+
+  <nav class="trio" aria-label="The user-document bar">
+    <span class="lbl">Your documents</span>
+    <span class="here">Board — the state</span>
+    <a href="../Site/Fieldnotes.md">Fieldnotes — the buffer</a>
+    <a href="Fractal_Roadmap.html">Roadmap — the plan</a>
+    <a href="Fractal_Fieldnote_Handout.html">Handout — the manual</a>
+  </nav>
+
+  <div class="donebar">
+    <span class="label">Complete &amp; ratified:</span>
+    <a class="archive-link" href="Fractal_Agenda_Board_Archive.html">everything before &mdash; the archive</a>
+    <span class="chip"><b>THE PUBLIC-IDENTITY BUILD</b> (per v0.55) — the hand-offs recorded executed · the name held (<b>FRACTAL</b>), the umbrella deferred → <b>OQ-34</b> (the KNET/K-NET clearance findings live in the row) · the profile groundwork (<code>fractal@knet.network</code> verified public) · the first mark (<i>The Kernel</i>, endless — <code>Site/Marks/</code>) · <b>the site's fractal layout, presentable</b> (Home · Guide · Concepts · Blog-as-wiki + <code>legal.html</code>; the guide deepened — the birth as systems explanation, the rule register, the canonical-docs teaching; the standards feed; tagline <i>&#8220;AI agents forget. Your project won&#8217;t.&#8221;</i>) · FN-0006 / entry 46 (the Codex close-scope specimen) · the Onboarding v0.4 proposal banked · no pack</span>
+    <span class="chip"><b>THE ENGINE-SKETCH SESSION</b> (per v0.56) — <b>C-119</b>: the site is FRACTAL's engine sketch, co-developing with the public mirror by design — the command rules made + the drone-flight linking pass (37 mentions, 14 linked) · <b>the shipped baseline's parts exposed, downloadable</b> (<code>Site/commands/</code> six · <code>Site/standards/</code> eight; the migration standard honestly <i>next-release</i>; the rule register concept-level) · the git-setup guide resolved by deletion · the avatar done (your hand) · <b>the mirror tree cured</b> — 285 iCloud-conflict duplicates removed on byte-identity proof · the <b>C-116 cleanliness-check amendment banked</b> (fires at the mechanization) · no pack</span>
+    <span class="chip"><b>THE GO-LIVE SESSION</b> (per v0.57) — <b>C-120: FRACTAL IS LIVE</b> — the flip executed (<b>your hand</b>, observed necessity, live &ne; official): the mirror public · the site served (<code>gh-pages</code> split, <code>main</code> keeps the release rhythm) · <b>the gate</b> at <code>knet.network</code> (the umbrella's address, FRACTAL the first card; Cloudflare DNS, HTTPS enforced) · the intake layer (fieldnote-shaped issues · one-way PRs · merge-commit-only) · the Impressum placeholder (your call) · verified cold-visitor end to end (24/24 files 200) · <b>Global §2's second transition</b> (v0.5 — living publicly) · the <b>Value Model</b> captured (C-086's third member + live site page) · <b>Network Foundation v0.4</b> (the descent §10 · the serving layer §11) · Q2 answered &amp; signed off · <b>A1 ratified</b> · the wiki concept banked (Q3) · no pack</span>
+    <span class="chip"><b>THE MECHANIZATION CLOSE</b> (per v0.58 — no new number) — <b>the C-110/C-112 slate executed in full</b> (your "yes let's implement this"): <code>close.py</code> carries the close's mechanical half — walk pre-fill · judgment dirty-flag · drag gauge · <code>--stamp</code> (bumps, minted history rows, post-ripple counts pre-hash) · <code>--pack</code> (the tagging gate: §7.3 clause-span · <b>the C-116 cleanliness amendment executed</b> · C-120 preservation) · <b>TF1-4 cured on its named trigger</b> (the TF1 slate fully closed) · scratch-proven; live signals: the clause-span red as designed, two drag YELLOWs (LC + Index), mirror checks green · FN-0009 (the vendor-convergence datum — the USP series' strongest specimen) · beta-0.6 trigger satisfied (12 commits / 82 files since beta-0.5) · <b>Scan #5 commissioned as an ultracode flight</b> (attention lanes: <b>the diet + the adaptive close</b>, your word; close-first sequencing your call) · no pack — the tagging close follows the flight</span>
+    <span class="chip"><b>SCAN #5 + THE FULL SLATE</b> (per v0.59) — the flight flown on your <b>"flight go"</b> (15/15 agents · 1.62M vs ~1.5M estimate · ~28 min) with <b>the gas-metering lane you added</b>: empty close &asymp;11k tokens vs the mother's &asymp;316k (&asymp;28&times;), spine &asymp;9&times;, orientation &asymp;5&times; — <b>OQ-28's first datum</b>; the diet priced (&asymp;1,350 tokens per 1,000 evicted words per session) · <b>35 findings, 0 High</b> (series 26&rarr;24&rarr;8&rarr;7&rarr;35); your <b>"full slate"</b> — 33/35 cured in-session (protocols v0.50–v0.54 retro-minted + all nine stamped; the GENESIS currency reissue — the pack gate green early; the enumeration-freeze loci ended structurally) · <b>both diets executed</b> (Index 2,160&rarr;1,980 · LC 6,305&rarr;&asymp;3,000 — both YELLOWs cured) · the gas-gauge article (<code>procedures.html#gas</code>) + the KNet hand-off written · <b>the Fractal Interface Foundation ratified</b> (C-086 fourth member, your "ratified and close" — directions-never-context; five executed message classes; the second child + the small-organisation proof) · two agenda points opened: <b>website grooming (with you)</b> · the interface's parameters · no pack — beta-0.6 next, now carrying the interface</span>
+    <span class="chip"><b>THE FIELDNOTE-RAM + NETWORK-VISION SESSION</b> (per v0.60 — <b>C-121</b>) — the hygiene sweep: <b>both <code>no-history-rewrite</code> rulesets</b> (mirror + gate, your hand, API-verified) · <b>the first ordinary serving-split refresh</b> on your "let's do the gh push" (deploy-verified byte-identical — S5-8.3 closed whole) · Discussions off · <b>your makeover ratified: the fieldnote is RAM</b> — one buffer, single-word command (the off-topic jump), extraction + read-back + <b>your ratification as the write gate</b>, solving = dissolution, the pressure plug (budget 10, provisional) — 21 lane blocks judged (10 migrated · 11 solved-frozen, FN-0003's target friction dissolved by C-121 itself), the lanes frozen, <b>the plug's first live firing at your ratified gas capture (11/10 YELLOW standing)</b> · <b>the user-document trio</b>: the Fieldnote Handout + <b>the Roadmap</b> (your commission — the plan of record) beside the Board; <b>their working-as-one refinement pass queued into beta-0.6</b>; the site's concepts page gains the user-documents section · <b>the network vision recorded</b> (vision-tier): government/domestic/PR/research · the OQ-34 <b>seat annotation</b> on your "go as recommended" (coordinator never commander; law/addresses/returns; the Manifest exception) · the hangar (sandbox-clean tool-fractals) · fission named (the drag-gauge trigger) · <b>Interface Foundation v0.2</b> on your "ratify and close": <b>PR the second child, born with beta-0.6</b> (your timing call) + <b>the inbox transport</b> (envelopes as files in the target's repo, read by its opener) · no pack — the refinement pass + grooming, then the tagging close + PR's birth</span>
+    <span class="chip"><b>THE INTERFACE-BIRTH SESSION</b> (per v0.61 — <b>C-122</b>) — the <b>instrument forge</b> (your commission: proxies not raw tokens, the consent questionnaire; <b>OQ-35</b> the measurement program — your sorting call: <i>"this is agenda board material"</i>) · <b>C-122 on your "go"</b>: the mirror doctrine — <b>this board is the Local Context's human pole, the Roadmap the Global's</b>, the buffer shared, the Handout its manual; the refinement pass executed whole (the trio bar above · role declarations · Global v0.6 · the site section) · <b>the first C-121 work-down on your "full slate"</b>: 11 → <b>4/10</b>, seven dissolved (OQ-35 · OQ-36 the adoption path · the bibliography citation · <b>Agenda Board Format v0.2</b> · Client Library v0.5), four held on named triggers · the <b>three-leg KNet tool-fractal exchange</b> (your four-eye commission; your live-use correction; the <b>cross-model convergence</b> — both models deriving <i>live in the workspace, fixed at the seam</i>) → <b>Foundation v0.3</b> (the interface place — <i>"a second ram for communication"</i>, pull never push) + <b>v0.4</b> (installed integration vs. remote instance) · the <b>C-096 git observation</b> (KNet commits fine — onto a stranded <code>codex/*</code> branch; IF-0004 the return; Library v0.6 the harvest) · <b>the interface BORN</b> on your word: <code>Interface/</code> — the index + four standing hand-offs, one direction routing all · Registry v0.6 (the <b>Interface Protocol</b> forging row) · no pack — the interface build next, then grooming, then the tagging close</span>
+    <span class="chip"><b>THE INTERFACE-BUILD SESSION</b> (per v0.62 — <b>C-123/C-124/C-125</b>) — <b>the interface built on your direction</b> (<i>"simple and solid, only what the process needs"</i>): the <b>Interface Place Format v0.1</b> (place contract · index grammar · envelope minimum · skeleton; counterpart navigation deferred to <b>two children</b>, your word) · <b>genesis births the organ in every newborn</b> (GENESIS v0.13, scratch births green) · Foundation v0.5 (the credited KNet refinements) · <b>the transport candidate banked on your FTP/TCP question</b>: git-over-SSH/HTTPS, the proven class, never built ahead of need · <b>C-124 the pair series from your correction</b> (the buffer is governance-side): kernel trio fixed, extensions by the kernel-shipped <b>Pair Procedure v0.1</b> — <b>the Update Plan pair born</b> (this board slimmed to <i>update open</i> + link, your commission verbatim) · <b>C-125 the takeover gate on your responsibility sentence</b> (structure holds the reasoning's standard — its first walk caught + cured one real loss) · Registry v0.7/v0.8 · Global v0.7 · the site's pair story · no pack — the grooming pass, then the tagging close (the Update Plan the path)</span>
+    <span class="chip"><b>THE USER-DOCUMENTS SESSION</b> (per v0.63 — <b>C-126–C-129</b>) — <b>your folder</b> (<i>&#8220;the user docs should have dedicated folder I can go to in the folder system&#8221;</i>): all your windows now in <code>User Documents/</code> at the repo root — Pair Procedure <b>v0.2</b> (the location law) + Board Format <b>v0.3</b>, three tools re-pointed, the takeover gate curing 7 checker-caught stale claims on the way, scratch birth green · <b>the Mining Tool sorted in your sentences</b> (named on your &#8220;yes&#8221;; <b>spec here, build KNet</b>, decoupled from beta-0.6 for speed) + <b>the beta-0.7 intake opened</b> (Update Plan &sect;5 — parallel, never blocking; the shelf promotes at the pack) · <b>C-127 your category separation</b>: kernel concepts &middot; kernel tools &middot; custom concepts (<b>never released</b> — the mirror exclusion, both custom pairs the first) &middot; installable tools (the Mining Tool forging — the site&#8217;s placeholder mark) &middot; plug-ins (banked) · <b>C-128 on your &#8220;go&#8221;</b>: this done bar became a <b>rolling window</b> — ten chips here, everything older verbatim in <a href="Fractal_Agenda_Board_Archive.html">the archive</a> (54&rarr;10+44; this close its first live regeneration) · <b>C-129 the Gas Gauge</b> (your commission: <i>&#8220;a better picture of what different procedure and operations take toll in gas&#8221;</i>) — the price list live on your bar, natively fed, seeded with real measurements, <b>the Mining Tool&#8217;s executing spec seed</b> · <b>the grooming pass opened</b> (the concepts guide-section cut on your first directive; <b>continues next session</b>)</span>
+    <span class="chip"><b>THE BETA-0.6 TAGGING CLOSE</b> (per v0.64 — <b>C-130, beta-0.6 packed</b>) — the <b>KMR/KIMK four-eye return</b> on your commission (IF-0005: two of KNet&#8217;s three readings confirmed and widened, the third <b>overturned</b> — the &#8220;missing&#8221; receipt found alive in KNet&#8217;s own object store, byte-exact, rescue advice time-bounded; <b>your live-then-freeze direction</b> recorded as its architecture section) · <b>your section contract ratified (C-130)</b>: Concepts the <b>dictionary</b> (fourteen-entry roster + the click-through detail tier) · Blog the <b>story</b> (the value model its forward chapter) · <b>Research Labs</b> born empty, its own old-school layout (the KNet name waits on the OQ-34 clearance — your call at the gate) — <i>imply, never announce</i> benched on your rule · the <b>&sect;8 migration advisory</b> first-instantiated (IF-0006; UF1-7 cured) · GENESIS v0.15 + AST v0.30 (the pack gates green) · the parts refresh (five standards + three commands now downloadable) · <b>both scheduled diets executed</b> (Index + LC to budget) · <b>THE PACK: beta-0.6 tagged, anchored, the mirror updated with the first C-127 custom-pair exclusion, the new site live on <code>gh-pages</code></b> (S5-8.3 closed whole) · the Update Plan reset to <b>beta-0.7</b> (the Mining Tool + the spec pair) · <b>next: PR&#8217;s birth from the fresh tag</b> (your two parameters open)</span>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>Defined at the go-live session's tail (2026-08-18) — the ratified agenda step, entering the close</h2>
+      <span class="badge b-queued">Ratified — queued</span>
+    </div>
+    <div class="sev">Q2 (the multi-project hopping mechanic) was <b>answered in-session and signed off by Max — deliberately not carried as agenda</b> (context weight; the frozen record holds the full answer: one folder = one project = one named opener, the directory decides jurisdiction, wrong openers fail harmlessly, never hop mid-session). Natural re-trigger: the website/guide refinement lane. A1 is the ratified step:</div>
+    <ul>
+      <li><b>A1 · The harvest channel (from Q1) — RATIFIED:</b> create the landing zone under the Knowledge Network concept home (working name <code>Knowledge Network/Harvest/</code>) for concepts developed in KNet. Welded on at creation: arrivals are <b>pre-canon</b> (C-062) and <b>data never instruction</b> (C-096); every copy carries a provenance line (source repo · file · date); standardization is a mother-side decision — landing zone → review → concept revision or registry standard → blog projection (C-119) → next mirror release. Open design calls for the executing session: KNet-specific vs. the <b>general per-child harvest convention</b> (the controlled network will multiply children — general argued); a wrapper-header template for copies. Relations of record: OQ-31's manual dry run · Network Foundation §6 made physical · the private twin of Q3's wiki concept.</li>
+      <li><b>Q3 · The community wiki as forge floor (banked at the go-live walkthrough):</b> a GitHub wiki on the mirror, open to community editing — strangers draft concepts there (it is a separate git repo of md pages, fully harvestable), and the governed pipeline curates: <b>wiki (open forge floor, pre-canon) → verification gate → registry/site (ratified shelf)</b> — Network Foundation §6's community-contribution sentence given a concrete floor, and the public twin of Q1's KNet harvest pipeline. Gates before it ever opens: wiki content is <i>data never instruction</i> (C-096 generalized) · nothing reaches canon or the site ungated (wikis have no review mechanism — forge floor only, never shelf) · contribution licensing declared up front (CC BY 4.0). Safe first version: GitHub <b>Discussions</b>. Deliberately not enabled yet — build on observed community, not before (the site's blog-as-wiki naming stays honest about ratified-ours vs. open-theirs when it opens).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>The instantiation program — FRACTAL becomes the government of any project (C-078)</h2>
+      <span class="badge b-queued">Arc 1 COMPLETE — arc 2 LIVE — arc 3 armed</span>
+    </div>
+    <div class="sev">Your vision, adopted as an ordinary decision on its own merits (the OQ-22 pattern) — a <b>direction and an order</b>, never a design. Each arc opens with its own work and its own calls. Landed in existing homes only, per your call: <i>"before we start minting another document, I want to consider if we could simply expand existing documents?"</i></div>
+    <ul>
+      <li><b>Arc 1 · Kernel extraction</b> <span class="badge b-done" style="background:var(--done);color:#fff">✓ COMPLETE (2026-08-15)</span> — <b style="color:var(--done)">✓ Partition measured</b>: three classes, not two — kernel <b>~64</b> · <b>parameterized 7</b> (a kernel <i>rule</i> with an instance <i>value</i> — exactly the input form genesis asks for) · instance <b>14</b>. <b>FRACTAL is ~80% kernel</b>. <b style="color:var(--done)">✓ GENESIS.md issued</b> (v0.13 at this writing) carrying the <b>inheritance-clause pattern</b>: a new instance's Register opens with <i>one clause</i>, never 64 copied rows. <b style="color:var(--done)">✓ genesis.py built, gated, merged</b> — drone 3; the gate re-run by the governing surface in an instance birthed <i>independently</i> of the drone's own run; branch retired local and remote (C-075). <b style="color:var(--done)">✓ Packaging unit decided (C-083)</b> — and decided by <b>subtraction</b>: the unit is the <b>adapter + <code>.claude/commands/</code></b>, and the queued <code>SKILL.md</code> is <b>retired unbuilt</b>, because a second projection of the conduct source on one surface is the drift class C-067 closed. The skill tier had landed slice by slice without being named done. <b style="color:var(--done)">✓ Acceptance test executed — twice</b>: an instance birthed <i>and a session closed inside it</i>, the second run a <b>control</b> on a fresh instance proving the first run's three findings cured in the generator, not in one repo. <span class="ref"><b>Two failures were ours, not the drone's:</b> the commit was impossible by construction (linked-worktree index outside the sandbox → C-082) and the acceptance gate was mis-specified (→ C-081; <code>GENESIS.md</code> §6 already said <code>verify.py</code>). <b>Deepest finding:</b> of 76 errors in a newborn, only 9 are registry hard-coding — <b>67 are inherited kernel documents citing FRACTAL's own history</b>. The kernel is not biography-free; both cures deliberately deferred. Delivered the <i>skill</i> tier; the <i>plugin</i> tier stays open behind a tier-1 index (C-079)</span></li>
+      <li><b>Arc 2 · The first foreign instance</b> <span class="badge b-done" style="background:var(--done);color:#fff">OPEN — LIVE (2026-08-15, per v0.37)</span> — specimen fixed by your call: <b>KNet</b>, a research instance (the knowledge network through information economics; the tracker stands as a candidate <i>later</i> instance), birthed beside the repo <b>from the anchored <code>beta-0.1</code> tag</b> by you as the kernel's first stranger. <b>§6 acceptance passed same day</b> — P-001 with an unprompted scope note (C-031 rediscovered natively), tier-0 hand-close, a defective close repaired by <b>doctrine the child articulated itself</b> (overtaken vs invalid-at-issue — the first <b>reverse-inheritance</b> candidate, OQ-31). <span class="ref">OQ-28 collecting real data (the hidden shelf; the minimality question) · OQ-29 awaits KNet's first code artifacts · OQ-4's comparison moment = this arc's completion · phase-5 loop live: fieldnotes → fixes → next anchored release</span></li>
+      <li><b>Arc 3 · Federation</b> <span class="badge b-parked">Deferred — two instances must exist first</span> — merge a stranger's published instance. <b>Verdict already recorded</b> (Architecture State §6): <b>identity merges free</b> (ULID ids never collide; merging logs is concatenate-and-sort, which the tools already do) · <b>codes collide by design</b> (C-044 one global namespace + C-049 first-mint-wins — every instance mints its own <code>GOV</code>, <code>CTX</code>, <code>AGENT.HUMAN.*</code>) and <code>verify.py</code> <b>already refuses loudly</b>, so the substrate fails safe · the cure is an <b>origin layer</b>, not a relaxed guard · <b>meaning stays human</b> — foreign graphs arrive whole and attributed, equivalence is asserted by minted bridge events, never inferred. <span class="ref">≈ one Schema minor reissue + a fifth store tool for the merge — comparable to the custody session, not a research project (OQ-31)</span></li>
+      <li><b>Ordering rationale:</b> arc 1 unblocks both successors — <b>and has</b>; arc 3 waits because specifying a merge protocol against a <i>hypothetical</i> second store is specification ahead of need — the discipline OQ-4 has held since 2026-08-13 — and arc 2 produces the real one.</li>
+      <li><b>Global §2 deliberately untouched</b> (your call): the realisation line moves when FRACTAL first governs a project that is not itself, not on the intent to try. That event is OQ-4's <b>second candidate</b> — and a second case is this ledger's own stated condition for finally defining the term.</li>
+    </ul>
+    <div class="opening"><b>To open:</b> Claude Code in the repo (<code>Desktop/FRACTAL/</code>) → type <b><code>/fractal</code></b> — loads Global + the active Local Context + the newest Return Package, reports standing <i>+ the buffer depth (C-121)</i> → the queue's head: <b>PR's birth from the fresh <code>beta-0.6</code> tag</b> (on you: the child's <b>name</b> + the shared-core contract; the release lane's home, now the beta-0.7 plan, stays the <b></b>); or any standing offer (C-031) → end with <b><code>/close</code></b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>Scan #3 findings — standing (Max's directive, 2026-08-15)</h2>
+      <span class="badge b-queued">On the agenda</span>
+    </div>
+    <div class="sev">8 findings (5 Med · 3 Low · 0 High) — dispositions live in the Register's review-findings ledger (C-058); this card stands until they change. Full evidence: <code>Review_2026-08-15_LooseEnds-Scan-3.md</code>. <b>Scan #4 (the pre-pack gate, ninth session): 7 findings, all Fixed in-pass</b> ("full slate") — evidence: <code>Review_2026-08-15_LooseEnds-Scan-4.md</code>. Across four Scans exactly one finding stands open: <b>S3-2.2</b>.</div>
+    <ul>
+      <li><b>S3-1.1</b> <span class="ref">Med</span> — custody claim "whole history verifies <code>G</code>" false as stated (16 G / 38 N) → <b style="color:var(--done)">Fixed</b>: scoped in Register/Rule Overview/Local Context; drill now checks the <code>%G?</code> shape (BOOTSTRAP §4)</li>
+      <li><b>S3-1.2</b> <span class="ref">Low</span> — Rule Overview §5 ledger pointer one close behind (tolerant zone) → <b style="color:var(--done)">Fixed</b>: version-agnostic (stamp-inside rule)</li>
+      <li><b>S3-1.3</b> <span class="ref">Med</span> — store README stale ×3 (spec pointer was schema v0.5 · no <code>close.py</code> · no Navigation Contract) → <b style="color:var(--done)">Fixed</b>: one README pass</li>
+      <li><b>S3-2.1</b> <span class="ref">Med</span> — Architecture State §4 still carried the dissolved "entry-point nodes" idea (C-068) → <b style="color:var(--done)">Fixed</b>: AST v0.8, §4 = the C-068 posture</li>
+      <li><b>S3-2.2</b> <span class="ref">Low</span> — Schema v0.6 + Navigation Contract v0.1 lack <code>Reviewed By</code> (S2-2.2's forward half regressed at its trigger) → <b style="color:var(--med)">Open</b> — lands at each spec's next reissue (named trigger; the new forward-commitment practice guards it)</li>
+      <li><b>S3-3.1</b> <span class="ref">Med</span> — command tier unstamped + outside the checker walk → <b style="color:var(--done)">Fixed</b>: both commands stamped; <code>check_versions.py</code> now walks <code>.claude/commands/</code></li>
+      <li><b>S3-3.2</b> <span class="ref">Med</span> — <code>AGENTS.md</code> content frozen through C-074/C-075 (forbidden-paths list predated the custody layer) → <b style="color:var(--done)">Fixed</b>: v0.4 re-projection; structural cure = <b>C-077</b> (adapter row: stamps + content)</li>
+      <li><b>S3-3.3</b> <span class="ref">Low</span> — BOOTSTRAP §2 didn't record the landed command tier → <b style="color:var(--done)">Fixed</b>: three OQ-16 slices named, full unit still queued</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="ws-letter">G</span>
+      <h2>Standing open questions</h2>
+      <span class="badge b-parked">Parked</span>
+    </div>
+    <div class="sev">Idle by design — non-blocking</div>
+    <ul>
+      <li><b>OQ-32</b> profiles &amp; roles: descriptive roles (author/committer) as <b>folds of the log</b>, granted roles (owner/co-owner/editor/reader) as placement events; the <b>responsibility collapse</b> — every non-owner authority traces to an owner grant. Resolution wants arc 2's multi-writer reality; doctrine home: Knowledge Network Foundation §4 (C-086); the social extension, log-ins, and the <b>economic layer</b> captured beside it as armed triggers (<code>Vision_2026-08-15_Network-Thesis.md</code>, pre-canon)</li>
+      <li><b>OQ-28</b> the weight dial: what is the <i>minimum viable ritual</i> for an instance? (Two measurements from the stranger's side — ~20k words mandatory prose, 67 inherited citations — plus the standards-library shape, C-086; <b>and now the first inside-view datum</b>: your own affordability question, answered structurally by C-095, per v0.40.) · <b>OQ-29</b> is code a governed artifact? — <b>first live test case: the Workbench</b> (governance-side clean; first <i>use</i> datum negative, consumed by the vehicle decision — per v0.40) · <b>OQ-31</b> federation namespace + trust (arc 3) — <b>two</b> reverse-transfer data now: governance doctrine (v0.37) and research content (v0.39, the Foundation's v0.2 revision)</li>
+      <li><b>OQ-4</b> — "genuine transition" criteria: fires and is expected to <i>resolve</i> at arc 2 ("a second case forces comparison" is this row's own condition — declaration stays yours) · <b>OQ-9</b> next promotion · <b>OQ-27</b> outside-custody scope (per-writer keys armed; <b>federation is its at-scale case</b>) · <span class="ref"><b>OQ-20 RESOLVED this session (C-103, per v0.46)</b> — the heavier review variant exists and ran: the capture-review, adversarially verified, first member approved</span></li>
+      <li><span class="ref"><b>Off the ledger at the punch-list close (per v0.35):</b> OQ-16 (vendor half mooted by C-089) · OQ-17 (calibrated by observation — ~15 sessions, zero steering complaints) · OQ-18 (resolved as <i>no</i> — aboutness, not authorship time; no Schema touch) · OQ-30 (resolved as C-087). One review finding stands: <b>S3-2.2</b>, deliberately held — its OQ-18 bundle dissolved; the trigger stays each spec's next <i>real</i> reissue</span></li>
+    </ul>
+    <div class="note"><b>The publishing shape is final (C-105 amending C-098, per v0.47):</b> license landed (Apache-2.0 + CC BY 4.0 + NOTICE; the name not licensed) · <b>the mirror is the permanent public home</b> — the mother stays private, ownership resolves as <b>proof-in-reserve</b>, two anchor chains (the mother's private, the mirror's public under <code>fractal@knet.network</code>) · the annex holds the personal class · curation lives in-repo (<code>.gitattributes</code>). Branch protection's trigger is <b>the flip (mirror public)</b>. <b>Four</b> conduct candidates banked for the next Settings reissue (suggestion hygiene · the board offer · always-flag · one-open-loop, C-106). The C-038 drill rides every canonical Scan (C-076); prose truth stays with the C-059 checklist, mechanized by <code>check_versions.py</code> (C-060) at every close.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="ws-letter">H</span>
+      <h2>Roadmap offers — on your call</h2>
+      <span class="badge b-offer">Offers</span>
+    </div>
+    <div class="sev"><b>Absorbed by the program, not displaced (C-078).</b> The shipping tier <i>is</i> arc 1; the index server's trigger genuinely fires around arc 3 — a second instance is what makes inverted-view reads routine — so H's prime brief becomes necessary rather than optional as the arcs advance. WS is unchanged.</div>
+    <ul>
+      <li><b>Version-agreement checker</b> <span class="ref">(OQ-24)</span> — <b>shipped &amp; canonized 2026-08-14 (C-060)</b> · <b>Spec-version identity</b> <span class="ref">(S2-5.1)</span> — <b>decided &amp; executed 2026-08-14 (C-061)</b> · <b>Archive move</b> <span class="ref">(OQ-10)</span> — <b>decided &amp; executed 2026-08-14 (C-063)</b></li>
+      <li><b>KG search / index</b> <span class="ref">(C-021 step 3)</span> — the <code>resolve</code>/<code>enter</code>/<code>trace</code>/<code>history</code> MCP server; <b>spec complete</b>: the <code>verify.py</code> invariant suite + the <b>Navigation Contract</b> (C-070); trigger <b>sharpened</b> (C-068): inverted-view reads becoming routine — <b>not fired</b>. <b>Now tiered (C-079):</b> the read <i>contract</i> is kernel, this server is <b>kernel-optional tier 1</b>; tier 0 is the grep ritual, which is what every new instance starts on. Answers <i>"fix it before the kernel extraction?"</i> with <b>no — decide its tier instead</b>. Prime first real drone brief (C-066)</li>
+      <li><b>Interface</b> — <b>the forge is done and the first slice shipped (C-093):</b> the Workspace Foundation is the WS canonical (concept tier), the Workbench its walking skeleton — identity-coupled panes over the settled C-068 entry contract, the first shipped piece of "rendering." On offer next: the vehicle decision (Electron / branded app / Agent SDK chat pane, preferences held provisional) · further panes on observed use · the Galaxy (deferred; the workbench builds toward it)</li>
+      <li><b>Shipping tier</b> — the <i>skill</i> tier is <b>complete</b> (C-083: adapter + <code>.claude/commands/</code>; the queued <code>SKILL.md</code> retired unbuilt); the <b>plugin</b> tier waits on a tier-1 index (C-079). <b>The public gate is landed and rebuilt</b> (per v0.33/v0.47): <code>README.md</code> at the root + the site (<code>Site/fractal-site.html</code> — <b>LIVE since 2026-08-18, C-120</b>: GitHub Pages from the mirror's <code>gh-pages</code>, reached through the gate at <code>knet.network</code> — the umbrella's address, FRACTAL the first card) — <b>naming answered</b> (the "fractal by KNet" umbrella contingency of record, C-105; the gate its executed shape)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>Where the numbers root</h2>
+      <span class="badge b-parked">Legend</span>
+    </div>
+    <ul>
+      <li><b>C-#</b> — a numbered <b>decision</b>. Defined authoritatively in the Governance Protocol that records it (the history layer, PROT); indexed one-per-row in the <b>Decision Register</b> (C-001 → C-n)</li>
+      <li><b>OQ-#</b> — an <b>open question</b>. Lives in the Register's cumulative open-question ledger (C-034); every protocol §11 item is swept in; items leave only by recorded disposition</li>
+      <li><b>S<i>n</i>-x.y</b> — a <b>review finding</b>: Loose-Ends Scan #<i>n</i>, section x, finding y. E.g. <b>S2-5.1</b> = Scan #2 (<code>Review_2026-08-14_LooseEnds-Scan-2.md</code>), §5 <i>Identity system vs. governance</i>, finding 1 — about how spec versions live in the store, but rooted in the <i>scan</i>, not the Schema. Dispositioned in the Register's review-findings ledger (C-058)</li>
+    </ul>
+    <div class="note">One lookup home for all three ledgers: the <b>Decision Register</b>. This board projects the <b>Local Context</b>; the Local Context draws on the Register, the Rule Overview, and the protocols.</div>
+  </div>
+
+  <footer>
+    Standing stamped projection per C-047/C-048 — source file: <code>User Documents/Fractal_Agenda_Board.html</code> (the dedicated user-documents folder, C-126), regenerated file-first at close whenever the agenda changes; <b>the file is the only rendering (C-089)</b>, <b>offered actively (C-102)</b>, and <b>format-standard conformant (C-104 — Fractal_Agenda_Board_Format_v0.3, this board its first instance; the user-document bar field-proven here per C-094, then recorded in the v0.2 reissue beside the coequal-branch provision — shipping-run FN-0005 dissolved; the folder + extension pill likewise field-first, recorded in v0.3)</b> · your at-a-glance counterpart to the AI-facing Local Context — <b>the dynamic pole of the user spine (C-122, the mirror doctrine):</b> the Roadmap mirrors the Global Context as this board mirrors the Local, two reader-matched spines over one canonical substrate, sharing the fieldnote buffer (C-121) as their common write-surface; path-changes go to the roadmap, work lands here — two readers, one source; nothing lives only here · store: 146 nodes / 944 events after the thirtieth close's mint (Protocol v0.64), one log file (C-055), 7 roots, all routes bound (C-053), multi-writer safe (C-049/C-050), off-site copy live (C-056), reviews canonical &amp; ledgered — <b>two variants since C-103: Scan + capture</b> (C-058), close checklist standing (C-059), version agreement machine-checked (C-060), per-version spec identities (C-061), client adapters canonical (C-065), drone tier flight-proven (C-066), read side contracted (C-068–C-070), close mechanics tool-assisted (C-073), custody calibrated — every signed commit verifies <code>G</code> (C-074–C-076), adapter content tripwired (C-077), instantiation program live — arc 1 complete, arc 2 running, arc 3 armed (C-078/C-079/C-081–C-083), the punch list closed (C-087–C-089), <b>the legal identity layer — ALL THREE RELEASES BITCOIN-FINAL (C-090; beta-0.3 upgraded this session, block 962752)</b>, phase-5 conduct in the kernel (C-091/C-092), the WS forge + the Workbench (C-093), field testing standard + compaction (C-094/C-095), the observation window (C-096), the client library (C-097), the flip prepared (C-098–C-102; GUIDE.md, the command sextet), the capture session (C-103/C-104, per v0.46), <b>THE PUBLISHING IDENTITY — mirror-as-home + the public identity + the mirror's own anchor chain (C-105), the named opener (C-106), the stranger test passed, the site rebuilt, beta-0.4 packed, per v0.47</b>, the refinement pivot + the flight tier (C-107–C-109), the diet program (C-110–C-112), <b>THE REGISTRY RELEASE — the standards library live, vocabulary extension, the scholarly convention (C-113–C-115), the genesis reissue, beta-0.5 packed, per v0.50</b>, the release seam closed (C-116–C-118, per v0.51–v0.54), <b>THE PUBLIC-IDENTITY BUILD — the site presentable, the mark, OQ-34, per v0.55</b>, <b>the engine-sketch model — the site's parts exposed verbatim, C-119 per v0.56</b>, <b>THE GO-LIVE — FRACTAL public on both addresses, C-120 per v0.57</b>, the mechanization close (C-110/C-112 executed · TF1-4 cured · the close's mechanical half tool-carried, per v0.58), <b>SCAN #5 + THE FULL SLATE (35 findings 0 High, 33 cured in-session · the gas datum, OQ-28 · both diets · the Interface Foundation, C-086's fourth member, per v0.59)</b>, <b>the fieldnote-RAM redesign + the network vision (C-121 · the buffer + pressure plug · the user-document trio · the OQ-34 seat annotation · Foundation v0.2: PR + the inbox transport, per v0.60)</b>, <b>the mirror doctrine + the interface birth (C-122 · the first work-down 11→4 · the three-leg KNet exchange · Foundation v0.3/v0.4 · <code>Interface/</code> + its index · OQ-35/OQ-36, per v0.61)</b>, <b>the interface build + the pair series + the takeover gate (C-123 the place standard, genesis-born · C-124 the pair series + the Update Plan pair · C-125 structure holds the reasoning's standard, per v0.62)</b>, <b>the user-documents system + the gas economy (C-126 your folder · C-127 the integration categories · C-128 the rolling window, this bar its first · C-129 the Gas Gauge, natively fed · the Mining Tool sorted, the beta-0.7 intake opened, the grooming pass begun, per v0.63)</b>, <b>THE BETA-0.6 TAGGING CLOSE (C-130 the section contract · the KMR four-eye return · the §8 advisory first-instantiated · both diets · the pack + the new site live, per v0.64)</b> · five Scans + one capture + one stranger test + four flights down — <code>verify.py</code> + <code>check_versions.py</code> + <code>check_scan.py</code> green · operating surface: Claude Code in-repo (C-018 swappable clients); push at close = Claude, standing authorization (C-064)
+  </footer>
+
+</div>
+</body>
+</html>

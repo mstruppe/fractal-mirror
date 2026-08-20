@@ -1,0 +1,17 @@
+FRACTAL release provenance attestation (C-090)
+
+Release tag:  beta-0.5
+Tag object:   896db467744912daeab207172b5a81e5e83ea23c
+Commit:       18d41046b21715f3ad90646463a7c357be9f15cc
+Tagged:       2026-08-17, at the registry-release close — the standards library
+              (Registry/), the vocabulary-extension mechanism (C-114), the
+              Scholarly Source Convention (C-115) and the RF1 cures ship from
+              this tag; it is the pinned target of the KNet kernel migration
+              (OQ-33's first live case)
+Repository:   FRACTAL - private origin mstruppe/fractal (host swappable, C-018)
+Custody:      signed tag, key G per .allowed_signers (C-074)
+
+Verification: "ots verify beta-0.5.txt.ots" proves this file existed no later
+than the attested time; the tag object hash commits the entire repository
+content and history at beta-0.5 by construction. The receipt is pending at
+issue and upgrades to Bitcoin-final via "ots upgrade" (C-090).

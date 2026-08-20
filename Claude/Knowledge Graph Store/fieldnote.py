@@ -1,33 +1,37 @@
 #!/usr/bin/env python3
-"""FRACTAL fieldnote tool — capture and intake for field observations (C-094).
+"""FRACTAL fieldnote tool — capture, depth, and intake for field observations (C-094, C-121).
 
-The machine half of /fieldnote, graduated beside the store tools when the
-friends-beta added the intake half (fieldnotes entry 39; the graduation
-trigger recorded in the tool's first home, Site/fieldnote.py).
+The machine half of /fieldnote. v0.2 (the RAM redesign, C-121): the fieldnote
+is temporary memory — ONE buffer per instance, no routing at capture, worked
+off soon. Solving dissolves an entry into the project (a decision, a document
+update, a transfer) and deletes it whole from the buffer; the citation plus
+git history is the trace. Ids never rewind (the header's high-water line).
 
-CAPTURE — deterministic routing and attribution (Max's ruling of record,
-2026-08-16): the target is a fact, not an interpretation. A missing or
-unknown target is a hard error and NOTHING is written. A valid capture
-appends one immutable machine-format block (Fractal Fieldnote Format v0.1)
-to the resolved ledger; everything judgmental (titles, cures, implications)
-stays outside the block, on the AI/human side (the C-073 split).
+CAPTURE — appends one content-immutable machine-format block (Fractal
+Fieldnote Format v0.2: six keys, no target) to the buffer named in the config.
+The raw report lands verbatim; the derived reading and categorisation proposal
+are judgment-layer, written by the AI surface AFTER the user's ratification
+(the write gate is conduct — Format §5; this tool is only the writer).
 
-PARSE — the intake half: validate ledger files against the format and emit
-the entries as JSON. Whole-or-nothing: any invalid block fails the intake
-loudly with no partial output.
+DEPTH — the pressure plug (C-121): depth = surviving blocks + unchecked
+`- [ ]` work-down rows; over the header's budget line → YELLOW advisory.
+Warning, never a gate: a full buffer still captures.
 
-Roster authority lives in `fieldnote_roster.json` beside this tool — a
-machine-read fact, not an interpretation; command-file tables are
-projections of it. The roster also declares this instance's name.
+PARSE — the intake half: validate files and emit entries as JSON,
+whole-or-nothing. Accepts BOTH grammars — v0.2 six-key blocks and v0.1
+seven-key blocks (frozen ledgers, v0.1-kernel children) — emitting `target`
+only where a block carried it.
+
+Config authority lives in `fieldnote_roster.json` beside this tool (historic
+filename kept; v0.2 shape): {"instance": "<Name>", "buffer": "<path>"}.
 
 Usage:
-  python3 fieldnote.py <target> <report text ...>        append a capture block
-  python3 fieldnote.py --kind friction <target> <text>   capture with a stated kind
-  python3 fieldnote.py --resolve <target>                print route + next id, write nothing
-  python3 fieldnote.py --list                            print the roster, write nothing
-  python3 fieldnote.py parse <file> [<file> ...]         validate + emit entries as JSON
+  python3 fieldnote.py <report text ...>            append a capture block
+  python3 fieldnote.py --kind friction <text ...>   capture with a stated kind
+  python3 fieldnote.py --depth                      print depth vs budget, write nothing
+  python3 fieldnote.py parse <file> [<file> ...]    validate + emit entries as JSON
 
-Where this tool and Fractal_Fieldnote_Format_v0.1.md disagree, the document
+Where this tool and Fractal_Fieldnote_Format_v0.2.md disagree, the document
 wins (the S4-2.1 rule).
 """
 import datetime
@@ -39,14 +43,18 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
-ROSTER_FILE = HERE / "fieldnote_roster.json"
+CONFIG_FILE = HERE / "fieldnote_roster.json"
 
 KINDS_STATABLE = ("friction", "green", "vision", "question", "capture")
 ID_RE = re.compile(r"^FN-(\d{4})$")
 TS_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{4}$")
-KEY_ORDER = ("id", "ts", "author", "instance", "target", "kind", "report")
+KEY_ORDER = ("id", "ts", "author", "instance", "kind", "report")          # v0.2
+V01_KEY_ORDER = ("id", "ts", "author", "instance", "target", "kind", "report")
 FENCE_OPEN = "```fieldnote"
 FENCE_CLOSE = "```"
+BUDGET_RE = re.compile(r"^\*\*Budget:\*\* (\d+) entries", re.M)
+HIGHWATER_RE = re.compile(r"^\*\*Id high-water:\*\* FN-(\d{4})", re.M)
+OPEN_ROW_RE = re.compile(r"^- \[ \]", re.M)
 
 
 def die(msg: str) -> None:
@@ -55,32 +63,28 @@ def die(msg: str) -> None:
     sys.exit(1)
 
 
-def load_roster() -> dict:
-    if not ROSTER_FILE.is_file():
-        die(f"roster file not found: {ROSTER_FILE.name} (expected beside this tool)")
+def load_config() -> dict:
+    if not CONFIG_FILE.is_file():
+        die(f"config file not found: {CONFIG_FILE.name} (expected beside this tool)")
     try:
-        roster = json.loads(ROSTER_FILE.read_text(encoding="utf-8"))
+        config = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
-        die(f"roster file unreadable: {exc}")
-    if (
-        not isinstance(roster, dict)
-        or not isinstance(roster.get("instance"), str)
-        or not roster["instance"]
-        or not isinstance(roster.get("targets"), dict)
-        or not roster["targets"]
-        or not all(
-            isinstance(k, str) and k and isinstance(v, str) and v
-            for k, v in roster["targets"].items()
+        die(f"config file unreadable: {exc}")
+    if isinstance(config, dict) and "targets" in config:
+        die(
+            "config carries the retired v0.1 target roster — the v0.2 shape is "
+            '{"instance": "<Name>", "buffer": "<path>"} (Format v0.2 §6; '
+            "migration: the lanes freeze, one buffer replaces them)"
         )
+    if (
+        not isinstance(config, dict)
+        or not isinstance(config.get("instance"), str)
+        or not config["instance"]
+        or not isinstance(config.get("buffer"), str)
+        or not config["buffer"]
     ):
-        die('roster file must be {"instance": "<Name>", "targets": {"<word>": "<ledger path>", ...}}')
-    return roster
-
-
-def print_targets(roster: dict, stream) -> None:
-    print(f"Instance: {roster['instance']} · registered targets:", file=stream)
-    for word, ledger in roster["targets"].items():
-        print(f"  {word:8} -> {ledger}", file=stream)
+        die('config file must be {"instance": "<Name>", "buffer": "<path>"}')
+    return config
 
 
 def git_identity() -> str:
@@ -106,16 +110,6 @@ def git_identity() -> str:
     return f"{config('user.name')} <{config('user.email')}>"
 
 
-def next_id(text: str) -> int:
-    numbers = []
-    for block, _ in iter_blocks(text.splitlines()):
-        for line in block:
-            match = re.fullmatch(r"id: FN-(\d{4})", line)
-            if match:
-                numbers.append(int(match.group(1)))
-    return (max(numbers) + 1) if numbers else 1
-
-
 def iter_blocks(lines):
     """Yield (block_lines, opening_line_number) for every fieldnote fence."""
     block, start = None, None
@@ -130,6 +124,48 @@ def iter_blocks(lines):
             block.append(line)
 
 
+def block_ids(text: str):
+    numbers = []
+    for block, _ in iter_blocks(text.splitlines()):
+        for line in block:
+            match = re.fullmatch(r"id: FN-(\d{4})", line)
+            if match:
+                numbers.append(int(match.group(1)))
+    return numbers
+
+
+def buffer_state(text: str):
+    """(depth, budget, high_water) — the §4 machine facts."""
+    depth = len(block_ids(text)) + len(OPEN_ROW_RE.findall(text))
+    budget_match = BUDGET_RE.search(text)
+    budget = int(budget_match.group(1)) if budget_match else None
+    hw_match = HIGHWATER_RE.search(text)
+    high_water = int(hw_match.group(1)) if hw_match else None
+    return depth, budget, high_water
+
+
+def pressure_line(depth: int, budget) -> str:
+    line = f"buffer depth: {depth}/{budget if budget is not None else '—'}"
+    if budget is not None and depth > budget:
+        line += ("  YELLOW — over the budget (C-121 pressure plug, advisory): "
+                 "work the buffer down soon (solve = dissolve into the project, Format v0.2 §4)")
+    return line
+
+
+def resolve_buffer(config) -> Path:
+    buffer = REPO / config["buffer"]
+    if not buffer.is_file():
+        die(f"config is stale — buffer not found: {buffer}")
+    return buffer
+
+
+def depth_view() -> None:
+    config = load_config()
+    text = resolve_buffer(config).read_text(encoding="utf-8")
+    depth, budget, _ = buffer_state(text)
+    print(f"{config['instance']} · {config['buffer']} · {pressure_line(depth, budget)}")
+
+
 def capture(argv) -> None:
     kind = "capture"
     if argv and argv[0] == "--kind":
@@ -139,40 +175,27 @@ def capture(argv) -> None:
         if kind not in KINDS_STATABLE:
             die(f"--kind must be one of: {', '.join(KINDS_STATABLE)}")
         argv = argv[2:]
-    resolve_only = bool(argv) and argv[0] == "--resolve"
-    if resolve_only:
-        argv = argv[1:]
 
-    roster = load_roster()
-    if not argv:
-        print("ERROR: no target given — /fieldnote requires a target as its first word", file=sys.stderr)
-        print_targets(roster, sys.stderr)
-        print("Nothing was written.", file=sys.stderr)
-        sys.exit(1)
-    target = argv[0].lower()
-    if target not in roster["targets"]:
-        print(f"ERROR: unknown target {target!r}", file=sys.stderr)
-        print_targets(roster, sys.stderr)
-        print("Nothing was written.", file=sys.stderr)
-        sys.exit(1)
-    ledger_rel = roster["targets"][target]
-    ledger = REPO / ledger_rel
-    if not ledger.is_file():
-        die(f"roster is stale — ledger not found: {ledger}")
+    config = load_config()
+    buffer = resolve_buffer(config)
+    text = buffer.read_text(encoding="utf-8")
 
-    text = ledger.read_text(encoding="utf-8")
-    n = next_id(text)
-    if resolve_only:
-        print(f"target '{target}' -> {ledger_rel} · next id: FN-{n:04d}")
-        return
-
-    report = " ".join(argv[1:]).strip()
+    report = " ".join(argv).strip()
     if not report:
         die("no report text given — nothing to capture")
     report_lines = report.splitlines() or [""]
     for line in report_lines:
         if line.lstrip().startswith("```"):
             die("report may not contain a code fence line (it cannot round-trip the block format)")
+
+    depth, budget, high_water = buffer_state(text)
+    if high_water is None:
+        die(
+            "buffer header lacks the Id high-water line "
+            "(`**Id high-water:** FN-NNNN`) — ids must never rewind past "
+            "deletions (Format v0.2 §2 rule 3); restore the line before capturing"
+        )
+    n = max([high_water] + block_ids(text)) + 1
 
     stamp = datetime.datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
     body = "\n".join(("  " + line).rstrip() if line.strip() else "" for line in report_lines)
@@ -181,24 +204,29 @@ def capture(argv) -> None:
         f"id: FN-{n:04d}\n"
         f"ts: {stamp}\n"
         f"author: {git_identity()}\n"
-        f"instance: {roster['instance']}\n"
-        f"target: {target}\n"
+        f"instance: {config['instance']}\n"
         f"kind: {kind}\n"
         "report:\n"
         f"{body}\n"
         f"{FENCE_CLOSE}\n"
     )
-    ledger.write_text(text.rstrip("\n") + "\n" + block, encoding="utf-8")
-    print(f"captured: FN-{n:04d} -> {ledger_rel} (immutable machine block; judgment layer is yours, outside it)")
+    text = HIGHWATER_RE.sub(f"**Id high-water:** FN-{n:04d}", text, count=1)
+    buffer.write_text(text.rstrip("\n") + "\n" + block, encoding="utf-8")
+    print(f"captured: FN-{n:04d} -> {config['buffer']} (block is the fact layer; "
+          f"the ratified derived reading goes beneath it) · {pressure_line(depth + 1, budget)}")
 
 
 def parse_block(lines, start, file_label, errors):
     def err(msg):
         errors.append(f"{file_label}:{start}: {msg}")
 
+    # Grammar sniff (Format v0.2 §3): position five decides — `target:` = v0.1.
+    v01 = len(lines) > 4 and lines[4].startswith("target: ")
+    key_order = V01_KEY_ORDER if v01 else KEY_ORDER
+
     fields = {}
     index = 0
-    for key in KEY_ORDER[:-1]:  # all simple keys, in fixed order
+    for key in key_order[:-1]:  # all simple keys, in fixed order
         if index >= len(lines):
             err(f"missing key {key!r}")
             return None
@@ -210,7 +238,7 @@ def parse_block(lines, start, file_label, errors):
         fields[key] = line[len(prefix):]
         index += 1
     if index >= len(lines) or lines[index] != "report:":
-        err("expected bare `report:` line after the six value keys")
+        err("expected bare `report:` line after the value keys")
         return None
     index += 1
     report_lines = []
@@ -244,12 +272,13 @@ def parse_block(lines, start, file_label, errors):
         return None
     fields["report"] = "\n".join(report_lines)
     fields["file"] = file_label
+    fields["_keys"] = ("file",) + key_order
     return fields
 
 
 def parse(paths) -> None:
     if not paths:
-        die("parse requires at least one ledger file")
+        die("parse requires at least one buffer/ledger file")
     entries = []
     errors = []
     for raw in paths:
@@ -278,15 +307,15 @@ def parse(paths) -> None:
             print(f"INVALID: {line}", file=sys.stderr)
         print(f"intake FAILED: {len(errors)} error(s); no JSON emitted (whole-or-nothing)", file=sys.stderr)
         sys.exit(1)
-    ordered = [{key: entry[key] for key in ("file",) + KEY_ORDER} for entry in entries]
+    ordered = [{key: entry[key] for key in entry["_keys"]} for entry in entries]
     print(json.dumps(ordered, ensure_ascii=False, indent=2))
     print(f"intake OK: {len(ordered)} entr{'y' if len(ordered) == 1 else 'ies'} from {len(paths)} file(s)", file=sys.stderr)
 
 
 def main() -> None:
     argv = sys.argv[1:]
-    if argv and argv[0] == "--list":
-        print_targets(load_roster(), sys.stdout)
+    if argv and argv[0] == "--depth":
+        depth_view()
         return
     if argv and argv[0] == "parse":
         parse(argv[1:])

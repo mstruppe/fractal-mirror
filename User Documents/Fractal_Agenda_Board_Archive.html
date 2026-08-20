@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRACTAL — Agenda Board Archive</title>
+<style>
+  :root {
+    --bg: #f7f6f3; --card: #ffffff; --ink: #1a1a1e; --muted: #6b6b74;
+    --line: #e6e4de; --accent: #2f6fed; --done: #3a9d6e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a; --card: #202024; --ink: #ececef; --muted: #9b9ba5;
+      --line: #313138; --accent: #6b9bff; --done: #55b98a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.55; padding: 40px 24px 56px; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header { margin-bottom: 24px; }
+  .kicker { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .back { display: inline-block; margin: 14px 0 22px; font-size: 13px; color: var(--accent); text-decoration: none;
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; background: var(--card); }
+  .back:hover { border-color: var(--accent); }
+  .achip { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--done);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; font-size: 13.5px; }
+  .achip::before { content: "\2713\00a0 "; color: var(--done); font-weight: 700; }
+  .achip b { font-weight: 650; }
+  .achip code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.92em;
+    background: color-mix(in srgb, var(--line) 50%, transparent); padding: 1px 5px; border-radius: 5px; }
+  footer { margin-top: 26px; font-size: 12.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">FRACTAL &middot; Agenda Board Archive</div>
+    <h1>The chip archive</h1>
+    <div class="sub">Every chip the board&rsquo;s done bar has retired &mdash; verbatim, append-only, newest first (the rolling window, C-128: the board keeps the newest ten; everything older lands here). Derived projection: each chip points at its records &mdash; the canonical history is the protocol series and the dated Return Packages.</div>
+  </header>
+
+  <a class="back" href="Fractal_Agenda_Board.html">&larr; back to the board</a>
+
+    <div class="achip"><b>THE RELEASE-SEAM SESSION</b> (per v0.51–v0.54) — TF1 ratified (17 findings ledgered) · <b>C-116</b> the mirror rides every beta (executed: beta-0.5 on the public chain) · <b>KNet migrated</b> (P-008, Gates 0–6, receipt Bitcoin-final) · <b>UF1</b> flown (9 agents, 948k, 18 refuter defects cured) → <b>C-117</b> the Kernel Migration Procedure (OQ-33 resolved; the TF1 slate closed) · the C-097 harvest (Client Library v0.3) · <b>C-118</b> <code>check_scan.py</code> (the eighth tool) · three fieldnotes + the blog's gate paragraph · no pack — beta-0.6 forms on the mechanization</div>
+    <div class="achip"><b>THE REGISTRY-RELEASE SESSION</b> (per v0.50) — the <b>KNet look</b>: the child authored its own migration protocol (<code>P-007</code> — pin-never-follow, seven-disposition matrix, six gates, you at Gate 3) · <b>C-113</b> the <b>Registry live</b> (<code>Registry/README.md</code> — the standards library, five ratified standards seeded, honest <i>forging/named</i> rows) · <b>C-114</b> vocabulary extension (prose + checker: the <code>vocabulary_local.json</code> hook in <code>verify.py</code>) · <b>C-115</b> the Scholarly Source Convention + the materials rule · the <b>RF1 High slate cured</b>, the genesis reissue (root-mint escape hatch), Onboarding <b>v0.3</b>, the GUIDE session card · the <b>Gate-1 hand-off packet</b> for the migration · <b>UF1</b> (the updatability flight) contracted, parked on the migration · <b>beta-0.5 packed</b> — the registry release shipped</div>
+
+    <div class="achip"><b>THE DIET SESSION</b> (per v0.49) — <b>C-110</b> the DF1 triage + the cache doctrine (Group A behaviour-gated, then adopted + <b>executed</b>: ~46&thinsp;KB off the Register, the ledgers and histories to pointer tables) · the <b>CB1 flight</b>: 23/24 correct, pointer-following proven at depth, two eviction gates distilled · <b>C-111</b> the <b>Diet Procedure v0.1</b> ratified (DP1-verified, 22 findings cured) + the <b>procedures blog</b> live on the site · <b>C-112</b> the <b>adaptive close</b> — the RF1 micro-close cured by deletion · the <b>flight standard reissued v0.2</b> (gating mode · derived counts · mechanical effort · cost honesty)</div>
+    <div class="achip"><b>THE REFINEMENT-PIVOT SESSION</b> (per v0.48) — <b>C-107</b> the flip de-triggered, refinement-through-use the mode, OQ-33 opened, the registry vision banked · <b>C-108</b> the flight tier: <b>both procedure standards ratified full-slate</b> (Ultracode Flight Protocol v0.1 · Scan Procedure v0.1), beta-0.5 declared <b>the registry release</b> · <b>C-109</b> the H6 frozen-tree grant · two flights flown (10 agents, 0 failures) · the <b>full site slate applied</b> · the RF1 sim slate collected as the next head · no pack, deliberately (C-107)</div>
+    <div class="achip"><b>THE PUBLISHING-IDENTITY SESSION</b> (per v0.47) — <b>C-105 ratified &amp; executed</b>: the mirror is the <b>permanent public home</b>; <code>knet.network</code> yours; <code>fractal@knet.network</code> the public identity, a custody principal; <b>the mirror's own anchor chain opened</b> · the site <b>rebuilt from the capture</b> (your design brief; both stale-site Highs cured) · <b>Stranger Test #1 PASSED</b> — six findings cured in the generator (the genesis document's v0.7 reissue with the interview carry + board rider; Onboarding's second issue) · <b>C-106</b> the named opener (entry = the project's name; close universal; one open loop) · <b>beta-0.4 packed</b></div>
+    <div class="achip"><b>THE CAPTURE SESSION</b> (per v0.46) — ship acts 1–2 ✓ (the curated mirror built, verify-green, signed &amp; pushed; the friend package ready) · <b>C-103</b> the capture-review class (OQ-20 resolved: 4 flights, 67 agents, 366 claims adversarially verified — <b>the capture APPROVED as the public identity's raw material</b>) · <b>C-104</b> the Agenda Board Format canonized (this board its first conformant instance) · two fieldnote lanes (<code>publish</code> · <code>general</code>) · ADHD resolved + <b>always-flag</b> set · <b>all three anchors Bitcoin-final</b></div>
+    <div class="achip"><b>THE FLIP PREPARED</b> (per v0.45) — the whole bundle built &amp; gated in one cycle: C-098 flip shape (raw repo, phased mirror, <b>the annex</b>) · C-099 license layer (Apache-2.0 + CC BY 4.0, terms travel) · C-100 testing pipeline (Fieldnote Format v0.1, <code>fieldnote.py</code> the seventh tool, every newborn born with the door) · C-101 onboarding (<code>/begin</code>, the interview, the self-retiring rail) · C-102 the board offered actively; the genesis document's sixth issue · GUIDE.md · notebook → annex · beta-0.2 <b>Bitcoin-final</b> · <b>beta-0.3 packed</b></div>
+    <div class="achip">Library's first field refresh (entry 42) · OQ-32's profile mechanism designed · <b>THE FLIP CALLED</b> (per v0.44) — a friend with a real need; the shipment bundle is the head</div>
+    <div class="achip">First <code>/fieldnote</code> wave (entries 37–41, per v0.43): the <b>paper passport</b> born in the child (P-003, Zotero); the friends-beta pipeline designed; the USP felt; routing made <b>deterministic</b> (<code>fieldnote.py</code>)</div>
+    <div class="achip">C-097 — the <b>client library</b> issued (per v0.42): the vendor-surface catalog, no runtime API; <code>/look</code> + <code>/fieldnote</code> + the Command Index landed the same day — the command quintet complete</div>
+    <div class="achip">C-096 — the <b>observation window</b> opened (postscript, per v0.41): direct read-only eye on the child; the holistic field-test loop complete</div>
+    <div class="achip">C-094 field testing standard · C-095 remove on observed drag — <b>first compaction executed</b> (Local Context 8,629 → ~2,300 words, lossless)</div>
+    <div class="achip">SECOND-CLIENT TRIAL OPENED — KNet boards the ChatGPT desktop; orientation <b>green on a foreign engine, zero kernel changes</b> (per v0.40); fieldnotes 30–34 — the second field run</div>
+    <div class="achip">THE WS FORGE — OQ-23 fired &amp; resolved: Workspace Foundation issued, the <b>Workbench</b> landed &amp; verified (C-093, per v0.39); the child's report → Network Foundation v0.2</div>
+    <div class="achip">PHASE-5 INGESTED — C-091/C-092 in the kernel; README quickstart-first; <code>/welcome</code>; genesis remote form; the genesis document's fifth issue; <code>beta-0.2</code> anchored (per v0.38)</div>
+    <div class="achip">ARC 2 OPENED BY EXECUTION — the first shipping run: KNet born from the anchored tag, GENESIS §6 acceptance passed same day (per v0.37)</div>
+    <div class="achip">BETA PACKED — <code>beta-0.1</code> tagged, signed &amp; anchored (C-090's first execution, per v0.36)</div>
+    <div class="achip">Scan #4 — the pre-pack gate: 7 findings, 0 High, full slate in-pass; first birth test; drill green with machine rebind</div>
+    <div class="achip">FIRST REALISATION TRANSITION — Global §2 moved v0.4: "shipping its completed foundation" (OQ-4's first declared datum)</div>
+    <div class="achip">Legal identity layer — C-090: releases provenance-anchored; license + trademark postures (per v0.36)</div>
+    <div class="achip">Flight 4 landed, gated &amp; merged in-session — <code>doctor.py</code> the sixth tool; scratch-birth gate 76 → 0</div>
+    <div class="achip">Punch list CLOSED — C-087 secrets · C-088 inherited provenance · C-089 Cowork retired; OQ-16/17/18/30 off the ledger; postures recorded (per v0.35)</div>
+    <div class="achip">Vision tier issued — C-086 concept foundations; the Knowledge Network Foundation drafted (per v0.34)</div>
+    <div class="achip">Vision whiteboard — public gate landed: README + Site; network thesis captured; OQ-32 opened (per v0.33)</div>
+    <div class="achip">Committer semantics + live pre-canon (C-084/C-085)</div>
+    <div class="achip">Arc 1 — kernel extraction COMPLETE: genesis gated, instance closed twice, packaging by subtraction (C-081–C-083)</div>
+    <div class="achip">OQ-13 CLOSED PERMANENTLY — the three <code>_v0.1</code> names retired, grandfathering gone, recurrence machine-blocked (C-080)</div>
+    <div class="achip">Scan #3 — canonical review, 0 High; first Scan-riding drill green; full slate + C-077 (per v0.29)</div>
+    <div class="achip">Custody session — committer pinned, signing verifiable, drill cadence set (C-074–C-076; OQ-25/OQ-26 resolved)</div>
+    <div class="achip">Drone flight 2 — close.py built, gated, merged, canonized (C-073)</div>
+    <div class="achip">Settings upstream currency (C-071/C-072)</div>
+    <div class="achip">Navigation architecture — read side contracted (C-068–C-070, Schema v0.6)</div>
+    <div class="achip">First Code session — hygiene fixed (S2-6.2/S2-6.3); archive move (OQ-10 → C-063); standing push (C-064)</div>
+    <div class="achip">S2-5.1 — spec-version identity decided &amp; executed (C-061); pre-canon labelled (C-062)</div>
+    <div class="achip">OQ-24 — version-agreement checker shipped (C-060)</div>
+    <div class="achip">Scan #2 — canonical review; 20/26 findings fixed in one pass (C-058/C-059)</div>
+    <div class="achip">C-038 drill — shipment proven green (2026-08-13)</div>
+    <div class="achip">OQ-21 — off-site host (C-056/C-057)</div>
+    <div class="achip">OQ-3 — event-log layout (C-055)</div>
+    <div class="achip">Agenda Board introduced (C-047, repo-resident per C-048)</div>
+    <div class="achip">F — Architecture State forged; all routes bound (C-051–C-054)</div>
+    <div class="achip">E — multi-writer safety (C-049–C-050)</div>
+    <div class="achip">D — facet layer (C-043–C-046)</div>
+    <div class="achip">C — identity &amp; schema</div>
+    <div class="achip">B</div>
+    <div class="achip">A</div>
+
+  <footer>
+    Fed at every board regeneration (chips fall in at the top, verbatim &mdash; never edited, never deleted) &middot; born 2026-08-19 with the board&rsquo;s first 44 fallen chips (C-128) &middot; format: Fractal_Agenda_Board_Format_v0.3 &sect;2 row 3.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -3,7 +3,7 @@ id: DOC-01M02SKWXHP3M2FB6G2K3KH4XB
 type: DOC
 created: 2026-08-15T13:26:10Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:d4b7232cbe17e73b953e1fb60c04c6000c910d0bb3e83330f53ac0df4cf73b4f
+content_hash: sha256:67f52a81c63e84bdb059b923d705f495c057d317ec762bf195a0a6a9e3583370
 title: "Fractal Knowledge Network Foundation"
 aliases: ["route:Fractal_Knowledge_Network_Foundation"]
 placements:
