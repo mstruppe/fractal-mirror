@@ -13,12 +13,41 @@
      The rule register is explained, never enumerated. The standards feed and command
      sources moved here from the blog (the blog now tells the story).
      The command library projects the Command Index; the bibliography projects the Registry —
-     this page cites the kernel, it never becomes a second source (C-035 discipline). -->
+     this page cites the kernel, it never becomes a second source (C-035 discipline).
+     Fold layer (Max's direction, 2026-08-20, post-close edit): sections and entries
+     collapse to their headlines; deep links auto-open their fold. No text changed. -->
 <style>
   /* the central-concepts roster stacks: name on its own line, description below (Max's direction, 2026-08-20) */
-  .doors.stacked a { display: block; padding: 1.05rem 0.2rem 1.15rem; }
   .doors.stacked .door-name { display: block; }
-  .doors.stacked .door-what { display: block; text-align: left; margin-top: 0.35rem; }
+  .doors.stacked .door-what { display: block; text-align: left; }
+  /* fold menus (Max's direction, 2026-08-20, the post-close edit): every section collapses
+     to kicker + headline, the arrow on the bottom border marks the extend; the roster and
+     the bibliography fold per entry inside. Presentation only — no text changed. */
+  details.fold > summary, details.entry > summary { list-style: none; cursor: pointer; }
+  details.fold > summary::-webkit-details-marker, details.entry > summary::-webkit-details-marker { display: none; }
+  details.fold > summary { position: relative; border-bottom: 1px solid var(--hairline-soft); padding-bottom: 1.7rem; }
+  details.fold > summary::after {
+    content: ""; position: absolute; left: 50%; bottom: 0.55rem;
+    width: 10px; height: 10px; margin-left: -7px;
+    border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg); transition: transform 0.25s ease, border-color 0.2s ease;
+  }
+  details.fold > summary:hover::after { border-color: var(--ink); }
+  details.fold[open] > summary::after { transform: rotate(225deg); bottom: 0.35rem; }
+  details.fold[open] > summary { margin-bottom: 1.4rem; }
+  details.entry > summary { position: relative; padding: 1.05rem 2rem 1.05rem 0.2rem; }
+  details.entry > summary::after {
+    content: ""; position: absolute; right: 0.55rem; top: 50%;
+    width: 7px; height: 7px; margin-top: -6px;
+    border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg); transition: transform 0.25s ease, border-color 0.2s ease;
+  }
+  details.entry > summary:hover::after { border-color: var(--ink); }
+  details.entry[open] > summary::after { transform: rotate(225deg); margin-top: -2px; }
+  details.entry > summary h3 { margin: 0; }
+  .doors.stacked details.entry a.deep { display: block; padding: 0 0.2rem 1.1rem; border-bottom: none; }
+  .doors.stacked details.entry .door-what { margin-top: 0; }
+  .bib details.entry > summary { padding-left: 0; }
 </style>
 <script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
 <noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
@@ -52,8 +81,11 @@
 <main>
 
 <section id="commands" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Command library</p>
   <h2>A command is a one-word act.</h2>
+</summary>
   <p>Sessions are driven by a handful of commands &mdash; and where one must be aimed, it takes a target (<span class="mono">/command &lt;target&gt;</span>), so a few words serve a growing project. Each command is a small markdown file the agent reads: the procedure written in plain language, shipped in the baseline&rsquo;s <span class="mono">.claude/commands/</span> folder and stamped like everything else. The words work even where slash-commands don&rsquo;t.</p>
   <p>Every entry opens its own page; the verbatim shipped file rides beside it &mdash; read one to see exactly what a session is told, or drop it into your own instance&rsquo;s folder and adapt it.</p>
   <ul class="doors">
@@ -68,128 +100,142 @@
 
   <h3 style="margin-top: 3.5rem;">Hardwired and taught</h3>
   <p>The commands above ship in the public baseline &mdash; hardwired in the mirror, born into every new instance. Beyond them, an instance can grow its own: a custom command is a small stamped file teaching the session a procedure in your project&rsquo;s own words. <em>How to teach a command &mdash; the recipe and its rules &mdash; lands here in the content pass.</em></p>
+</details>
 </section>
 
 <section id="concepts" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Central concepts</p>
   <h2>The system in fourteen entries.</h2>
+</summary>
   <p>Everything FRACTAL does builds from the concepts below. Each entry is the short form; where an entry carries a link, the deeper description is behind it &mdash; a section on this page, a command&rsquo;s own page, or the chapter of the <a href="blog.html">story</a> where it happened. Where a paragraph is enough, the paragraph is all there is.</p>
   <ul class="doors stacked">
-    <li><a href="blog.html#origins"><span class="door-name">The canonical record</span><span class="door-what">every fact lives in exactly one governed document; boards, indexes, and this site are projections that cite it and never become a second source</span></a></li>
-    <li><a href="blog.html#proof"><span class="door-name">The knowledge store</span><span class="door-what">the project&rsquo;s memory substrate &mdash; small append-only records under a dependency-free verifier that blocks any commit breaking its invariants</span></a></li>
-    <li><a href="#rules"><span class="door-name">The rule register</span><span class="door-what">the numbered ledger of every decision the project has made, each with its reasoning &mdash; rules are made by talking, kept by the record</span></a></li>
-    <li><a href="concepts/close.html"><span class="door-name">The close ritual</span><span class="door-what">a session ends by writing its own record &mdash; checklist walked, checkers green, one commit; the next session opens where it left off</span></a></li>
-    <li><a href="concepts/fractal.html"><span class="door-name">The context spine</span><span class="door-what">how a session orients: a stable pole (vision and mode) and a dynamic pole (where the work stands) &mdash; read in one pass, never scanned</span></a></li>
-    <li><a href="#userdocs"><span class="door-name">User documents</span><span class="door-what">the owner&rsquo;s windows into the project &mdash; roadmap, agenda board, fieldnote handout &mdash; the same spine the AI reads, reader-matched</span></a></li>
-    <li><a href="#userdocs"><span class="door-name">The fieldnote buffer</span><span class="door-what">the project&rsquo;s deliberate RAM: the one document human and AI both write &mdash; captures ratified in, worked off soon, gauged for pressure</span></a></li>
-    <li><a href="guide.html#birth"><span class="door-name">The kernel and genesis</span><span class="door-what">what every project is born with &mdash; constitution, formats, procedures, tools &mdash; and the executable birth that copies it in one sitting</span></a></li>
-    <li><a href="blog.html#proof"><span class="door-name">Releases and provenance</span><span class="door-what">a release is a signed tag with an independent timestamp receipt committed beside it &mdash; priority is mathematics, not testimony</span></a></li>
-    <li><a href="#bibliography"><span class="door-name">Working standards</span><span class="door-what">every procedure the system runs on is a written, versioned, ratified standard &mdash; distilled from executed history, never designed in the abstract</span></a></li>
-    <li><a href="#categories"><span class="door-name">Integration categories</span><span class="door-what">everything the system produces belongs to one category &mdash; shipped at birth, grown by you, or installed by decision &mdash; so the offer stays honest</span></a></li>
-    <li><a href="#bib-interface-place"><span class="door-name">The interface place</span><span class="door-what">how instances talk: each keeps one deliberately readable place; counterparts pull, nobody writes into a foreign tree</span></a></li>
-    <li><a href="concepts/look.html"><span class="door-name">The observation window</span><span class="door-what">a read-only look into another of your instances &mdash; boundaries first, report and withdraw; children stay sovereign</span></a></li>
-    <li><a href="#extensions"><span class="door-name">The sandbox shelf</span><span class="door-what">concepts proven here become things you can take &mdash; standards, command files, procedures &mdash; versioned and signed with their release</span></a></li>
+    <li><details class="entry"><summary><span class="door-name">The canonical record</span></summary><a class="deep" href="blog.html#origins"><span class="door-what">every fact lives in exactly one governed document; boards, indexes, and this site are projections that cite it and never become a second source</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The knowledge store</span></summary><a class="deep" href="blog.html#proof"><span class="door-what">the project&rsquo;s memory substrate &mdash; small append-only records under a dependency-free verifier that blocks any commit breaking its invariants</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The rule register</span></summary><a class="deep" href="#rules"><span class="door-what">the numbered ledger of every decision the project has made, each with its reasoning &mdash; rules are made by talking, kept by the record</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The close ritual</span></summary><a class="deep" href="concepts/close.html"><span class="door-what">a session ends by writing its own record &mdash; checklist walked, checkers green, one commit; the next session opens where it left off</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The context spine</span></summary><a class="deep" href="concepts/fractal.html"><span class="door-what">how a session orients: a stable pole (vision and mode) and a dynamic pole (where the work stands) &mdash; read in one pass, never scanned</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">User documents</span></summary><a class="deep" href="#userdocs"><span class="door-what">the owner&rsquo;s windows into the project &mdash; roadmap, agenda board, fieldnote handout &mdash; the same spine the AI reads, reader-matched</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The fieldnote buffer</span></summary><a class="deep" href="#userdocs"><span class="door-what">the project&rsquo;s deliberate RAM: the one document human and AI both write &mdash; captures ratified in, worked off soon, gauged for pressure</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The kernel and genesis</span></summary><a class="deep" href="guide.html#birth"><span class="door-what">what every project is born with &mdash; constitution, formats, procedures, tools &mdash; and the executable birth that copies it in one sitting</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">Releases and provenance</span></summary><a class="deep" href="blog.html#proof"><span class="door-what">a release is a signed tag with an independent timestamp receipt committed beside it &mdash; priority is mathematics, not testimony</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">Working standards</span></summary><a class="deep" href="#bibliography"><span class="door-what">every procedure the system runs on is a written, versioned, ratified standard &mdash; distilled from executed history, never designed in the abstract</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">Integration categories</span></summary><a class="deep" href="#categories"><span class="door-what">everything the system produces belongs to one category &mdash; shipped at birth, grown by you, or installed by decision &mdash; so the offer stays honest</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The interface place</span></summary><a class="deep" href="#bib-interface-place"><span class="door-what">how instances talk: each keeps one deliberately readable place; counterparts pull, nobody writes into a foreign tree</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The observation window</span></summary><a class="deep" href="concepts/look.html"><span class="door-what">a read-only look into another of your instances &mdash; boundaries first, report and withdraw; children stay sovereign</span></a></details></li>
+    <li><details class="entry"><summary><span class="door-name">The sandbox shelf</span></summary><a class="deep" href="#extensions"><span class="door-what">concepts proven here become things you can take &mdash; standards, command files, procedures &mdash; versioned and signed with their release</span></a></details></li>
   </ul>
+</details>
 </section>
 
 <section id="rules" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">The rule register</p>
   <h2>Rules are made by talking, kept by the record.</h2>
+</summary>
   <p>Every FRACTAL project carries a <strong>rule register</strong> &mdash; a numbered ledger of every rule and decision the project has ever made, each row carrying its reasoning. It is one of FRACTAL&rsquo;s backbones: nothing governs because the AI happens to remember it. A thing governs because it stands in the register &mdash; and every session reads the register.</p>
   <p>You make a rule by saying it. <em>&ldquo;From now on, we do X&rdquo;</em> &mdash; the session records it as a numbered decision with its why, and every session after honors it. Change your mind later and the register records that too: decisions supersede one another on the record, nothing is overwritten &mdash; the same never-lose-anything mechanic as the <a href="guide.html#birth">canonical documents</a>.</p>
   <p>This is also how you tune the language itself: if your agent ever misreads a command, or you simply want your own words for things, establish the rule once &mdash; <em>&ldquo;in this project, wrap up means close&rdquo;</em> &mdash; and it is law from then on, in every session, whichever agent drives. Your project is born with its register seeded; by tradition its first entry is your first real decision.</p>
+</details>
 </section>
 
 <section id="userdocs" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">User documents</p>
   <h2>The human gets the same spine the AI does.</h2>
+</summary>
   <p>AI sessions move faster than human tracking &mdash; so a FRACTAL project keeps living documents that exist purely for the owner&rsquo;s eyes. They are not an extra invention: they mirror the AI&rsquo;s own navigation, pole for pole. The agent orients by a stable document (the vision and current mode) and a dynamic one (where the work stands right now); the owner gets the same pair, reader-matched &mdash; all of them projections of the record: readable without any AI, refreshed by it, never a second source.</p>
   <p><strong>The roadmap</strong> is the stable pole &mdash; where this is going: the big moves in order, each waiting on its named trigger, none built before it fires. It moves when the <em>path</em> changes, not when work queues up.</p>
   <p><strong>The agenda board</strong> is the dynamic pole &mdash; the state of the work at a glance: what&rsquo;s done, what&rsquo;s queued, what stands open, each chip pointing at its record. It refreshes at every close, so the picture is never stale by more than one working cycle. A project adopts it by its own decision; the format it follows is the <a href="#bib-board">board standard</a> below.</p>
   <p><strong>The fieldnote buffer</strong> sits between the two spines &mdash; the one document both the human and the AI write: the project&rsquo;s temporary memory, RAM, deliberately. Anything that pops up mid-work goes in through <a class="mono" href="#cmd-fieldnote">/fieldnote</a> as a normal message, no interrupt: the agent reads its structured understanding back, <em>your ratification writes it</em>, and the session returns to the task. The buffer is a growing list meant to shrink: entries are worked off soon &mdash; each dissolves into the project as a rule, a document update, or its own undertaking &mdash; and a pressure gauge warns when the list runs full, without ever blocking a capture. A one-page <strong>handout</strong> ships beside the pair, so the whole mechanic can be learned in a minute.</p>
   <p class="step-note">The sorting rule falls out of the shape: a change to the <em>path</em> lands on the roadmap, <em>work</em> lands on the board, and <em>what surfaced along the way</em> lands in the buffer. Between them, nothing a session produces or a human notices depends on anyone&rsquo;s memory.</p>
   <p>Under the hood, each window is one half of a <strong>document pair</strong>: a governance original the AI maintains, and the reader-matched face you actually open &mdash; when the two disagree, the original is right, and the stamp on the user half says so. Three pairs are <strong>fixed in the kernel</strong> &mdash; every FRACTAL project has them from birth: vision&thinsp;&harr;&thinsp;roadmap, working state&thinsp;&harr;&thinsp;board, buffer&thinsp;&harr;&thinsp;handout. Everything beyond those three is an <strong>extension</strong>, added only when a project feels the need, by a five-step standard (<a href="#bib-pairs">the pair procedure</a>). FRACTAL&rsquo;s own first extension is an <em>update plan</em> &mdash; the forming release&rsquo;s collected to-do path, one home for the whole slate, which lets the board say just <em>update open</em> and link. A project that never ships releases simply never adds that pair &mdash; and can add ones this project never imagined. All the user halves live together in one <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">User Documents/</span> folder at the repository root &mdash; the owner&rsquo;s own place in the file system, openable without asking the AI.</p>
+</details>
 </section>
 
 <section id="categories" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Integration categories</p>
   <h2>What ships with every birth, what stays yours, what installs.</h2>
+</summary>
   <p>Everything a FRACTAL system produces &mdash; concepts and tools alike &mdash; belongs to exactly one <strong>integration category</strong>, defined by how deep it reaches into your instance. The separation keeps the offer honest: you always know whether something arrives at birth, is yours to grow, or is yours to install.</p>
   <p><strong>Kernel concepts</strong> ship with every birth &mdash; the constitution, the formats, the procedures on the genesis shelf. <strong>Kernel tools</strong> ship the same way: the store&rsquo;s verifier, the genesis executor, the close mechanics &mdash; copied at birth, yours from day one.</p>
   <p><strong>Custom concepts</strong> are the organs an instance grows for itself, on felt need &mdash; FRACTAL&rsquo;s own update plan is one. These are deliberately <strong>never part of a release</strong>: every fractal project develops its own, so what you meet here is the <em>class</em> and the standard process for growing your own &mdash; never this project&rsquo;s copy imposed on yours.</p>
   <p><strong>Installable tools</strong> are the category now forming: instruments a project installs by its own recorded decision, running in its own sessions, pinned to a release, removable without residue. <span class="vtag">forming</span> The first member is <strong>the Mining Tool</strong> &mdash; a measurement instrument for the network: scaling proxies instead of raw counts, a per-release manifest, consent asked at genesis, dormant by default, data leaving only by the owner&rsquo;s push. The standard is written here; the tool is built in the network&rsquo;s research instance. A fifth category &mdash; plug-ins that need no installation at all &mdash; is named but deliberately not designed: nothing here is built ahead of need.</p>
+</details>
 </section>
 
 <section id="bibliography" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Bibliography</p>
   <h2>A bibliography of AI workflow standards.</h2>
+</summary>
   <p>Every procedure FRACTAL runs on is a written, versioned, ratified standard &mdash; distilled from executed history, never designed in the abstract. This section catalogs them the way a paper cites its sources: identity, version, status, claim &mdash; dated by ratification, full texts verbatim from the shipped baseline. The commands above are their compressed spoken forms; together they grow toward a shared working language for AI agents &mdash; naturally born from use.</p>
   <p>Three of these already have their stories told on the <a href="procedures.html">procedures blog</a> &mdash; plus the close ritual&rsquo;s own story, and the first measurement of what governance costs.</p>
 
-  <div class="bib" id="bib-flight">
-    <h3>Ultracode Flight Protocol <span class="vtag">v0.2 &middot; ratified 2026-08-17</span></h3>
+  <div class="bib" id="bib-flight"><details class="entry"><summary>    <h3>Ultracode Flight Protocol <span class="vtag">v0.2 &middot; ratified 2026-08-17</span></h3></summary>
     <p>The container for multi-agent work: commissioning contract, launch sequence, verification tiers, landing and cost honesty. When one session isn&rsquo;t enough, this is how a fleet flies without losing the record.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Ultracode_Flight_Protocol_v0.2.md" download>Fractal_Ultracode_Flight_Protocol_v0.2.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-scan">
-    <h3>Scan Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-scan"><details class="entry"><summary>    <h3>Scan Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3></summary>
     <p>The loose-end review: how a project audits itself for drift, with a machine gate (<span class="mono">check_scan.py</span>, in the baseline since beta-0.6) that blocks red. Distilled from four executed scans.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Scan_Procedure_v0.1.md" download>Fractal_Scan_Procedure_v0.1.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-diet">
-    <h3>Diet Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-diet"><details class="entry"><summary>    <h3>Diet Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3></summary>
     <p>Working-set eviction: what a living project may forget, and how it proves the forgetting is safe. The answer to context that only ever grows.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Diet_Procedure_v0.1.md" download>Fractal_Diet_Procedure_v0.1.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-vocabulary">
-    <h3>Vocabulary Extension Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-vocabulary"><details class="entry"><summary>    <h3>Vocabulary Extension Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3></summary>
     <p>How an instance extends the shared vocabulary under governance &mdash; new roles by recorded decision, checker-enforced.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Vocabulary_Extension_Procedure_v0.1.md" download>Fractal_Vocabulary_Extension_Procedure_v0.1.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-scholarly">
-    <h3>Scholarly Source Convention <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-scholarly"><details class="entry"><summary>    <h3>Scholarly Source Convention <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3></summary>
     <p>The first content convention: how papers enter the knowledge store &mdash; identity, identifier routes, authorship shape.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Scholarly_Source_Convention_v0.1.md" download>Fractal_Scholarly_Source_Convention_v0.1.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-migration">
-    <h3>Kernel Migration Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-migration"><details class="entry"><summary>    <h3>Kernel Migration Procedure <span class="vtag">v0.1 &middot; ratified 2026-08-17</span></h3></summary>
     <p>How a living instance adopts a newer kernel release: pin, decide per change, validate, land &mdash; sovereignty preserved at every gate. Distilled from the first executed migration, not designed on paper.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Kernel_Migration_Procedure_v0.1.md" download>Fractal_Kernel_Migration_Procedure_v0.1.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-onboarding">
-    <h3>Onboarding Protocol <span class="vtag">v0.3 &middot; ratified 2026-08-17</span></h3>
+  </details></div>
+  <div class="bib" id="bib-onboarding"><details class="entry"><summary>    <h3>Onboarding Protocol <span class="vtag">v0.3 &middot; ratified 2026-08-17</span></h3></summary>
     <p>The guided first loop behind <a class="mono" href="#cmd-welcome">/welcome</a> and <a class="mono" href="#cmd-begin">/begin</a>: the interview that drives a birth, the rail that offers one move per loop and then retires itself.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Onboarding_Protocol.md" download>Fractal_Onboarding_Protocol.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-fieldnote">
-    <h3>Fieldnote Format <span class="vtag">v0.2 &middot; ratified 2026-08-18</span></h3>
+  </details></div>
+  <div class="bib" id="bib-fieldnote"><details class="entry"><summary>    <h3>Fieldnote Format <span class="vtag">v0.2 &middot; ratified 2026-08-18</span></h3></summary>
     <p>The capture format behind <a class="mono" href="#cmd-fieldnote">/fieldnote</a>, redesigned as <a href="#userdocs">temporary memory</a>: one buffer, ratification-gated capture, a pressure gauge, machine-parsable entries with whole-or-nothing intake &mdash; the field-test loop&rsquo;s interface.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Fieldnote_Format_v0.2.md" download>Fractal_Fieldnote_Format_v0.2.md &darr;</a> &middot; <a href="standards/Fractal_Fieldnote_Format_v0.1.md" download>v0.1 &darr;</a> as history</span>
-  </div>
-  <div class="bib" id="bib-board">
-    <h3>Agenda Board Format <span class="vtag">v0.3 &middot; ratified 2026-08-19</span></h3>
+  </details></div>
+  <div class="bib" id="bib-board"><details class="entry"><summary>    <h3>Agenda Board Format <span class="vtag">v0.3 &middot; ratified 2026-08-19</span></h3></summary>
     <p>The at-a-glance board standard: contract, section grammar, instance-neutral skeleton. Adopted by decision, never imposed. v0.2 adds the <a href="#userdocs">user-document bar</a> and the coequal-branch provision for projects running parallel agenda arcs; v0.3 moves the board into the dedicated <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">User Documents/</span> folder and lets extension pairs join the bar.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Agenda_Board_Format_v0.3.md" download>Fractal_Agenda_Board_Format_v0.3.md &darr;</a> &middot; <a href="standards/Fractal_Agenda_Board_Format_v0.1.md" download>v0.1 &darr;</a> as history</span>
-  </div>
-  <div class="bib" id="bib-pairs">
-    <h3>User Document Pair Procedure <span class="vtag">v0.2 &middot; ratified 2026-08-19</span></h3>
+  </details></div>
+  <div class="bib" id="bib-pairs"><details class="entry"><summary>    <h3>User Document Pair Procedure <span class="vtag">v0.2 &middot; ratified 2026-08-19</span></h3></summary>
     <p>The <a href="#userdocs">user-document</a> system as a standard: every human window is the derived half of a governance original &mdash; three pairs fixed in the kernel, and a five-step process for adding a project&rsquo;s own (the update-plan pair the first executed extension). v0.2 adds the location law: all user halves in one <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">User Documents/</span> folder, born the day the first half renders.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_User_Document_Pair_Procedure_v0.2.md" download>Fractal_User_Document_Pair_Procedure_v0.2.md &darr;</a></span>
-  </div>
-  <div class="bib" id="bib-interface-place">
-    <h3>Interface Place Format <span class="vtag">v0.1 &middot; ratified 2026-08-19</span></h3>
+  </details></div>
+  <div class="bib" id="bib-interface-place"><details class="entry"><summary>    <h3>Interface Place Format <span class="vtag">v0.1 &middot; ratified 2026-08-19</span></h3></summary>
     <p>The communication organ between FRACTAL projects: one deliberately-readable place per instance under a small navigation index &mdash; pull, never push; envelopes as temporary memory; every newborn born with one. The first mechanical slice of the fractal interface.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Interface_Place_Format_v0.1.md" download>Fractal_Interface_Place_Format_v0.1.md &darr;</a></span>
-  </div>
+  </details></div>
 
   <p class="caveat tight">The catalog&rsquo;s substrate is the Registry that ships in the baseline &mdash; honest statuses, provenance attached. As standards mature they gain their entry here; nothing is listed before it is ratified in the record.</p>
+</details>
 </section>
 
 <section id="extensions" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Extensions</p>
   <h2>The sandbox shelf.</h2>
+</summary>
   <p>Concepts proven here become things you can take: a standard&rsquo;s full text, a command file to teach your instance, a procedure to adopt &mdash; <strong>fractal sandbox extensions</strong>, downloadable, versioned, signed with the release they ship in.</p>
   <p class="caveat tight">The shelf opens with the content pass &mdash; its first stock is the ten standards above, each as an adoptable file. Until then, everything listed ships inside <a href="https://github.com/mstruppe/fractal-mirror">the public baseline</a> itself.</p>
+</details>
 </section>
 
 </main>
@@ -201,6 +247,27 @@
   <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
 </footer>
 
+<script>
+(function () {
+  function openForHash() {
+    if (!location.hash) return;
+    var el;
+    try { el = document.querySelector(decodeURIComponent(location.hash)); } catch (e) { return; }
+    if (!el) return;
+    var child = el.firstElementChild;
+    if (child && child.tagName === "DETAILS") child.open = true;
+    var d = el.closest ? el.closest("details") : null;
+    while (d) { d.open = true; d = d.parentElement ? d.parentElement.closest("details") : null; }
+    el.scrollIntoView();
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) setTimeout(openForHash, 0);
+  });
+  window.addEventListener("hashchange", openForHash);
+  openForHash();
+})();
+</script>
 <script src="site.js" defer></script>
 
 </body>
