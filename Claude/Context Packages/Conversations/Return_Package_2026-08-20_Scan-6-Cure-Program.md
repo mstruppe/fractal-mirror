@@ -1,0 +1,26 @@
+# Return Package — 2026-08-20 · The thirty-first Code session (Scan #6, the cure program, the seed tree, the behaviour sandbox)
+
+> **DERIVED PROJECTION — handover record (C-001).** Frozen at issue; not minted (C-042 mint-on-reuse). The reasoning of record is Protocol v0.65; the dispositions live in the C-131/C-132 Register rows, the S6 ledger block, the two frozen flight-and-review records, and the Update Plan v0.9.
+
+**Parent:** Return_Package_2026-08-20_Beta-0.6-Tagging-Close.md · **Local Context:** v0.82 (this close's stamp) · **Close commit:** the `[GOV]` Scan-6 close of 2026-08-20, pushed per C-064; the three mirror-side publics pushed mid-session on Max's "go" (`036792c` · `1188b3b` · `7f6d7de`)
+
+---
+
+## 1 · Handover (the auditable line)
+
+**Opened `/fractal` onto the queue; Max set the game plan (flight → fixes → release), commissioned the beta-0.6 delta review with the kernel/custom partition audit as his addendum, and launched the contracted ultracode flight on "green light … +1 … ready for take off" — 60 agents, 4.04M tokens, ~21 minutes, 36 unique findings 0 High (0 refuted outright), the partition verdict CLEAR on all four surfaces; he ratified the six-decision cure slate "as recommended" and the cure program executed Waves 1–4 in-session (the tool guards with the pack gate's four new checks — whose first live run caught C-080 as a second partition gap beside C-121 — the document sweep, the user-document refresh, the site cures); he designed and ratified C-131, the seed tree ("the kernel ships already built but empty … from this seed tree the fractal tree can grow however it needs to grow" — `Templates/` with four frozen seed editions, `User Documents/` born-with, Grown-from stamps, Pair Procedure v0.3, the scratch birth green end-to-end), chartered PR to take the whole site estate at its birth ("with this connection we establish the first real form of a network") and re-targeted the birth to beta-0.7; he commissioned and ratified C-132, the behaviour-convention class ("a library where user can call different behaviours sandbox style") with the MRC — his five math rules from the KNet Codex friction — the `/mrc` shortcut, the site's Behaviour sandbox section, and IF-0007 as the offer back to KNet; on his "go" the three publics went live and deploy-verified (the intake reroute, the sandbox + stranger-cures refresh, and — on his "this deserves a blog post" — the memory chapter, One log); his closing sort pushed the Mining Tool to beta-0.8's shelf and held the spec-reissue pair on its trigger after the rundown; he typed `/close` and this close sealed it: Protocol v0.65, five DOC mints, the ripple, the gates, the push.** The arc: commission → flight → ratify → cure → ratify → build → publish → sort → `/close`.
+
+## 2 · The working set for the next session (offers, C-031)
+
+1. **The queue's head: the beta-0.7 tagging close** — the slate stands essentially complete (the Update Plan v0.9 the path); Wave 6 executes at the pack: the rider's demo labeling + the shipped-link cure (the new HTML-hygiene gate holds the pack red until it lands), the S6-1.1 staging rule's first execution, the parts parity sweep. The two drag YELLOWs (Index 2,073/2,000 · LC 3,655/3,500) diet at the same boundary.
+2. **Then PR's birth from the fresh `beta-0.7` tag** — on Max: the child's **name** · the shared-core contract (Foundation §8); born with its interface place and the **site-estate charter** (all website operations transfer; the mother keeps the what-and-why plus the address — the C-123 counterpart line decidable at the two-children point).
+3. **The transports (Max's hand):** IF-0005 to KNet — **gc-time-sensitive, prune-eligible ≈2026-09-01** · IF-0006 + the beta-0.6 receipt pair (or hold and offer beta-0.7 once) · **IF-0007 — the MRC offer** (the Codex friction's cure traveling home).
+4. **On Max besides:** the Scan #6 byproduct triage (25 items, Review §5) · the Impressum postal address · the profile acts · the annex remote · the Safari pass · Releases/immutability · IF-0001's KNet-side landing.
+
+## 3 · What this session proved (the green data)
+
+**The delta-review class works as a release ritual** — a whole release boundary swept, adversarially verified, and cured inside one session, with the finder lanes so precise that 44 independent refuters overturned nothing. **The gates now out-sweep the flights that build them** — the partition-seat check, written to cure S6-7.1, found C-080 on its first live run; a machine check born from a finding immediately exceeded its finder. **The seed-tree principle closed the kernel's last soft boundary** — with Grown-from stamps and frozen seed editions, even document *content* is now mechanically sortable into kernel and growth, and a newborn arrives already built but empty, exactly as designed in the owner's words. **And the loop from field friction to shipped cure ran end-to-end in one sitting** — an unexplained equation in a child's session became a ratified convention, a callable command, a public site section, and an interface offer back to the very instance that felt the friction.
+
+---
+
+*Author: Claude (AGENT.AI.CLAUDE) · Thirty-first Code session, opened `/fractal`, closed on Max's `/close`. Next: `/fractal` → the beta-0.7 tagging close (the Update Plan v0.9 the path) → PR's birth → the small network begins.*

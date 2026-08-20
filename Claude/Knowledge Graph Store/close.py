@@ -26,7 +26,7 @@ Usage:
 
 After every --write, verify.py and check_versions.py run automatically.
 """
-import argparse, datetime, hashlib, json, os, re, subprocess, sys, time
+import argparse, datetime, fnmatch, hashlib, json, os, re, subprocess, sys, time
 sys.dont_write_bytecode = True   # the checker import must not litter the store tree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -369,6 +369,34 @@ def board_paths():
             if name.endswith("_Agenda_Board.html")]
 
 
+def gas_pair_paths():
+    """The Gas pair's two files (C-129; S6-2.6 — the walk row close.py reads
+    by construction now resolves mechanically). Existence-filtered: the pair
+    is a custom extension — instances without it stay silent."""
+    pair = ("Claude/Context Packages/Fractal_Gas_Ledger.md",
+            "User Documents/Fractal_Gas_Gauge.html")
+    return [p for p in pair if os.path.isfile(os.path.join(REPO, p))]
+
+
+def pair_series_paths():
+    """The user-document pair series walk row (C-131/decision ⑤ — Scan #6's
+    S6-5.1 cure): every user half, the seed templates, and the extension
+    originals. Existence-filtered — the mother's set is the widest; a newborn
+    resolves to its own born-with seeds."""
+    rels = []
+    for directory in ("User Documents", "Templates"):
+        full = os.path.join(REPO, directory)
+        if os.path.isdir(full):
+            rels.extend(directory + "/" + name
+                        for name in sorted(os.listdir(full))
+                        if not name.startswith("."))
+    for rel in ("Claude/Context Packages/Fractal_Update_Plan.md",
+                "Claude/Context Packages/Fractal_Gas_Ledger.md"):
+        if os.path.isfile(os.path.join(REPO, rel)):
+            rels.append(rel)
+    return rels
+
+
 def store_tool_paths():
     directory = "Claude/Knowledge Graph Store"
     return [directory + "/" + name
@@ -420,6 +448,7 @@ def row_paths(row, living, series, checker):
         ("decision register", lambda: lp("Decision Register")),
         ("rule overview", lambda: lp("Rule Overview")),
         ("local context", lambda: lp("Local Context")),
+        ("pair series", pair_series_paths),      # before the board: the series row names it
         ("agenda board", board_paths),
         ("context index", lambda: lp("Context Index")),
         ("global context", lambda: lp("Global Context")),
@@ -430,6 +459,7 @@ def row_paths(row, living, series, checker):
         ("store tools", store_tool_paths),
         ("conversation settings", lambda: lp("Conversation Settings")),
         ("adapters", lambda: lp("Claude Code Adapter") + lp("Codex Adapter")),
+        ("gas ledger", gas_pair_paths),          # S6-2.6 — the C-129 walk row's mapping
     ]
     for token, resolve in mapping:
         if token in plain:
@@ -538,6 +568,23 @@ def history_kind(text):
     return None
 
 
+def history_has(text, version):
+    """True when the history block already carries a v{version} entry — the
+    half-manual state S6-2.1 fired on at the beta-0.6 close (GENESIS shipped
+    two v0.15 entries): the hand wrote the row, the stamp stayed. The mint
+    defers to the hand exactly as the stamp-moved branch defers the bump.
+    Format-aware: table row start, or a v{version} run inside the prose block."""
+    if re.search(r"^\|\s*v" + re.escape(version) + r"\s*\|", text, re.M):
+        return True
+    match = re.search(r"\*\*Revision history:?\*\*", text)
+    if match:
+        end = text.find("\n\n", match.end())
+        region = text[match.end():end if end >= 0 else len(text)]
+        if re.search(r"\bv" + re.escape(version) + r"\s*\(", region):
+            return True
+    return False
+
+
 def insert_history(text, version, date, note, ofrecord):
     """Mint one revision-history row in the document's own format (C-110
     proposal 6). Table = the Register's | Version | Date | Headline | Of record |;
@@ -634,9 +681,14 @@ def stamp_plan(env, changed, nodes, events, notes, args):
                 preview.append(f"  {rel}: stamp v{current.group(1)} -> v{new_version}, "
                                f"Updated -> {today} (annotation text kept — review by hand)")
                 if history_kind(text):
-                    operations.append(("history", new_version))
-                    preview.append(f"  {rel}: revision-history {history_kind(text)} row "
-                                   f"minted from its --note (v{new_version}, {today})")
+                    if history_has(text, new_version):
+                        preview.append(f"  {rel}: v{new_version} history entry already "
+                                       "present (hand-written) — mint skipped, the row "
+                                       "is the hand's (S6-2.1)")
+                    else:
+                        operations.append(("history", new_version))
+                        preview.append(f"  {rel}: revision-history {history_kind(text)} row "
+                                       f"minted from its --note (v{new_version}, {today})")
             elif current and head_stamp:
                 preview.append(f"  {rel}: stamp already moved by hand "
                                f"(v{head_stamp.group(1)} -> v{current.group(1)}) — "
@@ -675,11 +727,101 @@ def apply_stamp(plan, notes):
             target.write(text)
 
 
+def curated_exclusions():
+    """The curation layer's export-ignore pattern list, read from the repo's
+    .gitattributes — the one written home of the C-127 exclusion law (S6-7.3;
+    never sourced from the resetting Update Plan). Quoted patterns follow the
+    file's own convention for names with spaces."""
+    path = os.path.join(REPO, ".gitattributes")
+    if not os.path.isfile(path):
+        return []
+    patterns = []
+    for line in open(path, encoding="utf-8"):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith('"'):
+            end = line.find('"', 1)
+            if end < 0:
+                continue
+            pattern, rest = line[1:end], line[end + 1:]
+        else:
+            parts = line.split(None, 1)
+            pattern, rest = parts[0], parts[1] if len(parts) > 1 else ""
+        if "export-ignore" in rest.split():
+            patterns.append(pattern)
+    return patterns
+
+
+def excluded_matches(patterns, tracked):
+    """Tracked mirror paths matching any curation pattern — an accidental
+    carry the sync should have excluded (S6-7.3's composition check)."""
+    hits = []
+    for rel in tracked:
+        for pattern in patterns:
+            base = pattern[:-3] if pattern.endswith("/**") else None
+            if rel == pattern \
+               or (base is not None and (rel == base or rel.startswith(base + "/"))) \
+               or fnmatch.fnmatch(rel, pattern):
+                hits.append(rel)
+                break
+    return hits
+
+
+def mirror_html_hygiene(mirror, tracked):
+    """S6-7.4: shipped HTML must not carry hollowed elements (the empty
+    <b></b> the beta-0.6 pill-drop left on the public board) or relative
+    hrefs into paths absent from the tracked tree (the dangling
+    ../Site/Fieldnotes.md class). Content-bearing tags only — decorative
+    empty spans are legitimate."""
+    problems, tracked_set = [], set(tracked)
+    for rel in tracked:
+        if not rel.endswith(".html"):
+            continue
+        full = os.path.join(mirror, rel)
+        if not os.path.isfile(full):
+            continue
+        text = open(full, encoding="utf-8", errors="replace").read()
+        for match in re.finditer(r"<(b|strong|em|a)\b[^>]*>\s*</\1>", text):
+            problems.append(f"{rel}: empty <{match.group(1)}> element")
+        for match in re.finditer(r'href="([^"]+)"', text):
+            target = match.group(1).split("#", 1)[0]
+            if not target or target.startswith("/") \
+               or re.match(r"^(https?:|mailto:|data:)", target):
+                continue
+            resolved = os.path.normpath(
+                os.path.join(os.path.dirname(rel), target)).replace(os.sep, "/")
+            if resolved not in tracked_set:
+                problems.append(f"{rel}: dangling href {target}")
+    return problems
+
+
+def section_six_gaps(ast_text, register_max):
+    """S6-7.1's gate half: every decision number the release ships must hold a
+    seat in AST §6, the partition of record — the source the §8 advisory cites
+    for its class column. Numbers stand singly (C-084) and in ranges
+    (C-014–C-020, any dash); C-002's 'neither' sentence is itself in §6, so
+    plain coverage suffices. Returns missing numbers, or None when §6 is
+    unreadable."""
+    section = re.search(r"^## 6\..*?$(.*?)(?=^## \d|\Z)", ast_text, re.M | re.S)
+    if not section:
+        return None
+    text = section.group(1)
+    seen = set()
+    for low, high in re.findall(r"C-(\d{3})\s*[–—-]\s*C-(\d{3})", text):
+        seen.update(range(int(low), int(high) + 1))
+    for number in re.findall(r"\bC-(\d{3})\b", text):
+        seen.add(int(number))
+    return [n for n in range(1, register_max + 1) if n not in seen]
+
+
 def pack_mode(args):
     """The tagging-close gate (--pack) — the checks owed once per release:
     the Migration Procedure's clause-span rule (C-117 §7.3), the mirror's
-    post-rebuild cleanliness (the C-116 amendment, per v0.56), and the
-    serving-layer preservation duties (C-120). Red block: exit 1 on failure."""
+    post-rebuild cleanliness (the C-116 amendment, per v0.56), the
+    serving-layer preservation duties (C-120, three classes since the v0.64
+    postscript), the partition-seat check (S6-7.1), and the composition
+    checks (S6-7.3/S6-7.4). Red block: exit 1 on failure."""
     failures = []
     scope = "mirror half only (S5-6.1 post-rebuild re-run)" if args.mirror_only \
         else "C-117 §7.3 · C-116 cleanliness · C-120 preservation"
@@ -719,6 +861,29 @@ def pack_mode(args):
                                 "the clause reissue (S5-7.2; the CAP1-PROD-1/TF1-11 class)")
             elif register_max:
                 print(f"  §0 count: OK — GENESIS §0 and the Register agree at {register_max}")
+            # S6-7.1's gate half: a decision with no partition seat ships an
+            # advisory citing a fact its pinned source does not contain (the
+            # C-121 hole's class — fourth specimen of S5-3.3).
+            ast_rel = env[1].get("Architecture State", {}).get("path") if env else None
+            if not ast_rel or not os.path.isfile(os.path.join(REPO, ast_rel)):
+                failures.append("Architecture State not found — the partition "
+                                "seat check needs it (S6-7.1)")
+            elif register_max:
+                gaps = section_six_gaps(
+                    open(os.path.join(REPO, ast_rel), encoding="utf-8").read(),
+                    register_max)
+                if gaps is None:
+                    failures.append("Architecture State: no readable '## 6.' section — "
+                                    "the partition seat check needs it (S6-7.1)")
+                elif gaps:
+                    failures.append(
+                        "AST §6 leaves " + ", ".join(f"C-{n:03d}" for n in gaps[:8])
+                        + ("..." if len(gaps) > 8 else "")
+                        + f" without a partition seat ({len(gaps)} gap(s)) — classify "
+                          "before tagging (S6-7.1)")
+                else:
+                    print(f"  partition seats: OK — AST §6 covers "
+                          f"C-001–C-{register_max:03d} gapless")
 
     mirror = os.path.expanduser(args.mirror)
     if not os.path.isdir(os.path.join(mirror, ".git")):
@@ -764,6 +929,45 @@ def pack_mode(args):
             else:
                 print("  mirror CNAME: none on gh-pages (informational — the gate "
                       "repo carries the domain; pull-before-push still applies)")
+        # S6-7.3: composition — nothing the curation layer excludes may ride
+        # the tracked tree (the C-127 law's mechanism half; hand discipline
+        # alone held it before this check).
+        patterns = curated_exclusions()
+        leaked = excluded_matches(patterns, tracked)
+        if leaked:
+            failures.append(f"mirror carries {len(leaked)} curated-exclusion "
+                            "path(s) — the C-127 sync leaked (S6-7.3): "
+                            + ", ".join(sorted(leaked)[:5])
+                            + ("..." if len(leaked) > 5 else ""))
+        elif patterns:
+            print(f"  mirror exclusions: OK — none of the {len(patterns)} "
+                  "curation pattern(s) matches a tracked file")
+        # The third preservation class (the v0.64 postscript's cure): the
+        # mirror's OWN public-chain receipts must survive the rebuild — the
+        # curated sync swept them once at beta-0.6, caught mid-pack.
+        own_tags = (git_out(mirror, "tag", "--list", "beta-*") or "").split()
+        tracked_set = set(tracked)
+        missing_pairs = [f"Provenance/{tag_name}-public{suffix}"
+                         for tag_name in own_tags
+                         for suffix in (".txt", ".txt.ots")
+                         if f"Provenance/{tag_name}-public{suffix}" not in tracked_set]
+        if missing_pairs:
+            failures.append("mirror public-chain receipt(s) missing post-rebuild "
+                            "(C-120 preservation, third class — the v0.64 "
+                            "postscript): " + ", ".join(missing_pairs[:6]))
+        elif own_tags:
+            print(f"  mirror own-chain receipts: OK — -public pairs tracked "
+                  f"for all {len(own_tags)} mirror tag(s)")
+        # S6-7.4: the shipped HTML's hygiene (hollowed elements, dangling
+        # hrefs into excluded paths — the pill-drop edit's failure class).
+        hygiene = mirror_html_hygiene(mirror, tracked)
+        if hygiene:
+            failures.append(f"mirror HTML hygiene ({len(hygiene)} defect(s), "
+                            "S6-7.4): " + "; ".join(hygiene[:4])
+                            + ("..." if len(hygiene) > 4 else ""))
+        else:
+            print("  mirror HTML hygiene: OK — no empty elements, no "
+                  "dangling relative hrefs")
 
     if failures:
         print(f"\nFAIL — {len(failures)} pack-time failure(s). "
@@ -797,8 +1001,20 @@ def revise_mode(args, nodes, events, bucket):
         if args.write and plan["files"]:
             # Notes are validated BEFORE any byte moves — a refused run must
             # leave the tree untouched (C-008's spirit at the file layer).
-            missing = [f"{doc['id']} ({doc['repo_path']})" for doc in changed
-                       if not note_for(doc, notes)]
+            # S6-2.4: the check covers the stamp plan's own rows on DOC-backed
+            # paths too (a git-dirty DOC whose node hash is pre-synced becomes
+            # hash-changed only BY the stamp pass — the old post-apply refusal
+            # left the bump written). Plan auto_notes satisfy their rows, so
+            # the mechanical C-110 counts ripple still passes.
+            doc_by_path = {n["repo_path"]: n["id"] for n in nodes
+                           if n["type"] == "DOC" and n["repo_path"]}
+            pending = {doc["repo_path"]: doc["id"] for doc in changed}
+            for rel in plan["files"]:
+                if rel in doc_by_path:
+                    pending.setdefault(rel, doc_by_path[rel])
+            missing = [f"{pending[rel]} ({rel})" for rel in sorted(pending)
+                       if not (notes.get(rel) or notes.get(pending[rel])
+                               or plan["auto_notes"].get(rel))]
             if missing:
                 print("REFUSED: missing --note for changed document(s):")
                 for item in missing:

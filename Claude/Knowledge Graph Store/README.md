@@ -1,7 +1,7 @@
 # FRACTAL — Knowledge Graph Store
 
 Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero infrastructure
-(C-021). Format spec: **Node & Event Schema v0.6** (what is written) + **Navigation Contract v0.1**
+(C-021). Format spec: **Node & Event Schema v0.7** (what is written) + **Navigation Contract v0.2**
 (how it is read — the C-070 companion), both in `../Architecture/Concepts/Knowledge Graph/`.
 
 ## Layout
@@ -19,9 +19,12 @@ Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero inf
   mechanically), and reads the drag gauge (advisory word budgets, C-110 proposal 10); `--stamp`
   (applied at `--write`) bumps stale version headers, mints revision-history rows from each
   document's `--note`, and writes store counts at predicted post-ripple totals *before* hashing;
-  `--pack` runs the tagging-close gate — the GENESIS §3.4 clause-span check (Migration Procedure
-  §7.3), the mirror's post-rebuild cleanliness + duplicate scan (the C-116 amendment), and the
-  serving-layer preservation checks (`.github/` · `gh-pages` · `CNAME`, C-120). The `--create`
+  `--pack` runs the tagging-close gate — the GENESIS §3.4 clause-span + §0 count checks (Migration
+  Procedure §7.3; S5-7.2), the AST §6 partition-seat check (S6-7.1 — every shipped decision classified),
+  the mirror's post-rebuild cleanliness + duplicate scan (the C-116 amendment), the serving-layer
+  preservation checks (`.github/` · `gh-pages` · the mirror's own `-public` receipt pairs, C-120 —
+  `CNAME` reported informationally, the gate repo carries the domain), and the composition checks
+  (S6-7.3 curated-exclusion absence · S6-7.4 shipped-HTML hygiene). The `--create`
   alias grammar's prefix follows the instance's own `.version-registry` (TF1-4's cure; mother
   default `Fractal_`). Judgment on what a change *means* stays manual (C-110 proposal 14).
   `check_versions.py` carries the **`INHERITED` source class (C-088)**: in a birthed instance, a

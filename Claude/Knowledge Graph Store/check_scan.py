@@ -164,7 +164,14 @@ def main():
             errors.append("Register has no '## Review-findings ledger' section")
         else:
             for sid in seed_ids:
-                lines = [l for l in ledger.splitlines() if sid in l]
+                # Row existence anchors to the ledger's own row grammar —
+                # `| **S<n>-x.y` at line start — never a bare substring: a
+                # deleted row must not "trace" through prose mentions of the
+                # id elsewhere in the ledger (S6-2.3; the grammar below is the
+                # one the unconditional check already trusts).
+                row_re = re.compile(r"^\|\s*\*{0,2}" + re.escape(sid) + r"\b")
+                lines = [l.strip() for l in ledger.splitlines()
+                         if row_re.match(l.strip())]
                 if not lines:
                     flag(f"{sid}: no row in the Register's review-findings ledger (§10)")
                 elif not any(DISPO_WORDS.search(l) for l in lines):

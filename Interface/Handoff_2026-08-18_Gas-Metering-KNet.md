@@ -30,3 +30,7 @@ Spine growth averages ≈450 words (≈600 tokens) per closed session. The pract
 - **The benchmarking issue** (its own P-row queue): these are calibration reference points from the mother — a known-governance-weight instance at two life stages.
 - **Q07 / context fidelity:** the cost side of the fidelity question — what a session *pays* to be oriented is now measurable alongside what it *retains*.
 - The method is registry-shaped (a future metering procedure standard, C-094 loop); if KNet runs it and frictions surface, the fieldnote door is the channel back.
+
+---
+
+*Cite this file by path + issue date — `Interface/Handoff_2026-08-18_Gas-Metering-KNet.md`, issued 2026-08-18 — or pin it at the mother's `beta-0.6` anchored tag, which carries these bytes. Envelope element 5 added 2026-08-20 per Scan #6 S6-6.1 (the Format's citation-line minimum); content above untouched.*

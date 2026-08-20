@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """FRACTAL Knowledge Graph Store — fold verifier (C-050).
 
-THE RITUAL (Schema v0.6 §5.5): this script must run and PASS before every
+THE RITUAL (Schema v0.7 §5.5): this script must run and PASS before every
 store-touching commit and after every merge that touches the store (the C-037
 commit boundary). Git merges JSONL appends textually; the semantic merge check
 is this script, never git.
@@ -13,7 +13,7 @@ Checks, over the full store:
                        (id prefix decodes into the recorded ts/created second);
                        event-id uniqueness; ts ordering; the C-055 volume tripwire
                        (advisory WARN when a partition exceeds 50,000 events —
-                       time for the roll ceremony, Schema v0.6 §4.1).
+                       time for the roll ceremony, Schema v0.7 §4.1).
   B. Mint grammar    — code shape; parent = code prefix; mint-before-use; sibling
                        uniqueness; GLOBAL ROOT UNIQUENESS (C-044); the COLLISION
                        TRIPWIRE with first-mint-wins / cured discrimination (C-049);
@@ -25,7 +25,7 @@ Checks, over the full store:
                        C-045 grandfather), aliases, placements (redirect-resolved),
                        content_hash chain. Log <-> nodes bijection.
   E. Hashes          — store-node body hashes recompute; external canonical-file
-                       hashes recompute against the repo (Schema v0.6 §3.7).
+                       hashes recompute against the repo (Schema v0.7 §3.7).
 
 Instance vocabulary: an optional vocabulary_local.json beside the store extends
 the placement-role set governedly (each role names its adopting decision — see

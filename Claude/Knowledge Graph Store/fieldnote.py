@@ -110,8 +110,13 @@ def git_identity() -> str:
     return f"{config('user.name')} <{config('user.email')}>"
 
 
-def iter_blocks(lines):
-    """Yield (block_lines, opening_line_number) for every fieldnote fence."""
+def iter_blocks(lines, unclosed=None):
+    """Yield (block_lines, opening_line_number) for every fieldnote fence.
+    A block still open at EOF is never yielded; when the caller passes an
+    `unclosed` list, its opening line number lands there instead of being
+    silently dropped (S6-4.1 — silent loss defeats whole-or-nothing intake).
+    Handling is per-caller: parse fails the intake, capture refuses to append
+    (the new block would nest inside the open fence), depth warns."""
     block, start = None, None
     for number, line in enumerate(lines, 1):
         if block is None:
@@ -122,11 +127,13 @@ def iter_blocks(lines):
             block, start = None, None
         else:
             block.append(line)
+    if block is not None and unclosed is not None:
+        unclosed.append(start)
 
 
-def block_ids(text: str):
+def block_ids(text: str, unclosed=None):
     numbers = []
-    for block, _ in iter_blocks(text.splitlines()):
+    for block, _ in iter_blocks(text.splitlines(), unclosed):
         for line in block:
             match = re.fullmatch(r"id: FN-(\d{4})", line)
             if match:
@@ -135,18 +142,25 @@ def block_ids(text: str):
 
 
 def buffer_state(text: str):
-    """(depth, budget, high_water) — the §4 machine facts."""
-    depth = len(block_ids(text)) + len(OPEN_ROW_RE.findall(text))
+    """(depth, budget, high_water, unclosed) — the §4 machine facts plus the
+    S6-4.1 corruption signal (opening line numbers of fences never closed)."""
+    unclosed = []
+    depth = len(block_ids(text, unclosed)) + len(OPEN_ROW_RE.findall(text)) \
+        + len(unclosed)
     budget_match = BUDGET_RE.search(text)
     budget = int(budget_match.group(1)) if budget_match else None
     hw_match = HIGHWATER_RE.search(text)
     high_water = int(hw_match.group(1)) if hw_match else None
-    return depth, budget, high_water
+    return depth, budget, high_water, unclosed
 
 
 def pressure_line(depth: int, budget) -> str:
     line = f"buffer depth: {depth}/{budget if budget is not None else '—'}"
-    if budget is not None and depth > budget:
+    if budget is None:
+        line += ("  ADVISORY: budget line missing — the C-121 pressure plug is "
+                 "unarmed; restore `**Budget:** N entries` to the buffer header "
+                 "(S6-4.3; gauge-class, never a gate)")
+    elif depth > budget:
         line += ("  YELLOW — over the budget (C-121 pressure plug, advisory): "
                  "work the buffer down soon (solve = dissolve into the project, Format v0.2 §4)")
     return line
@@ -162,8 +176,13 @@ def resolve_buffer(config) -> Path:
 def depth_view() -> None:
     config = load_config()
     text = resolve_buffer(config).read_text(encoding="utf-8")
-    depth, budget, _ = buffer_state(text)
-    print(f"{config['instance']} · {config['buffer']} · {pressure_line(depth, budget)}")
+    depth, budget, _, unclosed = buffer_state(text)
+    line = pressure_line(depth, budget)
+    if unclosed:
+        line += (f"  WARNING: unclosed fieldnote fence opened at line "
+                 f"{unclosed[0]} — repair the buffer before the next capture "
+                 "(S6-4.1)")
+    print(f"{config['instance']} · {config['buffer']} · {line}")
 
 
 def capture(argv) -> None:
@@ -175,6 +194,14 @@ def capture(argv) -> None:
         if kind not in KINDS_STATABLE:
             die(f"--kind must be one of: {', '.join(KINDS_STATABLE)}")
         argv = argv[2:]
+    if "--kind" in argv:
+        die(
+            "misplaced --kind — the flag is recognized only as the FIRST "
+            "argument: `fieldnote.py --kind <class> <report text>` (S6-4.2; "
+            "a trailing flag would be joined verbatim into the content-"
+            "immutable block). To mention the flag inside a report, write it "
+            "without the leading dashes."
+        )
 
     config = load_config()
     buffer = resolve_buffer(config)
@@ -188,7 +215,13 @@ def capture(argv) -> None:
         if line.lstrip().startswith("```"):
             die("report may not contain a code fence line (it cannot round-trip the block format)")
 
-    depth, budget, high_water = buffer_state(text)
+    depth, budget, high_water, unclosed = buffer_state(text)
+    if unclosed:
+        die(
+            f"buffer carries an unclosed fieldnote fence (opened at line "
+            f"{unclosed[0]}) — appending now would nest the new block inside "
+            "it (S6-4.1); close the fence, then capture"
+        )
     if high_water is None:
         die(
             "buffer header lacks the Id high-water line "
@@ -292,10 +325,17 @@ def parse(paths) -> None:
             errors.append(f"{raw}: unreadable: {exc}")
             continue
         in_file = []
-        for block, start in iter_blocks(lines):
+        unclosed = []
+        for block, start in iter_blocks(lines, unclosed):
             entry = parse_block(block, start, str(path), errors)
             if entry:
                 in_file.append((start, entry))
+        for start in unclosed:
+            errors.append(
+                f"{raw}:{start}: unclosed fieldnote fence — the block was "
+                "dropped by the fence grammar and would be lost silently "
+                "(S6-4.1); close the fence"
+            )
         numbers = [int(entry["id"][3:]) for _, entry in in_file]
         if len(set(numbers)) != len(numbers):
             errors.append(f"{raw}: duplicate ids: sequence {['FN-%04d' % n for n in numbers]}")

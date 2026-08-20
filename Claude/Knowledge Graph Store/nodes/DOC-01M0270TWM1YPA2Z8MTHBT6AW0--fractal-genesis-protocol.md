@@ -3,7 +3,7 @@ id: DOC-01M0270TWM1YPA2Z8MTHBT6AW0
 type: DOC
 created: 2026-08-15T08:01:11Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:dcdf54b247655b9c690be63ae6a7b75d98a20a7a24f34bd8cce9db26750208ec
+content_hash: sha256:de474cf2bac38ff35e78c882ba50d55f646c355214da0a0346fe0e08a21b6a7a
 title: "Fractal Genesis Protocol"
 aliases: ["route:Fractal_Genesis_Protocol"]
 placements:

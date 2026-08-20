@@ -3,7 +3,7 @@ id: DOC-01M0FAV49WHSMHQYJ0DA9NJFGE
 type: DOC
 created: 2026-08-20T10:18:06Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:863b1949922f7bb1aeb8c7b7cd891429a91a808e3bc4f218c289201750a5ee0f
+content_hash: sha256:9d6e94641e29aaaff5aaeca9efce2eaf5e048502dae397caea460bcac372290a
 title: "Fractal Governance Protocol — Claude Series v0.64"
 aliases: ["route:Fractal_Governance_Protocol_Claude_v0.64"]
 placements:

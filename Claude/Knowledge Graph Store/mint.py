@@ -2,7 +2,7 @@
 """FRACTAL Knowledge Graph Store — mint guard (C-050).
 
 Makes local duplicate codes IMPOSSIBLE instead of merely forbidden (C-049
-prevention layer), and automates "two writes, one truth" (Schema v0.6 §4.5):
+prevention layer), and automates "two writes, one truth" (Schema v0.7 §4.5):
 one invocation writes both the mint event line and the node stub.
 
 Stdlib-only. Dry-run by default — nothing is written without --write.
@@ -24,7 +24,7 @@ Options:
 
 After --write: run `python3 verify.py` and commit per C-037.
 Reparents (new code for an EXISTING concept) are not this tool's job — follow
-Schema v0.6 §5.3 rule 6 (re-mint same subject + redirect alias, one commit).
+Schema v0.7 §5.3 rule 6 (re-mint same subject + redirect alias, one commit).
 """
 import sys, os, json, re, time, datetime
 
@@ -149,7 +149,7 @@ def main():
             f"code prefix (C-027); this node stores its own coordinate and needs no self-placement.\n")
     # One append-only log file (C-055, resolving OQ-3): append to the single active partition
     # = the lexically last _events/*.jsonl. New partitions are opened only by the roll ceremony
-    # (Schema v0.6 §4.1) when verify.py's volume tripwire fires — never automatically per-writer.
+    # (Schema v0.7 §4.1) when verify.py's volume tripwire fires — never automatically per-writer.
     parts = sorted(f for f in os.listdir(evdir) if f.endswith(".jsonl"))
     bucket = os.path.join(evdir, parts[-1] if parts else "part-0001.jsonl")
 

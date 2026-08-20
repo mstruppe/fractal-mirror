@@ -1,0 +1,20 @@
+FRACTAL release provenance attestation (C-090)
+
+Release tag:  beta-0.6
+Tag object:   647946a0ad4cff2a7c47bc38ae282d416ff3c300
+Commit:       14c97e5907de2a196ff5005f4943722d2aa7d5f4
+Tagged:       2026-08-20, at the beta-0.6 tagging close — the interface release:
+              the Interface Place Format (the communication organ born at
+              genesis), the fieldnote RAM redesign, the user-document pair
+              series + the User Documents/ folder, the integration categories,
+              the board's rolling window, the Kernel Migration Procedure, the
+              close mechanization, and the site's section contract; the first
+              release under the C-127 curation exclusion and the first
+              §8-templated migration advisory (per Protocol v0.64)
+Repository:   FRACTAL - private origin mstruppe/fractal (host swappable, C-018)
+Custody:      signed tag, key G per .allowed_signers (C-074)
+
+Verification: "ots verify beta-0.6.txt.ots" proves this file existed no later
+than the attested time; the tag object hash commits the entire repository
+content and history at beta-0.6 by construction. The receipt is pending at
+issue and upgrades to Bitcoin-final via "ots upgrade" (C-090).

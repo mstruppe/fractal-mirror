@@ -121,3 +121,7 @@
 ## 7 · Advisory statement (§9.9)
 
 This return is advisory. It creates no KNet authority; accepts no KMR or KIMK artifact, root, or byte; ratifies no decision; unlocks nothing; and its recommendations — including the rescue in §4 — are proposals for KNet's own review under Max's dispositions. The mother inspected the pinned state read-only and altered nothing in KNet's repository, object store, or refs.
+
+---
+
+*Cite this file by path + issue date — `Interface/Handoff_2026-08-19_KMR-KIMK-Independent-Review-Return.md`, issued 2026-08-19 — or pin it at the mother's `beta-0.6` anchored tag, which carries these bytes (the subject pin in the header names KNet's commit and is not this file's own citation). Envelope element 5 added 2026-08-20 per Scan #6 S6-6.1; content above untouched.*

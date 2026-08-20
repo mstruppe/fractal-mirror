@@ -48,7 +48,9 @@ Source classes (Max's calls, 2026-08-14):
              claims enforced only on a living ledger's "Sources:" line.
 
 Scope: BOOTSTRAP.md + GENESIS.md + the root adapters CLAUDE.md and AGENTS.md (C-065/C-066)
-+ all .md/.html under Claude/ + the store tools' .py files.
++ all .md/.html under Claude/ + the store tools' .py files + User Documents/
+(the C-126 home — its board is STRICT; joined the walk per S6-2.2, which found
+the folder claimed but never read) + Templates/ (the C-131 seed tier).
 Excluded: .git, _to_delete/, Archive/ (the pointer-only ChatGPT era lives at
 Archive/Foundation with ChatGPT/, C-029/C-063), _events/ (the log is the store
 verifier's territory).
@@ -216,6 +218,45 @@ def read(p):
 def alias_regex(a):
     return re.escape(a).replace(r"\ ", r"[\s_]+")
 
+def pair_half_gate(repo, stamps):
+    # The user-document pair-half currency gate (FN-0002, 2026-08-20): a half in
+    # User Documents/ that stamps its original's version must match that original's
+    # internal stamp. The thirty-first close regenerated the Update Plan original
+    # but not its half — the walk's "both halves current" mark was prose, unverified;
+    # this makes the pair-series walk row mechanical (ERROR — the silent-loss class).
+    # Halves whose stamps are version-agnostic by design (Roadmap, Gas Gauge) carry
+    # no claim and are not forced to; a half not yet born is not a defect.
+    def field_version(relpath):
+        p = os.path.join(repo, relpath)
+        if not os.path.exists(p): return None
+        m = re.search(r"\*\*Version:\*\*\s*([0-9]+\.[0-9]+)", read(p))
+        return m.group(1) if m else None
+    checks = [
+        ("User Documents/Fractal_Agenda_Board.html",
+         r"Projection of Fractal_Local_Context[^<]*?<b>v([0-9]+\.[0-9]+)</b>",
+         stamps.get("Local Context"), "the Local Context"),
+        ("User Documents/Fractal_Update_Plan.html",
+         r"projection of <code>Claude/Context Packages/Fractal_Update_Plan\.md</code>\s*v([0-9]+\.[0-9]+)",
+         field_version("Claude/Context Packages/Fractal_Update_Plan.md"), "Fractal_Update_Plan.md"),
+    ]
+    fdir = os.path.join(repo, "Claude/Project Governance/Governance Documents")
+    eds = [m.group(1) for f in (os.listdir(fdir) if os.path.isdir(fdir) else [])
+           for m in [re.match(r"Fractal_Fieldnote_Format_v([0-9]+\.[0-9]+)\.md$", f)] if m]
+    if eds:
+        checks.append(("User Documents/Fractal_Fieldnote_Handout.html",
+                       r"Fractal_Fieldnote_Format_v([0-9]+\.[0-9]+)",
+                       max(eds, key=vkey), "the newest Fieldnote Format edition"))
+    for half, pat, want, name in checks:
+        p = os.path.join(repo, half)
+        if not os.path.exists(p) or want is None: continue
+        found = re.findall(pat, read(p))
+        if not found:
+            warn(f"{half}: no recognizable stamp for its original ({name}) — "
+                 f"the pair-half gate cannot check it (FN-0002 heuristic)")
+        elif want not in found:
+            err(f"{half}: stamps its original ({name}) at v{max(found, key=vkey)} — "
+                f"the original says v{want}: the half was not regenerated (FN-0002)")
+
 def registry_copy(registry):
     """Copy the small declarative registry without adding a dependency."""
     return {
@@ -318,8 +359,11 @@ def main():
             if os.path.splitext(f)[1].lower() not in SCAN_EXT: continue
             # .claude/commands/ joined the walk 2026-08-15 (Scan #3 S3-3.1, per Protocol v0.29):
             # the command tier is a tracked behavioral surface — its paths and claims are guarded.
+            # User Documents/ joined 2026-08-20 (S6-2.2 — the C-126 move left the STRICT board
+            # named but never read); Templates/ with it (the C-131 seed tier ships claims too).
             if rel in ("BOOTSTRAP.md", "GENESIS.md", "CLAUDE.md", "AGENTS.md") or rel.startswith("Claude/") \
-               or rel.startswith(".claude/commands/"):
+               or rel.startswith(".claude/commands/") or rel.startswith("User Documents/") \
+               or rel.startswith("Templates/"):
                 scope.append(rel)
 
     # -- store actuals for the count-claim rule (S4-1.2)
@@ -628,6 +672,9 @@ def main():
                     elif not HIST_MARKER.search(window):
                         warn(f"{rel}: cites {key} v{cv} without a historical marker — "
                              f"newest is v{newest.get(key)} (currency heuristic)")
+
+    # ---- the pair-half currency gate (FN-0002) — after the living stamps exist
+    pair_half_gate(repo, stamps)
 
     # ---- report
     print(f"FRACTAL version-agreement checker — repo: {repo}")

@@ -3,7 +3,7 @@ id: DOC-01KZVYPGEGBD3A8BF8N16D40QR
 type: DOC
 created: 2026-08-12T21:40:18Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:ab767da62c99d464932934a2adeb197a8f12963f154501280e90581e44f43ed6
+content_hash: sha256:ada8c2a8879a865d632f83538fbc77b86990d2a4bae4cd69dc0fdbe943e85f16
 title: "Fractal Decision Register"
 aliases: ["Fractal_Decision_Register", "Fractal Decision Register"]
 placements:
