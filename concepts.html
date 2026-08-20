@@ -68,6 +68,7 @@
 
 <nav class="subnav" aria-label="Concepts sections">
   <a href="#commands">Command library</a>
+  <a href="#sandbox">Behaviour sandbox</a>
   <a href="#concepts">Central concepts</a>
   <a href="#rules">Rule register</a>
   <a href="#userdocs">User documents</a>
@@ -103,6 +104,20 @@
 
   <h3 style="margin-top: 3.5rem;">Hardwired and taught</h3>
   <p>The commands above ship in the public baseline &mdash; hardwired in the mirror, born into every new instance. Beyond them, an instance can grow its own: a custom command is a small stamped file teaching the session a procedure in your project&rsquo;s own words. <em>How to teach a command &mdash; the recipe and its rules &mdash; lands here in the content pass.</em></p>
+</details>
+</section>
+
+<section id="sandbox" class="float">
+<details class="fold">
+<summary>
+  <p class="kicker">Behaviour sandbox</p>
+  <h2>A convention is a summoned rule-set.</h2>
+</summary>
+  <p>Beside the commands stands a second callable tier: <strong>behaviour conventions</strong> &mdash; rule-sets that shape <em>how one class of output is represented</em>, summoned into a scope rather than standing always-on. Call one by name onto a document or task and its rules bind there completely; it composes with the project&rsquo;s standing conduct, never overrides it, and releases when the work that called it ends. Each entry opens its own page; the verbatim standard and its command file ride beside it.</p>
+  <ul class="doors">
+    <li id="sbx-mrc"><a href="concepts/mrc.html"><span class="door-name">MRC</span><span class="door-what">the Mathematical Representation Convention &mdash; five rules that make every equation self-carrying: symbols defined, types stated, operations explicit, ranges given, derivation before code</span></a><span class="door-src">source: <a href="standards/Fractal_Mathematical_Representation_Convention_v0.1.md" download>the convention &darr;</a> &middot; command: <a href="commands/mrc.md" download>mrc.md &darr;</a></span></li>
+  </ul>
+  <p class="step-note" style="margin-top: 1.4rem;">The shelf grows the way everything here grows: a convention is minted when a real friction demands one &mdash; this first entry came from a model description whose equations arrived unexplained &mdash; and an instance adopts it by its own recorded decision. The scholarly-source rules in the <a href="#bibliography">bibliography</a> are the class&rsquo;s older sibling.</p>
 </details>
 </section>
 
@@ -179,7 +194,7 @@
   <h2>A bibliography of AI workflow standards.</h2>
 </summary>
   <p>Every procedure FRACTAL runs on is a written, versioned, ratified standard &mdash; distilled from executed history, never designed in the abstract. This section catalogs them the way a paper cites its sources: identity, version, status, claim &mdash; dated by ratification, full texts verbatim from the shipped baseline. The commands above are their compressed spoken forms; together they grow toward a shared working language for AI agents &mdash; naturally born from use.</p>
-  <p>Three of these already have their stories told on the <a href="procedures.html">procedures blog</a> &mdash; plus the close ritual&rsquo;s own story, and the first measurement of what governance costs.</p>
+  <p>Three of these already have their stories told in <a href="procedures.html">the procedures section</a> &mdash; Concepts&rsquo; story-form annex &mdash; plus the close ritual&rsquo;s own story, and the first measurement of what governance costs.</p>
 
   <div class="bib" id="bib-flight"><details class="entry"><summary>    <h3>Ultracode Flight Protocol <span class="vtag">v0.2 &middot; ratified 2026-08-17</span></h3></summary>
     <p>The container for multi-agent work: commissioning contract, launch sequence, verification tiers, landing and cost honesty. When one session isn&rsquo;t enough, this is how a fleet flies without losing the record.</p>
@@ -213,6 +228,10 @@
     <p>The capture format behind <a class="mono" href="#cmd-fieldnote">/fieldnote</a>, redesigned as <a href="#userdocs">temporary memory</a>: one buffer, ratification-gated capture, a pressure gauge, machine-parsable entries with whole-or-nothing intake &mdash; the field-test loop&rsquo;s interface.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Fieldnote_Format_v0.2.md" download>Fractal_Fieldnote_Format_v0.2.md &darr;</a> &middot; <a href="standards/Fractal_Fieldnote_Format_v0.1.md" download>v0.1 &darr;</a> as history</span>
   </details></div>
+  <div class="bib" id="bib-mrc"><details class="entry"><summary>    <h3>Mathematical Representation Convention <span class="vtag">v0.1 &middot; ratified 2026-08-20</span></h3></summary>
+    <p>The first entry of the <a href="#sandbox">behaviour sandbox</a>: five rules that make mathematical writing self-carrying &mdash; every symbol defined before use, data types stated, operations explicit, dimensions and ranges given, the derivation written out before any code. Summoned by name (<span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">MRC</span>) onto a document or task, released when it ends.</p>
+    <span class="bib-src">full text: <a href="standards/Fractal_Mathematical_Representation_Convention_v0.1.md" download>Fractal_Mathematical_Representation_Convention_v0.1.md &darr;</a></span>
+  </details></div>
   <div class="bib" id="bib-board"><details class="entry"><summary>    <h3>Agenda Board Format <span class="vtag">v0.3 &middot; ratified 2026-08-19</span></h3></summary>
     <p>The at-a-glance board standard: contract, section grammar, instance-neutral skeleton. Adopted by decision, never imposed. v0.2 adds the <a href="#userdocs">user-document bar</a> and the coequal-branch provision for projects running parallel agenda arcs; v0.3 moves the board into the dedicated <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">User Documents/</span> folder and lets extension pairs join the bar.</p>
     <span class="bib-src">full text: <a href="standards/Fractal_Agenda_Board_Format_v0.3.md" download>Fractal_Agenda_Board_Format_v0.3.md &darr;</a> &middot; <a href="standards/Fractal_Agenda_Board_Format_v0.1.md" download>v0.1 &darr;</a> as history</span>
@@ -237,7 +256,7 @@
   <h2>The sandbox shelf.</h2>
 </summary>
   <p>Concepts proven here become things you can take: a standard&rsquo;s full text, a command file to teach your instance, a procedure to adopt &mdash; <strong>fractal sandbox extensions</strong>, downloadable, versioned, signed with the release they ship in.</p>
-  <p class="caveat tight">The shelf opens with the content pass &mdash; its first stock is the ten standards above, each as an adoptable file. Until then, everything listed ships inside <a href="https://github.com/mstruppe/fractal-mirror">the public baseline</a> itself.</p>
+  <p class="caveat tight">The shelf opens with the content pass &mdash; its first stock is the standards above, each as an adoptable file. Until then, everything listed ships inside <a href="https://github.com/mstruppe/fractal-mirror">the public baseline</a> itself.</p>
 </details>
 </section>
 

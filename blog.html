@@ -121,8 +121,10 @@
   <p>A fresh clone on a clean machine rebuilds the working system from the bootstrap document alone &mdash; verified, byte-parity, three green drills on the record. The record&rsquo;s own words: <em>&ldquo;&lsquo;Laptop in the ocean&rsquo; is demonstrated fact.&rdquo;</em></p>
 
   <h3>Priority is mathematics, not testimony</h3>
-  <p>Every release ships as a signed tag with an independent OpenTimestamps receipt committed in the repository itself, so any clone carries the full proof chain; the earliest anchors are Bitcoin-final. This is the one claim a stranger can check without reading anything:</p>
-  <p class="check">git tag -v beta-0.4 &nbsp;&middot;&nbsp; ots verify Provenance/beta-0.3-public.txt.ots</p>
+  <p>Every release ships as a signed tag with an independent OpenTimestamps receipt committed in the repository itself, so a clone of the public home carries the proof chain for every anchored release before it (the newest tag&rsquo;s own receipt lands with its anchor commit); the earliest anchors are Bitcoin-final. This is the one claim a stranger can check without reading anything &mdash; both commands from a clone&rsquo;s root:</p>
+  <p class="check">git -c gpg.ssh.allowedSignersFile=.allowed_signers tag -v beta-0.4</p>
+  <p class="check">ots verify Provenance/beta-0.3-public.txt.ots</p>
+  <p>The first needs only git &mdash; the flag binds the repository&rsquo;s own signer roster, and a good signature prints as such. The second needs the OpenTimestamps client (<span class="check" style="display:inline">pip install opentimestamps-client</span>); without a local Bitcoin node it retrieves the calendar attestations and then reports it cannot reach a node &mdash; that is the expected view from a fresh machine, and the pending-versus-final status it prints is the honest state of each anchor.</p>
 
   <h3>A stranger can birth a working instance</h3>
   <p>The path the <a href="fractal-site.html#setup">setup</a> describes has been walked twice under stranger conditions: once when the first child project was born from an anchored release tag, and once in a simulated onboarding of the public mirror itself &mdash; a scripted non-programmer ran the quickstart verbatim through to a real birth, both integrity checkers passing, with no outside knowledge needed at any step.</p>
@@ -152,7 +154,7 @@
   </table></div>
 
   <h3>The product: memory that survives</h3>
-  <p>The kernel, the governance stack, the knowledge store, the standards. The promise is the one on the masthead &mdash; <em>AI agents forget. Your project won&rsquo;t.</em> &mdash; made provable rather than asserted: session-durable context, decision provenance, machine-verified consistency, releases signed and externally timestamped. It is the deepest branch and the furthest along: five anchored releases, an executable genesis, and a first foreign project born from the kernel and later migrated across a release boundary under its own governance &mdash; every gate on the record.</p>
+  <p>The kernel, the governance stack, the knowledge store, the standards. The promise is the one on the masthead &mdash; <em>AI agents forget. Your project won&rsquo;t.</em> &mdash; made provable rather than asserted: session-durable context, decision provenance, machine-verified consistency, releases signed and externally timestamped. It is the deepest branch and the furthest along: every release since the first anchored, an executable genesis, and a first foreign project born from the kernel and later migrated across a release boundary under its own governance &mdash; every gate on the record.</p>
   <p>Everything else in this model rides on this branch. No other promise is credible if this one is not real &mdash; which is why the <a href="#proof">proof chapter</a> exists.</p>
 
   <h3>The hub: the site is the engine sketch</h3>
