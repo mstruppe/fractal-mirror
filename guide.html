@@ -9,6 +9,25 @@
 <!-- GUIDE section of the fractal layout (structure pass 2026-08-17):
      the in-depth path — reachable from the top menu and from Home's setup button.
      Skeleton now; the content pass fills each step from GUIDE.md and the onboarding script. -->
+<style>
+  /* fold menus (Max's direction, 2026-08-20, the post-close edit — the concepts systematic
+     applied here): every step collapses to kicker + headline, the arrow on the bottom
+     border marks the extend; deep links auto-open. Presentation only — no text changed. */
+  details.fold > summary { list-style: none; cursor: pointer; position: relative; border-bottom: 1px solid var(--hairline-soft); padding-bottom: 0.85rem; }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary::after {
+    content: ""; position: absolute; left: 50%; bottom: 0.3rem;
+    width: 10px; height: 10px; margin-left: -7px;
+    border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg); transition: transform 0.25s ease, border-color 0.2s ease;
+  }
+  details.fold > summary:hover::after { border-color: var(--ink); }
+  details.fold[open] > summary::after { transform: rotate(225deg); bottom: 0.18rem; }
+  details.fold[open] > summary { margin-bottom: 0.7rem; }
+  /* tighter rhythm: the section gap halved on this page */
+  main section { padding-top: 3.5rem; }
+  main section:last-of-type { padding-bottom: 4rem; }
+</style>
 <script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
 <noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
 </head>
@@ -40,16 +59,23 @@
 <main>
 
 <section id="before" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 0</p>
   <h2>Before you start.</h2>
+</summary>
   <p>Two things on your machine: <strong>git</strong>, and an <strong>AI coding agent</strong> that can hold a session in a folder, read and write files, and run terminal commands. <a href="https://claude.com/claude-code">Claude Code</a> is the tested reference; any agent meeting those minimums works &mdash; the commands are plain language underneath.</p>
   <p>Nothing else: no account with FRACTAL, no server, no database. What you build here is yours.</p>
   <p class="step-note">Any operating system works &mdash; the memory is plain files. macOS is the tested reference and Linux runs the same lines verbatim; on Windows, use <em>Git Bash</em> (ships with <a href="https://git-scm.com/download/win">Git for Windows</a>) for the setup lines, and read <span class="mono">python3</span> as <span class="mono">py</span> wherever a tool is invoked.</p>
+</details>
 </section>
 
 <section id="first-contact" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 1</p>
   <h2>First contact.</h2>
+</summary>
 
   <p class="voice">Clone the public baseline, stand on the newest release&hellip;</p>
   <p>Open a terminal: on <strong>macOS</strong>, press <span class="mono">&#8984;&thinsp;Space</span> and type &ldquo;Terminal&rdquo;; on <strong>Windows</strong>, open <em>Git Bash</em> from the Start menu; on <strong>Linux</strong>, your terminal of choice. Then paste the one line from the <a href="fractal-site.html#setup">setup</a>:</p>
@@ -143,11 +169,15 @@ Two paths from here:
   <p class="term-note">Condensed &mdash; the real sessions say more. The point of the picture: after the one terminal line, the whole FRACTAL life &mdash; first contact, the birth, every working loop &mdash; happens inside the interface you already like.</p>
 
   <p style="margin-top: 3rem;">The session explains where you&rsquo;re standing and offers the two paths: look around, or start your own project. The short form of these steps lives on the <a href="fractal-site.html#setup">home page</a>.</p>
+</details>
 </section>
 
 <section id="birth" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 2</p>
   <h2>The birth.</h2>
+</summary>
   <p class="voice">A project can only be born with facts that belong to its owner: what it is, what to call it, who writes in it, what kinds of work it will hold, where its off-site copy should live. The interview exists to collect exactly those facts &mdash; once, in your own words &mdash; and to carry them mechanically into the birth: <strong>your answers become the project&rsquo;s founding documents</strong>, not notes about them. Nothing is asked twice, nothing is thrown away, nothing is invented on your behalf.</p>
   <p>You follow it by typing <a class="mono" href="concepts.html#cmd-begin">/begin</a> in the reference copy, where first contact left you. It is a conversation, not a form: one question at a time, and after each answer the session drafts what your words feed and reads it back for your confirmation. At the end it shows you the whole birth plan &mdash; the files, the names, the remote &mdash; and writes your repository only after your yes.</p>
   <p><strong>You are not expected to understand FRACTAL to answer any of this.</strong> The questions start simple and deepen as the conversation goes; the session explains each concept at the exact moment it matters, and you find the flow together, naturally. Understanding grows through use &mdash; nobody starts by understanding FRACTAL, its founder included.</p>
@@ -202,29 +232,42 @@ Two paths from here:
   <p style="margin-top: 2.6rem;">What is deliberately <strong>not</strong> asked: the technical defaults &mdash; the rebuild document, the close checklist, the capture door &mdash; are written for you and stated, not questioned. One more one-liner only: <em>will this project touch credentials?</em> Names get recorded, values never enter the repo, and &ldquo;none yet&rdquo; is the usual answer. Push back on any default and it becomes a real question.</p>
   <p>The birth ends with a handoff: your project lives at its own path, and the reference copy governs nothing there &mdash; from that moment, only your project&rsquo;s own sessions act inside it. And one honest line the record insists on: <strong>a birthed repository is not yet an instance &mdash; the instance is real at its first close.</strong> Which is exactly where the next step takes you.</p>
   <p class="term-note">This walkthrough projects the Onboarding Protocol &mdash; the ratified interview script; its <a href="concepts.html#bib-onboarding">bibliography entry</a> names the source of record.</p>
+</details>
 </section>
 
 <section id="driving" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 3</p>
   <h2>Driving a session.</h2>
+</summary>
   <p>Every working session opens with your project&rsquo;s own command and closes with <a class="mono" href="concepts.html#cmd-close">/close</a>. Between the two you just work &mdash; the session reads the memory at the start, and what matters is written back at the end. Mid-work, <a class="mono" href="concepts.html#cmd-fieldnote">/fieldnote</a> captures a friction or a win in one line without leaving the task.</p>
   <p>And feel free to browse the <a href="concepts.html">concepts</a> and <a href="blog.html">blog</a> pages along the way &mdash; that&rsquo;s where the inspiration lives, along with useful interaction and procedure tips.</p>
+</details>
 </section>
 
 <section id="closing" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 4</p>
   <h2>Closing the loop.</h2>
+</summary>
   <p>Every loop ends the same way: <strong>the close</strong>. In Claude Code it is the <a href="concepts.html#commands">command</a> <a class="mono" href="concepts.html#cmd-close">/close</a>; in the ChatGPT desktop app you simply say <em>close</em> &mdash; or, the founder&rsquo;s usual phrase, <em>&ldquo;let&rsquo;s close this session.&rdquo;</em> Other agents may differ in surface, but the word itself is the trigger: <strong>close</strong>, said in context, starts the process anywhere. The close is where the memory is actually made: the handover written for the next session, the checkers run green, the work committed and pushed. A session that closed can be picked up cold by any future session &mdash; that is the whole point. The chat window itself is disposable after that &mdash; some clients even tidy their own artifacts away when you close, and it costs nothing: <strong>the memory never lived in the chat.</strong></p>
   <p>And what is true of <em>close</em> is true of <strong>every command</strong>: the slash form belongs to the client, the word belongs to the system. <span class="mono">welcome</span>, <span class="mono">begin</span>, <span class="mono">fieldnote</span>, your project&rsquo;s own name &mdash; each is plain language any capable agent understands*. Which closes this guide the way FRACTAL closes everything: the same small rule, applied at every scale.</p>
   <p class="term-note">* And if an agent ever misreads a word &mdash; or you want your own vocabulary &mdash; you don&rsquo;t adapt to the agent; you talk to it: establish the rule once, in plain conversation, and it is recorded in your project&rsquo;s <a href="concepts.html#rules">rule register</a> &mdash; honored by every session after, whichever agent drives.</p>
   <p class="step-note">And &ldquo;picked up cold&rdquo; means exactly what it says. You can close the chat, throw your laptop into the ocean, go hiking in the rainforest, eat street food in India, survive a plane crash in the Himalayas, get hospitalized, recover, go back home, get bored, find life meaningless, start drinking, get addicted, lose your job, go to rehab, get a new job, fall in love with a stranger from rehab, have three kids, get divorced, have your heart broken, lose your home, join the army, live through World War III, get ambushed with your squad, lose your mate, promise to take care of his dog &mdash; and one evening, with the dog on your lap, your new laptop on the dog&rsquo;s belly, and a cat purring behind you, you remember FRACTAL, set it up again, and continue your project exactly where you left off. Only with an updated FRACTAL, and better AI agents.</p>
+</details>
 </section>
 
 <section id="growing" class="float">
+<details class="fold">
+<summary>
   <p class="kicker">Step 5</p>
   <h2>Growing.</h2>
+</summary>
   <p>More instances (<a class="mono" href="concepts.html#cmd-look">/look</a> observes them read-only), adopting newer kernel releases by your own decision (the migration standard), adopting standards from the registry, teaching your own commands. Each of these is its own concept &mdash; the depth lives on the <a href="concepts.html">concepts page</a>.</p>
   <p class="caveat tight">This page is the guide&rsquo;s skeleton &mdash; each step gains its full walkthrough in the content pass. Until then, the practical companion is <a href="https://github.com/mstruppe/fractal-mirror/blob/main/GUIDE.md">GUIDE.md in the baseline</a>, which covers day two onward in detail today.</p>
+</details>
 </section>
 
 </main>
@@ -236,6 +279,27 @@ Two paths from here:
   <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
 </footer>
 
+<script>
+(function () {
+  function openForHash() {
+    if (!location.hash) return;
+    var el;
+    try { el = document.querySelector(decodeURIComponent(location.hash)); } catch (e) { return; }
+    if (!el) return;
+    var child = el.firstElementChild;
+    if (child && child.tagName === "DETAILS") child.open = true;
+    var d = el.closest ? el.closest("details") : null;
+    while (d) { d.open = true; d = d.parentElement ? d.parentElement.closest("details") : null; }
+    el.scrollIntoView();
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) setTimeout(openForHash, 0);
+  });
+  window.addEventListener("hashchange", openForHash);
+  openForHash();
+})();
+</script>
 <script src="site.js" defer></script>
 
 </body>
