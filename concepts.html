@@ -51,6 +51,9 @@
   /* tighter rhythm (Max's direction): the section gap halved on this page */
   main section { padding-top: 3.5rem; }
   main section:last-of-type { padding-bottom: 4rem; }
+  /* the owner paragraph (Max's direction, 2026-08-20): fixed intro doctrine —
+     part of the header, never folded; the guide's birth step deep-links here */
+  .owner-fixed { margin: 2.2rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--hairline-soft); font-size: 1rem; max-width: 40rem; }
 </style>
 <script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
 <noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
@@ -80,6 +83,7 @@
 <header class="hero-lite">
   <h1>Concepts</h1>
   <p class="lede">The dictionary and manual of FRACTAL: every command and every central concept, each in a few honest lines &mdash; and where a few lines aren&rsquo;t enough, the deeper description is one click away. The same pattern as everywhere in FRACTAL: a small set of ideas, applied recursively.</p>
+  <p class="owner-fixed" id="owner">One concept underlies every entry below: <strong>the owner</strong>. Every FRACTAL instance has exactly one &mdash; the human all authority inside it traces back to. AI agents are real, named writers whose work stays attributed to them forever, but writing is not owning: agents draft, review, and maintain <em>under grants the owner makes</em>; the owner ratifies, decides, and answers. Responsibility never transfers to the machine. The same rule grounds the system one level up: the kernel every project inherits stems from one origin, and it ships <em>already ratified by the origin&rsquo;s owner</em> &mdash; one standing ratification that holds the responsibility for the machine, kept to best knowledge through agent review passes and machine gates, made cryptographic by each release&rsquo;s signed tag and independent timestamp receipt. Trust here is never trust in anonymous files: it is a named person&rsquo;s ratification at the origin, and your own at your instance &mdash; <a href="guide.html#birth">ownership is born at the birth</a>, and everything after answers to you.</p>
 </header>
 
 <main>
