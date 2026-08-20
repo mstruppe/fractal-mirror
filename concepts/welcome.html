@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — /welcome</title>
+<meta name="description" content="/welcome — the scripted first contact: where the session is standing, what FRACTAL is, and the two paths out.">
+<link rel="stylesheet" href="../site.css">
+<!-- Concept detail page (the dictionary's click-through tier, Max's direction 2026-08-20).
+     Describes the shipped command; the verbatim file is the source of record. -->
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a class="mark" href="../fractal-site.html">FRACTAL</a>
+  <a href="../fractal-site.html">Home</a>
+  <a href="../guide.html">Guide</a>
+  <a href="../concepts.html" aria-current="page">Concepts</a>
+  <a href="../blog.html">Blog</a>
+  <a href="../labs.html">Research Labs</a>
+</nav>
+
+<header class="hero-lite">
+  <p class="kicker"><a href="../concepts.html#commands">Command library</a></p>
+  <h1><span class="mono">/welcome</span></h1>
+  <p class="lede">First contact, scripted. The one moment every project meets a stranger is the one moment least safe to improvise &mdash; so it isn&rsquo;t.</p>
+</header>
+
+<main>
+<section class="float">
+  <h2>What happens</h2>
+  <p>The session first determines <strong>where it is standing</strong>, with one read-only command. A distribution clone &mdash; a copy at a release tag, anything that is not the governing repository &mdash; makes the session a <em>reference surface</em>: it may read, explain, and assist a birth, and it may never close, edit canon, or push. The governing repository itself gets a different greeting: this is the live project; working sessions open with its own opener. The distinction is stated in one friendly sentence, not a wall of rules.</p>
+  <p>Then the explanation, written for a user rather than an evaluator: your project gets a memory that survives every session &mdash; decisions recorded with their reasoning, work handed over so any future session picks up cold, all of it plain text in git that you own. The AI works inside rules you can read; nothing is hidden in chat history.</p>
+  <p>Then <strong>exactly two paths out</strong>. <em>Start my own project</em> leads into the onboarding interview (<a href="begin.html" class="mono">/begin</a>) and ends in a repository of your own. <em>Show me around</em> gets an oriented tour &mdash; answered from the corpus, citing what was read, loading only what the question needs. Common first questions &mdash; what a clone contains versus what an instance inherits, which version to use, what the two permission layers are &mdash; are answered briefly, and only if asked.</p>
+  <h2>Why it&rsquo;s shaped this way</h2>
+  <p>The first shipping run found the opening moment unscripted, and the finding became a command &mdash; the same route every part of the system takes from friction to fix. Two rules do the real work here: a session must know whether it governs or merely references before it acts, and it must orient by reading the named entry points, never by scanning the repository.</p>
+  <p class="step-note">The shipped file: <a href="../commands/welcome.md" download>welcome.md &darr;</a> &mdash; the baseline&rsquo;s own working copy, verbatim. It compresses the <a href="../concepts.html#bib-onboarding">Onboarding Protocol</a> and the reference-surface rule; the stamp at its foot names its sources and refresh triggers, like every governed file.</p>
+  <p><a href="../concepts.html#commands">&larr; back to the command library</a></p>
+</section>
+</main>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row"><a href="../legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="../site.js" defer></script>
+
+</body>
+</html>

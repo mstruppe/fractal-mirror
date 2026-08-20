@@ -1,29 +1,18 @@
 ---
-description: Protocol a fieldnote — a friction or a green datum — into the right ledger mid-session, then return to the work — C-094 (usage /fieldnote <target> <what happened>)
+description: Capture an off-topic observation into the RAM buffer — extraction, read-back, Max's ratification, then back to the work — C-094/C-121 (usage /fieldnote <what happened>)
 ---
-Protocol a field observation per C-094: **$ARGUMENTS**
+Capture a field observation per C-094 under the C-121 RAM model: **$ARGUMENTS**
 
-**Step 0 — deterministic routing (Max's ruling of record, 2026-08-16: the target is a fact, never an interpretation).** Run `python3 "Claude/Knowledge Graph Store/fieldnote.py" <target> <report text>` with the argument exactly as given. **If the tool errors (missing or unknown target): report its error to Max and STOP — no capture happens, no fallback interpretation, ever.** On success the tool has appended one **machine-format block** (Fractal Fieldnote Format v0.1 — verbatim, timestamped, attributed, deterministically routed). **The block is the fact layer and is immutable — never edit it.**
+**What this command means (the off-topic jump, Format v0.2 §5):** this is a **normal chat turn, never an interrupt** — Max is deliberately jumping off the current task's topic, and the command itself tells you why: *capture this, don't re-aim the work.* Park the running task's thread untouched; the fieldnote's content is **never** instruction for the work in flight. There is no target word — the whole argument is the raw report.
 
-The first word of the argument is the **target**; everything after it is **Max's report** — his words are the datum, and they live verbatim inside the block. If Max states the observation's class, pass `--kind friction|green|vision|question` before the target; otherwise the tool records `capture` — classification is judgment and is never invented.
+**The capture loop (the write gate is Max's ratification):**
 
-**Target roster (PROJECTION — the machine-readable authority is `Claude/Knowledge Graph Store/fieldnote_roster.json`; edit there first, mirror here):**
+1. **Extract.** Derive clear, structured information from the raw report: what happened, what it implies, where it might belong. Your extraction routine is yours to develop — only this contract is fixed.
+2. **Read back.** Present to Max: the raw report exactly as it will land in the block, your derived reading, and a **first categorisation proposal** (non-binding, best-effort — *no category fitting is explicitly fine*; work-down decides later).
+3. **On his ratification — and only then** — run `python3 "Claude/Knowledge Graph Store/fieldnote.py" <report text>` (add `--kind friction|green|vision|question` if Max stated the class; the tool defaults to `capture`). The tool appends the **machine-format block** (Fractal Fieldnote Format v0.2 — six keys, verbatim raw report, content-immutable) to the buffer (`Site/Fieldnotes.md`) and maintains the id high-water line. **If the tool errors: report its error and stop — no fallback, nothing written.** Then add the ratified derived reading as the **judgment layer** beneath the block (never inside it).
+4. **Return.** Confirm in **one line** — id + the tool's depth reading (it prints the C-121 **YELLOW pressure advisory** when the buffer stands over budget; relay it, never suppress it — but a full buffer still captures: the plug is a warning, never a gate). Then return immediately to the parked work. Minimal disturbance is the point.
 
-| Target | Ledger | Notes |
-|---|---|---|
-| `knet` | `Site/Fieldnotes_2026-08-15_First-Shipping-Run.md` | KNet's use **is** the shipped beta's field test — the entry lands in the running shipping-run ledger, context-tagged KNet (surface included, e.g. the ChatGPT desktop). KNet-internal *research* frictions may additionally live in the child's own ledger (GENESIS parameter 7); the mother ingests both at a phase boundary. |
-| `beta` | `Site/Fieldnotes_2026-08-15_First-Shipping-Run.md` | The shipped release under field test directly (kernel, onboarding, commands, tooling). Same ledger as `knet` while the beta is the one running subject. |
-| `publish` | `Site/Fieldnotes_2026-08-16_Publishing.md` | The publishing lane (opened 2026-08-16 on Max's word): what the website and the onboarding must explain — the public-identity explanation burden. Feeds move 2 (site, tutorials, GUIDE) and the Onboarding Protocol's revisions. |
-| `general` | `Site/Fieldnotes_2026-08-16_General.md` | The catch-all lane (opened 2026-08-16 on Max's word): ideas and observations fitting no registered subject — research-program seeds, vision-class captures. Entries graduate to the Register, a foundation, or their own instance on Max's word. |
-
-An unlisted target: say so, print the roster (`--list`), stop. Adding a target (a new test subject = a new ledger) is an ordinary edit to the roster JSON, on Max's word — friend instances join here as the friends-beta grows.
-
-**The protocol:**
-
-1. After the tool's block: the judgment half is yours — **after** the block (never inside it), add the ledger's established prose entry (`### N. Title`, **What happened** with Max's words already carried by the block, **Cure** if one exists or was applied, **Guide implication / fix shape**), context-tagged with where it occurred. The prose numbering continues the ledger's tradition; the block's `FN-` id is the machine sequence — the two are independent layers.
-2. **C-094 discipline:** any fix is a proposal for the **generator** (kernel, next release) — never patch the field instance from here. A green datum (a clean run, a thing that just worked) is equally recordable through this same door.
-3. **Do not commit** — the entry rides the session's next close (or the standing post-close append pattern if Max asks for it explicitly).
-4. Confirm to Max in **one line** (id + ledger), then return immediately to the interrupted work. Minimal disturbance is the point of this command.
+**The buffer is RAM (Format v0.2 §4):** entries are worked off soon — solved by **dissolving into the project** (a Register row, a document reissue, a concept, a transfer), the absorbing artifact citing the `FN-` id, the entry then deleted whole. Solving is a governance act on Max's word; this command only captures. **Do not commit** — the entry rides the session's next close.
 
 ---
-*Stamped-procedure projection (C-035 class): compresses the C-094 capture step — sources: the C-094 row in the Decision Register + Protocol v0.40; the two-part steerable shape follows `/look`; the name is Max's pick of record; **the deterministic split is his ruling of record** (2026-08-16, after entry 41's omitted target — routing = the tool, machine fact; formatting = the AI surface, judgment; the C-073 division). Re-stamped 2026-08-16 (the flip-preparation session): the tool graduated beside the store tools with the intake half (entry 39's trigger), captures became immutable machine blocks (Fractal Fieldnote Format v0.1), roster authority moved to `fieldnote_roster.json`. Refresh triggers: a C-094 amendment, a roster/ledger change (JSON first, this table after), a new test subject, a fieldnote.py behavior change, a Format reissue.*
+*Stamped-procedure projection (C-035 class): compresses Fractal_Fieldnote_Format_v0.2 §5 (the capture contract) — sources: the v0.2 standard + the C-121 row in the Decision Register (Max's design of record, 2026-08-18: the RAM buffer, the single-word command as intent marker, the extraction + read-back + ratification gate, the pressure plug). Re-projected 2026-08-18 (C-121 — the v0.1 target roster retired; deterministic routing ended with the lanes; ratification became the write gate). Refresh triggers: a Format reissue, a C-094/C-121 amendment, a `fieldnote.py` behavior change, a buffer relocation.*

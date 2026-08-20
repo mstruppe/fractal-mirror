@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FRACTAL — Blog</title>
-<meta name="description" content="Working standards, field studies, experimental designs, and results — from FRACTAL's own record.">
+<meta name="description" content="The story of FRACTAL — the idea, how it started, how it developed, and where it is heading. Everything cites the record it happened in.">
 <link rel="stylesheet" href="site.css">
-<!-- BLOG section — deliberately rendered as FRACTAL's wiki (Max's direction, 2026-08-18):
-     plain, dense, made for overview, the way developer and researcher environments look.
-     The seriousness is shown by the rendering, never claimed by the copy.
-     TARGET RENDERING (Max's direction, same date): the central-bank release page model —
-     serious, stripped, navigable; in place of policy notes, AI working standards presented
-     like research papers in a blog. The Working standards feed below is that model's seed;
-     per-standard paper pages land in the content pass. -->
+<!-- BLOG section — the story page (Max's direction, 2026-08-20):
+     the blog tells the FRACTAL story — the idea, how it started, how it developed,
+     where it is heading. The value model is part of the story and is told here
+     (value-model.html now redirects to its chapter; the of-record stamp travels with it).
+     The standards feed and command sources moved to Concepts (the dictionary);
+     the research series — field studies, experimental designs, results — opens at
+     the Research Labs (labs.html; de-branded pending OQ-34 clearance), empty until the first publication lands.
+     Wiki rendering kept: plain, dense, made for reading. -->
 <style>
   /* wiki mode: document rendering, no reveal theatrics */
   .wiki { max-width: 52rem; margin: 0 auto; padding: 7.5rem 1.5rem 5rem; font-size: 0.95rem; line-height: 1.6; }
@@ -46,18 +47,13 @@
   .wiki .check { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; color: var(--muted); margin: 0.3rem 0 0.9rem; }
   .wiki .status { font-size: 0.82rem; color: var(--faint); font-style: italic; }
   .wiki .rule-note { font-size: 0.85rem; color: var(--faint); border-top: 1px solid var(--hairline-soft); margin-top: 2.6rem; padding-top: 1rem; }
-  /* the publications feed (release-page model) */
-  .pubs { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.4rem 0 0.9rem; }
-  .pubs td { padding: 0.55rem 1rem 0.55rem 0; border-bottom: 1px solid var(--hairline-soft); vertical-align: baseline; }
-  .pubs td.d { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
-  .pubs td.t a { border-bottom: none; font-weight: 550; }
-  .pubs td.t a:hover { border-bottom: 1px solid var(--hairline); }
-  .pubs td.v { color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
-  .pubs td.s { color: var(--faint); font-size: 0.82rem; font-style: italic; white-space: nowrap; text-align: right; }
-  .pubs td.w { color: var(--muted); font-size: 0.85rem; }
-  .pubs td.d a { border-bottom: none; }
-  .pubs td.d a:hover { border-bottom: 1px solid var(--hairline); }
-  .pubs-wrap { overflow-x: auto; }
+  .wiki .of-record { font-size: 0.85rem; color: var(--faint); margin-top: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--hairline-soft); }
+  /* the branches table (carried in with the value model) */
+  .branch-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0 0.9rem; }
+  .branch-table td { padding: 0.6rem 1rem 0.6rem 0; border-bottom: 1px solid var(--hairline-soft); vertical-align: baseline; color: var(--muted); }
+  .branch-table td.n { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
+  .branch-table td.b { color: var(--ink); font-weight: 550; white-space: nowrap; }
+  .branch-wrap { overflow-x: auto; }
 </style>
 <script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
 <noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
@@ -70,92 +66,101 @@
   <a href="guide.html">Guide</a>
   <a href="concepts.html">Concepts</a>
   <a href="blog.html" aria-current="page">Blog</a>
+  <a href="labs.html">Research Labs</a>
 </nav>
 
-<nav class="subnav" aria-label="Blog sections">
-  <a href="value-model.html">Value model</a>
-  <a href="#standards">Standards</a>
-  <a href="#commands">Commands</a>
+<nav class="subnav" aria-label="Blog chapters">
+  <a href="#idea">The idea</a>
+  <a href="#origins">How it started</a>
+  <a href="#development">How it developed</a>
   <a href="#proof">Proof</a>
-  <a href="#field">Field studies</a>
-  <a href="#experiments">Experiments</a>
-  <a href="#results">Results</a>
+  <a href="#value-model">Where it is heading</a>
 </nav>
 
 <div class="wiki">
   <h1>FRACTAL Blog</h1>
-  <p class="wiki-sub">Working standards, field studies, experimental designs, and results — from the project&rsquo;s own record. What lands here has already happened, and cites where it happened.</p>
+  <p class="wiki-sub">The story of FRACTAL &mdash; the idea, how it started, how it developed, and where it is heading. Everything cites the record it happened in.</p>
 
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol>
-      <li><a href="#standards">Working standards</a></li>
-      <li><a href="#commands">Command sources</a></li>
-      <li><a href="#proof">Proof — claims you can check</a></li>
-      <li><a href="#field">Field studies</a></li>
-      <li><a href="#experiments">Experimental designs</a></li>
-      <li><a href="#results">Results</a></li>
+      <li><a href="#idea">The idea</a></li>
+      <li><a href="#origins">How it started</a></li>
+      <li><a href="#development">How it developed</a></li>
+      <li><a href="#proof">Proof &mdash; claims you can check</a></li>
+      <li><a href="#value-model">Where it is heading: three branches and a shooting star</a></li>
     </ol>
   </div>
 
-  <h2 id="standards">Working standards</h2>
-  <p>Ratified standards for AI-assisted work, in order of release. Each was distilled from executed history and ratified on the record; full texts ship in the public baseline. Per-standard paper presentations — abstract, method, provenance — land here in the content pass.</p>
-  <div class="pubs-wrap"><table class="pubs">
-    <tr id="std-migration"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-migration">Kernel Migration Procedure</a></td><td class="v">v0.1</td><td class="s">ships with the next release</td></tr>
-    <tr id="std-scholarly"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-scholarly">Scholarly Source Convention</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Scholarly_Source_Convention_v0.1.md" download>full text &darr;</a></td></tr>
-    <tr id="std-vocabulary"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-vocabulary">Vocabulary Extension Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Vocabulary_Extension_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
-    <tr id="std-onboarding"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-onboarding">Onboarding Protocol</a></td><td class="v">v0.3</td><td class="s"><a href="standards/Fractal_Onboarding_Protocol.md" download>full text &darr;</a></td></tr>
-    <tr id="std-diet"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-diet">Diet Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Diet_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
-    <tr id="std-flight"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-flight">Ultracode Flight Protocol</a></td><td class="v">v0.2</td><td class="s"><a href="standards/Fractal_Ultracode_Flight_Protocol_v0.2.md" download>full text &darr;</a></td></tr>
-    <tr id="std-scan"><td class="d">2026-08-17</td><td class="t"><a href="concepts.html#bib-scan">Scan Procedure</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Scan_Procedure_v0.1.md" download>full text &darr;</a></td></tr>
-    <tr id="std-board"><td class="d">2026-08-16</td><td class="t"><a href="concepts.html#bib-board">Agenda Board Format</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Agenda_Board_Format_v0.1.md" download>full text &darr;</a></td></tr>
-    <tr id="std-fieldnote"><td class="d">2026-08-16</td><td class="t"><a href="concepts.html#bib-fieldnote">Fieldnote Format</a></td><td class="v">v0.1</td><td class="s"><a href="standards/Fractal_Fieldnote_Format_v0.1.md" download>full text &darr;</a></td></tr>
-  </table></div>
-  <p class="status">Full texts are the shipped baseline&rsquo;s files, verbatim and downloadable; a standard ratified after the newest anchored release ships with the next one.</p>
+  <h2 id="idea">The idea</h2>
+  <p>Real investigation is fragmented. A question moves through the web, the literature, a dataset, a notebook, a model, a draft &mdash; and every switch throws context away. The answer half-formed on one surface has to be rebuilt on the next. FRACTAL began as a refusal to accept that: one environment for the whole lifecycle &mdash; gather, organise, analyse, model, connect, communicate &mdash; where the reasoning survives along with the results.</p>
+  <p>The method behind it is <strong>recursive simplicity</strong>. Complex understanding comes from a small set of simple rules applied again and again, at every scale: project, domain, component, conversation, task. Begin from the smallest abstraction that works, and add only what an observed problem demands. The same principle decides what gets built at all &mdash; nothing in the system exists ahead of a need that actually fired.</p>
+  <p>The AI in this picture is a collaborator with the books open. It drafts, maintains, verifies, and cites; interpretation and decisions stay with the human. And the knowledge itself is treated as a living structure rather than a pile of documents &mdash; everything connects, everything carries its provenance, nothing depends on anyone&rsquo;s memory.</p>
 
-  <h2 id="commands">Command sources</h2>
-  <p>A command is a small markdown file the agent reads — the procedure written down in plain language, shipped in the baseline&rsquo;s <span class="mono">.claude/commands/</span> folder and stamped like everything else. These are the six from the newest anchored release, verbatim and downloadable: read one to see exactly what a session is told, or drop it into your own instance&rsquo;s folder and adapt it. The dictionary view — what each does, in one line — is the <a href="concepts.html#commands">command library</a>.</p>
-  <div class="pubs-wrap"><table class="pubs">
-    <tr id="src-welcome"><td class="d"><a href="concepts.html#cmd-welcome">/welcome</a></td><td class="w">the scripted first contact — the standing check, the explanation, the two paths out</td><td class="s"><a href="commands/welcome.md" download>welcome.md &darr;</a></td></tr>
-    <tr id="src-begin"><td class="d"><a href="concepts.html#cmd-begin">/begin</a></td><td class="w">the trigger of the onboarding interview — the protocol is the script, the birth is its product</td><td class="s"><a href="commands/begin.md" download>begin.md &darr;</a></td></tr>
-    <tr id="src-fractal"><td class="d"><a href="concepts.html#cmd-yourproject">/fractal</a></td><td class="w">the baseline&rsquo;s own opener — the living specimen of your project&rsquo;s named command</td><td class="s"><a href="commands/fractal.md" download>fractal.md &darr;</a></td></tr>
-    <tr id="src-close"><td class="d"><a href="concepts.html#cmd-close">/close</a></td><td class="w">the close ritual orchestrated — checklist, checkers, ripple, commit and push</td><td class="s"><a href="commands/close.md" download>close.md &darr;</a></td></tr>
-    <tr id="src-fieldnote"><td class="d"><a href="concepts.html#cmd-fieldnote">/fieldnote</a></td><td class="w">deterministic capture — one line into the right ledger, then straight back to the work</td><td class="s"><a href="commands/fieldnote.md" download>fieldnote.md &darr;</a></td></tr>
-    <tr id="src-look"><td class="d"><a href="concepts.html#cmd-look">/look</a></td><td class="w">the observation window — boundaries first, read-only always, report and withdraw</td><td class="s"><a href="commands/look.md" download>look.md &darr;</a></td></tr>
-  </table></div>
-  <p class="status">Verbatim copies of the shipped baseline&rsquo;s files; refreshed with each release.</p>
+  <h2 id="origins">How it started</h2>
+  <p>FRACTAL began as long conversations with an AI about how knowledge work should feel, and became software the day those conversations were given a repository. The earliest foundation &mdash; the first architecture drafts, the first governance protocols &mdash; was laid with one vendor&rsquo;s chat assistant; in August 2026 the project moved to a coding agent and rebuilt itself from first principles. That era split is preserved in the repository&rsquo;s own archive, because the project keeps its history the way it keeps everything else.</p>
+  <p>The first thing built was memory: a knowledge store of small, append-only records with a verifier that blocks any commit violating its invariants. The second was law: every decision the project makes is a numbered row in a register, with its reasoning attached &mdash; made by saying it out loud in a working session. <a href="concepts.html#rules">Rules are made by talking</a>; the record keeps them.</p>
+  <p>Around those two grew the rhythm the system still runs on. A session opens by reading a compressed spine of context &mdash; the vision, the current state, the standing rules. It closes by writing its own record: what was decided, what changed, what the next session should expect. The close is a ritual with machine checkers that block red, and it ends in a commit. Between sessions, nothing lives in an AI&rsquo;s memory; everything lives in the repo.</p>
 
-  <h2 id="proof">Proof — claims you can check</h2>
+  <h2 id="development">How it developed</h2>
+  <p>The system&rsquo;s first real test was reproducing itself. The kernel &mdash; the constitution, formats, procedures, and tools a project needs from day one &mdash; was extracted into an executable genesis, and the stranger&rsquo;s path from a bare clone to a working instance was drilled until it held. The first child followed: a research project born from an anchored release tag, governed by its own record from its first session. It later crossed a release boundary under its own migration protocol, every gate on the record &mdash; and along the way it swapped AI vendors mid-life without touching the kernel.</p>
+  <p>Releases became provenance events: each one a signed tag with an independent OpenTimestamps receipt committed beside it, the earliest anchors Bitcoin-final. Five betas shipped that way. On 18 August 2026 the proven parts went public &mdash; a mirror serving the anchored releases, this site explaining the machine from its real parts, one permanent address as the door. Live is deliberately not official: no announcement, no launch. The system keeps improving the way it always has &mdash; by being used, now in the open.</p>
+  <p>What follows are the claims that record can already back.</p>
+
+  <h2 id="proof">Proof &mdash; claims you can check</h2>
 
   <h3>The memory survives a vendor swap</h3>
-  <p>The first project born from FRACTAL&rsquo;s kernel was birthed and run through Claude Code, then continued its working sessions in the ChatGPT desktop app — zero kernel changes, because the memory lives in the repo. The protocol of record states: <em>&ldquo;Client-neutrality moved from claim to observed fact.&rdquo;</em> In the founder&rsquo;s words: <em>&ldquo;usually you&rsquo;re vendor bound to get memory within projects.&rdquo;</em></p>
+  <p>The first project born from FRACTAL&rsquo;s kernel was birthed and run through Claude Code, then continued its working sessions in the ChatGPT desktop app &mdash; zero kernel changes, because the memory lives in the repo. The protocol of record states: <em>&ldquo;Client-neutrality moved from claim to observed fact.&rdquo;</em> In the founder&rsquo;s words: <em>&ldquo;usually you&rsquo;re vendor bound to get memory within projects.&rdquo;</em></p>
 
   <h3>Integrity is machine-verified, not asserted</h3>
-  <p>Two dependency-free checkers block red: one verifies the knowledge store&rsquo;s invariants before every store-touching commit; one reads the corpus&rsquo;s own prose claims about itself — versions, pointers, counts — against reality at every close. Both have caught real defects, and each catch becomes a mechanical rule. The tools refuse, never degrade. Where the checkers don&rsquo;t reach, verification stays on humans — the machine-checked claims run in minutes; the rest is reviewed on the record, and drift is measured, not denied.</p>
+  <p>Two dependency-free checkers block red: one verifies the knowledge store&rsquo;s invariants before every store-touching commit; one reads the corpus&rsquo;s own prose claims about itself &mdash; versions, pointers, counts &mdash; against reality at every close. Both have caught real defects, and each catch becomes a mechanical rule. The tools refuse, never degrade. Where the checkers don&rsquo;t reach, verification stays on humans &mdash; the machine-checked claims run in minutes; the rest is reviewed on the record, and drift is measured, not denied.</p>
 
   <h3>Total machine loss is drilled, not promised</h3>
-  <p>A fresh clone on a clean machine rebuilds the working system from the bootstrap document alone — verified, byte-parity, three green drills on the record. The record&rsquo;s own words: <em>&ldquo;&lsquo;Laptop in the ocean&rsquo; is demonstrated fact.&rdquo;</em></p>
+  <p>A fresh clone on a clean machine rebuilds the working system from the bootstrap document alone &mdash; verified, byte-parity, three green drills on the record. The record&rsquo;s own words: <em>&ldquo;&lsquo;Laptop in the ocean&rsquo; is demonstrated fact.&rdquo;</em></p>
 
   <h3>Priority is mathematics, not testimony</h3>
   <p>Every release ships as a signed tag with an independent OpenTimestamps receipt committed in the repository itself, so any clone carries the full proof chain; the earliest anchors are Bitcoin-final. This is the one claim a stranger can check without reading anything:</p>
   <p class="check">git tag -v beta-0.4 &nbsp;&middot;&nbsp; ots verify Provenance/beta-0.3-public.txt.ots</p>
 
   <h3>A stranger can birth a working instance</h3>
-  <p>The path the <a href="fractal-site.html#setup">setup</a> describes has been walked twice under stranger conditions: once when the first child project was born from an anchored release tag, and once in a simulated onboarding of the public mirror itself — a scripted non-programmer ran the quickstart verbatim through to a real birth, both integrity checkers passing, with no outside knowledge needed at any step.</p>
+  <p>The path the <a href="fractal-site.html#setup">setup</a> describes has been walked twice under stranger conditions: once when the first child project was born from an anchored release tag, and once in a simulated onboarding of the public mirror itself &mdash; a scripted non-programmer ran the quickstart verbatim through to a real birth, both integrity checkers passing, with no outside knowledge needed at any step.</p>
 
   <h3>Limits, stated</h3>
-  <p>FRACTAL does not abolish context limits — sessions read a compressed spine; the claim is owned, verifiable, vendor-independent memory, never infinite memory. No auto-updates into living instances — by design; sovereignty is the trade, named plainly. No adoption path for existing projects yet — the paved path births new projects. No UI — terminal and files, with one honestly failed experiment on the books. The network layers are unbuilt and trigger-armed, constitutionally barred from binding a build.</p>
+  <p>FRACTAL does not abolish context limits &mdash; sessions read a compressed spine; the claim is owned, verifiable, vendor-independent memory, never infinite memory. No auto-updates into living instances &mdash; by design; sovereignty is the trade, named plainly. No adoption path for existing projects yet &mdash; the paved path births new projects. No UI &mdash; terminal and files, with one honestly failed experiment on the books. The network layers are unbuilt and trigger-armed, constitutionally barred from binding a build.</p>
 
-  <h2 id="field">Field studies</h2>
-  <p>Whole episodes from the record, told with their evidence attached: the first child project&rsquo;s birth from an anchored tag; the vendor-swap trial; the first kernel migration, executed under the child&rsquo;s own protocol with every gate on the record; the close that survived its own client archiving the chat.</p>
-  <p class="status">The first written studies land with the content pass; their raw material exists as flight records, protocols, and fieldnote ledgers in the baseline.</p>
+  <h2 id="value-model">Where it is heading: three branches and a shooting star</h2>
+  <p>The forward path is written the same way as the history above &mdash; with statuses attached. Its core is the <strong>value model</strong>: what FRACTAL is worth, and to whom. Deliberately <strong>not a business model</strong> &mdash; business implies cash flow, and none of the branches below carries one. It is a <strong>value promise</strong>: the structure of what the project delivers before, and independent of, any money changing hands.</p>
+  <p>The branches share a structural property that is itself fractal: <strong>each is a value promise outward and an experiment inward, at once.</strong> The product proves itself by running its own development. The explanation of the machine is built from the machine&rsquo;s real parts. The distribution arm, when it opens, will double as the test bench for a content class the system has never governed. Nothing here is decoration on top of the work &mdash; every surface that delivers value to someone else also feeds the loop that improves the system.</p>
+  <div class="branch-wrap"><table class="branch-table">
+    <tr><td class="n">1</td><td class="b">The product</td><td>durable, auditable project memory across AI sessions</td></tr>
+    <tr><td class="n">2</td><td class="b">The hub</td><td>the method itself, learnable and adoptable piecemeal</td></tr>
+    <tr><td class="n">3</td><td class="b">The media branch</td><td>knowledge reaching people where they are &mdash; declared, unbuilt</td></tr>
+    <tr><td class="n">&#8734;</td><td class="b">The horizon</td><td>the knowledge network &mdash; a bearing, not a destination</td></tr>
+  </table></div>
 
-  <h2 id="experiments">Experimental designs</h2>
-  <p>The claims worth making are the ones that can fail: whether structured context keeps agents <em>right</em> (a context-fidelity experiment with blinded scoring is running in the first child project now), whether it keeps them <em>cheap</em> (the tokens-on-new-context claim, designed to be measured against a bare-conversation baseline), and which engine at which capacity suffices for which use intensity.</p>
-  <p class="status">Designs are published here when they freeze; results follow when they exist — including the ones that come back negative.</p>
+  <h3>The product: memory that survives</h3>
+  <p>The kernel, the governance stack, the knowledge store, the standards. The promise is the one on the masthead &mdash; <em>AI agents forget. Your project won&rsquo;t.</em> &mdash; made provable rather than asserted: session-durable context, decision provenance, machine-verified consistency, releases signed and externally timestamped. It is the deepest branch and the furthest along: five anchored releases, an executable genesis, and a first foreign project born from the kernel and later migrated across a release boundary under its own governance &mdash; every gate on the record.</p>
+  <p>Everything else in this model rides on this branch. No other promise is credible if this one is not real &mdash; which is why the <a href="#proof">proof chapter</a> exists.</p>
 
-  <h2 id="results">Results</h2>
-  <p class="status">Nothing to report yet — by honesty, not by accident: the first experiment is still in the field. Results land here as experiments close, whichever way they land.</p>
+  <h3>The hub: the site is the engine sketch</h3>
+  <p>This website is not marketing surface for branch one. It is the machine&rsquo;s explanation built from the machine&rsquo;s real parts &mdash; the shipped baseline&rsquo;s <a href="concepts.html#commands">command files</a> and <a href="concepts.html#bibliography">working standards</a>, verbatim and downloadable, refreshed with each release. Its standalone promise: a visitor can learn the method, take the standards, and adopt pieces <strong>without ever birthing an instance</strong>.</p>
+  <p>That promise is not a guess. In a simulation program, three synthetic adopters walked the public material end to end; all three declined the full system &mdash; <em>not yet</em> &mdash; and all three wanted the substrate: the standards, the procedures, the checkable formats. People take the parts before they take the whole. The hub is the branch that serves exactly that adoption path, and it grows by the ordinary content pass &mdash; guide depth, paper-style standard pages, field studies.</p>
+
+  <h3>The media branch: declared, unbuilt</h3>
+  <p>The newest branch, and the only one that does not exist yet &mdash; stated here with its honest status. Three roles in one structure: <strong>marketing, website extension, and information distributor</strong> &mdash; a social media arm producing governed public content.</p>
+  <p>Its inward face is the interesting one. Producing governed media content means solving, in real use, problems no current part of the system touches: extracting knowledge from media into the project&rsquo;s markdown record; whether a post is a stamped projection of a canonical source, the way every other public artifact here is; provenance for content that leaves the repository and circulates; and the complexity growth of the instance that governs all of it. <strong>Somewhere there is a practical limit to how complex a governed instance can get. None is in sight yet</strong> &mdash; and this branch is the probe that goes looking for it.</p>
+  <p>It opens by decision, not by drift: no post exists until the branch&rsquo;s trigger fires, and when it does, the experiment is instrumented from the first post &mdash; the same field-testing discipline every other part of the system runs under.</p>
+
+  <h3>The horizon: the shooting star</h3>
+  <p>The fourth value is the knowledge network &mdash; warm starts for every new project, knowledge exchanged as verified increments, verification labor finally paid. It is deliberately <strong>not a branch</strong>. It is a bearing: the direction the three branches fly by, not a destination any of them is committed to reach. The network layers are unbuilt, trigger-armed, and constitutionally barred from binding a build &mdash; the same honesty the <a href="#proof">limits section</a> states for everything else. The nearest real piece of it already exists in miniature: <a href="fractal-site.html#discover">one public home</a>, serving standards to anyone who wants them.</p>
+
+  <h3>The constraint: gas</h3>
+  <p>One constraint cuts across every branch, and it deserves to be stated as plainly as the promises: <strong>this work is token-heavy, and tokens are not cheap.</strong> The record carries the data honestly &mdash; a single nine-agent verification flight spent close to a million tokens; the largest verification program ran 67 agents; the flight standard requires cost reporting precisely because the burn was felt early. The structural form of the risk is sharper than &ldquo;expensive&rdquo;:</p>
+  <p class="voice"><strong>Value scales with token spend &mdash; so the failure mode is not that FRACTAL doesn&rsquo;t work, but that it succeeds into unaffordability. FRACTAL could become so good it needs too much gas.</strong></p>
+  <p>The exposure differs by branch: the product&rsquo;s ritual overhead is the baseline burn; the hub is nearly free &mdash; static content, refreshed mechanically; the media branch would be the hungriest of all, which is one reason it waits for a cost picture before it opens. What the constraint buys today is discipline, not fear: cost stays on the record, efficiency work &mdash; like the <a href="procedures.html#diet">memory diet</a> &mdash; counts as value work rather than housekeeping, and the open question is armed where it can be answered cheaply: does token spend per unit of durable value fall, hold, or rise as an instance grows? No datum distinguishes these yet. The record that answers it is already being kept.</p>
+  <p class="of-record">Of record: <em>Fractal_Value_Model</em> v0.2 &mdash; canonical concept document, Draft, explicitly non-binding (issued 2026&#8211;08&#8211;18). This chapter is a stamped projection of that document: it refreshes when the document revises, and commits to nothing the document doesn&rsquo;t. The founder&rsquo;s framings are preserved verbatim &mdash; the shooting star, the exclamation mark, the gas.</p>
+
+  <p>Beyond the branches lies the research record. The first experiments are already in the field &mdash; a context-fidelity study is running in the first child project now &mdash; and their designs and results will be published as dated, citable records at the <a href="labs.html">Research Labs</a>. Nothing has landed there yet. When it does, it lands frozen, whichever way the result falls.</p>
 
   <p class="rule-note">Editorial rule of this page: everything cites the record; nothing is written here first.</p>
 </div>
