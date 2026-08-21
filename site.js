@@ -40,6 +40,59 @@
     });
   });
 
+  /* the "where" question — setup location picker.
+     Rewrites the clone command (.cmd[data-cmd="clone"]) and every inline
+     [data-fractal-path] to the place the visitor chooses. The command creates
+     the folder; the picker only decides where. Choice persists per browser. */
+  var pickers = document.querySelectorAll("[data-where]");
+  if (pickers.length) {
+    var WHERE_KEY = "fractal-where";
+    var where = { base: "Desktop", name: "fractal" };
+    try {
+      var saved = JSON.parse(localStorage.getItem(WHERE_KEY));
+      if (saved && typeof saved.base === "string" && saved.name) where = saved;
+    } catch (e) {}
+    var wherePath = function () {
+      var rest = (where.base ? where.base + "/" : "") + where.name;
+      /* a space needs quoting, and ~ does not expand inside quotes — use $HOME */
+      return /\s/.test(rest) ? '"$HOME/' + rest + '"' : "~/" + rest;
+    };
+    var whereRender = function () {
+      var p = wherePath();
+      document.querySelectorAll('.cmd[data-cmd="clone"]').forEach(function (el) {
+        el.firstChild.nodeValue =
+          "git clone https://github.com/mstruppe/fractal-mirror.git " + p +
+          " && cd " + p + " && git checkout $(git describe --tags --abbrev=0)";
+      });
+      document.querySelectorAll("[data-fractal-path]").forEach(function (el) {
+        el.textContent = p;
+      });
+      pickers.forEach(function (pk) {
+        pk.querySelectorAll("[data-base]").forEach(function (b) {
+          b.classList.toggle("active", b.getAttribute("data-base") === where.base);
+        });
+        var inp = pk.querySelector("input");
+        if (inp && inp.value !== where.name && document.activeElement !== inp) inp.value = where.name;
+      });
+      try { localStorage.setItem(WHERE_KEY, JSON.stringify(where)); } catch (e) {}
+    };
+    pickers.forEach(function (pk) {
+      pk.querySelectorAll("[data-base]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          where.base = b.getAttribute("data-base");
+          whereRender();
+        });
+      });
+      var inp = pk.querySelector("input");
+      if (inp) inp.addEventListener("input", function () {
+        /* strip what would break the shell line; spaces are fine (quoted above) */
+        where.name = inp.value.replace(/["'\\$`]/g, "").trim() || "fractal";
+        whereRender();
+      });
+    });
+    whereRender();
+  }
+
   /* subnav */
   var subnav = document.querySelector("nav.subnav");
   if (!subnav) return;

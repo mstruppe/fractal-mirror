@@ -69,7 +69,20 @@
     <div class="step-n">1</div>
     <div class="step-body">
       <p class="step-title">Get FRACTAL</p>
-      <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <div class="where" data-where>
+        <p class="where-q">Where should it land on your machine?</p>
+        <div class="where-row" role="group" aria-label="Choose where the folder is created">
+          <button type="button" class="chip active" data-base="Desktop">Desktop</button>
+          <button type="button" class="chip" data-base="Downloads">Downloads</button>
+          <button type="button" class="chip" data-base="Documents">Documents</button>
+          <button type="button" class="chip" data-base="">Home folder</button>
+          <label class="where-name">folder name
+            <input type="text" value="fractal" spellcheck="false" autocomplete="off" aria-label="Folder name">
+          </label>
+        </div>
+        <p class="step-note">You don&rsquo;t create the folder yourself &mdash; the command below creates it, at exactly the spot you pick; anywhere is fine. This copy is the hatch, not the home: birth your own project and that project gets its own folder, chosen consciously in the interview &mdash; this one becomes scaffolding you can delete.</p>
+      </div>
+      <div class="cmd" data-cmd="clone">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
       <p class="step-note">A &ldquo;detached HEAD&rdquo; notice is expected &mdash; you are standing on the newest release. This clone is a reference, not your project.</p>
     </div>
   </div>

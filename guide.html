@@ -78,8 +78,23 @@
 </summary>
 
   <p class="voice">Clone the public baseline, stand on the newest release&hellip;</p>
+  <p>First, know what this step downloads: <strong>the hatch, not the home</strong>. The folder is a reference copy of FRACTAL &mdash; it explains itself, and it can birth your own project. Stay to read, and this copy is your copy. Birth a project, and the project gets <em>its own</em> folder &mdash; the interview asks you where, and <em>that</em> is the location worth choosing consciously; this one becomes scaffolding you can delete.</p>
+  <p>So put this one anywhere &mdash; Downloads is fine. You don&rsquo;t create the folder yourself: the command below creates it at the spot you pick, and everything lives inside it &mdash; delete the folder and every trace is gone.</p>
+  <div class="where" data-where>
+    <p class="where-q">Where should it land on your machine?</p>
+    <div class="where-row" role="group" aria-label="Choose where the folder is created">
+      <button type="button" class="chip active" data-base="Desktop">Desktop</button>
+      <button type="button" class="chip" data-base="Downloads">Downloads</button>
+      <button type="button" class="chip" data-base="Documents">Documents</button>
+      <button type="button" class="chip" data-base="">Home folder</button>
+      <label class="where-name">folder name
+        <input type="text" value="fractal" spellcheck="false" autocomplete="off" aria-label="Folder name">
+      </label>
+    </div>
+    <p class="step-note">The command updates as you choose. A name with a space works too &mdash; the line quotes itself for you.</p>
+  </div>
   <p>Open a terminal: on <strong>macOS</strong>, press <span class="mono">&#8984;&thinsp;Space</span> and type &ldquo;Terminal&rdquo;; on <strong>Windows</strong>, open <em>Git Bash</em> from the Start menu; on <strong>Linux</strong>, your terminal of choice. Then paste the one line from the <a href="fractal-site.html#setup">setup</a>:</p>
-  <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+  <div class="cmd" data-cmd="clone">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
   <div class="term" role="img" aria-label="Terminal after cloning: git reports the detached HEAD notice — expected.">
     <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Terminal &mdash; what you&rsquo;ll see</span></div>
     <div class="term-body"><span class="tp">$</span> <span class="tc">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal</span>
@@ -124,8 +139,8 @@ Two paths from here:
     <div class="step-n">1</div>
     <div class="step-body">
       <p class="step-title">One time: paste this in a terminal, press enter, close it</p>
-      <div class="cmd">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
-      <p class="step-note">That is the terminal&rsquo;s entire role in your FRACTAL life. (An agent with desktop access can even run this line for you &mdash; paste it into the chat instead.)</p>
+      <div class="cmd" data-cmd="clone">git clone https://github.com/mstruppe/fractal-mirror.git ~/Desktop/fractal &amp;&amp; cd ~/Desktop/fractal &amp;&amp; git checkout $(git describe --tags --abbrev=0)<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+      <p class="step-note">It creates the one folder FRACTAL lives in, at the spot chosen above &mdash; that is the terminal&rsquo;s entire role in your FRACTAL life. (An agent with desktop access can even run this line for you &mdash; paste it into the chat instead.)</p>
     </div>
   </div>
 
@@ -141,7 +156,7 @@ Two paths from here:
     <div class="step-n">3</div>
     <div class="step-body">
       <p class="step-title">Connect it to FRACTAL</p>
-      <p class="step-note">Open <span class="mono">~/Desktop/fractal</span> as the project folder (in Claude Code&rsquo;s desktop app: open that folder; in any agent: make it the working folder). <strong>The folder is the connection</strong> &mdash; FRACTAL&rsquo;s memory is the folder, so an agent standing in it is an agent connected to it.</p>
+      <p class="step-note">Open <span class="mono" data-fractal-path>~/Desktop/fractal</span> as the project folder (in Claude Code&rsquo;s desktop app: open that folder; in any agent: make it the working folder). <strong>The folder is the connection</strong> &mdash; FRACTAL&rsquo;s memory is the folder, so an agent standing in it is an agent connected to it.</p>
     </div>
   </div>
 
