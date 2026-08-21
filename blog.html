@@ -36,6 +36,84 @@
   .toc li { margin: 0.22rem 0; }
   .toc a { border-bottom: none; }
   .toc a:hover { border-bottom: 1px solid var(--hairline); }
+  /* the floating contents pill (editorial, 2026-08-21): the subnav row is retired on this
+     page — once the in-page Contents box scrolls fully out of view, a chevron appears under
+     the top menu and expands the same table of contents from anywhere in the page. */
+  .tocfloat { position: fixed; top: 46px; left: 0; right: 0; z-index: 9; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  .tocfloat[hidden] { display: none; }
+  /* lightly tinted glass (15% ground — the deep blur carries the separation); the surface
+     carries a screen-reflection glare — two broad soft diagonal light bands (the glass
+     texture of the reference set), nothing more */
+  .tocfloat {
+    --glass: rgba(255, 255, 255, 0.15);
+    --shine: rgba(255, 255, 255, 0.5);
+    --shine2: rgba(255, 255, 255, 0.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    .tocfloat {
+      --glass: rgba(0, 0, 0, 0.15);
+      --shine: rgba(255, 255, 255, 0.085);
+      --shine2: rgba(255, 255, 255, 0.045);
+    }
+  }
+  .tocfloat-btn {
+    pointer-events: auto; order: 2; display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 26px; border: 1px solid var(--hairline-soft); border-top: none;
+    border-radius: 0 0 8px 8px; background: var(--glass);
+    -webkit-backdrop-filter: saturate(1.5) blur(25px); backdrop-filter: saturate(1.5) blur(25px);
+    color: var(--muted); cursor: pointer; padding: 0; transition: color 0.2s ease;
+  }
+  .tocfloat-btn:hover { color: var(--ink); }
+  .tocfloat-btn svg { transition: transform 0.25s ease; }
+  .tocfloat[data-open] .tocfloat-btn svg { transform: rotate(180deg); }
+  /* the expanded menu: a full-width bar under the top menu, vertically minimal —
+     the chapters flow horizontally (wrapping on small screens); the chevron tab
+     rides beneath the bar to collapse it. Mechanics per the original submenu:
+     it slides down as if it comes out of the top bar (height unrolls while the
+     content translates in from above, clipped — the subnav's motion, layout-true). */
+  .tocfloat-panel {
+    order: 1; width: 100%; pointer-events: none;
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+  }
+  .tocfloat[data-open] .tocfloat-panel { grid-template-rows: 1fr; pointer-events: auto; }
+  .tocfloat-panel-in { overflow: hidden; min-height: 0; }
+  .tocfloat-panel .toc {
+    margin: 0; border: none; border-radius: 0; display: block;
+    width: 100%; box-sizing: border-box;
+    padding: 0.4rem 1.5rem 0.5rem;
+    position: relative;
+    background: var(--glass);
+    -webkit-backdrop-filter: saturate(1.5) blur(25px); backdrop-filter: saturate(1.5) blur(25px);
+    border-bottom: 1px solid var(--hairline-soft);
+    transform: translateY(-100%);
+    transition: transform 0.35s ease;
+  }
+  /* the glass surface: the screen-reflection glare — one wide and one narrow diagonal
+     band with soft edges, sweeping the pane; layered over the frost, under the words */
+  .tocfloat-panel .toc::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(118deg,
+      transparent 26%, var(--shine) 34%, var(--shine) 44%, transparent 52%,
+      transparent 57%, var(--shine2) 62%, var(--shine2) 66%, transparent 71%);
+  }
+  .tocfloat-panel .toc ol, .tocfloat-panel .toc .toc-title { position: relative; z-index: 1; }
+  .tocfloat[data-open] .tocfloat-panel .toc { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .tocfloat-panel, .tocfloat-panel .toc { transition: none; }
+  }
+  .tocfloat-panel .toc-title { display: none; }
+  /* the original content structure, numbered — aligned to the article column,
+     very little spacing above and below */
+  .tocfloat-panel .toc ol { max-width: 52rem; margin: 0 auto; padding-left: 3rem; }
+  /* scrollspy (the original submenu's mechanic): the section currently on screen
+     reads ink, the rest recede muted; numbers follow their row where :has lands */
+  .tocfloat-panel .toc li { color: var(--muted); }
+  .tocfloat-panel .toc a { color: var(--muted); transition: color 0.2s ease; }
+  .tocfloat-panel .toc a:hover { color: var(--ink); border-bottom: none; }
+  .tocfloat-panel .toc a.active { color: var(--ink); }
+  .tocfloat-panel .toc li:has(a.active) { color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { .tocfloat-btn svg { transition: none; } }
   .wiki h2 {
     font-size: 1.3rem; font-weight: 600; letter-spacing: 0;
     border-bottom: 1px solid var(--hairline-soft); padding-bottom: 0.3rem;
@@ -69,15 +147,12 @@
   <a href="labs.html">Research Labs</a>
 </nav>
 
-<nav class="subnav" aria-label="Blog chapters">
-  <a href="#idea">The idea</a>
-  <a href="#origins">How it started</a>
-  <a href="#development">How it developed</a>
-  <a href="#memory">The memory</a>
-  <a href="#proof">Proof</a>
-  <a href="#stories">Stories</a>
-  <a href="#value-model">Where it is heading</a>
-</nav>
+<div class="tocfloat" id="tocfloat" hidden>
+  <button class="tocfloat-btn" id="tocfloatBtn" aria-expanded="false" aria-controls="tocfloatPanel" aria-label="Table of contents" title="Contents">
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="tocfloat-panel" id="tocfloatPanel"><div class="tocfloat-panel-in" id="tocfloatPanelIn"></div></div>
+</div>
 
 <div class="wiki">
   <h1>FRACTAL Blog</h1>
@@ -195,6 +270,59 @@
 </footer>
 
 <script src="site.js" defer></script>
+<script>
+/* the floating contents pill — page-local (the blog's rule: the reader is never more than
+   one tap from the table of contents). Without JS the pill stays hidden and the in-page
+   Contents box at the top of the article remains the navigation. */
+(function () {
+  var toc = document.querySelector(".wiki .toc");
+  var wrap = document.getElementById("tocfloat");
+  var btn = document.getElementById("tocfloatBtn");
+  var panelIn = document.getElementById("tocfloatPanelIn");
+  if (!toc || !wrap || !btn || !panelIn || !("IntersectionObserver" in window)) return;
+  panelIn.appendChild(toc.cloneNode(true));
+  function isOpen() { return wrap.hasAttribute("data-open"); }
+  function setOpen(open) {
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) wrap.setAttribute("data-open", ""); else wrap.removeAttribute("data-open");
+  }
+  btn.addEventListener("click", function () { setOpen(!isOpen()); });
+  panelIn.addEventListener("click", function (e) {
+    var a = e.target; while (a && a.tagName !== "A") a = a.parentElement;
+    if (a) setOpen(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && isOpen()) { setOpen(false); btn.focus(); }
+  });
+  document.addEventListener("click", function (e) {
+    if (isOpen() && !wrap.contains(e.target)) setOpen(false);
+  });
+  new IntersectionObserver(function (entries) {
+    var e = entries[0];
+    var passed = !e.isIntersecting && e.boundingClientRect.top < 0;
+    wrap.hidden = !passed;
+    if (!passed) setOpen(false);
+  }, { rootMargin: "-46px 0px 0px 0px" }).observe(toc);
+  /* scrollspy — the original submenu's recipe: observe the chapter headings,
+     light the matching row; a heading without a Contents row clears the light */
+  var spyLinks = Array.prototype.slice.call(panelIn.querySelectorAll("a[href^='#']"));
+  if (spyLinks.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        spyLinks.forEach(function (l) {
+          var on = l.getAttribute("href") === "#" + e.target.id;
+          l.classList.toggle("active", on);
+          if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    Array.prototype.slice.call(document.querySelectorAll(".wiki h2[id]")).forEach(function (h) {
+      spy.observe(h);
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
