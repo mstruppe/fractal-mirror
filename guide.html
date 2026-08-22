@@ -117,8 +117,8 @@ You are in 'detached HEAD' state. &#8230;</span></div>
   </div>
   <p class="term-note">Another agent opens the folder its own way &mdash; any client that can read files and run commands in a folder serves.</p>
 
-  <p class="voice" style="margin-top: 3rem;">&hellip;type <a class="mono" href="concepts.html#cmd-welcome">/welcome</a>.</p>
-  <div class="cmd">/welcome<button class="copy" type="button" aria-label="Copy command">copy</button></div>
+  <p class="voice" style="margin-top: 3rem;">&hellip;say <a class="mono" href="concepts.html#cmd-welcome">welcome</a>.</p>
+  <div class="cmd">welcome<button class="copy" type="button" aria-label="Copy command">copy</button></div>
   <div class="term" role="img" aria-label="The session answering /welcome: it explains the reference copy and offers two paths.">
     <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Claude Code &mdash; first contact</span></div>
     <div class="term-body"><span class="tp">&#10095;</span> <span class="tc">/welcome</span>
@@ -130,7 +130,7 @@ Two paths from here:
   1 &middot; Look around &mdash; ask anything about what you see.
   2 &middot; Start your own project &mdash; type /begin.</span></div>
   </div>
-  <p class="term-note">Condensed &mdash; the real session says more, in plain words. If <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> doesn&rsquo;t autocomplete in your agent, the plain sentence does the same: <em>&ldquo;I&rsquo;m new here &mdash; welcome me.&rdquo;</em></p>
+  <p class="term-note">Condensed &mdash; the real session says more, in plain words. The slash in the window above is Claude Code&rsquo;s spelling, shown because that terminal is Claude Code; <strong>the word itself is the command in any agent</strong> &mdash; <a class="mono" href="concepts.html#cmd-welcome">welcome</a>, or the plain sentence: <em>&ldquo;I&rsquo;m new here &mdash; welcome me.&rdquo;</em></p>
 
   <p class="voice" style="margin-top: 3.5rem;">The comfortable road: one line of terminal, then your UI.</p>
   <p>Let&rsquo;s be explicit about the honest split. The terminal is needed <strong>exactly once</strong> &mdash; one copy, one paste, one enter. Everything after that happens in whatever agent interface you&rsquo;re comfortable in.</p>
@@ -164,7 +164,7 @@ Two paths from here:
     <div class="step-n">4</div>
     <div class="step-body">
       <p class="step-title">Start the loop</p>
-      <p class="step-note">Type <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> &mdash; first contact, the two paths. <a class="mono" href="concepts.html#cmd-begin">/begin</a> births your own project. From then on the loop is always the same: open a session with your project&rsquo;s own command, work, <a class="mono" href="concepts.html#cmd-close">/close</a>.</p>
+      <p class="step-note">Say <a class="mono" href="concepts.html#cmd-welcome">welcome</a> &mdash; first contact, the two paths. <a class="mono" href="concepts.html#cmd-begin">begin</a> births your own project. From then on the loop is always the same: open a session with your project&rsquo;s own word, work, <a class="mono" href="concepts.html#cmd-close">close</a>. (In Claude Code the commands also autocomplete with a slash &mdash; one client&rsquo;s spelling, nothing more.)</p>
     </div>
   </div>
 
@@ -172,10 +172,10 @@ Two paths from here:
     <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">Claude Code &mdash; the desktop app</span></div>
     <div class="app-body">
       <p class="app-greet"><span class="spark">&#10059;</span> What&rsquo;s up next?</p>
-      <div><div class="msg you">/welcome</div></div>
-      <div class="msg ai">You&rsquo;re standing in a reference copy of FRACTAL &mdash; the public baseline at its newest anchored release. Two paths from here: look around, or start your own project &mdash; type <b>/begin</b>.</div>
-      <div><div class="msg you">/begin</div></div>
-      <div class="msg ai">Five questions, then the birth: your project gets its own repository, memory, and opening command &mdash; <b>/yourproject</b>. From then on the loop is always the same: <b>/yourproject</b> &middot; work &middot; <b>/close</b>.</div>
+      <div><div class="msg you">welcome</div></div>
+      <div class="msg ai">You&rsquo;re standing in a reference copy of FRACTAL &mdash; the public baseline at its newest anchored release. Two paths from here: look around, or start your own project &mdash; say <b>begin</b>.</div>
+      <div><div class="msg you">begin</div></div>
+      <div class="msg ai">Five questions, then the birth: your project gets its own repository, memory, and opening word &mdash; <b>yourproject</b>. From then on the loop is always the same: <b>yourproject</b> &middot; work &middot; <b>close</b>.</div>
       <div class="app-chips"><span class="chip">Local</span><span class="chip">fractal</span><span class="chip">main</span></div>
       <div class="app-input"><span>Describe a task or ask a question</span><span class="ret">&#9166;</span></div>
       <div class="app-foot"><span>Auto&ensp;+</span><span>your model &middot; ready</span></div>
@@ -194,7 +194,7 @@ Two paths from here:
   <h2>The birth.</h2>
 </summary>
   <p class="voice">A project can only be born with facts that belong to its <a href="concepts.html#owner">owner</a>: what it is, what to call it, who writes in it, what kinds of work it will hold, where its off-site copy should live. The interview exists to collect exactly those facts &mdash; once, in your own words &mdash; and to carry them mechanically into the birth: <strong>your answers become the project&rsquo;s founding documents</strong>, not notes about them. Nothing is asked twice, nothing is thrown away, nothing is invented on your behalf.</p>
-  <p>You follow it by typing <a class="mono" href="concepts.html#cmd-begin">/begin</a> in the reference copy, where first contact left you. It is a conversation, not a form: one question at a time, and after each answer the session drafts what your words feed and reads it back for your confirmation. At the end it shows you the whole birth plan &mdash; the files, the names, the remote &mdash; and writes your repository only after your yes.</p>
+  <p>You follow it by saying <a class="mono" href="concepts.html#cmd-begin">begin</a> in the reference copy, where first contact left you. It is a conversation, not a form: one question at a time, and after each answer the session drafts what your words feed and reads it back for your confirmation. At the end it shows you the whole birth plan &mdash; the files, the names, the remote &mdash; and writes your repository only after your yes.</p>
   <p><strong>You are not expected to understand FRACTAL to answer any of this.</strong> The questions start simple and deepen as the conversation goes; the session explains each concept at the exact moment it matters, and you find the flow together, naturally. Understanding grows through use &mdash; nobody starts by understanding FRACTAL, its founder included.</p>
 
   <h3 style="margin-top: 3rem;">The five questions, and why each is asked</h3>
@@ -213,7 +213,7 @@ Two paths from here:
     <div class="step-body">
       <p class="step-title">&ldquo;What should it be called?&rdquo;</p>
       <p class="step-note">The name becomes the prefix every governed artifact carries &mdash; one stable identity from day one. The identity name wants letters and digits (the session derives one and confirms it with you); your <em>folder</em> can keep any name you like.</p>
-      <p class="step-note"><strong>Behind the question:</strong> the name is also your <strong>way back</strong>. It becomes your project&rsquo;s own opening command &mdash; however long you&rsquo;ve been away, that one word loads the memory and reports where things stand. (Right now, in the reference copy, your project has no name yet &mdash; that is exactly why the universal commands <a class="mono" href="concepts.html#cmd-welcome">/welcome</a> and <a class="mono" href="concepts.html#cmd-begin">/begin</a> exist; the birth writes your named command into the newborn, so your first real loop already opens with it.)</p>
+      <p class="step-note"><strong>Behind the question:</strong> the name is also your <strong>way back</strong>. It becomes your project&rsquo;s own opening command &mdash; however long you&rsquo;ve been away, that one word loads the memory and reports where things stand. (Right now, in the reference copy, your project has no name yet &mdash; that is exactly why the universal commands <a class="mono" href="concepts.html#cmd-welcome">welcome</a> and <a class="mono" href="concepts.html#cmd-begin">begin</a> exist; the birth writes your named command into the newborn, so your first real loop already opens with it.)</p>
     </div>
   </div>
 
@@ -261,7 +261,7 @@ Two paths from here:
   <p class="kicker">Step 3</p>
   <h2>Driving a session.</h2>
 </summary>
-  <p>Every working session opens with your project&rsquo;s own command and closes with <a class="mono" href="concepts.html#cmd-close">/close</a>. Between the two you just work &mdash; the session reads the memory at the start, and what matters is written back at the end. Mid-work, <a class="mono" href="concepts.html#cmd-fieldnote">/fieldnote</a> captures a friction or a win in one line without leaving the task.</p>
+  <p>Every working session opens with your project&rsquo;s own command and closes with <a class="mono" href="concepts.html#cmd-close">close</a>. Between the two you just work &mdash; the session reads the memory at the start, and what matters is written back at the end. Mid-work, <a class="mono" href="concepts.html#cmd-fieldnote">fieldnote</a> captures a friction or a win in one line without leaving the task.</p>
   <p>And feel free to browse the <a href="concepts.html">concepts</a> and <a href="blog.html">blog</a> pages along the way &mdash; that&rsquo;s where the inspiration lives, along with useful interaction and procedure tips.</p>
 </details>
 </section>
@@ -285,7 +285,7 @@ Two paths from here:
   <p class="kicker">Step 5</p>
   <h2>Growing.</h2>
 </summary>
-  <p>More instances (<a class="mono" href="concepts.html#cmd-look">/look</a> observes them read-only), adopting newer kernel releases by your own decision (the migration standard), adopting standards from the registry, teaching your own commands. Each of these is its own concept &mdash; the depth lives on the <a href="concepts.html">concepts page</a>.</p>
+  <p>More instances (<a class="mono" href="concepts.html#cmd-look">look</a> observes them read-only), adopting newer kernel releases by your own decision (the migration standard), adopting standards from the registry, teaching your own commands. Each of these is its own concept &mdash; the depth lives on the <a href="concepts.html">concepts page</a>.</p>
   <p class="caveat tight">This page is the guide&rsquo;s skeleton &mdash; each step gains its full walkthrough in the content pass. Until then, the practical companion is <a href="https://github.com/mstruppe/fractal-mirror/blob/main/GUIDE.md">GUIDE.md in the baseline</a>, which covers day two onward in detail today.</p>
 </details>
 </section>
