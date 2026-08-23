@@ -12,7 +12,7 @@ the Register as the judgment dirty-bit (C-112), and reads the drag gauge; --stam
 (applied at --write) bumps stale version headers, mints revision-history rows from
 each document's --note, and writes store counts at predicted post-ripple totals;
 --pack runs the tagging-close gate (clause span, mirror cleanliness, serving-layer
-preservation). The judgment half — what a change means, protocol prose,
+preservation, the birth-state manifest). The judgment half — what a change means, protocol prose,
 ratification — stays manual by declared boundary (C-110 proposal 14).
 
 Stdlib-only. Dry-run by default — nothing is written without --write.
@@ -22,7 +22,7 @@ Usage:
   python3 close.py --write [--stamp] [--protocol vX.Y] --note <id-or-path>="<one-line note>" [...]
   python3 close.py [--write] --create <path> --type DOC --title <title> \
       --alias <Fractal_Name> --topic <CODE> [--actor AGENT.X.Y]
-  python3 close.py --pack [--mirror <path>] [--mirror-only]
+  python3 close.py --pack [--mirror <path>] [--mirror-only | --manifest-only] [--major]
 
 After every --write, verify.py and check_versions.py run automatically.
 """
@@ -42,6 +42,14 @@ STAMP_RE = re.compile(r"\*\*Version:\*\*\s*v?(\d+\.\d+)")
 # tripwire class, C-055's advisory pattern; initial values the DF1 flight's).
 BUDGET_WORDS = {"Local Context": 3500, "Context Index": 2000}
 SESSION_ROWS_BUDGET = 40
+# The birth-state manifest (C-134 item 3) — validated by the pack gate.
+MANIFEST_REL = "Claude/Project Governance/Rule Corpus/birth_state_manifest.json"
+# C-135 — semantic versioning ARMED-INACTIVE: the kernel-layer doctrine is
+# ratified (engine swaps / contract breaks make majors, content converts
+# lazily), but the numbering itself activates only on Max's FN-0006
+# hold-or-jump call. Until he flips this constant, the release-class line at
+# --pack is informational and nothing branches on it.
+SEMVER_ACTIVE = False
 
 
 def die(message):
@@ -266,11 +274,15 @@ def write_files(updates):
 
 
 def run_gates():
-    """verify + check_versions at every close (C-050/C-060); a working
+    """verify + check_versions at every close (C-050/C-060), doctor at every
+    close (C-087 — Max's strict-MACHINE ruling, Classification Audit #1:
+    a guard off the governing path is a habit, not a gate); a working
     change-set carrying a Scan report auto-appends check_scan.py on that
     report (S5-6.2 — the Scan Procedure §12 gate cannot be skipped by
-    following the ritual verbatim)."""
-    runs = [("verify.py", []), ("check_versions.py", [])]
+    following the ritual verbatim); the anchor-occurrence check closes the
+    same ruling's other half (C-090/C-116 — the acts must be SEEN to have
+    happened, not merely done well when done)."""
+    runs = [("verify.py", []), ("check_versions.py", []), ("doctor.py", [])]
     if os.path.isfile(os.path.join(HERE, "check_scan.py")):
         for rel in sorted(working_changes() or set()):
             if re.search(r"Review_.+LooseEnds-Scan.*\.md$", os.path.basename(rel)):
@@ -285,7 +297,216 @@ def run_gates():
         print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
         if result.returncode:
             status = 1
+    print("\n# anchor occurrence (C-090/C-116)")
+    problems = anchor_occurrence()
+    if problems:
+        for message in problems:
+            print("  ERR:", message)
+        status = 1
+    else:
+        print("  OK — every beta tag carries its tracked receipt pair and "
+              "its mirror twin (public chain floor beta-0.3)")
     return status
+
+
+# The mirror's public chain begins at beta-0.3; earlier anchors predate the
+# public home, so their twins are not demanded.
+MIRROR_CHAIN_FLOOR = (0, 3)
+
+
+def default_mirror():
+    return os.path.join(os.path.dirname(REPO), "fractal-mirror")
+
+
+def anchor_occurrence(mirror=None):
+    """Occurrence gate for the release acts (Classification Audit #1, Max's
+    strict ruling of record 2026-08-22): every local beta-* tag must have its
+    Provenance receipt pair tracked (C-090 — the anchor act happened) and its
+    mirror twin from the chain floor up (C-116 — the rider rode). A skipped
+    act is caught at the latest by the next close's gates. Fails closed on a
+    missing mirror."""
+    errors = []
+    tags = (git_out(REPO, "tag", "--list", "beta-*") or "").split()
+    if not tags:
+        return errors
+    tracked = set((git_out(REPO, "ls-files", "Provenance") or "").splitlines())
+    for tag_name in sorted(tags):
+        for suffix in (".txt", ".txt.ots"):
+            pair_path = f"Provenance/{tag_name}{suffix}"
+            if pair_path not in tracked:
+                errors.append(f"anchor receipt missing for {tag_name}: "
+                              f"{pair_path} untracked (C-090 occurrence)")
+    mirror = os.path.expanduser(mirror or default_mirror())
+    if not os.path.exists(os.path.join(mirror, ".git")):
+        errors.append(f"mirror working copy not found at {mirror} "
+                      "(C-116 occurrence — fails closed)")
+        return errors
+    mirror_tags = set((git_out(mirror, "tag", "--list", "beta-*") or "").split())
+    for tag_name in sorted(tags):
+        match = re.fullmatch(r"beta-(\d+)\.(\d+)", tag_name)
+        if (match
+                and (int(match.group(1)), int(match.group(2))) >= MIRROR_CHAIN_FLOOR
+                and tag_name not in mirror_tags):
+            errors.append(f"mirror twin missing for {tag_name} — the C-116 "
+                          "rider did not ride (occurrence)")
+    return errors
+
+
+def advisory_occurrence():
+    """Occurrence gate for the per-release advisory (KMP v0.2 §8 — the duty
+    the mother owes at every anchored release; Max's ruling of record
+    2026-08-23, the upgrade-install campaign's panel call: the strict-MACHINE
+    pattern, C-136 — the advisory must be SEEN posted at the pack, and its §7
+    hygiene row must carry the pack's own results before any hand-off). The
+    forming release is derived as the next minor after the newest local beta
+    tag; FN-0006's grammar activation is this derivation's refresh trigger.
+    Fails closed while the §7 placeholder stands — the designed first-run
+    red: run the gates, stamp the results into §7, re-run green, then tag."""
+    problems, oks = [], []
+    pairs = []
+    for tag_name in (git_out(REPO, "tag", "--list", "beta-*") or "").split():
+        match = re.fullmatch(r"beta-(\d+)\.(\d+)", tag_name)
+        if match:
+            pairs.append((int(match.group(1)), int(match.group(2))))
+    if not pairs:
+        problems.append("no local beta-* tag readable — the forming-release "
+                        "derivation needs the tag chain (advisory occurrence)")
+        return problems, oks
+    major, minor = max(pairs)
+    forming = f"beta-{major}.{minor + 1}"
+    place = os.path.join(REPO, "Interface")
+    hits = []
+    if os.path.isdir(place):
+        for name in sorted(os.listdir(place)):
+            if (name.startswith("Advisory_") and name.endswith(".md")
+                    and forming.lower() in name.lower()):
+                hits.append(name)
+    if not hits:
+        problems.append(
+            f"no advisory posted for the forming release {forming} — "
+            f"Interface/Advisory_*{forming}*.md not found (KMP §8: the mother "
+            "owes the per-release advisory; post it before tagging)")
+        return problems, oks
+    pending = [name for name in hits
+               if "[Results stamped at the tagging close"
+               in open(os.path.join(place, name), encoding="utf-8").read()]
+    if pending:
+        problems.append(
+            f"advisory §7 hygiene row unstamped for {forming}: "
+            + ", ".join(pending)
+            + " — stamp this pack run's gate results into §7, then re-run "
+              "(the advisory freezes with the tag; hand-off before the stamp "
+              "is premature)")
+    else:
+        oks.append(f"{len(hits)} advisory envelope(s) posted for {forming}, "
+                   "§7 stamped")
+    return problems, oks
+
+
+def newest_spec_versions(skip_roots):
+    """Newest versioned edition per spec stem, read live from the governing
+    tree (never hardcoded — the gate's currency source is the tree itself).
+    Skips the serving/derived roots named in the manifest's own config so a
+    site copy or frozen artifact never masquerades as the standard."""
+    newest = {}
+    for root, dirs, files in os.walk(REPO):
+        if os.path.relpath(root, REPO) == ".":
+            dirs[:] = [d for d in dirs if d not in skip_roots and d != ".git"]
+        else:
+            dirs[:] = [d for d in dirs if d != ".git"]
+        for name in files:
+            match = VERSIONED_RE.match(name)
+            if match:
+                version = tuple(int(p) for p in match.group(2).split("."))
+                if version > newest.get(match.group(1), (-1,)):
+                    newest[match.group(1)] = version
+    return newest
+
+
+def manifest_gate():
+    """The birth-state manifest gate (C-134 item 3 — the manifest BINDS here:
+    every pack validates that the manifest parses, every element carries one
+    of the five axis-2 stances with its layer call closed, the spec pins
+    match the tree's newest editions (the F8 class — a keep-list naming v0.6
+    while the tree holds v0.7, now unrepeatable), and the CUSTOM never-travels
+    roster is present. Fail-closed per C-136: a check fires on the governing
+    path or the rule is habit. Returns (problems, ok_lines)."""
+    problems, oks = [], []
+    path = os.path.join(REPO, *MANIFEST_REL.split("/"))
+    if not os.path.isfile(path):
+        problems.append(f"manifest element invalid: {MANIFEST_REL} not found "
+                        "— the birth-state manifest must ride every pack "
+                        "(C-134 item 3)")
+        return problems, oks
+    try:
+        with open(path, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (ValueError, OSError) as exc:
+        problems.append(f"manifest element invalid: {MANIFEST_REL} does not "
+                        f"parse ({exc}) — C-134 item 3")
+        return problems, oks
+    config = data.get("_config") or {}
+    vocabulary = config.get("stance_vocabulary") or []
+    elements = data.get("elements") or []
+    if not vocabulary:
+        problems.append("manifest element invalid: _config.stance_vocabulary "
+                        "missing — the five-stance law is unreadable (C-134 "
+                        "axis 2)")
+    if not elements:
+        problems.append("manifest element invalid: the elements matrix is "
+                        "missing or empty (C-134 item 3)")
+    for element in elements:
+        seat = element.get("path") or "<unnamed element>"
+        stance = element.get("stance")
+        if not stance or (vocabulary and stance not in vocabulary):
+            problems.append(f"manifest element invalid: {seat} — stance "
+                            f"{stance!r} missing or outside the five-stance "
+                            "vocabulary (C-134 axis 2; the F1 class)")
+        if element.get("call_open"):
+            problems.append(f"manifest element invalid: {seat} — layer call "
+                            "still open (call_open true); close the call "
+                            "before packing (C-135 kernel-layer doctrine)")
+    roster = data.get("custom_never_travels") or []
+    if not roster:
+        problems.append("manifest element invalid: the CUSTOM roster "
+                        "(custom_never_travels) is missing or empty — the "
+                        "non-travel record must ride the manifest (C-134; "
+                        "the seed-body law's evidence)")
+    pins = config.get("spec_pins") or {}
+    if not pins:
+        problems.append("manifest element invalid: _config.spec_pins missing "
+                        "— the gate has no pins to hold current (C-134 "
+                        "item 3)")
+    skip_roots = set(config.get("spec_pin_skip_dirs")
+                     or (".git", "Site", "User Documents", "Provenance"))
+    newest = newest_spec_versions(skip_roots)
+    stale = 0
+    for stem, pin in sorted(pins.items()):
+        pin_match = re.fullmatch(r"v(\d+)\.(\d+)", str(pin))
+        if not pin_match:
+            problems.append(f"manifest element invalid: spec pin {stem} = "
+                            f"{pin!r} is not a vX.Y edition (C-134 item 3)")
+            continue
+        pinned = (int(pin_match.group(1)), int(pin_match.group(2)))
+        tree = newest.get(stem)
+        if tree is None:
+            problems.append(f"manifest pin stale: {stem} pinned {pin} but no "
+                            "versioned edition exists in the governing tree — "
+                            "re-pin or retire the row (C-134 item 3, the F8 "
+                            "class)")
+            stale += 1
+        elif tree != pinned:
+            problems.append(f"manifest pin stale: {stem} pinned {pin} but the "
+                            f"tree's newest is v{tree[0]}.{tree[1]} — re-pin "
+                            f"{os.path.basename(MANIFEST_REL)} before tagging "
+                            "(C-134 item 3, the F8 class)")
+            stale += 1
+    if not problems:
+        oks.append(f"{len(elements)} element(s) each carry a stance, every "
+                   f"layer call closed; {len(roster)}-family CUSTOM roster "
+                   f"present; all {len(pins)} spec pin(s) match the tree's "
+                   "newest editions")
+    return problems, oks
 
 
 # --------------------------------------------------------- mechanization ----
@@ -789,6 +1010,13 @@ def mirror_html_hygiene(mirror, tracked):
             if not target or target.startswith("/") \
                or re.match(r"^(https?:|mailto:|data:)", target):
                 continue
+            # The seed tier's placeholder hrefs ({{INSTANCE}}_..., {{BUFFER_HREF}})
+            # are the C-131 design — frozen v0.0 editions genesis fills at birth;
+            # unfilled is their shipped state, not a defect (first contact at the
+            # beta-0.7 pack: the gate predates the tier). Real paths in Templates/
+            # stay checked.
+            if rel.startswith("Templates/") and "{{" in target:
+                continue
             resolved = os.path.normpath(
                 os.path.join(os.path.dirname(rel), target)).replace(os.sep, "/")
             if resolved not in tracked_set:
@@ -820,14 +1048,22 @@ def pack_mode(args):
     the Migration Procedure's clause-span rule (C-117 §7.3), the mirror's
     post-rebuild cleanliness (the C-116 amendment, per v0.56), the
     serving-layer preservation duties (C-120, three classes since the v0.64
-    postscript), the partition-seat check (S6-7.1), and the composition
-    checks (S6-7.3/S6-7.4). Red block: exit 1 on failure."""
+    postscript), the partition-seat check (S6-7.1), the composition checks
+    (S6-7.3/S6-7.4), the birth-state manifest gate (C-134 item 3 — the
+    manifest binds here), and the advisory-occurrence gate (KMP v0.2 §8 —
+    the per-release advisory posted and §7-stamped; Max's panel ruling of
+    2026-08-23, the upgrade-install campaign). Red block: exit 1 on failure."""
     failures = []
-    scope = "mirror half only (S5-6.1 post-rebuild re-run)" if args.mirror_only \
-        else "C-117 §7.3 · C-116 cleanliness · C-120 preservation"
+    if args.mirror_only:
+        scope = "mirror half only (S5-6.1 post-rebuild re-run)"
+    elif args.manifest_only:
+        scope = "manifest gate only (C-134 item 3 — the mirror-free dry run)"
+    else:
+        scope = ("C-117 §7.3 · C-116 cleanliness · C-120 preservation · "
+                 "C-134 manifest · KMP §8 advisory")
     print(f"Pack-time gate ({scope}):")
 
-    if not args.mirror_only:
+    if not (args.mirror_only or args.manifest_only):
         genesis = os.path.join(REPO, "GENESIS.md")
         env = corpus_env()
         register_rel = env[1].get("Decision Register", {}).get("path") if env else None
@@ -885,11 +1121,32 @@ def pack_mode(args):
                     print(f"  partition seats: OK — AST §6 covers "
                           f"C-001–C-{register_max:03d} gapless")
 
-    mirror = os.path.expanduser(args.mirror)
-    if not os.path.isdir(os.path.join(mirror, ".git")):
+    if not args.mirror_only:
+        # The manifest gate (C-134 item 3): the birth-state manifest BINDS at
+        # the pack — validated whole at every tagging close, and runnable
+        # alone via --manifest-only (the C-136 testable path).
+        problems, oks = manifest_gate()
+        if problems:
+            failures.extend(problems)
+        else:
+            print("  manifest: OK — " + oks[0])
+
+    if not (args.mirror_only or args.manifest_only):
+        # The advisory-occurrence gate (KMP v0.2 §8; the strict-MACHINE
+        # pattern, C-136): the per-release advisory must be SEEN posted for
+        # the forming release, its §7 row stamped with this pack's results —
+        # first run red by design until the stamp lands.
+        problems, oks = advisory_occurrence()
+        if problems:
+            failures.extend(problems)
+        else:
+            print("  advisory: OK — " + oks[0])
+
+    mirror = None if args.manifest_only else os.path.expanduser(args.mirror)
+    if mirror is not None and not os.path.isdir(os.path.join(mirror, ".git")):
         failures.append(f"mirror not found at {mirror} — pass --mirror "
                         "(the C-116/C-120 checks run there)")
-    else:
+    elif mirror is not None:
         porcelain = git_out(mirror, "status", "--porcelain")
         if porcelain is None:
             failures.append("mirror: git status failed")
@@ -969,9 +1226,17 @@ def pack_mode(args):
             print("  mirror HTML hygiene: OK — no empty elements, no "
                   "dangling relative hrefs")
 
+    # The semver row (C-135, ARMED-INACTIVE) — one informational line,
+    # strictly exit-code-neutral: default minor, major only on the explicit
+    # --major declaration. Activation (SEMVER_ACTIVE) changes nothing until
+    # Max's FN-0006 hold-or-jump call flips the constant.
+    release_class = "major" if args.major else "minor"
+    print(f"\n  release class: {release_class} (per C-135 — semantic "
+          "versioning armed-inactive, FN-0006's activation call pending)")
+
     if failures:
         print(f"\nFAIL — {len(failures)} pack-time failure(s). "
-              "Cure before tagging (C-090/C-116/C-120).")
+              "Cure before tagging (C-090/C-116/C-120/C-134).")
         for message in failures:
             print("  ERR:", message)
         return 1
@@ -1242,12 +1507,23 @@ def arguments():
     parser.add_argument("--walk", action="store_true",
                         help="print only the adaptive-close view: walk pre-fill, Register flag, drag gauge (C-112)")
     parser.add_argument("--pack", action="store_true",
-                        help="run the tagging-close gate: clause span, mirror cleanliness, preservation (C-117/C-116/C-120)")
-    parser.add_argument("--mirror", default="~/Desktop/fractal-mirror",
-                        help="the public mirror's working copy for --pack (default: ~/Desktop/fractal-mirror)")
+                        help="run the tagging-close gate: clause span, mirror cleanliness, preservation, "
+                             "birth-state manifest (C-117/C-116/C-120/C-134)")
+    parser.add_argument("--mirror", default="~/Desktop/Knowledge Network/fractal-mirror",
+                        help="the public mirror's working copy for --pack "
+                             "(default: ~/Desktop/Knowledge Network/fractal-mirror — "
+                             "the estate roof, Protocol v0.68; stale pre-move default "
+                             "cured per the rule-corpus flight's verified defect)")
     parser.add_argument("--mirror-only", action="store_true",
                         help="with --pack: run only the mirror half — the cheap post-rebuild re-run "
                              "before the mirror tag (S5-6.1; the C-116 check must see the NEW rebuild)")
+    parser.add_argument("--manifest-only", action="store_true",
+                        help="with --pack: run only the birth-state manifest gate (C-134 item 3) — "
+                             "the mirror-free dry run, testable without a real pack")
+    parser.add_argument("--major", action="store_true",
+                        help="with --pack: declare the forming release C-135-major (engine swap / "
+                             "contract break); informational while semantic versioning stays "
+                             "armed-inactive (FN-0006)")
     return parser.parse_args()
 
 
@@ -1255,6 +1531,13 @@ def main():
     args = arguments()
     if args.mirror_only and not args.pack:
         die("--mirror-only accompanies --pack")
+    if args.manifest_only and not args.pack:
+        die("--manifest-only accompanies --pack")
+    if args.major and not args.pack:
+        die("--major accompanies --pack")
+    if args.mirror_only and args.manifest_only:
+        die("--mirror-only and --manifest-only are each a single half; "
+            "run them separately (or plain --pack for the whole gate)")
     if args.pack:
         if any((args.create, args.note, args.stamp, args.walk, args.write)):
             die("--pack runs alone (the tagging-close gate)")

@@ -3,7 +3,7 @@ id: DOC-01M08EV47A6TVWYYNPM1XD4CGD
 type: DOC
 created: 2026-08-17T18:13:19Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:154ec2a327adc896670d4342f64252c5c3fcb179609ec4a99c3fb4037b5faa36
+content_hash: sha256:d017090ff1b70d3490b3a6851fddb279eea8a6547e405cc43cda2d4ca22514ff
 title: "Fractal Kernel Migration Procedure v0.1"
 aliases: ["route:Fractal_Kernel_Migration_Procedure_v0.1"]
 placements:

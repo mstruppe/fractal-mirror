@@ -135,6 +135,14 @@ def main():
     if n and n >= 2 and not re.search(r"\*\*Baseline:?\*\*", text):
         flag("**Baseline:** line missing (§3.1 — the previous Scan by filename and date)")
 
+    # C2 · restore-drill standing section (C-076/C-038 — Classification Audit #1's
+    # live catch: Scan #6 shipped drill-less and this gate stayed green; Max's
+    # disposition 2026-08-22: the check builds. A Scan must carry the drill's
+    # standing section (the Scan #5 shape: a heading naming the restore drill).
+    if not re.search(r"^#{1,4}\s.*restore[\s-]drill", text, re.I | re.M):
+        flag("restore-drill standing section missing — no heading names the "
+             "restore drill (C-076; the C-038 lapse class, audit #1)")
+
     # D+E · disposition-seed table and id grammar
     rows = seed_rows(text, n)
     if not rows:

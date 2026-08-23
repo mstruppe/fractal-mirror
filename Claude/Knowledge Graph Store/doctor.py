@@ -13,6 +13,7 @@ Usage:  python3 doctor.py [--write]
 import argparse
 import collections
 import glob
+import json
 import math
 import os
 import re
@@ -174,6 +175,41 @@ PRIVATE_KEY_RE = re.compile(
 )
 LONG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9+/=_-])[A-Za-z0-9+/=_-]{48,}(?![A-Za-z0-9+/=_-])")
 HEX64_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+INTEGRITY_HASH_RE = re.compile(r"sha(?:1|256|384|512)-[A-Za-z0-9+/=]{20,}")
+DATED_IDENTIFIER_RE = re.compile(
+    r"[A-Za-z][A-Za-z0-9-]*(?:_[A-Za-z][A-Za-z0-9-]*)*"
+    r"_\d{4}-\d{2}-\d{2}"
+    r"(?:_[A-Za-z][A-Za-z0-9-]*)*"
+)
+DOCTOR_ROSTER = os.path.join(HERE, "doctor_roster.json")
+
+
+def load_cleared_tokens(path=DOCTOR_ROSTER):
+    """Per-instance known-innocent declarations — jurisdiction data, not code.
+    An absent or unreadable roster contributes nothing: detection never
+    narrows by accident."""
+    try:
+        with open(path, encoding="utf-8") as source:
+            data = json.load(source)
+    except (OSError, ValueError):
+        return frozenset()
+    tokens = data.get("cleared_tokens", []) if isinstance(data, dict) else []
+    return frozenset(token for token in tokens if isinstance(token, str))
+
+
+def declared_innocent(value, cleared):
+    """Tier 2 of the three-tier secrets lane (the pre-code design, ratified
+    2026-08-21): a long token is silenced only when it positively matches a
+    declared class — an integrity hash carrying its own sha-N- tag, a dated
+    document identifier in the governed filename grammar (C-012), or an
+    exact per-instance cleared token. Tier 1 (explicit credential patterns)
+    never consults this; everything unmatched falls through to tier 3, the
+    entropy heuristic."""
+    if INTEGRITY_HASH_RE.fullmatch(value):
+        return True
+    if DATED_IDENTIFIER_RE.fullmatch(value):
+        return True
+    return value in cleared
 
 
 def entropy(value):
@@ -211,6 +247,7 @@ def tracked_files(report):
 def scan_secrets(report):
     hits = []
     patterns = secret_patterns()
+    cleared = load_cleared_tokens()
     for relative in tracked_files(report):
         normalized = relative.replace(os.sep, "/")
         if normalized == ".allowed_signers":
@@ -238,6 +275,8 @@ def scan_secrets(report):
                     occupied.append(match.span())
             for match in LONG_TOKEN_RE.finditer(line):
                 if any(match.start() < end and start < match.end() for start, end in occupied):
+                    continue
+                if declared_innocent(match.group(0), cleared):
                     continue
                 if heuristic_secret(line, match):
                     hits.append((normalized, number, "high-entropy long token"))

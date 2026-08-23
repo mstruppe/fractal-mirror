@@ -1,0 +1,1535 @@
+{
+ "_provenance": {
+  "artifact": "Birth-State Manifest — the element matrix: every carrier file, its layer, the rule families it carries, its birth stance, pinned editions; the CUSTOM roster of what never travels",
+  "status": "RATIFIED as C-134 (2026-08-22, the thirty-seventh session, Max's 'all ratified' — item 3); BOUND 2026-08-23 by the pack gate: close.py --pack validates this file at every pack — it parses, every element carries a stance, the spec pins match the tree's newest editions, the CUSTOM roster is present. Fail-closed (C-136: a check fires on the governing path or the rule is habit).",
+  "derived_from": "scope_axis_sort.json (RATIFIED as sort 2026-08-22) — mechanical aggregation; element-layer calls marked call_open where carried rules' layers mix on a non-tool file",
+  "form": "the matrix split (Max's Q4 ruling): elements classified per-part; a SPLIT family simply contributes different parts to different rows",
+  "stance_law": "Every element carries one of the five C-134 axis-2 stances (Proposal_2026-08-21_Birth-State-Law.md §3): generate-fresh (instance-bound, written by genesis from a template) · seed (ships built-but-empty, C-131) · ship-neutral (jurisdiction-free, byte-exact) · origin-reference (the origin's biography, labeled, never law in the receiving tree) · omit (does not ship; forged on felt need). Genesis reads the stance to know what to generate, stamp, or copy; the KMP (item 7) reads the same stance to know what is mechanically adoptable, what is the instance's own, what is replaceable reference.",
+  "issued": "2026-08-22",
+  "bound": "2026-08-23"
+ },
+ "_config": {
+  "_note": "Read by the pack gate (close.py manifest_gate). spec_pins name the editions the kernel ships at the forming release; the gate compares each pin against the NEWEST versioned edition found in the governing tree (the F8 class made unrepeatable) — a spec reissue must re-pin here before the next pack.",
+  "stance_vocabulary": [
+   "generate-fresh",
+   "seed",
+   "ship-neutral",
+   "origin-reference",
+   "omit"
+  ],
+  "spec_pins": {
+   "Fractal_Node_and_Event_Schema": "v0.7",
+   "Fractal_Node_Template": "v0.5",
+   "Fractal_Navigation_Contract": "v0.2",
+   "Fractal_Scholarly_Source_Convention": "v0.1",
+   "Fractal_Agenda_Board_Format": "v0.3",
+   "Fractal_Diet_Procedure": "v0.1",
+   "Fractal_Fieldnote_Format": "v0.2",
+   "Fractal_Interface_Place_Format": "v0.2",
+   "Fractal_Kernel_Migration_Procedure": "v0.2",
+   "Fractal_Mathematical_Representation_Convention": "v0.1",
+   "Fractal_Scan_Procedure": "v0.1",
+   "Fractal_Ultracode_Flight_Protocol": "v0.2",
+   "Fractal_User_Document_Pair_Procedure": "v0.3",
+   "Fractal_Vocabulary_Extension_Procedure": "v0.1",
+   "Fractal_Fieldnote_Buffer_Seed": "v0.0"
+  },
+  "spec_pin_skip_dirs": [
+   ".git",
+   "Site",
+   "User Documents",
+   "Provenance",
+   "Workbench"
+  ]
+ },
+ "elements": [
+  {
+   "path": ".claude/commands/begin.md",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL",
+   "families_carried": 4,
+   "families": [
+    "ONB-day-one-checks",
+    "ONB-dry-run",
+    "ONB-guide-not-tell",
+    "ONB-handoff"
+   ],
+   "pinned_editions": [
+    "Fractal_Onboarding_Protocol.md at the pinned release edition (stable filename, v0.5 current)",
+    "Fractal_Onboarding_Protocol.md at the pinned release edition (v0.5 current)",
+    "genesis.py + Onboarding Protocol at the pinned release edition"
+   ],
+   "stance": "omit",
+   "stance_note": "Mother-side onboarding surface: genesis writes exactly the named opener + fieldnote.md into a child (ONB-jurisdiction; verified in both children). The interview's OUTPUT travels through the parametric channel, never this file.",
+   "call_open": false
+  },
+  {
+   "path": ".claude/commands/close.md",
+   "element_layer": "ENGINE",
+   "rule_scopes": "SPLIT",
+   "families_carried": 2,
+   "families": [
+    "C-112",
+    "CLOSE-1-JUDGE"
+   ],
+   "pinned_editions": [],
+   "stance": "omit",
+   "stance_note": "CLOSE-3-PACK: /close drives close.py, mother-side tier-1 tooling; neither file is in the KERNEL tuple or the generated set (GENESIS §3.6).",
+   "call_open": false
+  },
+  {
+   "path": ".claude/commands/look.md",
+   "element_layer": "ENGINE",
+   "rule_scopes": "PARAMETRIC",
+   "families_carried": 3,
+   "families": [
+    "LOOK-RATIFY-MAX",
+    "LOOK-REPORT-STOP",
+    "LOOK-ROSTER"
+   ],
+   "pinned_editions": [],
+   "stance": "omit",
+   "stance_note": "The C-096 observation window is the mother's own practice; the generated command set holds exactly the opener + fieldnote.md. The LOOK conduct floors travel through genesis's templates, not this file.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Architecture/Concepts/Knowledge Graph/Fractal_Navigation_Contract_v0.2.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 4,
+   "families": [
+    "C-068",
+    "C-069",
+    "C-070",
+    "C-079"
+   ],
+   "pinned_editions": [
+    "Navigation Contract v0.2",
+    "Schema v0.7 + Navigation Contract v0.2"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free spec, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Architecture/Concepts/Knowledge Graph/Fractal_Node_Template_v0.5.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 1,
+   "families": [
+    "C-022"
+   ],
+   "pinned_editions": [
+    "Schema v0.7; Node Template v0.5"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free spec, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Architecture/Concepts/Knowledge Graph/Fractal_Node_and_Event_Schema_v0.7.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 22,
+   "families": [
+    "C-014",
+    "C-015",
+    "C-016",
+    "C-017",
+    "C-022",
+    "C-023",
+    "C-024",
+    "C-025",
+    "C-026",
+    "C-027",
+    "C-040",
+    "C-041",
+    "C-043",
+    "C-044",
+    "C-045",
+    "C-046",
+    "C-049",
+    "C-055",
+    "C-061",
+    "C-070",
+    "FACET-LABEL-SEP",
+    "GEN-no-federation"
+   ],
+   "pinned_editions": [
+    "Schema v0.7",
+    "Schema v0.7 + Navigation Contract v0.2",
+    "Schema v0.7 collision policy",
+    "Schema v0.7; Node Template v0.5"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free spec, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Architecture/Concepts/Knowledge Graph/Fractal_Scholarly_Source_Convention_v0.1.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-115"
+   ],
+   "pinned_editions": [
+    "Scholarly Source Convention v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Not in the KERNEL tuple — Registry-shelf adoption is its only path into a child (C-113 channel).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/check_scan.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-118"
+   ],
+   "pinned_editions": [
+    "Scan Procedure v0.1 (§12); Scans #1–4 grandfathered WARN-only"
+   ],
+   "stance": "omit",
+   "stance_note": "Mother QA apparatus (the Scan series is her biography, GENESIS §4); absent from every child store.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/check_versions.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 19,
+   "families": [
+    "C-003",
+    "C-005",
+    "C-012",
+    "C-035",
+    "C-047",
+    "C-050/C-060",
+    "C-060",
+    "C-065",
+    "C-071",
+    "C-077",
+    "C-080",
+    "C-088",
+    "CS-MAINTAIN-FLAG",
+    "KMP-adapter-reproject",
+    "KMP-branch-manifest",
+    "UDP-original-governs",
+    "WALK-BOOTSTRAP",
+    "WALK-CONTEXT-INDEX",
+    "WALK-PAIR-SERIES"
+   ],
+   "pinned_editions": [
+    "Agenda Board Format v0.3; board seed v0.0",
+    "Conversation Settings v0.8",
+    "Kernel Migration Procedure v0.1",
+    "Settings stamp read live (v0.8 at this writing)",
+    "User Document Pair Procedure v0.3 + seeds v0.0; check_versions.py birth snapshot",
+    "User Document Pair Procedure v0.3; check_versions.py at the birth-release snapshot",
+    "generated templates of current genesis.py; check_versions.py birth snapshot"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction constants externalized to the genesis-written .version-registry (axis 4 — tool-config), so the tool itself ships byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/close.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 3,
+   "families": [
+    "C-073",
+    "C-112",
+    "KMP-clause-span"
+   ],
+   "pinned_editions": [
+    "Kernel Migration Procedure v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "CLOSE-3-PACK: mother-side tier-1 tooling; not in the KERNEL tuple. A child forges its own close machinery on felt need (tier-0 posture).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/doctor.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/PARAMETRIC",
+   "families_carried": 3,
+   "families": [
+    "C-057",
+    "C-074",
+    "C-087"
+   ],
+   "pinned_editions": [],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-bound constants live in the genesis-written doctor_roster.json (C-134 item 6 — axis 4), so the tool ships byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/fieldnote.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 9,
+   "families": [
+    "C-100",
+    "C-121",
+    "FN-block-grammar",
+    "FN-collection",
+    "FN-config",
+    "FN-id-law",
+    "FN-intake",
+    "FN-machine-fields",
+    "FN-verbatim-report"
+   ],
+   "pinned_editions": [
+    "Fieldnote Format v0.2",
+    "Fieldnote Format v0.2 (v0.1 ships beside as history)",
+    "Fieldnote Format v0.2 (v0.1 ships beside it as history)",
+    "Fieldnote Format v0.2 §6"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction constants in the genesis-written fieldnote_roster.json (the axis-4 pattern's origin), so the tool ships byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/genesis.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 94,
+   "families": [
+    "ABF-adoption",
+    "C-001",
+    "C-003",
+    "C-005",
+    "C-006",
+    "C-008",
+    "C-009",
+    "C-010",
+    "C-011",
+    "C-012",
+    "C-015",
+    "C-016",
+    "C-018",
+    "C-020",
+    "C-024",
+    "C-028",
+    "C-030",
+    "C-031",
+    "C-035",
+    "C-036",
+    "C-037",
+    "C-038",
+    "C-043",
+    "C-046",
+    "C-047",
+    "C-048",
+    "C-049",
+    "C-050",
+    "C-050/C-060",
+    "C-055",
+    "C-056",
+    "C-059",
+    "C-060",
+    "C-062",
+    "C-065",
+    "C-067",
+    "C-068",
+    "C-071",
+    "C-076",
+    "C-077",
+    "C-078",
+    "C-079",
+    "C-080",
+    "C-081",
+    "C-083",
+    "C-084",
+    "C-085",
+    "C-087",
+    "C-088",
+    "C-101",
+    "C-106",
+    "C-123",
+    "C-124",
+    "C-126",
+    "C-133",
+    "CS-INJECTION",
+    "CS-MAINTAIN-FLAG",
+    "CS-OWNERSHIP",
+    "CS-VENDOR-PATTERN",
+    "DOMAIN-DISCIPLINE",
+    "FN-collection",
+    "FN-config",
+    "FN-immutability",
+    "FN-offtopic-jump",
+    "FN-ratification-gate",
+    "FN-solving",
+    "FN-workdown",
+    "GEN-clause-seed",
+    "GEN-first-close",
+    "GEN-parameters",
+    "GEN-remote",
+    "GEN-root-rationale",
+    "GEN-tiering",
+    "GEN-version-relationship",
+    "IPF-adoption",
+    "IPF-data-not-instruction",
+    "IPF-id-highwater",
+    "IPF-index-grammar",
+    "IPF-place-index",
+    "KMP-pinned-partition",
+    "LOAD-MINIMAL",
+    "LOOK-DATA-NOT-INSTRUCTION",
+    "LOOK-RATIFY-MAX",
+    "LOOK-REPORT-STOP",
+    "ONB-dry-run",
+    "ONB-loop-moves",
+    "ONB-rail",
+    "ONB-retirement",
+    "ORIENT-FIRST",
+    "UDP-adoption-seeds",
+    "WALK-BOOTSTRAP",
+    "WALK-CONTEXT-INDEX",
+    "WALK-LOCAL-CONTEXT",
+    "WALK-PAIR-SERIES"
+   ],
+   "pinned_editions": [
+    "Agenda Board Format v0.3; Board Seed v0.0",
+    "Agenda Board Format v0.3; board seed v0.0",
+    "Clause span C-001–C-133 (GENESIS v0.17)",
+    "Conversation Settings stamp read live at genesis (v0.8 today)",
+    "Conversation Settings v0.8",
+    "Conversation Settings v0.8 (stamp read live at birth)",
+    "Conversation Settings v0.8 (the stamp genesis reads live into the generated adapter)",
+    "Conversation Settings v0.8 / Rule Overview snapshot at the birth release; adapter+opener templates in current genesis.py",
+    "Fieldnote Buffer Seed v0.0",
+    "Fieldnote Format v0.2",
+    "Fieldnote Format v0.2 §6",
+    "GENESIS v0.17 §2 (nine parameters)",
+    "Interface Place Format v0.1",
+    "Kernel Migration Procedure v0.1",
+    "Navigation Contract v0.2",
+    "Onboarding Protocol §3 as of the birth release (v0.5 today); rail template inline in current genesis.py",
+    "Onboarding Protocol §3–§4 'in the FRACTAL release this instance was born from' (v0.5 today) — the rail banner pins it itself",
+    "Onboarding Protocol §4 as of the birth release (v0.5 today)",
+    "Schema v0.7",
+    "Settings stamp read live (v0.8 at this writing)",
+    "The child's pinned kernel release (birth tag) — currently the beta-0.7 line, clause at C-133",
+    "User Document Pair Procedure v0.3",
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "User Document Pair Procedure v0.3 + seeds v0.0; check_versions.py birth snapshot",
+    "User Document Pair Procedure v0.3 §2 (location law)",
+    "generated templates of current genesis.py (post-F2-cure)",
+    "generated templates of current genesis.py; check_versions.py birth snapshot",
+    "genesis.py + Onboarding Protocol at the pinned release edition"
+   ],
+   "stance": "omit",
+   "stance_note": "GEN-manual-normative: the birth apparatus governs the birth and never enters a child — genesis.py is not in its own KERNEL tuple. Birth is the pure function; the function is not part of its own output.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/mint.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 9,
+   "families": [
+    "C-023",
+    "C-027",
+    "C-040",
+    "C-043",
+    "C-044",
+    "C-045",
+    "C-049",
+    "C-055",
+    "GEN-root-rationale"
+   ],
+   "pinned_editions": [
+    "Schema v0.7",
+    "Schema v0.7; Node Template v0.5"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free tool, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/postman.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL",
+   "families_carried": 0,
+   "families": [],
+   "pinned_editions": [
+    "Interface Place Format v0.2 §7 (the document wins where they disagree, S4-2.1)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple since the interface build (2026-08-23, the C-134 slate): the interface place's mail tool (poll · post · receipt · check — the check half is the Format's checker). Jurisdiction state lives in the genesis-written reader-side cursor postman_cursor.json (born empty — the axis-4 tool-config pattern), so the tool ships byte-exact; test_postman.py ships beside it in the tuple. Families await minting at the next classification audit (the tool post-dates the corpus baseline).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Knowledge Graph Store/verify.py",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 27,
+   "families": [
+    "C-014",
+    "C-015",
+    "C-016",
+    "C-019",
+    "C-022",
+    "C-023",
+    "C-024",
+    "C-025",
+    "C-026",
+    "C-027",
+    "C-040",
+    "C-041",
+    "C-043",
+    "C-044",
+    "C-045",
+    "C-046",
+    "C-049",
+    "C-050",
+    "C-050/C-060",
+    "C-055",
+    "C-057",
+    "C-058",
+    "C-061",
+    "C-114",
+    "FACET-HONEST-WEIGHT",
+    "GEN-first-close",
+    "GEN-no-federation"
+   ],
+   "pinned_editions": [
+    "Rule Overview (living, versionless stable filename); Schema v0.7 beside it",
+    "Scan Procedure v0.1 (shelf; not birth-shipped)",
+    "Schema v0.7",
+    "Schema v0.7 collision policy",
+    "Schema v0.7; Node Template v0.5",
+    "Vocabulary Extension Procedure v0.1; interchange layer (verbs/alias kinds) frozen per Schema v0.7"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free tool, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Agenda_Board_Format_v0.3.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 9,
+   "families": [
+    "ABF-adoption",
+    "ABF-bar",
+    "ABF-next-card",
+    "ABF-section-grammar",
+    "C-047",
+    "C-048",
+    "C-102",
+    "C-104",
+    "C-128"
+   ],
+   "pinned_editions": [
+    "Agenda Board Format v0.3",
+    "Agenda Board Format v0.3; Board Seed v0.0",
+    "Agenda Board Format v0.3; board seed v0.0"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free spec, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Client_Library.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-097"
+   ],
+   "pinned_editions": [],
+   "stance": "omit",
+   "stance_note": "The mother's own client roster (C-097's ledger — instance state, so never ship-neutral). A child's adapter is generated fresh (CLAUDE.md via client_adapter()); its own library grows by its own decisions.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Conversation_Settings.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 36,
+   "families": [
+    "C-001",
+    "C-003",
+    "C-004",
+    "C-005",
+    "C-008",
+    "C-009",
+    "C-011",
+    "C-012",
+    "C-030",
+    "C-031",
+    "C-033",
+    "C-035",
+    "C-037",
+    "C-050",
+    "C-059",
+    "C-062",
+    "C-065",
+    "C-066",
+    "C-067",
+    "C-071",
+    "C-075",
+    "C-077",
+    "C-082",
+    "C-084",
+    "C-085",
+    "C-086",
+    "C-091",
+    "C-092",
+    "CLOSE-1-JUDGE",
+    "CS-INJECTION",
+    "CS-MAINTAIN-FLAG",
+    "CS-OWNERSHIP",
+    "CS-VENDOR-PATTERN",
+    "DOMAIN-DISCIPLINE",
+    "LOAD-MINIMAL",
+    "ORIENT-FIRST"
+   ],
+   "pinned_editions": [
+    "Conversation Settings stamp read live at genesis (v0.8 today)",
+    "Conversation Settings v0.8",
+    "Conversation Settings v0.8 (stamp read live at birth)",
+    "Conversation Settings v0.8 (the stamp genesis reads live into the generated adapter)",
+    "Conversation Settings v0.8 / Rule Overview snapshot at the birth release; adapter+opener templates in current genesis.py",
+    "Fieldnote Buffer Seed v0.0",
+    "Settings stamp read live (v0.8 at this writing)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; conduct law made jurisdiction-safe by the C-134 authority reset (Settings v0.9 — inherited conduct text states the origin's promotions as history, never the reader's live grants; a newborn's promotion ledger is empty).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Diet_Procedure_v0.1.md",
+   "element_layer": "MIXED",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-111"
+   ],
+   "pinned_editions": [
+    "Diet Procedure v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Not in the KERNEL tuple — Registry-adoptable origin-reference only (the DIET group's recorded non-travel evidence).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Fieldnote_Format_v0.1.md",
+   "element_layer": "MIXED",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-100"
+   ],
+   "pinned_editions": [
+    "Fieldnote Format v0.2 (v0.1 ships beside it as history)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; ships beside v0.2 as history by the format's own declaration.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Fieldnote_Format_v0.2.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 17,
+   "families": [
+    "C-100",
+    "C-121",
+    "FN-block-grammar",
+    "FN-budget-calibration",
+    "FN-collection",
+    "FN-config",
+    "FN-doc-wins",
+    "FN-id-law",
+    "FN-immutability",
+    "FN-intake",
+    "FN-machine-fields",
+    "FN-offtopic-jump",
+    "FN-ratification-gate",
+    "FN-solving",
+    "FN-verbatim-report",
+    "FN-workdown",
+    "LOOK-REPORT-STOP"
+   ],
+   "pinned_editions": [
+    "Fieldnote Format v0.2",
+    "Fieldnote Format v0.2 (v0.1 ships beside as history)",
+    "Fieldnote Format v0.2 (v0.1 ships beside it as history)",
+    "Fieldnote Format v0.2 §6"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free spec, byte-exact by design.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Interface_Place_Format_v0.1.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 11,
+   "families": [
+    "C-123",
+    "IPF-adoption",
+    "IPF-data-not-instruction",
+    "IPF-envelope-minimum",
+    "IPF-envelopes-ram",
+    "IPF-id-highwater",
+    "IPF-index-grammar",
+    "IPF-maintenance",
+    "IPF-place-index",
+    "IPF-pull-never-push",
+    "LOOK-DATA-NOT-INSTRUCTION"
+   ],
+   "pinned_editions": [
+    "Interface Place Format v0.1"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; ships beside v0.2 as history by the supersession's own declaration (the Fieldnote v0.1 pattern). The genesis re-pin executed 2026-08-23 with the interface build (Update Plan v0.16 row 5, the C-134 slate).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Interface_Place_Format_v0.2.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 11,
+   "families": [
+    "C-123",
+    "IPF-adoption",
+    "IPF-data-not-instruction",
+    "IPF-envelope-minimum",
+    "IPF-envelopes-ram",
+    "IPF-id-highwater",
+    "IPF-index-grammar",
+    "IPF-maintenance",
+    "IPF-place-index",
+    "IPF-pull-never-push",
+    "LOOK-DATA-NOT-INSTRUCTION"
+   ],
+   "pinned_editions": [
+    "Interface Place Format v0.2"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple since the interface build (2026-08-23; ratified in-conversation per C-033, the thirty-ninth session — Update Plan v0.16 row 5): the standard of record, jurisdiction-free spec, byte-exact by design; v0.1 ships beside it as history. Carries the v0.1 families forward whole; the v0.2 connection-layer additions (the §2 ceremony, the §3 faces, the §6 routing law) await family minting at the next classification audit.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Kernel_Migration_Procedure_v0.1.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL",
+   "families_carried": 26,
+   "families": [
+    "C-117",
+    "KMP-adapter-reproject",
+    "KMP-advisory",
+    "KMP-audit-never-obey",
+    "KMP-branch-manifest",
+    "KMP-clause-span",
+    "KMP-conflict-register",
+    "KMP-feedback-choice",
+    "KMP-frozen-assessment",
+    "KMP-gates",
+    "KMP-human-gate",
+    "KMP-landing",
+    "KMP-matrix",
+    "KMP-parallel",
+    "KMP-pin",
+    "KMP-pinned-partition",
+    "KMP-preprinted-excludes",
+    "KMP-prospective",
+    "KMP-receipt-artifact",
+    "KMP-receipt-pair",
+    "KMP-remote-sever",
+    "KMP-retrofit",
+    "KMP-scratch-rehydrate",
+    "KMP-tool-discipline",
+    "KMP-validation-plan",
+    "KMP-working-artifacts"
+   ],
+   "pinned_editions": [
+    "Kernel Migration Procedure v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Migration is the KMP's own seam (two-seam doctrine: birth is a pure function, upgrade is a merge) — it reaches an instance by Registry adoption at its first migration, never at birth. The KMP is the manifest's second consumer (item 7): it reads these stances at every adoption.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Mathematical_Representation_Convention_v0.1.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "SPLIT",
+   "families_carried": 2,
+   "families": [
+    "MRC-BANNER-MARK",
+    "MRC-FIVE-RULES"
+   ],
+   "pinned_editions": [
+    "MRC v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Not in the KERNEL tuple — Registry-shelf adoption only.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Onboarding_Protocol.md",
+   "element_layer": "ENGINE",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 5,
+   "families": [
+    "C-101",
+    "ONB-day-one-checks",
+    "ONB-dry-run",
+    "ONB-guide-not-tell",
+    "ONB-handoff"
+   ],
+   "pinned_editions": [
+    "Fractal_Onboarding_Protocol.md at the pinned release edition (stable filename, v0.5 current)",
+    "Fractal_Onboarding_Protocol.md at the pinned release edition (v0.5 current)",
+    "genesis.py + Onboarding Protocol at the pinned release edition"
+   ],
+   "stance": "omit",
+   "stance_note": "Mother-side interview apparatus (ONB-jurisdiction): binds the midwife session and the generator; a newborn receives the rail + opener projections it produced, never the Protocol itself.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Rule_Overview.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 58,
+   "families": [
+    "C-001",
+    "C-003",
+    "C-004",
+    "C-010",
+    "C-018",
+    "C-019",
+    "C-020",
+    "C-033",
+    "C-034",
+    "C-036",
+    "C-037",
+    "C-042",
+    "C-050",
+    "C-056",
+    "C-057",
+    "C-058",
+    "C-059",
+    "C-066",
+    "C-067",
+    "C-074",
+    "C-075",
+    "C-076",
+    "C-082",
+    "C-084",
+    "C-085",
+    "C-086",
+    "C-090",
+    "C-091",
+    "C-092",
+    "C-094",
+    "C-095",
+    "C-096",
+    "C-097",
+    "C-102",
+    "C-103",
+    "C-106",
+    "C-108",
+    "C-109",
+    "C-110",
+    "C-111",
+    "C-112",
+    "C-113",
+    "C-114",
+    "C-115",
+    "C-117",
+    "C-118",
+    "C-125",
+    "C-127",
+    "C-128",
+    "C-132",
+    "C-133",
+    "DOMAIN-DISCIPLINE",
+    "FACET-HONEST-WEIGHT",
+    "FACET-LABEL-SEP",
+    "LEDGER-POINTER",
+    "LOAD-MINIMAL",
+    "ORIENT-FIRST",
+    "WS-OPEN"
+   ],
+   "pinned_editions": [
+    "Agenda Board Format v0.3",
+    "Conversation Settings stamp read live at genesis (v0.8 today)",
+    "Conversation Settings v0.8",
+    "Conversation Settings v0.8 (the stamp genesis reads live into the generated adapter)",
+    "Conversation Settings v0.8 / Rule Overview snapshot at the birth release; adapter+opener templates in current genesis.py",
+    "Diet Procedure v0.1",
+    "Fractal_Rule_Overview.md as shipped at the pinned release (stable filename, version inside — v0.55 current)",
+    "Kernel Migration Procedure v0.1",
+    "Rule Overview (living, versionless stable filename); Schema v0.7 beside it",
+    "Rule Overview snapshot at the birth release",
+    "Scan Procedure v0.1 (shelf; not birth-shipped)",
+    "Scan Procedure v0.1 (§12); Scans #1–4 grandfathered WARN-only",
+    "Schema v0.7",
+    "Scholarly Source Convention v0.1",
+    "Ultracode Flight Protocol v0.2 · Scan Procedure v0.1",
+    "User Document Pair Procedure v0.3",
+    "Vocabulary Extension Procedure v0.1; interchange layer (verbs/alias kinds) frozen per Schema v0.7",
+    "anchor authority is the instance's own value (parameter 9); no versioned edition"
+   ],
+   "stance": "generate-fresh",
+   "stance_note": "The F1 cure of record (C-134 item 2), EXECUTED 2026-08-23 (the build slate): the mother's page left the KERNEL tuple — genesis generates a child seed edition ({Name}_Rule_Overview.md, v0.0: kernel rules only, stamped to the newborn's own identity, the seed-body banner instructing growth by the instance's own decisions) and re-points the checker's Rule Overview row in the generated .version-registry. The stamp lands on a seed body, never on the grown body; the mother's page is the origin's biography in any copy, never the reader's law.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Scan_Procedure_v0.1.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 2,
+   "families": [
+    "C-108",
+    "C-118"
+   ],
+   "pinned_editions": [
+    "Scan Procedure v0.1 (§12); Scans #1–4 grandfathered WARN-only",
+    "Ultracode Flight Protocol v0.2 · Scan Procedure v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Mother scan practice; Procedure and check_scan.py both absent from the birth kernel — Registry-shelf adoption the only path (KNet's .inherited the precedent).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Ultracode_Flight_Protocol_v0.2.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 1,
+   "families": [
+    "C-108"
+   ],
+   "pinned_editions": [
+    "Ultracode Flight Protocol v0.2 · Scan Procedure v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "Not in the KERNEL tuple — the flight discipline is Registry-adoptable practice.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_User_Document_Pair_Procedure_v0.3.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 11,
+   "families": [
+    "C-122",
+    "C-124",
+    "C-125",
+    "C-126",
+    "C-131",
+    "UDP-adoption-seeds",
+    "UDP-extension-steps",
+    "UDP-felt-need",
+    "UDP-one-home",
+    "UDP-original-governs",
+    "WALK-PAIR-SERIES"
+   ],
+   "pinned_editions": [
+    "User Document Pair Procedure v0.3",
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "User Document Pair Procedure v0.3 + seeds v0.0; check_versions.py birth snapshot",
+    "User Document Pair Procedure v0.3 §2 (location law)",
+    "User Document Pair Procedure v0.3; check_versions.py at the birth-release snapshot",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; jurisdiction-free procedure, byte-exact by design (its seed tier travels beside it, C-131).",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/Fractal_Vocabulary_Extension_Procedure_v0.1.md",
+   "element_layer": "MIXED",
+   "rule_scopes": "SPLIT",
+   "families_carried": 1,
+   "families": [
+    "C-114"
+   ],
+   "pinned_editions": [
+    "Vocabulary Extension Procedure v0.1; interchange layer (verbs/alias kinds) frozen per Schema v0.7"
+   ],
+   "stance": "omit",
+   "stance_note": "Not in the KERNEL tuple — Registry-shelf adoption only; the frozen interchange layer it governs travels inside Schema v0.7.",
+   "call_open": false
+  },
+  {
+   "path": "Claude/Project Governance/Governance Documents/<Name>_Birth_Receipt_<date>.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/PARAMETRIC",
+   "families_carried": 0,
+   "families": [],
+   "pinned_editions": [
+    "the manifest of record at the birth release (read live by genesis at the birth act)"
+   ],
+   "stance": "generate-fresh",
+   "stance_note": "The day-one receipt (C-134 — the robustness triad's third leg, executed 2026-08-23): genesis writes a small dated frozen file into every newborn's Governance Documents — each GENESIS §2 parameter SET-BY-FOUNDER vs DEFAULTED-ON-SILENCE, each manifest element's stance as executed, the birth pins (spec_pins + the live Settings stamp + the born-from path). No mother-side counterpart exists — the path here is the generated shape. Deliberately distinct from the onboarding's day-one frictions (Onboarding Protocol §2.2's check c reads it): nothing in it is wrong; it is the audit surface. Families await minting at the next classification audit.",
+   "call_open": false
+  },
+  {
+   "path": "GENESIS.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC/SPLIT",
+   "families_carried": 39,
+   "families": [
+    "C-005",
+    "C-006",
+    "C-011",
+    "C-017",
+    "C-028",
+    "C-033",
+    "C-034",
+    "C-037",
+    "C-038",
+    "C-042",
+    "C-046",
+    "C-056",
+    "C-057",
+    "C-058",
+    "C-059",
+    "C-061",
+    "C-062",
+    "C-066",
+    "C-073",
+    "C-074",
+    "C-075",
+    "C-076",
+    "C-078",
+    "C-079",
+    "C-081",
+    "C-082",
+    "C-083",
+    "C-087",
+    "C-090",
+    "C-091",
+    "C-117",
+    "C-133",
+    "CS-OWNERSHIP",
+    "GEN-clause-seed",
+    "GEN-first-close",
+    "GEN-parameters",
+    "GEN-remote",
+    "GEN-tiering",
+    "GEN-version-relationship"
+   ],
+   "pinned_editions": [
+    "Clause span C-001–C-133 (GENESIS v0.17)",
+    "Conversation Settings v0.8",
+    "Fieldnote Buffer Seed v0.0",
+    "GENESIS v0.17 §2 (nine parameters)",
+    "Kernel Migration Procedure v0.1",
+    "Scan Procedure v0.1 (shelf; not birth-shipped)",
+    "Schema v0.7",
+    "The child's pinned kernel release (birth tag) — currently the beta-0.7 line, clause at C-133",
+    "anchor authority is the instance's own value (parameter 9); no versioned edition"
+   ],
+   "stance": "generate-fresh",
+   "stance_note": "genesis_record() writes the child's own GENESIS.md — its birth record and constitution seat, stamped with its own parameters and pinned release; the mother's page stays her own (§6 registers her children).",
+   "call_open": false
+  },
+  {
+   "path": "Interface/Interface_Index.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/PARAMETRIC",
+   "families_carried": 5,
+   "families": [
+    "IPF-id-highwater",
+    "IPF-index-grammar",
+    "IPF-maintenance",
+    "IPF-place-index",
+    "IPF-pull-never-push"
+   ],
+   "pinned_editions": [
+    "Interface Place Format v0.2 §8 (the skeleton of record)"
+   ],
+   "stance": "generate-fresh",
+   "stance_note": "The interface place, born at genesis (interface_index() — the Format v0.2 §8 skeleton since the interface build, 2026-08-23): the newborn's public face at Interface/, its own index at IF-0000 with the Face line, the connections block, and the CN high-water. The mother's own index is her instance state and never travels; the carried grammar is the Format's (the v0.2 element row above).",
+   "call_open": false
+  },
+  {
+   "path": "Interface/Interface_Index.md (connections block — the CN-0001 mother seed)",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "PARAMETRIC",
+   "families_carried": 0,
+   "families": [],
+   "pinned_editions": [
+    "Interface Place Format v0.2 §2.4 (birth is the introduction)"
+   ],
+   "stance": "generate-fresh",
+   "stance_note": "A newborn is born connected to its mother and to no one else (Format §2.4): genesis seeds CN-0001 — instance FRACTAL, the birth clone's own public place path as the channel address, the key fingerprint computed ssh-keygen -lf style from the kernel-shipped .allowed_signers at birth time (mother_identity(); the S4-2.1 read-at-run-time rule). The Code cell stays honest: computed at first joint verification — requires the newborn's own key; no key or code material is ever invented (C-087 posture). The mother records her side at the birth act, by her own hand.",
+   "call_open": false
+  },
+  {
+   "path": "LICENSE",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 1,
+   "families": [
+    "C-099"
+   ],
+   "pinned_editions": [
+    "Apache-2.0 (tools) + CC BY 4.0 (documents)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; C-099 — terms travel byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "LICENSE-docs",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 1,
+   "families": [
+    "C-099"
+   ],
+   "pinned_editions": [
+    "Apache-2.0 (tools) + CC BY 4.0 (documents)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; C-099 — terms travel byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "NOTICE",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 1,
+   "families": [
+    "C-099"
+   ],
+   "pinned_editions": [
+    "Apache-2.0 (tools) + CC BY 4.0 (documents)"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; C-099 — terms travel byte-exact.",
+   "call_open": false
+  },
+  {
+   "path": "Registry/README.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 9,
+   "families": [
+    "C-092",
+    "C-113",
+    "C-127",
+    "C-132",
+    "KMP-adapter-reproject",
+    "KMP-advisory",
+    "KMP-gates",
+    "MRC-BANNER-MARK",
+    "MRC-FIVE-RULES"
+   ],
+   "pinned_editions": [
+    "Kernel Migration Procedure v0.1",
+    "MRC v0.1"
+   ],
+   "stance": "omit",
+   "stance_note": "The shelf's contract is the origin's own surface: a child reaches the Registry through release copies at adoption time (C-113), never as born law; its own Registry is forged on felt need.",
+   "call_open": false
+  },
+  {
+   "path": "Templates/Fractal_Agenda_Board_Seed_v0.0.html",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL/SPLIT",
+   "families_carried": 9,
+   "families": [
+    "ABF-adoption",
+    "ABF-bar",
+    "ABF-next-card",
+    "ABF-section-grammar",
+    "C-047",
+    "C-048",
+    "C-104",
+    "C-131",
+    "UDP-adoption-seeds"
+   ],
+   "pinned_editions": [
+    "Agenda Board Format v0.3",
+    "Agenda Board Format v0.3; Board Seed v0.0",
+    "Agenda Board Format v0.3; board seed v0.0",
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "seed",
+   "stance_note": "C-131 seed tier: travels whole in the KERNEL tuple AND is instantiated built-but-empty into the newborn's User Documents (instantiate_seed).",
+   "call_open": false
+  },
+  {
+   "path": "Templates/Fractal_Fieldnote_Buffer_Seed_v0.0.md",
+   "element_layer": "CONTRACT",
+   "layer_note": "Resolved 2026-08-23 (C-134 item 3's schema pass, per the C-135 kernel-layer doctrine): the element layer follows the artifact's own form — a document is CONTRACT-layer even where it describes engine behavior; the engine half of its mixed families lives in the tools that execute them. Mechanical aggregation had read MIXED from the carried rules' layers.",
+   "rule_scopes": "KERNEL/PARAMETRIC",
+   "families_carried": 6,
+   "families": [
+    "C-062",
+    "C-121",
+    "C-131",
+    "FN-budget-calibration",
+    "FN-id-law",
+    "UDP-adoption-seeds"
+   ],
+   "pinned_editions": [
+    "Fieldnote Buffer Seed v0.0",
+    "Fieldnote Format v0.2",
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "seed",
+   "stance_note": "C-131 seed tier: travels whole; the newborn's buffer is born from it built-but-empty.",
+   "call_open": false
+  },
+  {
+   "path": "Templates/Fractal_Fieldnote_Handout_Seed_v0.0.html",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 2,
+   "families": [
+    "C-131",
+    "UDP-adoption-seeds"
+   ],
+   "pinned_editions": [
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "seed",
+   "stance_note": "C-131 seed tier: travels whole AND instantiates into the newborn's User Documents.",
+   "call_open": false
+  },
+  {
+   "path": "Templates/Fractal_Roadmap_Seed_v0.0.html",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 2,
+   "families": [
+    "C-131",
+    "UDP-adoption-seeds"
+   ],
+   "pinned_editions": [
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "seed",
+   "stance_note": "C-131 seed tier: travels whole AND instantiates into the newborn's User Documents.",
+   "call_open": false
+  },
+  {
+   "path": "Templates/README.md",
+   "element_layer": "CONTRACT",
+   "rule_scopes": "KERNEL",
+   "families_carried": 2,
+   "families": [
+    "C-131",
+    "UDP-adoption-seeds"
+   ],
+   "pinned_editions": [
+    "User Document Pair Procedure v0.3 + seed tier v0.0",
+    "seed editions v0.0 · User Document Pair Procedure v0.3"
+   ],
+   "stance": "ship-neutral",
+   "stance_note": "KERNEL tuple; the seed tier's own contract page, jurisdiction-free.",
+   "call_open": false
+  }
+ ],
+ "custom_never_travels": [
+  {
+   "family": "BEGIN-COLD-ARRIVAL",
+   "note": "genesis.py build_plan() writes exactly two commands into a newborn — the named opener and fieldnote.md; begin.md and the Onboarding Protocol are absent from the KERNEL tuple. Verified in both children"
+  },
+  {
+   "family": "C-002",
+   "note": "AST §6 verbatim: 'plus C-002, retired by C-067 and therefore travelling as neither'; GENESIS §3.4's exclusion list names it. Its living content (canon lives in the repo) survives in the kernel through"
+  },
+  {
+   "family": "C-007",
+   "note": "AST §6 instance class and GENESIS §3.4 exclusion list both name C-007. The ChatGPT-era/Claude-era folder split is FRACTAL's own repo biography; a newborn has no ChatGPT era. (Children do receive a Cla"
+  },
+  {
+   "family": "C-013",
+   "note": "AST §6 instance class; GENESIS §3.4 exclusion list. The forge-clean-don't-retrofit method is arc-1 biography — how FRACTAL curated its own ChatGPT-era material; a newborn has nothing to forge from."
+  },
+  {
+   "family": "C-021",
+   "note": "AST §6 instance class and GENESIS §3.4 exclusion list both name C-021 — the decision row is FRACTAL's own build-sequencing biography. Note the seam honestly: the philosophy travels re-expressed — Rule"
+  },
+  {
+   "family": "C-029",
+   "note": "AST §6 instance class; GENESIS §3.4 exclusion list. ChatGPT-era lineage pointers are pure mother biography — a child has no prior era. The distinct-numbering pattern it seeded generalizes via §3.4's P"
+  },
+  {
+   "family": "C-032",
+   "note": "AST §6 instance class and GENESIS §3.4 exclusion both name C-032, and Audit #1's four-card ruling (corpus note) calls it a milestone row — FRACTAL's act of building its store, integrity credited under"
+  },
+  {
+   "family": "C-051",
+   "note": "C-051 is in the GENESIS §3.4 exclusion list (C-051–C-054, instance class); Architecture State is not in the KERNEL tuple and the genesis-written .version-registry explicitly lists it in living_omit (g"
+  },
+  {
+   "family": "C-052",
+   "note": "A one-time supersession recording in the mother's Register/Architecture State/Archive (corpus: history row, complete; the live face doctrine is C-017's, a separate family); C-052 sits inside the exclu"
+  },
+  {
+   "family": "C-064",
+   "note": "C-064 is in the GENESIS §3.4 exclusion list (instance class), and mother CLAUDE.md rule 8 states it directly: 'the C-064 standing push does not travel into a copy'; the PR newborn's adapter carries no"
+  },
+  {
+   "family": "C-066-STOP",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q3 — no born carrier; the general C-066/C-084 reservations travel as kernel; drone-specific text re-materializes at any child's"
+  },
+  {
+   "family": "C-084-DRONE",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q3 — no born carrier; the general C-066/C-084 reservations travel as kernel; drone-specific text re-materializes at any child's"
+  },
+  {
+   "family": "C-089",
+   "note": "C-089 is in the GENESIS §3.4 exclusion list, and the corpus row states the ground: the surface roster is instance biography ('instance decision'); the retired Cowork surface is a fact about the mother"
+  },
+  {
+   "family": "C-093",
+   "note": "AST §6 explicitly: 'C-093 stands instance-side per the v0.17 judgment'; C-093 is in GENESIS §3.4's instance-class exclusion list. Workbench/ is the mother's own build — not in genesis.py's KERNEL tupl"
+  },
+  {
+   "family": "C-098",
+   "note": "C-098 in GENESIS §3.4's exclusion list; AST §6 instance class (the annex is FRACTAL's own distribution biography, its routing pattern recorded as reusable practice only). BOOT-annex lives in the mothe"
+  },
+  {
+   "family": "C-105",
+   "note": "C-105 in GENESIS §3.4's exclusion list; AST §6 instance ('mirror-as-home is FRACTAL's own distribution posture', pattern recorded as reusable practice only). Executed architecture: mstruppe/fractal-mi"
+  },
+  {
+   "family": "C-107",
+   "note": "C-107 in GENESIS §3.4's exclusion list; AST §6 instance ('the flip's de-triggering and the refinement program are FRACTAL's own realization posture — biography'). The publish-on-observed-necessity cal"
+  },
+  {
+   "family": "C-116",
+   "note": "C-116 in GENESIS §3.4's exclusion list; AST §6 instance ('the mirror rider ... is FRACTAL's own distribution posture, the C-098/C-105 class', pattern recorded as practice only). All three members are "
+  },
+  {
+   "family": "C-119",
+   "note": "C-119 in GENESIS §3.4's exclusion list; AST §6 instance ('the engine-sketch site model ... FRACTAL's own public-presence biography', the parts-exposed-verbatim pattern recorded as practice only). Site"
+  },
+  {
+   "family": "C-120",
+   "note": "C-120 in GENESIS §3.4's exclusion list; AST §6 instance ('the go-live — the flip, the gate, the serving split, the intake layer — FRACTAL's own public-presence biography'). Lives in the mirror's gh-pa"
+  },
+  {
+   "family": "C-129",
+   "note": "C-129 in GENESIS §3.4's exclusion list; AST §6 instance ('the Gas Ledger pair a custom-concept extension by its own category, mirror-excluded, kernel candidacy deliberately deferred'). WALK-GAS-LEDGER"
+  },
+  {
+   "family": "C-130",
+   "note": "C-130 in GENESIS §3.4's exclusion list; AST §6 instance ('the site's section contract the C-119/C-120 site-family's floor plan', its three-section pattern recorded as reusable practice only). Editoria"
+  },
+  {
+   "family": "CLOSE-0-ORIENTED",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): the adversarially-agreed correction adopted with the sort ratification."
+  },
+  {
+   "family": "CLOSE-3-PACK",
+   "note": "close.py and .claude/commands/close.md are in neither genesis.py's KERNEL tuple (lines 38-66) nor the generated set (915-947); GENESIS §3.6 states '/close is not shipped: it drives close.py, which is "
+  },
+  {
+   "family": "DELETIONS-ALLOWED",
+   "note": "Mother CLAUDE.md Repo-rituals bullet only; the generated child adapter (genesis.py 382-426) carries no deletions ritual, and the child gitignore() (752-756) holds only OS noise + the secrets layer — n"
+  },
+  {
+   "family": "DIET-behaviour-test",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "DIET-commissioned",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "DIET-fact-presence",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "DIET-finding-ids",
+   "note": "Diet Procedure v0.1 §4.3 + the mother's Register DF-ledger practice; neither the Procedure nor the DF series enters a newborn (Register generated fresh with 'No instance decisions', genesis.py 315-350"
+  },
+  {
+   "family": "DIET-gauge",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "DIET-measurement",
+   "note": "Diet Procedure v0.1 §4 flight-contract discipline; the Procedure is absent from the KERNEL tuple and all genesis templates — Registry-adoptable origin-reference only."
+  },
+  {
+   "family": "DIET-pointer-grammar",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "DIET-provenance-note",
+   "note": "Diet Procedure v0.1 §6.3; same non-travel evidence as the rest of the DIET group — Registry reference, never born law."
+  },
+  {
+   "family": "DIET-records",
+   "note": "Diet Procedure v0.1 §8; the machine half (close.py run_gates at the adopting close) is mother-side tier-1 tooling that doesn't ship. Registry-adoptable reference only."
+  },
+  {
+   "family": "DIET-slate-classes",
+   "note": "Diet Procedure v0.1 §5 ratification bar; Procedure not in KERNEL, no genesis site — origin-reference via the Registry shelf row only."
+  },
+  {
+   "family": "DRONE-HANDBACK",
+   "note": "AGENTS.md is neither in the KERNEL tuple nor generated (grep 'AGENTS' in genesis.py: only docstring-free absence; the generated dict writes CLAUDE.md only). The drone tier is a GENESIS §5 shelf row ('"
+  },
+  {
+   "family": "DRONE-ORIENT",
+   "note": "Same as DRONE-HANDBACK: AGENTS.md rule 2 lives only in the mother's drone adapter; no genesis site copies or instantiates it; drone tier is shelf-optional (GENESIS §5)."
+  },
+  {
+   "family": "FN-NO-COMMIT",
+   "note": "The 'Do not commit — the entry rides the session's next close' sentence exists only in the mother's .claude/commands/fieldnote.md (line 15); the generated child fieldnote command (genesis.py 512-553) "
+  },
+  {
+   "family": "GEN-manual-normative",
+   "note": "GENESIS §0's manual-path-normative / document-wins / dry-run-default rule governs the birth apparatus, which never enters a child: genesis.py is not in its own KERNEL tuple, and the child's GENESIS.md"
+  },
+  {
+   "family": "LOOK-ORIENT-TARGET",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): the adversarially-agreed correction adopted with the sort ratification."
+  },
+  {
+   "family": "ONB-inline-preanswers",
+   "note": "Read Fractal_Onboarding_Protocol.md v0.5 §1.2–1.6 (mother Governance Documents). Not in genesis.py's KERNEL tuple or generated set — a newborn receives only <opener>.md + fieldnote.md commands and no "
+  },
+  {
+   "family": "ONB-instrumentation",
+   "note": "Onboarding Protocol §5: the instrumentation duty binds the midwife session and the mother's generator (fixes land in genesis.py, never as interview patches). The capture apparatus it uses (FIELDNOTES."
+  },
+  {
+   "family": "ONB-jurisdiction",
+   "note": "Both members live mother-side: .claude/commands/begin.md (not generated into children — genesis writes only <opener>.md + fieldnote.md; knet/PR command dirs hold exactly those two) and Onboarding Prot"
+  },
+  {
+   "family": "ONB-never-fork",
+   "note": "Onboarding Protocol banner (read): the three projections are /begin, a future app first-run flow, and a future website walkthrough — all mother-side surfaces; GENESIS-wins is the mother's document-gov"
+  },
+  {
+   "family": "ONB-one-question",
+   "note": "Both members mother-side: begin.md (never generated into a child; verified in knet/PR .claude/commands) and Onboarding Protocol §1 (absent from KERNEL tuple and generated set). Interview conduct execu"
+  },
+  {
+   "family": "ONB-perform",
+   "note": "Onboarding Protocol §0.1 — conduct of the birthing/midwife session (the session is the tutorial). The Protocol does not ship at birth (KERNEL tuple, PR .inherited); the child's own first-loop guidance"
+  },
+  {
+   "family": "ONB-real-first-loop",
+   "note": "The conduct rule (nothing asked twice, no sandbox) binds the interview session mother-side (Protocol §0.2/§1.1/§2.1, not shipped). Its OUTPUT travels through the parametric channel: genesis.py --visio"
+  },
+  {
+   "family": "REG-checker-named",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "REG-growth-by-decision",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "REG-honest-status",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "REG-sovereign-adoption",
+   "note": "Max's rulings 2026-08-22 (the Q1-Q4 discussion, thirty-seventh session): Q1 — carrier-credited; the norm's kernel carriage belongs to the carrier row's family. Max's seed-body law recorded: a newborn "
+  },
+  {
+   "family": "SCAN-birth-test",
+   "note": "Fractal_Scan_Procedure_v0.1.md §7.3. The Scan apparatus is mother QA practice: the Procedure and check_scan.py are absent from genesis.py's KERNEL tuple and generated set (PR's store holds only mint/v"
+  },
+  {
+   "family": "SCAN-commissioned",
+   "note": "Scan Procedure §2.1 (C-076 commissioned-never-scheduled). Same shipping facts as the SCAN family throughout: Procedure + check_scan.py not in the birth kernel (verified against genesis.py's KERNEL tup"
+  },
+  {
+   "family": "SCAN-conduct-guards",
+   "note": "Scan Procedure §1/§11 — read-only method, no silent scope growth, fixes-as-proposals: conduct of the mother's scan practice. Not birth-shipped (KERNEL tuple, PR tree); reaches a child only if it adopt"
+  },
+  {
+   "family": "SCAN-drop-unreproduced",
+   "note": "Scan Procedure §6.2 method discipline. Procedure absent from the birth kernel and the generated set; GENESIS §4 biography class; Registry-shelf adoption the only path to a child (knet's .inherited)."
+  },
+  {
+   "family": "SCAN-evidence-verify",
+   "note": "Scan Procedure §6.1 — verify against cited source, never a document's claim. Mother scan-method discipline; not in KERNEL tuple/generated set (PR confirms); adoption-only."
+  },
+  {
+   "family": "SCAN-finding-anatomy",
+   "note": "Scan Procedure §6.3 finding format. Not birth-shipped; no tool half travels either (check_scan.py mother-side only — absent from every child store). GENESIS §4 biography class; Registry shelf adoption"
+  },
+  {
+   "family": "SCAN-forward-open",
+   "note": "Scan Procedure §8.2 ledger practice (Open-with-named-trigger vs Fixed). Same family facts: Procedure not in genesis KERNEL/generated set, Scans named biography in GENESIS §4, knet-only via adoption."
+  },
+  {
+   "family": "SCAN-id-grammar",
+   "note": "Scan Procedure §4 with the machine half in check_scan.py (checks D+E). Both halves are mother-side: neither file is in genesis.py's KERNEL tuple or generated set, and no child store holds check_scan.p"
+  },
+  {
+   "family": "SCAN-mandate-surface",
+   "note": "Scan Procedure §2.2–2.3 — the commissioner's mandate/surface calls recorded in the report banner. Mother scan practice; not birth-shipped (KERNEL tuple, PR tree); adoption-only channel."
+  },
+  {
+   "family": "SCAN-method-guard-decl",
+   "note": "Scan Procedure §3.3–3.5 up-front declarations. Not in the birth kernel; check_scan.py (which doesn't read these fields anyway) also unshipped. GENESIS §4 biography class."
+  },
+  {
+   "family": "SCAN-non-findings",
+   "note": "Scan Procedure §6.4 non-findings section. Mother report-writing discipline; Procedure absent from KERNEL tuple/generated set and from PR; knet-only via post-birth adoption."
+  },
+  {
+   "family": "SCAN-report-format",
+   "note": "Scan Procedure §9 with check_scan.py A/B/D as the machine half — both mother-side only: neither ships in genesis.py's KERNEL tuple or generated set, no child store holds check_scan.py, and close.py (w"
+  },
+  {
+   "family": "SCAN-residue",
+   "note": "Scan Procedure §9/§10 residue re-verification across the Scan series — inherently the mother's own series (her Scans are her biography per GENESIS §4). Not birth-shipped; adoption of the Procedure wou"
+  },
+  {
+   "family": "SCAN-severity",
+   "note": "Scan Procedure §5 with the check_scan.py severity-cell check. Both halves mother-side; not in KERNEL tuple/generated set; check_scan.py absent from all child stores. Non-travelling."
+  },
+  {
+   "family": "SCAN-slate-call",
+   "note": "Scan Procedure §8.4 — the fix slate as the commissioner's triage. Mother scan-practice judgment rule; Procedure not birth-shipped (KERNEL tuple, PR .inherited); Registry-shelf adoption the only path."
+  },
+  {
+   "family": "SCAN-state-block",
+   "note": "Scan Procedure §3.1–3.2 with check_scan.py block C red-blocking via close.py run_gates — the full mechanism is mother-side: none of the three files (Procedure, check_scan.py, close.py) is in genesis.p"
+  },
+  {
+   "family": "WALK-ARCH-STATE",
+   "note": "The child's generated close checklist (decision_register(): 'Close checklist: Global Context, Local Context, Context Index, Decision Register, the client adapter, and both root protocols') has no Arch"
+  },
+  {
+   "family": "WALK-STORE-TOOLS",
+   "note": "The family is the walk ROW, and the row does not travel: the child's generated close checklist has no store-tools row, and its machine mapping (close.py store_tool_paths(), line 456) rides unshipped c"
+  },
+  {
+   "family": "WELCOME-RESTRAINT",
+   "note": ".claude/commands/welcome.md is never generated into a child — genesis writes exactly <opener>.md + fieldnote.md (build_plan lines ~923–924; knet and PR command dirs hold exactly those two). The rule r"
+  },
+  {
+   "family": "WELCOME-SCRIPT",
+   "note": "Same carrier facts as WELCOME-RESTRAINT: welcome.md (steps 2–4, the scripted first contact) lives only in the mother's tree and her release copies; absent from genesis.py's generated command set and f"
+  }
+ ]
+}

@@ -3,7 +3,7 @@ id: DOC-01KZVYPCHGJ0B1HPHD3Z0H67KV
 type: DOC
 created: 2026-08-12T21:40:14Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:5a09b48374f79cde7c9113f0ed10b036ba032c00dd93dcf63dd7a5e276de01b8
+content_hash: sha256:78a7509f8b57b6c12861e3ec6bc1af42b0746d537cb0a3db6c32ede68cde9994
 title: "Fractal Conversation Settings (v0.3)"
 aliases: ["Fractal_Conversation_Settings"]
 placements:

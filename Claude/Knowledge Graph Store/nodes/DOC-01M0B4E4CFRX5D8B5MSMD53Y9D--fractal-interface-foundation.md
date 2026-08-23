@@ -3,7 +3,7 @@ id: DOC-01M0B4E4CFRX5D8B5MSMD53Y9D
 type: DOC
 created: 2026-08-18T19:09:11Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:4fb3b27d9b1f226a7bca46339c65621449b9f2d0d69fcff6ec5795a30660ae49
+content_hash: sha256:4fbbbc6ef87c0db57702308789a42f071e5f49161cf8a903c757346ced0bea16
 title: "Fractal Interface Foundation"
 aliases: ["route:Fractal_Interface_Foundation"]
 placements:

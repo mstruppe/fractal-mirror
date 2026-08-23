@@ -1,0 +1,2026 @@
+{
+ "_provenance": {
+  "artifact": "Family-map proposal — the semantic merge map (365 exact-id rows -> 275 families), rebuilt as data",
+  "status": "Draft — PROPOSAL-ONLY (Flight Protocol §6); binds nothing until the owner adopts it into rule_corpus.json",
+  "source_flight": "Review_2026-08-22_Classification-Audit-1.md (wf_18ab3e9f-409) — Reconcile phase: two independent groupers + one adjudicator (24 A/B disagreements decided, grounds in the record)",
+  "mechanical_verification_at_landing": "366 member ids = 365 corpus rows + C-072 (retired row absorbed by a family — disposition open); zero duplicates; zero corpus rows unassigned; one defect: empty GEN-no-biography entry (its id rides the C-078 family) — drop proposed",
+  "issued": "2026-08-22"
+ },
+ "families": [
+  {
+   "canonical_id": "ORIENT-FIRST",
+   "members": [
+    "ORIENT-FIRST",
+    "BOOT-orient-sequence",
+    "FRACTAL-ORIENT-SPINE"
+   ],
+   "rationale": "DISAGREEMENT: A merged C-001 in as canonical; B kept C-001 out. Decided for B: the corpus row C-001 ('Context Persistence Workflow') spans CLAUDE.md rules 1/3/5 — the orient half AND the close tail (its notes assign the close tail to C-059/close.py) — so it is an umbrella over several distinct conduct rules; folding it into the orient-only family would fuse rules. The three orient rows (adapter rule 1, BOOTSTRAP §1 rehydration sequence, /fractal open spine) are one rule in three lanes; no exact C-ref exists, so the Settings-lane id is canonical."
+  },
+  {
+   "canonical_id": "C-003",
+   "members": [
+    "C-003",
+    "SOURCE-OF-TRUTH"
+   ],
+   "rationale": "Agreed core: adapter rule 2 restates C-003 projection integrity (derived, stamped, never authoritative). DISAGREEMENT: B also added ABF-derived; decided it belongs with C-047 (see there), since it is the board format's own clause sitting beside its sibling ABF rows."
+  },
+  {
+   "canonical_id": "C-010",
+   "members": [
+    "C-010",
+    "GEN-global-shape",
+    "WALK-GLOBAL-CONTEXT"
+   ],
+   "rationale": "Agreed: the Global Context's realisation line moves only at genuine transitions — the decision, the GENESIS shape clause, and the C-059 refresh row for the same trigger."
+  },
+  {
+   "canonical_id": "C-019",
+   "members": [
+    "C-019",
+    "BOOT-file-first"
+   ],
+   "rationale": "Agreed: canonical = plain text in the tree; every database/index/vendor surface a derived disposable projection — BOOTSTRAP restates it."
+  },
+  {
+   "canonical_id": "C-024",
+   "members": [
+    "C-024",
+    "BOOT-integrity"
+   ],
+   "rationale": "Agreed: log-canonical rule (_events authoritative, nodes a fold); BOOT-integrity's unbroken-history half is the rehydration-time verification of the same guarantee."
+  },
+  {
+   "canonical_id": "C-027",
+   "members": [
+    "C-027",
+    "FACET-MINT-FIRST",
+    "FACET-IMMUTABLE",
+    "FACET-PREFIX-PARENT"
+   ],
+   "rationale": "Agreed: facet rules 1, 2 and 7 are the clauses C-027's own name lists verbatim — mint-before-use, immutable/never-reused codes, parentage carried by the code prefix."
+  },
+  {
+   "canonical_id": "C-030",
+   "members": [
+    "C-030",
+    "WALK-REGISTER"
+   ],
+   "rationale": "Agreed: C-030 states the Register's refreshed-per-C-004 duty; the walk row is the same duty inventoried as a C-059 row."
+  },
+  {
+   "canonical_id": "C-031",
+   "members": [
+    "C-031",
+    "FRACTAL-REPORT-STOP"
+   ],
+   "rationale": "Agreed: FRACTAL-REPORT-STOP cites C-031 — the queue is an offer, never a mandate; the user's direction is primary."
+  },
+  {
+   "canonical_id": "C-035",
+   "members": [
+    "C-035",
+    "CMD-STAMP-REFRESH"
+   ],
+   "rationale": "Agreed: CMD-STAMP-REFRESH self-declares as 'C-035 class' — the stamped-projection rule applied to the command files."
+  },
+  {
+   "canonical_id": "C-036",
+   "members": [
+    "C-036",
+    "WALK-RULE-OVERVIEW"
+   ],
+   "rationale": "Agreed: the Rule Overview's context-package membership and refresh duty, decision lane and C-059 walk lane."
+  },
+  {
+   "canonical_id": "C-037",
+   "members": [
+    "C-037",
+    "C-037/C-084",
+    "BOOT-commit-convention"
+   ],
+   "rationale": "Agreed core: BOOT-commit-convention restates the commit convention; the compound C-037/C-084 row is the amended convention's full modern statement, assigned by its leading half. DISAGREEMENT: B also merged C-084 itself. Decided for A: the corpus shows C-084 as its own Register decision with distinct content (author=writer/committer=authorizer amendment; C-037's row even notes 'committer semantics later amended by C-084, outside this range') — parallel to C-120, which both maps keep separate while the compound C-116/C-120 row rides C-116."
+  },
+  {
+   "canonical_id": "C-040",
+   "members": [
+    "C-040",
+    "WALK-SCHEMA-TEMPLATE"
+   ],
+   "rationale": "Agreed: the walk row is C-040's own rider — a Schema reissue obliges a same-pass Template review — which C-040's note names as its HABIT residue."
+  },
+  {
+   "canonical_id": "C-043",
+   "members": [
+    "C-043",
+    "FACET-AS-DATA"
+   ],
+   "rationale": "Agreed: verbatim restatement — a new facet is a mint + token binding, never a schema edit."
+  },
+  {
+   "canonical_id": "C-045",
+   "members": [
+    "C-045",
+    "FACET-REDIRECT"
+   ],
+   "rationale": "Agreed: facet rule 6 (reparent by redirect, never delete) is C-045's redirect semantics."
+  },
+  {
+   "canonical_id": "C-047",
+   "members": [
+    "C-047",
+    "ABF-derived",
+    "ABF-stamp",
+    "ABF-regen-at-close",
+    "WALK-AGENDA-BOARD"
+   ],
+   "rationale": "Agreed core: ABF-stamp, ABF-regen-at-close and the walk row restate C-047's two atoms (stamped agenda projection; refresh rides the close). DISAGREEMENT: B moved ABF-derived to C-003. Decided for A: ABF-derived (Format §1.1 — the board is a derived projection, never authoritative) is the projection-nature clause of the board-specific decision C-047 ('stamped agenda projection'), sitting in the same document beside its sibling ABF rows; sending it to the general C-003 law while ABF-stamp stays here would split one document's clause set across the general/specific boundary the corpus otherwise keeps (per-document instances stay with their document's decision)."
+  },
+  {
+   "canonical_id": "C-048",
+   "members": [
+    "C-048",
+    "ABF-file-first"
+   ],
+   "rationale": "Agreed: the board is repo-resident and file-first, the web artifact optional/display-only."
+  },
+  {
+   "canonical_id": "C-049",
+   "members": [
+    "C-049",
+    "FACET-COLLISION-CURE"
+   ],
+   "rationale": "Agreed: facet rule 9 restates C-049's collision policy — first-mint-wins, append-only cure, deliberate flagged root mints."
+  },
+  {
+   "canonical_id": "C-050/C-060",
+   "members": [
+    "C-050/C-060",
+    "BOOT-checkers",
+    "CLOSE-4-GATES"
+   ],
+   "rationale": "Agreed: three lanes inventory the paired-checker red-block as one combined statement; kept as the pair family so neither atomic decision (C-050, C-060 — separate families) arbitrarily absorbs the bundle rows."
+  },
+  {
+   "canonical_id": "C-057",
+   "members": [
+    "C-057",
+    "BOOT-custody-ladder"
+   ],
+   "rationale": "Agreed: BOOT-custody-ladder is the layered-custody half of C-057's protection model."
+  },
+  {
+   "canonical_id": "C-058",
+   "members": [
+    "C-058",
+    "SCAN-dispositions",
+    "SCAN-never-revised"
+   ],
+   "rationale": "Agreed: both Scan-lane rows restate clauses C-058's own text carries — findings leave the ledger only by recorded disposition, and a frozen review is never revised."
+  },
+  {
+   "canonical_id": "C-059",
+   "members": [
+    "C-059",
+    "CLOSE-2-JUDGMENT-PASS",
+    "CLOSE-6-REPORT"
+   ],
+   "rationale": "Agreed core: CLOSE-2-JUDGMENT-PASS is C-059's judgment half nearly verbatim. DISAGREEMENT: A kept CLOSE-6-REPORT singleton; B merged it. Decided for B: C-059's corpus name is 'close-the-loop checklist + AUDITABLE HANDOVER' — CLOSE-6-REPORT (change summary, checklist marks, store delta, pending-on-Max, what stands open) is that handover half scripted in the command lane, the same lane relationship CLOSE-2 has, which both maps merge."
+  },
+  {
+   "canonical_id": "C-064",
+   "members": [
+    "C-064",
+    "BOOT-push-at-close",
+    "CLOSE-5-COMMIT-PUSH"
+   ],
+   "rationale": "Agreed: the standing push authorization — BOOTSTRAP restates it citing C-064; the close step's push half is C-064 (its commit half points at the C-037 family)."
+  },
+  {
+   "canonical_id": "C-065",
+   "members": [
+    "C-065",
+    "BOOT-stamped-adapters"
+   ],
+   "rationale": "Agreed core: per-surface adapters as stamped, re-projected (never hand-forked) governed compressions. DISAGREEMENT: A also merged CS-INJECTION. Decided for B: the corpus rows carry distinct load-bearing content — C-065 is adapter canonicity/re-projection (MACHINE, STRICT stamp checks), CS-INJECTION is the delivery architecture (auto-load at session start, zero per-session cost, STRUCTURAL — 'delivery cannot be forgotten'). Different mechanism, different rule; CS-INJECTION stays its own family."
+  },
+  {
+   "canonical_id": "C-066",
+   "members": [
+    "C-066",
+    "C-066-SCOPE",
+    "BOOT-drone-tier",
+    "DRONE-GATE"
+   ],
+   "rationale": "Agreed core: C-066's named clauses (bounded brief-only executors, drone/<task> branches, checkers-green acceptance) restated by the scope clause, BOOTSTRAP's drone tier, and the acceptance gate. DISAGREEMENT: B also merged C-066-STOP. Decided for A: stop-and-report on uncovered judgment calls is not among the clauses C-066's corpus row names; it is its own JUDGMENT row (escalation conduct), kept separate."
+  },
+  {
+   "canonical_id": "C-071",
+   "members": [
+    "C-071",
+    "WALK-SETTINGS-C071"
+   ],
+   "rationale": "Agreed: the walk row is C-071 itself exercised at close — conduct touched → Settings reissues first, projections restamp after."
+  },
+  {
+   "canonical_id": "C-073",
+   "members": [
+    "C-073",
+    "CLOSE-3-STAMP"
+   ],
+   "rationale": "DISAGREEMENT: A merged CLOSE-3-STAMP into C-073; B kept both singleton. Decided for A: CLOSE-3-STAMP is the scripted invocation order of close.py's canonized mechanical ripple (--create, --stamp plan, --write --stamp) — both rows are MACHINE with close.py the enforcing artifact; this is the same command-lane-invokes-canonized-tool relationship as CLOSE-1-WALK→C-112, which both maps merge."
+  },
+  {
+   "canonical_id": "C-074",
+   "members": [
+    "C-074",
+    "BOOT-signing"
+   ],
+   "rationale": "Agreed: custody is the signature — BOOT-signing restates C-074's .allowed_signers verification with rebind and %G?-distribution operational detail."
+  },
+  {
+   "canonical_id": "C-076",
+   "members": [
+    "C-076",
+    "BOOT-drill",
+    "SCAN-restore-drill"
+   ],
+   "rationale": "Agreed: one rule, three inventories — the restore drill rides every Scan (decision, BOOTSTRAP drill clause, Scan standing section)."
+  },
+  {
+   "canonical_id": "C-077",
+   "members": [
+    "C-077",
+    "WALK-ADAPTERS-C077"
+   ],
+   "rationale": "Agreed: adapter-content currency at every close; the walk row names C-077 and states the same re-project-never-hand-fork duty."
+  },
+  {
+   "canonical_id": "C-078",
+   "members": [
+    "C-078",
+    "C-078-KERNEL-PINS",
+    "GEN-kernel-copy",
+    "GEN-no-biography"
+   ],
+   "rationale": "Agreed core: birth from the tier-0 kernel (GEN-kernel-copy is the §1 copy step; C-078-KERNEL-PINS a crossmatch cover id from C-078's own note). DISAGREEMENT: B kept GEN-no-biography singleton. Decided for A: C-078's corpus name explicitly carries the 'inheritance clause'; GEN-no-biography (biography and instance-class decisions not inherited; store starts empty) is that clause's exclusion half, enforced by the same genesis.py mechanism the C-078 row describes. C-088 (INHERITED source class) is a different mechanism and stays separate."
+  },
+  {
+   "canonical_id": "C-081",
+   "members": [
+    "C-081",
+    "GEN-verify-only-gate"
+   ],
+   "rationale": "Agreed: verify.py alone is the genesis gate; check_versions.py never demanded of a newborn — GENESIS states it citing C-081."
+  },
+  {
+   "canonical_id": "C-083",
+   "members": [
+    "C-083",
+    "GEN-adapter-commands"
+   ],
+   "rationale": "DISAGREEMENT: A kept GEN-adapter-commands singleton; B merged. Decided for B: the corpus shows near-verbatim identity — C-083's enforcement reads 'genesis.py writes the parameterized CLAUDE.md (Settings stamp read live, never hardcoded) + tier-0 opener command at every birth', which is GEN-adapter-commands' whole content, and both rows sit at the same locus (§3.6). One packaging rule in two lanes; the opener-collision fallback is a detail of the same rule."
+  },
+  {
+   "canonical_id": "C-087",
+   "members": [
+    "C-087",
+    "BOOT-secrets",
+    "GEN-secrets-layer"
+   ],
+   "rationale": "Agreed: secrets doctrine in three lanes — values never in the repo, facts recorded, env-held, rebuild = re-issue; GEN row's C-115 materials tail noted."
+  },
+  {
+   "canonical_id": "C-090",
+   "members": [
+    "C-090",
+    "C-090-EXEC"
+   ],
+   "rationale": "Agreed: C-090-EXEC is a crossmatch cover id for the act half (signed tag + OTS) of the same provenance-anchoring rule."
+  },
+  {
+   "canonical_id": "C-091",
+   "members": [
+    "C-091",
+    "GEN-reference-copy",
+    "WELCOME-STANDING",
+    "BEGIN-STANDING"
+   ],
+   "rationale": "Agreed core: GEN-reference-copy restates C-091 verbatim. DISAGREEMENT: A made {WELCOME-STANDING, BEGIN-STANDING} their own family and kept WELCOME-RESTRAINT singleton; B merged all three into C-091. Decided split: the standing checks merge — C-091's own corpus enforcement names '/welcome and /begin script the standing check (git status + git describe)' as its apparatus, and CLAUDE.md rule 8 (C-091's projection) opens with the know-where-you-stand clause the two rows script; but WELCOME-RESTRAINT stays out (see its singleton entry) because its row spans two principles."
+  },
+  {
+   "canonical_id": "C-092",
+   "members": [
+    "C-092",
+    "REG-adopt-before-invent"
+   ],
+   "rationale": "Agreed: adopt before invent — the Registry lane restates the same shelf-check rule."
+  },
+  {
+   "canonical_id": "C-096",
+   "members": [
+    "C-096",
+    "LOOK-READONLY"
+   ],
+   "rationale": "Agreed: LOOK-READONLY names C-096 and restates the observation window's absolute read-only rule."
+  },
+  {
+   "canonical_id": "C-098",
+   "members": [
+    "C-098",
+    "BOOT-annex"
+   ],
+   "rationale": "Agreed: annex routing of personal-class material; the BOOT row's C-085/C-062 riders noted, its rule is C-098."
+  },
+  {
+   "canonical_id": "C-100",
+   "members": [
+    "C-100",
+    "FN-TOOL-WRITE"
+   ],
+   "rationale": "DISAGREEMENT: A kept FN-TOOL-WRITE singleton; B merged. Decided for B: C-100 canonized the fieldnote tool pipeline and its corpus enforcement (fieldnote.py writes content-immutable blocks, whole-or-nothing parse) is the same mechanism FN-TOOL-WRITE states from the command lane (immutable v0.2 block, id high-water, --kind first-arg, error=stop); both MACHINE rows name fieldnote.py as the enforcing artifact — the CLOSE-1-WALK→C-112 relationship. The format's other FN- clause rows keep their own distinct content and stay separate."
+  },
+  {
+   "canonical_id": "C-101",
+   "members": [
+    "C-101",
+    "BEGIN-READ-PROTOCOL"
+   ],
+   "rationale": "Agreed: BEGIN-READ-PROTOCOL has no content beyond C-101's arrangement — the Onboarding Protocol is the script, /begin only triggers it."
+  },
+  {
+   "canonical_id": "C-102",
+   "members": [
+    "C-102",
+    "ABF-active-offer"
+   ],
+   "rationale": "Agreed: the board offered by name, unprompted, when open threads accumulate — ABF row cites C-102."
+  },
+  {
+   "canonical_id": "C-105",
+   "members": [
+    "C-105",
+    "BOOT-public-posture"
+   ],
+   "rationale": "Agreed: the public-home posture — mother private, curated mirror the permanent public artifact with its own anchor chain; C-105 the dominant content of the BOOT row's bundle."
+  },
+  {
+   "canonical_id": "C-106",
+   "members": [
+    "C-106",
+    "GEN-one-loop"
+   ],
+   "rationale": "Agreed: one conversation, one open loop with close-here-open-there — GENESIS states it citing C-106."
+  },
+  {
+   "canonical_id": "C-110",
+   "members": [
+    "C-110",
+    "SPINE-BUDGETS"
+   ],
+   "rationale": "Agreed: SPINE-BUDGETS is C-110's own word-budget clause, inventoried separately by the crossmatch lane."
+  },
+  {
+   "canonical_id": "C-112",
+   "members": [
+    "C-112",
+    "CLOSE-1-WALK"
+   ],
+   "rationale": "Agreed: CLOSE-1-WALK cites C-112 and is the adaptive close's gauge/prefill walk — the mechanism C-112 canonized."
+  },
+  {
+   "canonical_id": "C-116",
+   "members": [
+    "C-116",
+    "C-116-EXEC",
+    "C-116/C-120"
+   ],
+   "rationale": "Agreed: the standing mirror rider; C-116-EXEC the crossmatch cover id for its execution half; the compound C-116/C-120 row assigned by its leading half — C-120 stays its own family."
+  },
+  {
+   "canonical_id": "C-117",
+   "members": [
+    "C-117",
+    "KMP-sovereign-adoption",
+    "KMP-semantic-checks"
+   ],
+   "rationale": "Agreed core: KMP-sovereign-adoption is C-117's headline clause. DISAGREEMENT: B kept KMP-semantic-checks singleton. Decided for A: C-117's corpus name carries BOTH clauses — 'child adopts a newer release only by its own recorded decision; SEMANTIC VALIDATION GATE' — and its enforcement states 'green checkers insufficient — the semantic gate is judgment by design'; KMP-semantic-checks (stamp-diff + manifest/matrix pairing, unmatched exemption fails) is that named second clause in the procedure lane."
+  },
+  {
+   "canonical_id": "C-118",
+   "members": [
+    "C-118",
+    "SCAN-close-gate"
+   ],
+   "rationale": "Agreed: the Scan conformance checker gates the close — Scan Procedure §12 is the same gate."
+  },
+  {
+   "canonical_id": "C-121",
+   "members": [
+    "C-121",
+    "FN-pressure-plug",
+    "FRACTAL-DEPTH-GAUGE"
+   ],
+   "rationale": "Agreed: C-121's one-buffer pressure plug — the YELLOW plug mechanism and its scripted orientation-moment firing in /fractal."
+  },
+  {
+   "canonical_id": "C-122",
+   "members": [
+    "C-122",
+    "UDP-sorting"
+   ],
+   "rationale": "Agreed: UDP-sorting is the sorting rule C-122's own name carries (stable pole / dynamic pole / buffer)."
+  },
+  {
+   "canonical_id": "C-124",
+   "members": [
+    "C-124",
+    "UDP-kernel-trio"
+   ],
+   "rationale": "Agreed: UDP-kernel-trio restates the kernel-trio-fixed half of C-124's own name."
+  },
+  {
+   "canonical_id": "C-125",
+   "members": [
+    "C-125",
+    "UDP-takeover-gate"
+   ],
+   "rationale": "Agreed core: UDP-takeover-gate sits at C-125's own loci (Pair Procedure §1.4/§3.4) and cites the C-125 law. DISAGREEMENT: B also merged DIET-fact-presence. Decided for A: DIET-fact-presence (Diet §6.2) is the principle's application in a second procedure with its own mechanics (compaction/narration/eviction-waits) and does not cite C-125; per-procedure applications of a shared principle deliberately stay separate in this corpus (the failed-consolidation class both maps invoke elsewhere)."
+  },
+  {
+   "canonical_id": "C-127",
+   "members": [
+    "C-127",
+    "REG-integration-category",
+    "REG-custom-never-released"
+   ],
+   "rationale": "Agreed: both Registry rows restate clauses C-127's own name carries — the one-category taxonomy and custom-never-released."
+  },
+  {
+   "canonical_id": "C-128",
+   "members": [
+    "C-128",
+    "ABF-rolling-window"
+   ],
+   "rationale": "Agreed: the rolling done bar — ten-chip window, append-only archive."
+  },
+  {
+   "canonical_id": "C-129",
+   "members": [
+    "C-129",
+    "WALK-GAS-LEDGER"
+   ],
+   "rationale": "Agreed: the walk row cites C-129 and is its feeding law — append the session's process rows at every close."
+  },
+  {
+   "canonical_id": "C-131",
+   "members": [
+    "C-131",
+    "UDP-seed-law",
+    "UDP-frozen-seeds",
+    "UDP-bounded-seeds"
+   ],
+   "rationale": "Agreed: the seed-tree principle — kernel ships built-but-empty; frozen editions and the bounded set are the disciplines C-131's own notes name."
+  },
+  {
+   "canonical_id": "C-132",
+   "members": [
+    "C-132",
+    "MRC-SCOPE-BIND"
+   ],
+   "rationale": "DISAGREEMENT: A kept MRC-SCOPE-BIND singleton; B merged. Decided for B: C-132's corpus enforcement states the invocation law verbatim — 'summoned by name, binds the named task, composes with Settings, releases at task end' — and MRC-SCOPE-BIND cites C-132 while repeating exactly those clauses from the command lane. Same rule, two lanes; the MRC's distinct content rows (MRC-FIVE-RULES, MRC-BANNER-MARK) stay separate."
+  },
+  {
+   "canonical_id": "CS-VENDOR-PATTERN",
+   "members": [
+    "CS-VENDOR-PATTERN",
+    "BOOT-vendor-pattern"
+   ],
+   "rationale": "Agreed: any future vendor surface gets a stamped instructions projection — read in place, no mirrors, never marry the vendor; Settings row canonical, no C-ref exists."
+  },
+  {
+   "canonical_id": "FN-offtopic-jump",
+   "members": [
+    "FN-offtopic-jump",
+    "FN-PARK-TASK"
+   ],
+   "rationale": "Agreed: /fieldnote is a normal turn never an interrupt — task parked untouched, the note's content never instruction for the work in flight; format and command lanes."
+  },
+  {
+   "canonical_id": "FN-ratification-gate",
+   "members": [
+    "FN-ratification-gate",
+    "FN-RATIFY-GATE",
+    "FN-ONE-LINE-RETURN"
+   ],
+   "rationale": "Agreed: the capture ratification gate — extract, read back, write only on ratification, one-line confirm and return; the format row whole, the command lane split into gate and return step."
+  },
+  {
+   "canonical_id": "FN-solving",
+   "members": [
+    "FN-solving",
+    "FN-RAM-WORKOFF"
+   ],
+   "rationale": "Agreed: solved = dissolved into a durable home citing the FN- id, block deleted whole, on the owner's word; format and command lanes."
+  },
+  {
+   "canonical_id": "GEN-no-federation",
+   "members": [
+    "GEN-no-federation",
+    "KMP-no-store-merge"
+   ],
+   "rationale": "Agreed: stores are never merged — codes collide by design, stores sovereign and append-only; GENESIS and migration lanes, no C-ref."
+  },
+  {
+   "canonical_id": "ONB-dry-run",
+   "members": [
+    "ONB-dry-run",
+    "BEGIN-DRYRUN"
+   ],
+   "rationale": "Agreed: the genesis dry-run is read together before any --write; protocol row canonical, the command projects the script."
+  },
+  {
+   "canonical_id": "ONB-jurisdiction",
+   "members": [
+    "ONB-jurisdiction",
+    "BEGIN-HANDOFF"
+   ],
+   "rationale": "DISAGREEMENT: A paired BEGIN-HANDOFF with ONB-handoff; B paired it with ONB-jurisdiction. Decided for B: BEGIN-HANDOFF's own corpus name cites '(jurisdiction, §0.6)' — ONB-jurisdiction's locus — and shares its JUDGMENT class and content (the midwife's jurisdictional stop: stages two/three live child-side). ONB-handoff (HABIT) carries the exit-script details (path, entry line, launcher suggestion, hatch disposability) and stays its own family."
+  },
+  {
+   "canonical_id": "ONB-one-question",
+   "members": [
+    "ONB-one-question",
+    "BEGIN-INTERVIEW"
+   ],
+   "rationale": "Agreed: interview conduct — one question at a time, never a form, defaults stated not asked; BEGIN-INTERVIEW compresses the same stage-one script."
+  },
+  {
+   "canonical_id": "C-001",
+   "members": [
+    "C-001"
+   ],
+   "rationale": "DISAGREEMENT: A made C-001 the canonical of the orient family. Decided singleton (B): C-001 is the umbrella Context Persistence Workflow spanning orient, load and close conduct (CLAUDE.md rules 1/3/5); its close tail is separately mechanized under C-059 — merging it into any one child family would fuse distinct rules."
+  },
+  {
+   "canonical_id": "ABF-adoption",
+   "members": [
+    "ABF-adoption"
+   ],
+   "rationale": "Agreed singleton — per-format adoption clause; per-format adoption rules deliberately stay distinct."
+  },
+  {
+   "canonical_id": "ABF-bar",
+   "members": [
+    "ABF-bar"
+   ],
+   "rationale": "Agreed singleton — board-format pill-bar mechanics; no duplicate."
+  },
+  {
+   "canonical_id": "ABF-next-card",
+   "members": [
+    "ABF-next-card"
+   ],
+   "rationale": "Agreed singleton — one NEXT card, agenda-shape never session-shape; declares C-106 untouched."
+  },
+  {
+   "canonical_id": "ABF-section-grammar",
+   "members": [
+    "ABF-section-grammar"
+   ],
+   "rationale": "Agreed singleton — the nine-section board grammar; format-internal."
+  },
+  {
+   "canonical_id": "BEGIN-COLD-ARRIVAL",
+   "members": [
+    "BEGIN-COLD-ARRIVAL"
+   ],
+   "rationale": "Agreed singleton — /begin's cold-arrival branching; distinct from the welcome script rows."
+  },
+  {
+   "canonical_id": "C-002",
+   "members": [
+    "C-002"
+   ],
+   "rationale": "Agreed singleton — hybrid anchoring; no restatement row."
+  },
+  {
+   "canonical_id": "C-004",
+   "members": [
+    "C-004"
+   ],
+   "rationale": "Agreed singleton — update ordering; no restatement row."
+  },
+  {
+   "canonical_id": "C-005",
+   "members": [
+    "C-005"
+   ],
+   "rationale": "Agreed singleton — artifact identity scheme."
+  },
+  {
+   "canonical_id": "C-006",
+   "members": [
+    "C-006"
+   ],
+   "rationale": "Agreed singleton — no restatement row."
+  },
+  {
+   "canonical_id": "C-007",
+   "members": [
+    "C-007"
+   ],
+   "rationale": "Agreed singleton — era folder split."
+  },
+  {
+   "canonical_id": "C-008",
+   "members": [
+    "C-008"
+   ],
+   "rationale": "Agreed singleton — manual-first automation; no named-lane duplicate row."
+  },
+  {
+   "canonical_id": "C-009",
+   "members": [
+    "C-009"
+   ],
+   "rationale": "Agreed singleton — Global/Local spine structure; LOAD-MINIMAL is the related but distinct loading conduct."
+  },
+  {
+   "canonical_id": "C-011",
+   "members": [
+    "C-011"
+   ],
+   "rationale": "Agreed singleton — local opening convention."
+  },
+  {
+   "canonical_id": "C-012",
+   "members": [
+    "C-012"
+   ],
+   "rationale": "Agreed singleton — living-doc naming; separate decision from C-080."
+  },
+  {
+   "canonical_id": "C-013",
+   "members": [
+    "C-013"
+   ],
+   "rationale": "Agreed singleton."
+  },
+  {
+   "canonical_id": "C-014",
+   "members": [
+    "C-014"
+   ],
+   "rationale": "Agreed singleton — essential core in one event log."
+  },
+  {
+   "canonical_id": "C-015",
+   "members": [
+    "C-015"
+   ],
+   "rationale": "Agreed singleton — TYPE-ULID identity."
+  },
+  {
+   "canonical_id": "C-016",
+   "members": [
+    "C-016"
+   ],
+   "rationale": "Agreed singleton — facet namespaces/routing codes."
+  },
+  {
+   "canonical_id": "C-017",
+   "members": [
+    "C-017"
+   ],
+   "rationale": "Agreed singleton — shells."
+  },
+  {
+   "canonical_id": "C-018",
+   "members": [
+    "C-018"
+   ],
+   "rationale": "Agreed singleton — substrate B."
+  },
+  {
+   "canonical_id": "C-020",
+   "members": [
+    "C-020"
+   ],
+   "rationale": "Agreed singleton — portability doctrine/ocean test."
+  },
+  {
+   "canonical_id": "C-021",
+   "members": [
+    "C-021"
+   ],
+   "rationale": "Agreed singleton — build sequencing on observed need; the felt-need instances elsewhere are per-scope rules, not restatements."
+  },
+  {
+   "canonical_id": "C-022",
+   "members": [
+    "C-022"
+   ],
+   "rationale": "Agreed singleton — node file format."
+  },
+  {
+   "canonical_id": "C-023",
+   "members": [
+    "C-023"
+   ],
+   "rationale": "Agreed singleton — append-only JSONL event log."
+  },
+  {
+   "canonical_id": "C-025",
+   "members": [
+    "C-025"
+   ],
+   "rationale": "Agreed singleton — supersede semantics; commit-boundary rider noted under the C-037 family's BOOT row."
+  },
+  {
+   "canonical_id": "C-026",
+   "members": [
+    "C-026"
+   ],
+   "rationale": "Agreed singleton — facet/role/weight vocabulary."
+  },
+  {
+   "canonical_id": "C-028",
+   "members": [
+    "C-028"
+   ],
+   "rationale": "Agreed singleton — the Decision Register as canonical index; the refresh duty is the C-030 family."
+  },
+  {
+   "canonical_id": "C-029",
+   "members": [
+    "C-029"
+   ],
+   "rationale": "Agreed singleton — lineage pointer-only."
+  },
+  {
+   "canonical_id": "C-033",
+   "members": [
+    "C-033"
+   ],
+   "rationale": "DISAGREEMENT: B merged CLOSE-1-JUDGE in. Decided singleton (A): C-033 is Max's ratification act itself (Draft→Ratified, deliberately human); CLOSE-1-JUDGE is the agent-side close conduct with its own content (judge decided-vs-executed, ask first, never ratify on his behalf) — complementary rules with different actors, so neither absorbs the other."
+  },
+  {
+   "canonical_id": "C-034",
+   "members": [
+    "C-034"
+   ],
+   "rationale": "Agreed singleton — cumulative OQ ledger; the scan-findings disposition rule is C-058's."
+  },
+  {
+   "canonical_id": "C-038",
+   "members": [
+    "C-038"
+   ],
+   "rationale": "DISAGREEMENT: B merged WALK-BOOTSTRAP in. Decided singleton (A): C-038's corpus row (Bootstrap Protocol + acceptance drill) states no refresh clause — unlike C-030/C-036 where the decision's own content carries the duty — so the BOOTSTRAP refresh row is a distinct C-059-lane duty."
+  },
+  {
+   "canonical_id": "C-041",
+   "members": [
+    "C-041"
+   ],
+   "rationale": "Agreed singleton — identity bridge."
+  },
+  {
+   "canonical_id": "C-042",
+   "members": [
+    "C-042"
+   ],
+   "rationale": "Agreed singleton — mint-on-reuse."
+  },
+  {
+   "canonical_id": "C-044",
+   "members": [
+    "C-044"
+   ],
+   "rationale": "Agreed singleton — global root-uniqueness."
+  },
+  {
+   "canonical_id": "C-046",
+   "members": [
+    "C-046"
+   ],
+   "rationale": "Agreed singleton — live domain-route bindings; WALK-CONTEXT-INDEX covers the broader index currency."
+  },
+  {
+   "canonical_id": "C-050",
+   "members": [
+    "C-050"
+   ],
+   "rationale": "Agreed singleton — atomic verify.py decision, kept separate from the pair-statement family C-050/C-060."
+  },
+  {
+   "canonical_id": "C-051",
+   "members": [
+    "C-051"
+   ],
+   "rationale": "DISAGREEMENT: B merged WALK-ARCH-STATE in. Decided singleton (A): C-051's corpus row names the map's authority, not a refresh duty; the walk row is a distinct C-059-lane duty with its own trigger and its own machine half (§6 partition gapless at --pack) — same reasoning as C-038/WALK-BOOTSTRAP."
+  },
+  {
+   "canonical_id": "C-055",
+   "members": [
+    "C-055"
+   ],
+   "rationale": "Agreed singleton — event-log layout/roll ceremony."
+  },
+  {
+   "canonical_id": "C-056",
+   "members": [
+    "C-056"
+   ],
+   "rationale": "Agreed singleton — the off-site copy itself; the push act is the C-064 family."
+  },
+  {
+   "canonical_id": "C-060",
+   "members": [
+    "C-060"
+   ],
+   "rationale": "Agreed singleton — atomic check_versions.py decision, kept separate from the pair family."
+  },
+  {
+   "canonical_id": "C-061",
+   "members": [
+    "C-061"
+   ],
+   "rationale": "Agreed singleton — spec-version identity."
+  },
+  {
+   "canonical_id": "C-062",
+   "members": [
+    "C-062"
+   ],
+   "rationale": "Agreed singleton — pre-canon label; BOOT-annex carries it only as a rider."
+  },
+  {
+   "canonical_id": "C-066-STOP",
+   "members": [
+    "C-066-STOP"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-066. Decided singleton (A): the stop-and-report escalation clause is not among the clauses C-066's corpus row names (bounded executors, branches, checkers-green); its own JUDGMENT content at the AGENTS.md locus."
+  },
+  {
+   "canonical_id": "C-067",
+   "members": [
+    "C-067"
+   ],
+   "rationale": "Agreed singleton — project-spine mirrors retired."
+  },
+  {
+   "canonical_id": "C-068",
+   "members": [
+    "C-068"
+   ],
+   "rationale": "Agreed singleton — entry is a query shape."
+  },
+  {
+   "canonical_id": "C-069",
+   "members": [
+    "C-069"
+   ],
+   "rationale": "Agreed singleton — trace contract."
+  },
+  {
+   "canonical_id": "C-070",
+   "members": [
+    "C-070"
+   ],
+   "rationale": "Agreed singleton — read-side contract split."
+  },
+  {
+   "canonical_id": "C-072",
+   "members": [
+    "C-072"
+   ],
+   "rationale": "Agreed singleton — RETIRED row (superseded by C-089)."
+  },
+  {
+   "canonical_id": "C-075",
+   "members": [
+    "C-075"
+   ],
+   "rationale": "Agreed singleton — drone-branch delete after gated merge; BOOT-drone-tier repeats it only as a rider inside the C-066 family."
+  },
+  {
+   "canonical_id": "C-079",
+   "members": [
+    "C-079"
+   ],
+   "rationale": "Agreed singleton — kernel tiering; GEN-tiering is a distinct rule."
+  },
+  {
+   "canonical_id": "C-080",
+   "members": [
+    "C-080"
+   ],
+   "rationale": "Agreed singleton — living filenames never carry a version."
+  },
+  {
+   "canonical_id": "C-082",
+   "members": [
+    "C-082"
+   ],
+   "rationale": "Agreed singleton — drone flights in full clones."
+  },
+  {
+   "canonical_id": "C-084",
+   "members": [
+    "C-084"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into the C-037 family. Decided singleton (A): C-084 is its own Register decision — the author=writer/committer=authorizer amendment with its own corpus row and content C-037's original lacks; the compound C-037/C-084 row carries the bundled statement and rides the C-037 family, mirroring how C-120 stays separate while C-116/C-120 rides C-116."
+  },
+  {
+   "canonical_id": "C-084-DRONE",
+   "members": [
+    "C-084-DRONE"
+   ],
+   "rationale": "Agreed singleton — the drone-jurisdiction commit identity outcome; an application of C-084 with materially different content."
+  },
+  {
+   "canonical_id": "C-085",
+   "members": [
+    "C-085"
+   ],
+   "rationale": "Agreed singleton — the live pre-canon notebook class; BOOT-annex carries its never-staged clause only as a rider."
+  },
+  {
+   "canonical_id": "C-086",
+   "members": [
+    "C-086"
+   ],
+   "rationale": "Agreed singleton — concept foundations tier."
+  },
+  {
+   "canonical_id": "C-088",
+   "members": [
+    "C-088"
+   ],
+   "rationale": "Agreed singleton — INHERITED source class; the checker-side mechanism, distinct from GEN-no-biography's inheritance-scope clause (C-078 family)."
+  },
+  {
+   "canonical_id": "C-089",
+   "members": [
+    "C-089"
+   ],
+   "rationale": "Agreed singleton — Cowork surface retired."
+  },
+  {
+   "canonical_id": "C-093",
+   "members": [
+    "C-093"
+   ],
+   "rationale": "Agreed singleton — Workbench."
+  },
+  {
+   "canonical_id": "C-094",
+   "members": [
+    "C-094"
+   ],
+   "rationale": "Agreed singleton — field testing as the proving process; the fieldnote mechanics it spawned are their own families."
+  },
+  {
+   "canonical_id": "C-095",
+   "members": [
+    "C-095"
+   ],
+   "rationale": "Agreed singleton — remove on observed drag; the diet standard's rows are distinct clauses."
+  },
+  {
+   "canonical_id": "C-097",
+   "members": [
+    "C-097"
+   ],
+   "rationale": "Agreed singleton — the client library; the vendor-surface pattern is its own family."
+  },
+  {
+   "canonical_id": "C-099",
+   "members": [
+    "C-099"
+   ],
+   "rationale": "Agreed singleton — license layer."
+  },
+  {
+   "canonical_id": "C-103",
+   "members": [
+    "C-103"
+   ],
+   "rationale": "Agreed singleton — the capture-review class."
+  },
+  {
+   "canonical_id": "C-104",
+   "members": [
+    "C-104"
+   ],
+   "rationale": "Agreed singleton — Agenda Board Format canonized; the format's clause rows group by their own content."
+  },
+  {
+   "canonical_id": "C-107",
+   "members": [
+    "C-107"
+   ],
+   "rationale": "Agreed singleton — refinement-through-use; a distinct member of the observed-need cluster."
+  },
+  {
+   "canonical_id": "C-108",
+   "members": [
+    "C-108"
+   ],
+   "rationale": "DISAGREEMENT: B merged SCAN-commissioned in. Decided singleton (A): C-108 states the commissioning-contract shape (game plan → agreement → explicit go + effort level); SCAN-commissioned is a trigger-ownership rule (never a watched date) whose corpus enforcement cites C-076, not C-108 — and both maps keep the parallel DIET-commissioned singleton, so absorbing one arm would be inconsistent."
+  },
+  {
+   "canonical_id": "C-109",
+   "members": [
+    "C-109"
+   ],
+   "rationale": "Agreed singleton — frozen-tree grant; KMP-pin/KMP-remote-sever are child-side procedure rules."
+  },
+  {
+   "canonical_id": "C-111",
+   "members": [
+    "C-111"
+   ],
+   "rationale": "Agreed singleton — the Diet Procedure canonization; DIET-* internals are their own rows."
+  },
+  {
+   "canonical_id": "C-113",
+   "members": [
+    "C-113"
+   ],
+   "rationale": "DISAGREEMENT: A merged REG-sovereign-adoption in. Decided singleton (B): C-113 canonized the five-rule contract; the other contract clauses (REG-checker-named, REG-growth-by-decision, REG-honest-status) stay their own rows in both maps, so absorbing only the sovereign-adoption clause would be arbitrary — the canonization-decision-vs-internal-clauses treatment used for C-104/C-111/C-123 applies."
+  },
+  {
+   "canonical_id": "C-114",
+   "members": [
+    "C-114"
+   ],
+   "rationale": "Agreed singleton — vocabulary extension procedure."
+  },
+  {
+   "canonical_id": "C-115",
+   "members": [
+    "C-115"
+   ],
+   "rationale": "Agreed singleton — Scholarly Source Convention + materials rule; GEN-secrets-layer's materials tail noted in the C-087 family."
+  },
+  {
+   "canonical_id": "C-119",
+   "members": [
+    "C-119"
+   ],
+   "rationale": "Agreed singleton — engine-sketch site model."
+  },
+  {
+   "canonical_id": "C-120",
+   "members": [
+    "C-120"
+   ],
+   "rationale": "Agreed singleton — go-live standing shapes; the compound C-116/C-120 row rides the C-116 family."
+  },
+  {
+   "canonical_id": "C-123",
+   "members": [
+    "C-123"
+   ],
+   "rationale": "DISAGREEMENT: A merged IPF-place-index, IPF-index-grammar, IPF-id-highwater and IPF-data-not-instruction in. Decided singleton (B): C-123 is the canonization decision ('the interface place is kernel structure'); its enforcement text names the place contract's clauses collectively — including pull-never-push and envelopes-RAM, which A left OUT — so A's four-of-nine selection was arbitrary. The consistent treatment (C-104, C-111, C-113, C-100) keeps the canonization row separate and the format's internal rules as their own rows."
+  },
+  {
+   "canonical_id": "C-126",
+   "members": [
+    "C-126"
+   ],
+   "rationale": "Agreed singleton — User Documents/ as the human's folder."
+  },
+  {
+   "canonical_id": "C-130",
+   "members": [
+    "C-130"
+   ],
+   "rationale": "Agreed singleton — site section contract."
+  },
+  {
+   "canonical_id": "C-133",
+   "members": [
+    "C-133"
+   ],
+   "rationale": "Agreed singleton — kernel ratification clause."
+  },
+  {
+   "canonical_id": "CLOSE-0-ORIENTED",
+   "members": [
+    "CLOSE-0-ORIENTED"
+   ],
+   "rationale": "Agreed singleton — /close precondition clause."
+  },
+  {
+   "canonical_id": "CLOSE-1-JUDGE",
+   "members": [
+    "CLOSE-1-JUDGE"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-033. Decided singleton (A): the close step's decided-vs-executed judgment with never-ratify-on-Max's-behalf is agent-side conduct applying C-033, with its own content and actor — C-033 remains Max's act."
+  },
+  {
+   "canonical_id": "CLOSE-3-PACK",
+   "members": [
+    "CLOSE-3-PACK"
+   ],
+   "rationale": "Agreed singleton — the tagging-close --pack gate ritual; executes several gates but equals none."
+  },
+  {
+   "canonical_id": "CS-INJECTION",
+   "members": [
+    "CS-INJECTION"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-065. Decided singleton (B): CS-INJECTION is the STRUCTURAL delivery architecture (adapters auto-load at session start, zero per-session cost — delivery cannot be forgotten), distinct from C-065's canonicity/re-projection rule and its STRICT stamp checking."
+  },
+  {
+   "canonical_id": "CS-MAINTAIN-FLAG",
+   "members": [
+    "CS-MAINTAIN-FLAG"
+   ],
+   "rationale": "Agreed singleton — Settings maintenance/divergence-flag duty."
+  },
+  {
+   "canonical_id": "CS-OWNERSHIP",
+   "members": [
+    "CS-OWNERSHIP"
+   ],
+   "rationale": "Agreed singleton — Max owns the conduct standard; distinct from C-033's ratification act."
+  },
+  {
+   "canonical_id": "DELETIONS-ALLOWED",
+   "members": [
+    "DELETIONS-ALLOWED"
+   ],
+   "rationale": "Agreed singleton — Code-surface deletion posture ritual."
+  },
+  {
+   "canonical_id": "DIET-behaviour-test",
+   "members": [
+    "DIET-behaviour-test"
+   ],
+   "rationale": "Agreed singleton — two-arm blind simulation clause."
+  },
+  {
+   "canonical_id": "DIET-commissioned",
+   "members": [
+    "DIET-commissioned"
+   ],
+   "rationale": "Agreed singleton — the diet's own trigger rule with the gauge-yellow prompt variant; parallel to SCAN-commissioned and C-108, deliberately not merged."
+  },
+  {
+   "canonical_id": "DIET-fact-presence",
+   "members": [
+    "DIET-fact-presence"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-125. Decided singleton (A): Diet §6.2 applies the fact-presence principle in its own procedure with its own mechanics (narration relocation, eviction waits) and its corpus row does not cite C-125; per-procedure applications of a shared principle stay separate (the failed-consolidation class), while UDP-takeover-gate — at C-125's own loci — merges."
+  },
+  {
+   "canonical_id": "DIET-finding-ids",
+   "members": [
+    "DIET-finding-ids"
+   ],
+   "rationale": "Agreed singleton — DF-id grammar; parallel to SCAN-id-grammar but a different document's rule."
+  },
+  {
+   "canonical_id": "DIET-gauge",
+   "members": [
+    "DIET-gauge"
+   ],
+   "rationale": "Agreed singleton — the diet trigger's measurement clause."
+  },
+  {
+   "canonical_id": "DIET-measurement",
+   "members": [
+    "DIET-measurement"
+   ],
+   "rationale": "Agreed singleton — reproducible-measurement clause."
+  },
+  {
+   "canonical_id": "DIET-pointer-grammar",
+   "members": [
+    "DIET-pointer-grammar"
+   ],
+   "rationale": "Agreed singleton — compacted-row pointer grammar; diet-specific."
+  },
+  {
+   "canonical_id": "DIET-provenance-note",
+   "members": [
+    "DIET-provenance-note"
+   ],
+   "rationale": "Agreed singleton — compaction provenance-note clause."
+  },
+  {
+   "canonical_id": "DIET-records",
+   "members": [
+    "DIET-records"
+   ],
+   "rationale": "Agreed singleton — diet-record landing clause with its own added content."
+  },
+  {
+   "canonical_id": "DIET-slate-classes",
+   "members": [
+    "DIET-slate-classes"
+   ],
+   "rationale": "Agreed singleton — mitigation slate classes."
+  },
+  {
+   "canonical_id": "DOMAIN-DISCIPLINE",
+   "members": [
+    "DOMAIN-DISCIPLINE"
+   ],
+   "rationale": "Agreed singleton — adapter rule 4's domain/proposal/externalise discipline; no single C-ref carries it."
+  },
+  {
+   "canonical_id": "DRONE-HANDBACK",
+   "members": [
+    "DRONE-HANDBACK"
+   ],
+   "rationale": "Agreed singleton — hand back, don't finish; content beyond C-066's row."
+  },
+  {
+   "canonical_id": "DRONE-ORIENT",
+   "members": [
+    "DRONE-ORIENT"
+   ],
+   "rationale": "Agreed singleton — the drone's minimal-orientation variant, materially different from the orient spine."
+  },
+  {
+   "canonical_id": "FACET-HONEST-WEIGHT",
+   "members": [
+    "FACET-HONEST-WEIGHT"
+   ],
+   "rationale": "Agreed singleton — honest depth/weight judgment clause."
+  },
+  {
+   "canonical_id": "FACET-LABEL-SEP",
+   "members": [
+    "FACET-LABEL-SEP"
+   ],
+   "rationale": "Agreed singleton — label separate from code; not carried by C-027's grammar row."
+  },
+  {
+   "canonical_id": "FN-NO-COMMIT",
+   "members": [
+    "FN-NO-COMMIT"
+   ],
+   "rationale": "Agreed singleton — capture rides the next close, never its own commit."
+  },
+  {
+   "canonical_id": "FN-block-grammar",
+   "members": [
+    "FN-block-grammar"
+   ],
+   "rationale": "Agreed singleton — the six-key block grammar."
+  },
+  {
+   "canonical_id": "FN-budget-calibration",
+   "members": [
+    "FN-budget-calibration"
+   ],
+   "rationale": "Agreed singleton — provisional budget calibration clause."
+  },
+  {
+   "canonical_id": "FN-collection",
+   "members": [
+    "FN-collection"
+   ],
+   "rationale": "Agreed singleton — buffer transport/ingestion at phase boundaries; overlaps ONB-instrumentation only at the tail."
+  },
+  {
+   "canonical_id": "FN-config",
+   "members": [
+    "FN-config"
+   ],
+   "rationale": "Agreed singleton — tool config shape."
+  },
+  {
+   "canonical_id": "FN-doc-wins",
+   "members": [
+    "FN-doc-wins"
+   ],
+   "rationale": "Agreed singleton — per-document document-wins instance; the class deliberately stays unconsolidated."
+  },
+  {
+   "canonical_id": "FN-id-law",
+   "members": [
+    "FN-id-law"
+   ],
+   "rationale": "Agreed singleton — FN-id uniqueness/high-water law; FN-TOOL-WRITE (C-100 family) exercises it but carries the tool-contract content."
+  },
+  {
+   "canonical_id": "FN-immutability",
+   "members": [
+    "FN-immutability"
+   ],
+   "rationale": "Agreed singleton — content-immutable blocks, correction = new entry; the C-025 store rule is a different artifact's law."
+  },
+  {
+   "canonical_id": "FN-intake",
+   "members": [
+    "FN-intake"
+   ],
+   "rationale": "Agreed singleton — whole-or-nothing parse, both grammars at intake."
+  },
+  {
+   "canonical_id": "FN-machine-fields",
+   "members": [
+    "FN-machine-fields"
+   ],
+   "rationale": "Agreed singleton — machine-field sourcing rules."
+  },
+  {
+   "canonical_id": "FN-verbatim-report",
+   "members": [
+    "FN-verbatim-report"
+   ],
+   "rationale": "Agreed singleton — verbatim raw-report landing."
+  },
+  {
+   "canonical_id": "FN-workdown",
+   "members": [
+    "FN-workdown"
+   ],
+   "rationale": "Agreed singleton — when the buffer is worked; distinct from FN-solving's dissolution semantics."
+  },
+  {
+   "canonical_id": "GEN-clause-seed",
+   "members": [
+    "GEN-clause-seed"
+   ],
+   "rationale": "Agreed singleton — the newborn Register's inheritance-clause seed and P- prefix; KMP-clause-span is the mother-side check, kept separate."
+  },
+  {
+   "canonical_id": "GEN-first-close",
+   "members": [
+    "GEN-first-close"
+   ],
+   "rationale": "Agreed singleton — GENESIS §6 first-close-makes-the-instance doctrine."
+  },
+  {
+   "canonical_id": "GEN-manual-normative",
+   "members": [
+    "GEN-manual-normative"
+   ],
+   "rationale": "Agreed singleton — GENESIS's manual-path-normative/document-wins clause; per-document instance."
+  },
+  {
+   "canonical_id": "GEN-no-biography",
+   "members": [],
+   "rationale": ""
+  },
+  {
+   "canonical_id": "GEN-parameters",
+   "members": [
+    "GEN-parameters"
+   ],
+   "rationale": "Agreed singleton — the nine pre-genesis parameter decisions."
+  },
+  {
+   "canonical_id": "GEN-remote",
+   "members": [
+    "GEN-remote"
+   ],
+   "rationale": "Agreed singleton — remote-binding mechanics at birth."
+  },
+  {
+   "canonical_id": "GEN-root-rationale",
+   "members": [
+    "GEN-root-rationale"
+   ],
+   "rationale": "Agreed singleton — deliberate minimal root minting with recorded call; composite of the C-049 ceremony plus genesis-specific judgment, kept whole."
+  },
+  {
+   "canonical_id": "GEN-tiering",
+   "members": [
+    "GEN-tiering"
+   ],
+   "rationale": "Agreed singleton — §5 components added on felt absence; observed-need cluster member, not a restatement of C-079 or C-021."
+  },
+  {
+   "canonical_id": "GEN-version-relationship",
+   "members": [
+    "GEN-version-relationship"
+   ],
+   "rationale": "Agreed singleton — which edition serves which purpose; distinct from adoption sovereignty."
+  },
+  {
+   "canonical_id": "IPF-adoption",
+   "members": [
+    "IPF-adoption"
+   ],
+   "rationale": "Agreed singleton — per-format adoption clause."
+  },
+  {
+   "canonical_id": "IPF-data-not-instruction",
+   "members": [
+    "IPF-data-not-instruction"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-123. Decided singleton (B): the interface-place jurisdiction's data-never-instruction rule is a format-internal clause; LOOK-DATA-NOT-INSTRUCTION binds a different window and both maps keep that one separate — same pattern, separate rules per jurisdiction, and C-123 stays the canonization row only."
+  },
+  {
+   "canonical_id": "IPF-envelope-minimum",
+   "members": [
+    "IPF-envelope-minimum"
+   ],
+   "rationale": "Agreed singleton — the posted-file envelope minimum."
+  },
+  {
+   "canonical_id": "IPF-envelopes-ram",
+   "members": [
+    "IPF-envelopes-ram"
+   ],
+   "rationale": "Agreed singleton — envelopes temporary by construction; distinct from C-121's buffer-RAM rule."
+  },
+  {
+   "canonical_id": "IPF-id-highwater",
+   "members": [
+    "IPF-id-highwater"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-123. Decided singleton (B): format-internal high-water law (the C-121 buffer law applied by hand at the communication scale); FN-id-law is the analogous but separate fieldnote rule — the canonization-vs-internals treatment keeps it its own row."
+  },
+  {
+   "canonical_id": "IPF-index-grammar",
+   "members": [
+    "IPF-index-grammar"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-123. Decided singleton (B): the six-block index grammar is format-internal mechanical content, parallel to ABF-section-grammar which both maps keep singleton under the C-104 canonization."
+  },
+  {
+   "canonical_id": "IPF-maintenance",
+   "members": [
+    "IPF-maintenance"
+   ],
+   "rationale": "Agreed singleton — index maintained by the posting session."
+  },
+  {
+   "canonical_id": "IPF-place-index",
+   "members": [
+    "IPF-place-index"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-123. Decided singleton (B): the one-place-one-index rule (readers check the index, never crawl) is the format's own §1.1 clause with its own named checker; C-123 stays the canonization row, consistent with every other canonized format's treatment."
+  },
+  {
+   "canonical_id": "IPF-pull-never-push",
+   "members": [
+    "IPF-pull-never-push"
+   ],
+   "rationale": "Agreed singleton — files stay in the author's place, no foreign-tree writes; a different jurisdiction from KMP-parallel."
+  },
+  {
+   "canonical_id": "KMP-adapter-reproject",
+   "members": [
+    "KMP-adapter-reproject"
+   ],
+   "rationale": "Agreed singleton — migration-lane rider of the re-projection discipline with its own same-change-set and .version-registry specifics."
+  },
+  {
+   "canonical_id": "KMP-advisory",
+   "members": [
+    "KMP-advisory"
+   ],
+   "rationale": "Agreed singleton — the mother's per-release advisory duty."
+  },
+  {
+   "canonical_id": "KMP-audit-never-obey",
+   "members": [
+    "KMP-audit-never-obey"
+   ],
+   "rationale": "Agreed singleton — audited-never-obeyed hand-overs; the data-not-instruction principle's migration instance, kept separate per jurisdiction."
+  },
+  {
+   "canonical_id": "KMP-branch-manifest",
+   "members": [
+    "KMP-branch-manifest"
+   ],
+   "rationale": "Agreed singleton — migration branch + .inherited manifest mechanics."
+  },
+  {
+   "canonical_id": "KMP-clause-span",
+   "members": [
+    "KMP-clause-span"
+   ],
+   "rationale": "Agreed singleton — the mother-side pack-time clause-span gate; the child-side seed is GEN-clause-seed."
+  },
+  {
+   "canonical_id": "KMP-conflict-register",
+   "members": [
+    "KMP-conflict-register"
+   ],
+   "rationale": "Agreed singleton — conflicts named by class at the human gate."
+  },
+  {
+   "canonical_id": "KMP-feedback-choice",
+   "members": [
+    "KMP-feedback-choice"
+   ],
+   "rationale": "Agreed singleton — feedback is the child's choice."
+  },
+  {
+   "canonical_id": "KMP-frozen-assessment",
+   "members": [
+    "KMP-frozen-assessment"
+   ],
+   "rationale": "Agreed singleton — Gate-2 assessment freezes at acceptance; the freeze principle applied to its own object."
+  },
+  {
+   "canonical_id": "KMP-gates",
+   "members": [
+    "KMP-gates"
+   ],
+   "rationale": "Agreed singleton — the Gate 0-6 skeleton."
+  },
+  {
+   "canonical_id": "KMP-human-gate",
+   "members": [
+    "KMP-human-gate"
+   ],
+   "rationale": "Agreed singleton — Gate 3 stops at the instance owner."
+  },
+  {
+   "canonical_id": "KMP-landing",
+   "members": [
+    "KMP-landing"
+   ],
+   "rationale": "Agreed singleton — one reviewed change-set landing shape."
+  },
+  {
+   "canonical_id": "KMP-matrix",
+   "members": [
+    "KMP-matrix"
+   ],
+   "rationale": "Agreed singleton — the adoption matrix and seven dispositions."
+  },
+  {
+   "canonical_id": "KMP-parallel",
+   "members": [
+    "KMP-parallel"
+   ],
+   "rationale": "Agreed singleton — no live coupling between mother and child."
+  },
+  {
+   "canonical_id": "KMP-pin",
+   "members": [
+    "KMP-pin"
+   ],
+   "rationale": "Agreed singleton — pin-and-verify procedure for anchored release tags; distinct from C-109's grant decision."
+  },
+  {
+   "canonical_id": "KMP-pinned-partition",
+   "members": [
+    "KMP-pinned-partition"
+   ],
+   "rationale": "Agreed singleton — pinned §6 as classification source of record."
+  },
+  {
+   "canonical_id": "KMP-preprinted-excludes",
+   "members": [
+    "KMP-preprinted-excludes"
+   ],
+   "rationale": "Agreed singleton — pre-printed EXCLUDE rows; matrix mechanics, related to but not the C-078 inheritance scope."
+  },
+  {
+   "canonical_id": "KMP-prospective",
+   "members": [
+    "KMP-prospective"
+   ],
+   "rationale": "Agreed singleton — adoption binds forward only."
+  },
+  {
+   "canonical_id": "KMP-receipt-artifact",
+   "members": [
+    "KMP-receipt-artifact"
+   ],
+   "rationale": "Agreed singleton — the upstream receipt artifact shape."
+  },
+  {
+   "canonical_id": "KMP-receipt-pair",
+   "members": [
+    "KMP-receipt-pair"
+   ],
+   "rationale": "Agreed singleton — receipt-pair handling and OTS pendency."
+  },
+  {
+   "canonical_id": "KMP-remote-sever",
+   "members": [
+    "KMP-remote-sever"
+   ],
+   "rationale": "Agreed singleton — transport clone severed from origin."
+  },
+  {
+   "canonical_id": "KMP-retrofit",
+   "members": [
+    "KMP-retrofit"
+   ],
+   "rationale": "Agreed singleton — per-component retrofit decisions."
+  },
+  {
+   "canonical_id": "KMP-scratch-rehydrate",
+   "members": [
+    "KMP-scratch-rehydrate"
+   ],
+   "rationale": "Agreed singleton — the scratch-rehydration landing gate."
+  },
+  {
+   "canonical_id": "KMP-tool-discipline",
+   "members": [
+    "KMP-tool-discipline"
+   ],
+   "rationale": "Agreed singleton — BIND/MIGRATE tool discipline."
+  },
+  {
+   "canonical_id": "KMP-validation-plan",
+   "members": [
+    "KMP-validation-plan"
+   ],
+   "rationale": "Agreed singleton — validation coverage and boundary honesty."
+  },
+  {
+   "canonical_id": "KMP-working-artifacts",
+   "members": [
+    "KMP-working-artifacts"
+   ],
+   "rationale": "Agreed singleton — working artifacts are not governance changes."
+  },
+  {
+   "canonical_id": "LEDGER-POINTER",
+   "members": [
+    "LEDGER-POINTER"
+   ],
+   "rationale": "Agreed singleton — the Register's ledgers as sole enumeration; a pointer-discipline instance, not a restatement."
+  },
+  {
+   "canonical_id": "LOAD-MINIMAL",
+   "members": [
+    "LOAD-MINIMAL"
+   ],
+   "rationale": "Agreed singleton — adapter rule 3 loading conduct; C-009 is the structural spine, not this rule."
+  },
+  {
+   "canonical_id": "LOOK-DATA-NOT-INSTRUCTION",
+   "members": [
+    "LOOK-DATA-NOT-INSTRUCTION"
+   ],
+   "rationale": "Agreed singleton — the observation window's data-never-instruction clause with the surfacing duty; a different jurisdiction from IPF's clause."
+  },
+  {
+   "canonical_id": "LOOK-ORIENT-TARGET",
+   "members": [
+    "LOOK-ORIENT-TARGET"
+   ],
+   "rationale": "Agreed singleton — target-side read-don't-scan method; distinct from the self-orientation spine."
+  },
+  {
+   "canonical_id": "LOOK-RATIFY-MAX",
+   "members": [
+    "LOOK-RATIFY-MAX"
+   ],
+   "rationale": "Agreed singleton — canon-entry only by Max's call at a close; its own boundary row."
+  },
+  {
+   "canonical_id": "LOOK-REPORT-STOP",
+   "members": [
+    "LOOK-REPORT-STOP"
+   ],
+   "rationale": "Agreed singleton — report-and-stop with fieldnote-candidate handling."
+  },
+  {
+   "canonical_id": "LOOK-ROSTER",
+   "members": [
+    "LOOK-ROSTER"
+   ],
+   "rationale": "Agreed singleton — registered-targets-only roster rule."
+  },
+  {
+   "canonical_id": "MRC-BANNER-MARK",
+   "members": [
+    "MRC-BANNER-MARK"
+   ],
+   "rationale": "Agreed singleton — MRC banner-mark clause."
+  },
+  {
+   "canonical_id": "MRC-FIVE-RULES",
+   "members": [
+    "MRC-FIVE-RULES"
+   ],
+   "rationale": "Agreed singleton — the MRC's five representation rules."
+  },
+  {
+   "canonical_id": "ONB-day-one-checks",
+   "members": [
+    "ONB-day-one-checks"
+   ],
+   "rationale": "Agreed singleton — post-birth visibility/push checks."
+  },
+  {
+   "canonical_id": "ONB-guide-not-tell",
+   "members": [
+    "ONB-guide-not-tell"
+   ],
+   "rationale": "Agreed singleton — questions-over-instructions interview stance."
+  },
+  {
+   "canonical_id": "ONB-handoff",
+   "members": [
+    "ONB-handoff"
+   ],
+   "rationale": "DISAGREEMENT: A paired BEGIN-HANDOFF with this row. Decided singleton (B): ONB-handoff carries the exit-script details (path and entry line, launcher as the child's own act, hatch disposability) — HABIT conduct; the jurisdictional stop BEGIN-HANDOFF states lives with ONB-jurisdiction, whose locus (§0.6) BEGIN-HANDOFF's own name cites."
+  },
+  {
+   "canonical_id": "ONB-inline-preanswers",
+   "members": [
+    "ONB-inline-preanswers"
+   ],
+   "rationale": "Agreed singleton — the enumerated friction pre-answers at their exact moments."
+  },
+  {
+   "canonical_id": "ONB-instrumentation",
+   "members": [
+    "ONB-instrumentation"
+   ],
+   "rationale": "Agreed singleton — interview frictions become fieldnotes, fixes land in the generator; overlaps FN-collection only at the tail."
+  },
+  {
+   "canonical_id": "ONB-loop-moves",
+   "members": [
+    "ONB-loop-moves"
+   ],
+   "rationale": "Agreed singleton — the four scripted first-loop moves; references other rules without equaling any."
+  },
+  {
+   "canonical_id": "ONB-never-fork",
+   "members": [
+    "ONB-never-fork"
+   ],
+   "rationale": "Agreed singleton — the onboarding script's projections-never-fork clause; per-document instance."
+  },
+  {
+   "canonical_id": "ONB-perform",
+   "members": [
+    "ONB-perform"
+   ],
+   "rationale": "Agreed singleton — the session performs the script."
+  },
+  {
+   "canonical_id": "ONB-rail",
+   "members": [
+    "ONB-rail"
+   ],
+   "rationale": "Agreed singleton — First Loops Rail conduct; its own content beyond C-101's canonization."
+  },
+  {
+   "canonical_id": "ONB-real-first-loop",
+   "members": [
+    "ONB-real-first-loop"
+   ],
+   "rationale": "Agreed singleton — interview answers are the genesis parameters, no sandbox."
+  },
+  {
+   "canonical_id": "ONB-retirement",
+   "members": [
+    "ONB-retirement"
+   ],
+   "rationale": "Agreed singleton — rail retirement proposal rule."
+  },
+  {
+   "canonical_id": "REG-checker-named",
+   "members": [
+    "REG-checker-named"
+   ],
+   "rationale": "Agreed singleton — every Registry entry names its checker half; its own contract clause."
+  },
+  {
+   "canonical_id": "REG-growth-by-decision",
+   "members": [
+    "REG-growth-by-decision"
+   ],
+   "rationale": "Agreed singleton — Registry growth by the forging instance's ratification."
+  },
+  {
+   "canonical_id": "REG-honest-status",
+   "members": [
+    "REG-honest-status"
+   ],
+   "rationale": "Agreed singleton — one honest status per entry."
+  },
+  {
+   "canonical_id": "REG-sovereign-adoption",
+   "members": [
+    "REG-sovereign-adoption"
+   ],
+   "rationale": "DISAGREEMENT: A merged it into C-113. Decided singleton (B): it is one of the contract's per-clause rows, and its siblings (REG-checker-named, REG-growth-by-decision, REG-honest-status) stay their own rows in both maps; C-117/KMP's sovereign adoption is the migration-specific variant, also kept separate (the failed-consolidation class)."
+  },
+  {
+   "canonical_id": "SCAN-birth-test",
+   "members": [
+    "SCAN-birth-test"
+   ],
+   "rationale": "Agreed singleton — birth test as a standing section at ship-gating Scans."
+  },
+  {
+   "canonical_id": "SCAN-commissioned",
+   "members": [
+    "SCAN-commissioned"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-108. Decided singleton (A): commissioned-never-scheduled is the Scan's trigger-ownership rule, whose corpus enforcement cites C-076 (never a watched date), not the commissioning-contract shape C-108 states; the parallel DIET-commissioned stays singleton in both maps."
+  },
+  {
+   "canonical_id": "SCAN-conduct-guards",
+   "members": [
+    "SCAN-conduct-guards"
+   ],
+   "rationale": "Agreed singleton — read-only method, no silent scope growth, fixes-as-proposals."
+  },
+  {
+   "canonical_id": "SCAN-drop-unreproduced",
+   "members": [
+    "SCAN-drop-unreproduced"
+   ],
+   "rationale": "Agreed singleton — non-reproducing findings dropped."
+  },
+  {
+   "canonical_id": "SCAN-evidence-verify",
+   "members": [
+    "SCAN-evidence-verify"
+   ],
+   "rationale": "Agreed singleton — findings verified at source."
+  },
+  {
+   "canonical_id": "SCAN-finding-anatomy",
+   "members": [
+    "SCAN-finding-anatomy"
+   ],
+   "rationale": "Agreed singleton — the finding's required anatomy."
+  },
+  {
+   "canonical_id": "SCAN-forward-open",
+   "members": [
+    "SCAN-forward-open"
+   ],
+   "rationale": "Agreed singleton — forward commitments stay Open."
+  },
+  {
+   "canonical_id": "SCAN-id-grammar",
+   "members": [
+    "SCAN-id-grammar"
+   ],
+   "rationale": "Agreed singleton — S<n>-x.y id grammar; not carried by C-058's row."
+  },
+  {
+   "canonical_id": "SCAN-mandate-surface",
+   "members": [
+    "SCAN-mandate-surface"
+   ],
+   "rationale": "Agreed singleton — mandate and executing surface recorded; a commissioning-record component distinct from the trigger rule."
+  },
+  {
+   "canonical_id": "SCAN-method-guard-decl",
+   "members": [
+    "SCAN-method-guard-decl"
+   ],
+   "rationale": "Agreed singleton — up-front method/exclusion/guard declaration."
+  },
+  {
+   "canonical_id": "SCAN-non-findings",
+   "members": [
+    "SCAN-non-findings"
+   ],
+   "rationale": "Agreed singleton — the non-findings-checked closing section."
+  },
+  {
+   "canonical_id": "SCAN-report-format",
+   "members": [
+    "SCAN-report-format"
+   ],
+   "rationale": "Agreed singleton — the one-file report format."
+  },
+  {
+   "canonical_id": "SCAN-residue",
+   "members": [
+    "SCAN-residue"
+   ],
+   "rationale": "Agreed singleton — prior-disposition re-verification."
+  },
+  {
+   "canonical_id": "SCAN-severity",
+   "members": [
+    "SCAN-severity"
+   ],
+   "rationale": "Agreed singleton — one severity per finding."
+  },
+  {
+   "canonical_id": "SCAN-slate-call",
+   "members": [
+    "SCAN-slate-call"
+   ],
+   "rationale": "Agreed singleton — the fix slate is the commissioner's call."
+  },
+  {
+   "canonical_id": "SCAN-state-block",
+   "members": [
+    "SCAN-state-block"
+   ],
+   "rationale": "Agreed singleton — the header state block."
+  },
+  {
+   "canonical_id": "UDP-adoption-seeds",
+   "members": [
+    "UDP-adoption-seeds"
+   ],
+   "rationale": "Agreed singleton — the pair-series format's own adoption clause."
+  },
+  {
+   "canonical_id": "UDP-extension-steps",
+   "members": [
+    "UDP-extension-steps"
+   ],
+   "rationale": "Agreed singleton — the five extension steps."
+  },
+  {
+   "canonical_id": "UDP-felt-need",
+   "members": [
+    "UDP-felt-need"
+   ],
+   "rationale": "Agreed singleton — pairs added on felt need, retired whole; observed-need cluster member."
+  },
+  {
+   "canonical_id": "UDP-one-home",
+   "members": [
+    "UDP-one-home"
+   ],
+   "rationale": "Agreed singleton — content lives in the original, projections link; pointer-discipline instance."
+  },
+  {
+   "canonical_id": "UDP-original-governs",
+   "members": [
+    "UDP-original-governs"
+   ],
+   "rationale": "Agreed singleton — original governs, user half informs, stamp as divergence signal; the pair authority clause."
+  },
+  {
+   "canonical_id": "WALK-ARCH-STATE",
+   "members": [
+    "WALK-ARCH-STATE"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-051. Decided singleton (A): C-051's row states the map's authority but no refresh clause; this walk row is the distinct C-059-lane refresh duty with its own trigger and machine half — parallel to WALK-BOOTSTRAP."
+  },
+  {
+   "canonical_id": "WALK-BOOTSTRAP",
+   "members": [
+    "WALK-BOOTSTRAP"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-038. Decided singleton (A): C-038's row (protocol + acceptance drill) states no refresh duty; the walk row is a distinct C-059-lane duty, unlike C-030/C-036 whose decisions carry the refresh clause themselves."
+  },
+  {
+   "canonical_id": "WALK-CONTEXT-INDEX",
+   "members": [
+    "WALK-CONTEXT-INDEX"
+   ],
+   "rationale": "Agreed singleton — C-059 refresh row for the Context Index; C-046 covers only the bindings half."
+  },
+  {
+   "canonical_id": "WALK-LOCAL-CONTEXT",
+   "members": [
+    "WALK-LOCAL-CONTEXT"
+   ],
+   "rationale": "Agreed singleton — the every-close Local Context row including the Active-Return re-pointing duty (the F2 cure's close-side half)."
+  },
+  {
+   "canonical_id": "WALK-PAIR-SERIES",
+   "members": [
+    "WALK-PAIR-SERIES"
+   ],
+   "rationale": "Agreed singleton — compound walk row (half refresh + seed-edition check) citing C-131/S6-5.1; equals neither."
+  },
+  {
+   "canonical_id": "WALK-STORE-TOOLS",
+   "members": [
+    "WALK-STORE-TOOLS"
+   ],
+   "rationale": "Agreed singleton — C-059 refresh row for the store tools; no C-ref states the duty."
+  },
+  {
+   "canonical_id": "WELCOME-RESTRAINT",
+   "members": [
+    "WELCOME-RESTRAINT"
+   ],
+   "rationale": "DISAGREEMENT: B merged it into C-091. Decided singleton (A): its corpus enforcement says it 'restates rules 1 AND 9' — a composite spanning the orient principle and C-091; a row that equals two families' content mergeable into neither without splitting stays whole as its own family."
+  },
+  {
+   "canonical_id": "WELCOME-SCRIPT",
+   "members": [
+    "WELCOME-SCRIPT"
+   ],
+   "rationale": "Agreed singleton — the scripted first-contact content (one paragraph, two paths, four FAQ); its own clause beyond C-091's first-contact rider."
+  },
+  {
+   "canonical_id": "WS-OPEN",
+   "members": [
+    "WS-OPEN"
+   ],
+   "rationale": "Agreed singleton — the declared open part forged on observed need."
+  }
+ ]
+}

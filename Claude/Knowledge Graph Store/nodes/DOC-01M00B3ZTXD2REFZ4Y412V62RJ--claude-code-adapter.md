@@ -3,7 +3,7 @@ id: DOC-01M00B3ZTXD2REFZ4Y412V62RJ
 type: DOC
 created: 2026-08-14T14:34:20Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:4bc29a813d076cf333f264406ecb174abc252952cec64540d9a4a020fd356caf
+content_hash: sha256:90647d8b6a1d7c0b7a0cb90b0c2573498310fae136a4b702cc4a5296189aebcc
 title: "Fractal Claude Code Adapter"
 aliases: ["route:Fractal_Claude_Code_Adapter"]
 placements:

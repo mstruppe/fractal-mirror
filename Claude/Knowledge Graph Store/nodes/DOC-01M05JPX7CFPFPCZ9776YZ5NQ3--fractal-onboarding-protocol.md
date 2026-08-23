@@ -3,7 +3,7 @@ id: DOC-01M05JPX7CFPFPCZ9776YZ5NQ3
 type: DOC
 created: 2026-08-16T15:23:12Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:8395d6a2696c2de199e59e0a2a31ebabaf806c5f5ed629275d3812d11905acc0
+content_hash: sha256:8ea86a2d36af65089e25355be7265fa5b9ae2c21d869bf720b7973af9e18743f
 title: "Fractal Onboarding Protocol"
 aliases: ["route:Fractal_Onboarding_Protocol"]
 placements:

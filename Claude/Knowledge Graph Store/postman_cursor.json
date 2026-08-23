@@ -1,0 +1,14 @@
+{
+  "cursor_format": 1,
+  "law": "reader-side cursor (Interface Place Format v0.2 §6.2): the last-seen index state per connection, kept in the reader's own tree — never in any author's place",
+  "connections": {
+    "CN-0002": {
+      "rows": {
+        "IF-0001": "standing"
+      },
+      "index_sha256": "d65fd5d1bd364d05078fe16a48a108bbe26ca6d62d6592b79ce286ef65c862a5",
+      "channel": "~/Desktop/Knowledge Network/PR",
+      "last_poll": "2026-08-23T14:06:29+02:00"
+    }
+  }
+}

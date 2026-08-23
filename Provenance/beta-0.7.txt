@@ -1,0 +1,20 @@
+FRACTAL release provenance attestation (C-090)
+
+Release tag:  beta-0.7
+Tag object:   0a643d6b1a61d0b2d318d3fe1d38ae852dd471f3
+Commit:       01ac7fd816b323cdf463d68d6a41d9f70d21b4c3
+Tagged:       2026-08-20, at the beta-0.7 tagging close — the trust release:
+              the seed tree (Templates/ + born-with user halves, C-131), the
+              behaviour-convention class with the MRC (C-132), the kernel
+              ratification clause (C-133 — one ratification at the origin,
+              holding the responsibility for all, stated in GENESIS §3.4), the
+              reviewed spec pair (Schema v0.7 + Navigation Contract v0.2 — the
+              first Reviewed By fields), the Scan #6 cure program's tool
+              guards, and the pair-half currency gate (per Protocol v0.66)
+Repository:   FRACTAL - private origin mstruppe/fractal (host swappable, C-018)
+Custody:      signed tag, key G per .allowed_signers (C-074)
+
+Verification: "ots verify beta-0.7.txt.ots" proves this file existed no later
+than the attested time; the tag object hash commits the entire repository
+content and history at beta-0.7 by construction. The receipt is pending at
+issue and upgrades to Bitcoin-final via "ots upgrade" (C-090).

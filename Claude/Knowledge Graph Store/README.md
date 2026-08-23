@@ -51,6 +51,14 @@ Live plain-text store for the FRACTAL Knowledge Graph. Hand-usable with zero inf
   single-buffer config `fieldnote_roster.json` (targets retired), content-immutable machine-format
   blocks (Fieldnote Format v0.2), the `--depth` pressure reading (budget + high-water in the buffer
   header), and `parse` for whole-or-nothing intake — both grammars accepted (v0.1 child ledgers).
+- `postman.py` — the ninth tool (C-139, the connection doctrine — Interface Place Format v0.2 §7):
+  the interface place's machine half — `poll` (the connections block as the reading list; header-diff
+  notifications against the reader-side cursor `postman_cursor.json`; connection-requests quarantined),
+  `post` / `receipt` (envelope + index row + high-water, refusing addressed posts to non-connections;
+  author resolved instance-locally, never the machine-global git identity), `spent` / `dissolve` (the
+  §6.1 closing acts, grammar-checked, the commit-before-dissolve duty warned), and `check` — the index
+  parser that *is* the format's checker. Ships to newborns via `genesis.py` (born v0.2-connected,
+  CN-0001 = the mother). Suite: `test_postman.py` (39). Stdlib-only, same family rules.
 - `stats.py` — **a convenience utility, not a canonized tool** (the first drone flight's drill
   artifact, 2026-08-14): a read-only fold counter whose output cross-checks `verify.py`'s totals.
   Canonization on observed need; it carries no invariant of its own.

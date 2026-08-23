@@ -354,6 +354,14 @@ def parse(paths) -> None:
 
 def main() -> None:
     argv = sys.argv[1:]
+    if argv and argv[0] in ("--help", "-h"):
+        print(__doc__)
+        sys.exit(0)
+    if argv and argv[0].startswith("-") and argv[0] not in ("--depth", "--kind"):
+        # Deterministic-routing law (the 2026-08-16 ruling): unknown input is a
+        # hard error, never content. The FN-0004 misfire is this guard's reason.
+        sys.exit(f"fieldnote.py: unknown option {argv[0]!r} — run --help for usage; "
+                 "a report never starts with '-'")
     if argv and argv[0] == "--depth":
         depth_view()
         return

@@ -3,7 +3,7 @@ id: DOC-01M0D60PG7AQEMW6R2ZSBWRF6S
 type: DOC
 created: 2026-08-19T14:15:17Z
 created_by: AGENT.AI.CLAUDE
-content_hash: sha256:2a2eb7c43fe760ed62fbea867d0300dd423b125d5728fe12d4bbd9dadc6f895d
+content_hash: sha256:f81b535fdbf56f51ba23b359c60e1a64937807f67dd8ec442f61c4f29087f535
 title: "Fractal Interface Place Format v0.1"
 aliases: ["route:Fractal_Interface_Place_Format_v0.1"]
 placements:

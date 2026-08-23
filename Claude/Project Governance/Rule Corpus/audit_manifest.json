@@ -1,0 +1,67 @@
+{
+ "dirty": [],
+ "new": [],
+ "disagreement": [],
+ "unreconciled": [],
+ "sample": [
+  {
+   "id": "ABF-active-offer",
+   "class": "HABIT"
+  },
+  {
+   "id": "C-024",
+   "class": "MACHINE"
+  },
+  {
+   "id": "C-036",
+   "class": "HABIT"
+  },
+  {
+   "id": "C-043",
+   "class": "STRUCTURAL"
+  },
+  {
+   "id": "C-044",
+   "class": "MACHINE"
+  },
+  {
+   "id": "C-088",
+   "class": "MACHINE"
+  },
+  {
+   "id": "C-107",
+   "class": "JUDGMENT"
+  },
+  {
+   "id": "CLOSE-6-REPORT",
+   "class": "HABIT"
+  },
+  {
+   "id": "KMP-prospective",
+   "class": "HABIT"
+  },
+  {
+   "id": "ONB-day-one-checks",
+   "class": "HABIT"
+  },
+  {
+   "id": "SCAN-forward-open",
+   "class": "HABIT"
+  },
+  {
+   "id": "WALK-RULE-OVERVIEW",
+   "class": "HABIT"
+  }
+ ],
+ "_meta": {
+  "corpus_version": "0.3",
+  "seed": 20260822,
+  "counts": {
+   "dirty": 0,
+   "new": 0,
+   "disagreement": 0,
+   "unreconciled": 0,
+   "sample": 12
+  }
+ }
+}
