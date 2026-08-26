@@ -66,7 +66,16 @@ nav.top {
 nav.top a { color: var(--muted); transition: color 0.2s ease; white-space: nowrap; }
 nav.top a:hover { color: var(--ink); }
 nav.top a[aria-current="page"] { color: var(--ink); }
-nav.top .mark { color: var(--ink); font-weight: 600; letter-spacing: 0.08em; }
+/* the mark is the special button now — pinned right, it leads to the Shell (FRACTAL's room) */
+nav.top .mark {
+  position: absolute; right: 1.15rem;
+  color: var(--ink); font-weight: 600; letter-spacing: 0.08em;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.26rem 0.95rem;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+nav.top .mark:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
 /* ---------- subnav (the same pattern, one level down — borderless, the words float) ---------- */
 nav.subnav {
@@ -103,6 +112,7 @@ nav.subnav.auto.shown { transform: none; opacity: 1; }
     scrollbar-width: none;
   }
   nav.top::-webkit-scrollbar, nav.subnav::-webkit-scrollbar { display: none; }
+  nav.top .mark { position: static; margin-left: auto; }   /* rides the row's end when the bar scrolls */
 }
 
 /* ---------- hero (full, home) ---------- */

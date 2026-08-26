@@ -65,7 +65,16 @@
   }
   nav a { color: var(--muted); transition: color 0.2s ease; white-space: nowrap; }
   nav a:hover { color: var(--ink); }
-  nav .mark { color: var(--ink); font-weight: 600; letter-spacing: 0.08em; }
+  /* the mark is the special button now — pinned right, it leads to the Shell (FRACTAL's room) */
+  nav .mark {
+    position: absolute; right: 1.15rem;
+    color: var(--ink); font-weight: 600; letter-spacing: 0.08em;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.26rem 0.95rem;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  nav .mark:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   @media (max-width: 900px) {
     nav {
       justify-content: flex-start;
@@ -75,6 +84,7 @@
       scrollbar-width: none;
     }
     nav::-webkit-scrollbar { display: none; }
+    nav .mark { position: static; margin-left: auto; }
   }
 
   header {
@@ -185,12 +195,12 @@
   nav.subnav .submark { color: var(--faint); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.66rem; }
 </style>
 <nav aria-label="Site">
-  <a class="mark" href="fractal-site.html">FRACTAL</a>
   <a href="fractal-site.html">Home</a>
   <a href="guide.html">Guide</a>
   <a href="concepts.html" aria-current="true">Concepts</a>
   <a href="blog.html">Blog</a>
   <a href="labs.html">Research Labs</a>
+  <a class="mark" href="Workbench/Shell/" title="The Shell — FRACTAL’s room">FRACTAL</a>
 </nav>
 <p style="max-width: 46rem; margin: 0.9rem auto 0; padding: 0 1.2rem; font-size: 0.8rem; color: var(--muted, #6b6b74);"><a href="concepts.html" style="color: inherit">Concepts</a> &rsaquo; The procedures &mdash; the governance processes in story form (this page is Concepts&rsquo; annex; the dictionary entries link here for depth).</p>
 <nav class="subnav" aria-label="Procedures sections">

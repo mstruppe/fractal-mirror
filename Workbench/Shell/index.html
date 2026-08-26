@@ -1,0 +1,59 @@
+<!doctype html>
+<!--
+  FRACTAL · The Shell — second build slice of the Workspace Foundation (the hangar's first artifact).
+  Working tool, not canon (C-092 class). Document of record: Fractal_Workspace_Foundation §6–§7 (v0.3, 2026-08-25).
+  Static and dependency-free by decision: no toolchain, no server requirement, no framework.
+  Read-only by law: the store is never written from a pane.
+  Slice 3 — the cockpit (the commission's first build, v0.5 2026-08-26): the right-hand pane is
+  summonable-pane #1 (the pattern the later editor pane repeats); it speaks the vendor-neutral
+  /engine/* seam to the local engine room when this page is served by it — otherwise the seat is
+  a door, never an engine. The pane itself still writes nothing; the engine's agent acts only
+  through the in-pane C-008 permission moment. Rituals stay words: /fractal and /close are typed.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL · The Shell</title>
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+<header id="topbar">
+  <div id="brand"><span class="mark">FRACTAL</span> · the Shell <em>· hangar prototype</em></div>
+  <div id="tiers">
+    <button id="tier-public" class="tier active" title="Read the published estate served beside this page">Public tier</button>
+    <button id="tier-local" class="tier" title="Grant this page read access to your instance folder (Chromium browsers)">My instance…</button>
+  </div>
+  <div id="status" role="status">—</div>
+  <button id="cockpit-toggle" title="Cockpit — the agent's seat" aria-label="Toggle the cockpit pane">◨</button>
+  <button id="theme" title="Appearance: auto" aria-label="Toggle light/dark mode">◐</button>
+</header>
+
+<aside id="nav">
+  <div id="quest"></div>
+  <div id="explorer-wrap" hidden>
+    <h3>The estate <span id="root-name"></span></h3>
+    <div id="explorer"></div>
+  </div>
+  <footer id="nav-foot">read-only · the store is never written from a pane</footer>
+</aside>
+
+<div id="nav-resize" title="Drag to resize · double-click to reset"></div>
+<main id="content"></main>
+
+<div id="cockpit-resize" title="Drag to resize · double-click to reset"></div>
+<aside id="cockpit" hidden>
+  <div id="cockpit-head"><span class="label">Cockpit</span><span id="cockpit-state">—</span></div>
+  <div id="cockpit-log"></div>
+  <form id="cockpit-form">
+    <textarea id="cockpit-input" rows="2" placeholder="Speak to the agent — Enter sends, Shift+Enter for a new line"></textarea>
+    <div id="cockpit-controls">
+      <button id="cockpit-stop" type="button" hidden>■ stop</button>
+      <button id="cockpit-send" type="submit" title="Send">↑</button>
+    </div>
+  </form>
+</aside>
+
+<script src="shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRACTAL — Roadmap</title>
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --card: #ffffff;
+    --ink: #1a1a1e;
+    --muted: #6b6b74;
+    --line: #e6e4de;
+    --accent: #2f6fed;
+    --done: #3a9d6e;
+    --med: #c78a2d;
+    --offer: #7a5fb5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a;
+      --card: #202024;
+      --ink: #ececef;
+      --muted: #9b9ba5;
+      --line: #313138;
+      --accent: #6b9bff;
+      --done: #55b98a;
+      --med: #d9a44a;
+      --offer: #a68ae0;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 40px 24px 56px;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; }
+  header { margin-bottom: 26px; }
+  .kicker {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px; font-weight: 600;
+  }
+  .badge {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; border-radius: 999px; padding: 2px 9px; margin-left: 8px;
+    vertical-align: 2px;
+  }
+  .b-now { background: var(--accent); color: #fff; }
+  .b-next { background: var(--offer); color: #fff; }
+  .b-armed { background: transparent; color: var(--med); border: 1px solid var(--med); }
+  .b-horizon { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+  .card p { font-size: 14.5px; margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card ul { margin: 6px 0 4px 22px; font-size: 14.5px; }
+  .card ul li { margin-bottom: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 12.5px; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 12px; color: var(--muted);
+  }
+  .chip b { color: var(--done); font-weight: 650; }
+  code, .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.92em; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 5px; padding: 1px 5px;
+  }
+  b.g { color: var(--done); }
+  b.o { color: var(--offer); }
+  b.y { color: var(--med); }
+  .rail {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px; margin-top: 4px;
+  }
+  .rail div {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; font-size: 13px; color: var(--muted);
+  }
+  .rail div b { color: var(--ink); display: block; margin-bottom: 3px; font-size: 12.5px; }
+  .trio {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 0 0 20px; font-size: 12.5px;
+  }
+  .trio .lbl {
+    color: var(--muted); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 2px;
+  }
+  .trio a, .trio .here {
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px;
+    color: var(--muted); text-decoration: none; background: var(--card);
+  }
+  .trio a:hover { color: var(--ink); border-color: var(--muted); }
+  .trio .here { color: var(--accent); border-color: var(--accent); font-weight: 650; }
+  .foot {
+    color: var(--muted); font-size: 12px; line-height: 1.6;
+    border-top: 1px solid var(--line); margin-top: 26px; padding-top: 14px;
+  }
+  .card.sub { border-left: 4px solid var(--offer); }
+  .subkick {
+    font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--offer); font-weight: 700; margin-bottom: 2px;
+  }
+  .stages { margin-top: 8px; }
+  .stage {
+    display: flex; gap: 12px; padding: 9px 0; font-size: 14px;
+    border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  }
+  .stage:first-child { border-top: none; }
+  .stage .tag {
+    flex: 0 0 88px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; padding-top: 2px;
+  }
+  .t-done { color: var(--done); } .t-live { color: var(--accent); }
+  .t-named { color: var(--offer); } .t-armed { color: var(--med); }
+  .t-hor { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">FRACTAL · User document — the roadmap · the Global Context&rsquo;s human projection (C-122)</div>
+  <h1>Heading toward the Knowledge Network</h1>
+  <div class="sub">The network grows like water: same core, same language everywhere — and it splits itself into the right domains as it grows. This page holds the big moves, in order, each waiting on its named trigger, none built before it fires. It is the <strong>stable pole</strong> of your document pair: the path lives here; the working state lives on the board.</div>
+</header>
+
+<nav class="trio" aria-label="The user-document bar">
+  <span class="lbl">Your documents</span>
+  <a href="Fractal_Agenda_Board.html">Board — the state</a>
+  <a href="../Templates/Fractal_Fieldnote_Buffer_Seed_v0.0.md" title="the shipped empty form (C-131) — this instance&#8217;s live buffer is Site/Fieldnotes.md, home only">Fieldnotes — the buffer</a>
+  <span class="here">Roadmap — the plan</span>
+  <a href="Fractal_Fieldnote_Handout.html">Handout — the manual</a>
+  <a href="Fractal_Update_Plan.html">Update Plan — the release</a>
+  <a href="Fractal_Gas_Gauge.html">Gas Gauge — the costs</a>
+    <a href="Fractal_Birth_Guide.html">Birth Guide — the birth</a>
+</nav>
+
+<div class="card">
+  <h2>Where this stands</h2>
+  <div class="chips">
+    <span class="chip"><b>✓</b> Live on both addresses (the flip executed, live &ne; official)</span>
+    <span class="chip"><b>✓</b> beta-0.8 anchored (2026-08-23) — the connection layer shipped; the upgrade wave executed whole and distilled into the migration law (2026-08-24)</span>
+    <span class="chip"><b>✓</b> PR crossed and paired — the first verified connection ceremony (the code matched on both sides, your word the gate)</span>
+    <span class="chip"><b>✓</b> KNet reborn on the beta-0.8 kernel (2026-08-24, Codex-resident) — the alpha era frozen whole as its citable archive</span>
+    <span class="chip"><b>✓</b> The seed-tree principle ratified (C-131) — the kernel ships built-but-empty; growth is always the instance's</span>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Move 1 — beta-0.6 · beta-0.7 <span class="badge b-done">✓ Both shipped 2026-08-20</span></h2>
+  <ul>
+    <li>beta-0.6 shipped whole at the thirtieth session's tagging close (the §8 migration advisory first-instantiated · the provenance pack · the mirror rider with the first C-127 exclusion · the new three-section site; Protocol v0.64); <b>beta-0.7 — the trust release — followed two sessions later</b> (the seed tree · the behaviour sandbox · the kernel ratification clause, C-133 · the reviewed spec pair; Protocol v0.66).</li>
+    <li><b>beta-0.8 — the connection release — shipped 2026-08-23</b> (conscious pairing · the two faces · the postman · the birth-state law · the two-lane migration fork), and the upgrade wave that installed it across the network is <b class="g">complete and distilled</b> (2026-08-24 — the lessons now live in the Kernel Migration Procedure v0.3). <b class="o">beta-0.9 — the completeness release — forms now:</b> the seed artifact, the advisory generator, the ceremony tool, the Mining Tool spec. The release lane's one home: the <a href="Fractal_Update_Plan.html">Update Plan</a>.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Move 2 — PR, the second child <span class="badge b-now">Live</span></h2>
+  <p><strong>Born 2026-08-21 on the beta-0.7 kernel; crossed to beta-0.8 and paired 2026-08-23</strong> — the light migration lane's first field specimen (one session end to end) and the first completed connection ceremony (CN real, the code verified both sides). Its channel program runs at its own pace.</p>
+  <ul>
+    <li><strong>Jurisdiction — the refined place (your direction, 2026-08-22, superseding the 2026-08-20 transfer plan):</strong> <b>the mother keeps <span class="mono">Site/</span> and its management</b> — the site is her own representation, and she knows herself best. <b>PR — the network's head of public relations — derives and distributes:</b> the site as <em>source</em>, content derived from the public canon and carried to the other channels (the X / Meta / TikTok / YouTube class), kept true when the source moves. The migration is <b>deferred, not dead</b> — a later-stage option once communication within the network has matured (the freeze-and-successor shape banked at PR). The counterpart-navigation design (the C-123 line) is now decidable — the network has two children with live places.</li>
+    <li><strong>Information flows in:</strong> release news from the mother (the advisory class) · research developments from KNet, the math-operator arc included (the hand-off class) · community signals from the public intake.</li>
+    <li><strong>What it proves:</strong> the interface's first standing edge — mother &harr; PR speaking the ratified message classes — and with KNet, the <b class="g">small-organisation proof</b>: three instances, one shared project.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Move 3 — the portfolio topology <span class="badge b-armed">Armed</span></h2>
+  <p>The separation, when scale demands it: <strong>government</strong> at the centre &middot; <strong>the mother</strong> as the domestic domain (kernel, workflows, rules — where updates are built) &middot; <strong>PR</strong> as the public face &middot; <strong>KNet</strong> as head of research.</p>
+  <ul>
+    <li><strong>The government fractal = the umbrella waking</strong> (OQ-34): the one desk where human and AI meet the network — it <em>coordinates, never commands</em>. The seat doctrine: it holds <b class="o">law, addresses, and returns — never members&rsquo; knowledge</b>. Redundancy of law is resilience (keep it); redundancy of context is cost (the shared-core contracts cap it); redundancy of authority stays forbidden.</li>
+    <li><strong>The Network Manifest:</strong> the address book the seat dials — instance name, repo address, jurisdiction, pinned release, transport. The gate&rsquo;s card list is its public projection; the <span class="mono">/look</span> roster is its seed.</li>
+    <li><strong>The editorial flow:</strong> the sixth message-class candidate — periodic, digest-shaped, public-bound: everything that must reach the website flows to PR as envelopes, never as context.</li>
+    <li><strong>Trigger:</strong> the founder&rsquo;s hand stops scaling as the network&rsquo;s transport — or the single-seat experience is wanted. Until then the government&rsquo;s functions live where they already are: the kernel, the release chain, Max&rsquo;s hand.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Move 4 — overgrowth, fission, and the hangar <span class="badge b-armed">Armed</span></h2>
+  <ul>
+    <li><strong>Any member too large births its domain children.</strong> The cleavage planes are pre-drawn: domains have been the bounded unit of loading since day one, so a fractal splits along them naturally — <em>like water</em>.</li>
+    <li><strong>The Fission Procedure</strong> (future standard): cut a domain out of a living instance into a new jurisdiction — which nodes travel, how the register splits, how provenance continues, the route pointer left at the seam. <b class="y">Trigger:</b> the drag gauge stays structurally YELLOW and dieting no longer cures it — you don&rsquo;t diet harder, you split.</li>
+    <li><strong>The hangar:</strong> heavy tools as their own fractals — individual anchored releases, <b class="g">added to or deleted from any network sandbox-clean</b> (pinned adoption by recorded decision; removal severs one route pointer, nothing more). Standards are the light extensions, tool-fractals the heavy ones — one adoption grammar. First candidate bay: KNet&rsquo;s math operator, if it outgrows its birth project.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>The horizon <span class="badge b-horizon">In sight</span></h2>
+  <p>The five-layer stack the canon already names: <strong>instance</strong> (live, proven) &rarr; <strong>portfolio</strong> (moves 2–4, materializing) &rarr; <strong>federation</strong> (arc 3 armed — the grab fires when child content is worth ingesting mechanically) &rarr; <strong>society</strong> (profiles and discovery) &rarr; <strong>economy</strong> (knowledge mining). Projects talking over the www is layers 3–5; the substrate is already www-native, and what&rsquo;s missing is named and trigger-armed, never accidental.</p>
+  <p><strong>The path to 1.0 has a name (your vision of record, 2026-08-22):</strong> the friction protocol is the final ascent — run and trial, add only what is necessary, shed what creates friction, iteratively, the way a fractal grows. Beta-0.9 is the completeness release; when the friction register runs dry, the summit gets its version number: <strong>fractal 1.0</strong>.</p>
+</div>
+
+<div class="card">
+  <h2>Sub-goal roadmaps — arcs of magnitude</h2>
+  <p>Your direction of record (2026-08-24): <em>the network is one big arc, constructed of other arcs of different magnitude — some deserve their own roadmap.</em> This section holds them. Each sub-roadmap zooms into one arc of the main path above, with its own stages and named triggers — same law as everything on this page: nothing builds before its trigger fires. New sub-roadmaps open on your word.</p>
+</div>
+
+<div class="card sub">
+  <div class="subkick">Sub-roadmap № 1</div>
+  <h2>The network arc — from envelopes to the social network</h2>
+  <div class="stages">
+    <div class="stage"><span class="tag t-done">✓ Done</span><span><strong>The interface place</strong> (2026-08-19) — every instance's own readable mail surface: envelopes, receipt loops, the RAM law. The e-mail shape, born from real need.</span></div>
+    <div class="stage"><span class="tag t-live">Live</span><span><strong>The connection layer</strong> (beta-0.8) — conscious pairing (the friend-request shape), the verified key-code ceremony, the two faces (public profile + hidden private). PR paired 2026-08-23 — the first completed ceremony; the reborn KNet's ceremony waits on its key, at its pace.</span></div>
+    <div class="stage"><span class="tag t-named">Named</span><span><strong>The two payload tiers</strong> (2026-08-24, your observation) — the document envelope exists; the conversational tier is the <strong>chat function</strong>, the named missing piece. Your copy-paste is today's chat: a channel that physically ends at the cross-owner boundary, so the tier must eventually go in-band.</span></div>
+    <div class="stage"><span class="tag t-named">Vision</span><span><strong>The deliberation venue</strong> (2026-08-24, your commission) — the independent room where fractal agents meet; a guided sequence automates the 4/6/8-eye principle with <em>provable</em> independence (sealed reviews commit by hash before any is revealed); <strong>a group never decides, only suggests</strong> — the venue's one output is the suggestion package, every gate stays an owner's. First build trigger: the first convened multi-instance review on your word — mother + PR + KNet is already six eyes across two vendors.</span></div>
+    <div class="stage"><span class="tag t-armed">Armed</span><span><strong>Cross-owner</strong> (arc 3) — the registrar relays existence (the umbrella waking, Move 3); <strong>chat and E2E build together</strong> — they are one seam with one trigger: the first connection between different owners.</span></div>
+    <div class="stage"><span class="tag t-hor">Horizon</span><span><strong>The (social) network</strong> — profiles (the public face) · friend requests (connection-requests) · mail (envelopes) · chat · rooms (venues). The grammar already runs whole at desk scale; scale is the only variable left.</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>The rules this plan obeys</h2>
+  <div class="rail">
+    <div><b>Directions, never context</b>Instances exchange envelopes — asks, advisories, hand-offs — never their working memory.</div>
+    <div><b>The shared-core contract</b>Siblings share the kernel and a contracted slice, nothing more. PR need not know the domestic domain.</div>
+    <div><b>Sovereignty — offers, never obligations</b>Every update, migration, and grab is a recorded per-instance decision. Deletion is always clean.</div>
+    <div><b>Trigger-armed, never premature</b>Nothing on this page is built before its named trigger fires. The vision constrains today&rsquo;s cheap choices — that&rsquo;s all it does, and that&rsquo;s enough.</div>
+    <div><b>Recursive simplicity</b>The same pattern at every scale: project &rarr; domain &rarr; component. The network is the pattern applied once more, outward.</div>
+  </div>
+</div>
+
+<div class="foot">
+  <strong>Derived projection (C-035 class) &middot; PRE-CANON on the vision tier (C-062) — a user document, never a source; informs, never governs.</strong> <strong>The Global Context&rsquo;s human projection (C-122, the mirror doctrine):</strong> the stable pole of the user spine — vision + trajectory at phase grain — as the Agenda Board is the Local Context&rsquo;s projection (the dynamic pole, session grain); the two spines share the fieldnote buffer (C-121) as their common write-surface, and the Handout is that organ&rsquo;s manual. The sorting rule of record (2026-08-19): a change to the <em>path</em> lands here; <em>work</em> lands on the board. Sources: the Global Context (v0.8 — §3 carries the pair series, C-122/C-124/C-126), the network-vision exchange of 2026-08-19 (Max&rsquo;s design of record — the separation, the government-as-seat, the hangar addendum, the fission question; reasoning at that session&rsquo;s protocol), the Fractal Interface Foundation v0.9 (§11 the connection layer + the two payload tiers and chat horizon, §11.6; §12 the deliberation venue — the sub-roadmap's substrate), the Knowledge Network Foundation v0.4 (the five-layer stack; the vision-tier pieces here graduate into its next revision on Max&rsquo;s word), and the Local Context&rsquo;s queue. Stamped 2026-08-19; restamped 2026-08-20 (the Scan #6 session — S6-5.1's cure: Move 1 marked shipped, Move 2 to Now with the site-estate charter, the chips brought current); restamped 2026-08-22 (the refined place — PR's P-002 on Max's verbatim: the jurisdiction bullet rewritten, the mother keeps the site, PR derives and distributes, migration deferred-not-dead); restamped 2026-08-24 (the distillation session — chips and Moves 1–2 brought current to the completed wave; <strong>the sub-goal roadmap tier opened on Max's direction</strong> — arcs of magnitude get their own staged roadmap here, the network arc its first member, projecting Interface Foundation v0.9 §§11–12). <strong>Grown from:</strong> <span class="mono">Fractal_Roadmap_Seed_v0.0</span> — the seed-tree stamp (C-131): the empty form is the kernel's, the path above is this instance's growth. Refresh triggers: a queue change at a close that moves a roadmap item, a realisation transition, a ratification graduating a vision item, a Global §3-class structural change, or a C-059 walk finding this stale.
+</div>
+
+</div>
+</body>
+</html>
