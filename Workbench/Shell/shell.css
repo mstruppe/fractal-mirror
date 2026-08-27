@@ -361,7 +361,7 @@ body.cockpit-open #cockpit-resize { display: block; }
    the menu — the two doors emerge as satellite bubbles fanned into the workspace. */
 #rider {
   position: fixed; z-index: 16;
-  width: 46px; height: 46px;
+  width: 69px; height: 69px;         /* 46 +50% (Max's call); the satellites stay 34 */
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: var(--bg);
@@ -378,12 +378,23 @@ body.cockpit-open #cockpit-resize { display: block; }
 #rider[data-edge="top"]    { top: 52px; }                       /* 46 topbar + the standoff */
 #rider[data-edge="left"]   { left: calc(var(--nav-w) + 6px); }
 #rider[data-edge="right"]  { right: 6px; }
+/* the orb — the bubble's living face (the 21st.dev voice orb's shader, ours to
+   drive: idle breathing, the hover and the hand stir it; no microphone here) */
+#rider-orb {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
 #rider .r-mark {
-  font-size: 1.05rem; line-height: 1;
-  color: var(--muted);
+  position: relative; z-index: 2;
+  font-size: 1.2rem; line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
   transition: color 120ms ease;
 }
-#rider:hover .r-mark { color: var(--ink); }
+#rider.no-orb .r-mark { color: var(--muted); text-shadow: none; }
+#rider.no-orb:hover .r-mark { color: var(--ink); }
 
 /* the bloom — hidden satellites scale out on hover/focus; a hide delay keeps them
    alive while the pointer crosses the small gap; the lift (dragging) closes them */
@@ -407,14 +418,25 @@ body.cockpit-open #cockpit-resize { display: block; }
 }
 #rider.lift .sat { opacity: 0; pointer-events: none; transition-delay: 0ms; }
 #rider .sat:hover { color: var(--ink); border-color: var(--ink); }
-#rider[data-edge="bottom"] #rider-pane { bottom: 44px; left: -16px; }
-#rider[data-edge="bottom"] #rider-mini { bottom: 44px; right: -16px; }
-#rider[data-edge="top"]    #rider-pane { top: 44px; left: -16px; }
-#rider[data-edge="top"]    #rider-mini { top: 44px; right: -16px; }
-#rider[data-edge="left"]   #rider-pane { left: 44px; top: -16px; }
-#rider[data-edge="left"]   #rider-mini { left: 44px; bottom: -16px; }
-#rider[data-edge="right"]  #rider-pane { right: 44px; top: -16px; }
-#rider[data-edge="right"]  #rider-mini { right: 44px; bottom: -16px; }
+/* the satellites bloom fully CLEAR of the bubble (no overlap — Max's call):
+   69px bubble + 8px void gap = 77px; the hide delay bridges the crossing */
+#rider[data-edge="bottom"] #rider-pane { bottom: 77px; left: -12px; }
+#rider[data-edge="bottom"] #rider-mini { bottom: 77px; right: -12px; }
+#rider[data-edge="top"]    #rider-pane { top: 77px; left: -12px; }
+#rider[data-edge="top"]    #rider-mini { top: 77px; right: -12px; }
+#rider[data-edge="left"]   #rider-pane { left: 77px; top: -12px; }
+#rider[data-edge="left"]   #rider-mini { left: 77px; bottom: -12px; }
+#rider[data-edge="right"]  #rider-pane { right: 77px; top: -12px; }
+#rider[data-edge="right"]  #rider-mini { right: 77px; bottom: -12px; }
+/* corner care: near a border's ends the fan folds inward (t-start/t-end via JS) */
+#rider.t-end[data-edge="left"] #rider-mini,
+#rider.t-end[data-edge="right"] #rider-mini { bottom: auto; top: 34px; }
+#rider.t-start[data-edge="left"] #rider-pane,
+#rider.t-start[data-edge="right"] #rider-pane { top: auto; bottom: 34px; }
+#rider.t-end[data-edge="top"] #rider-mini,
+#rider.t-end[data-edge="bottom"] #rider-mini { right: 0; }
+#rider.t-start[data-edge="top"] #rider-pane,
+#rider.t-start[data-edge="bottom"] #rider-pane { left: 0; }
 /* free = beyond every border's reach: the bubble rides the hand — only the edge
    anchors release (after the data-edge rules on purpose); inline left/top steer */
 #rider.free { inset: auto; }
