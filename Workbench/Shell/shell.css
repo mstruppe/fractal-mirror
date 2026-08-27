@@ -728,6 +728,24 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 #frame .b4 { top: 110px; }
 #frame .b5 { top: calc(50% + 26px); }
 #frame .b6 { bottom: 110px; }
+/* the void canvas — the workspace ground: an infinite plane, grab and drag to
+   pan (the TouchDesigner mechanic); the frame and the menus hold still. With
+   the Reader closed its card recedes and the whole framed workspace is open
+   canvas — ▤ toggles the Reader back over the plane. */
+#void-canvas { display: none; position: fixed; z-index: 0; cursor: grab; touch-action: none; }
+#void-canvas.grabbing { cursor: grabbing; }
+@media (min-width: 761px) {
+  [data-skin="station"] #void-canvas { display: block; }
+  [data-skin="station"] #screen-idle { background: transparent; pointer-events: none; }
+  [data-skin="station"] body:has(#screen-idle) #content {
+    background: none;
+    border-color: transparent;
+    box-shadow: none;
+    pointer-events: none;
+  }
+  [data-skin="station"] body:has(#screen-idle) #content::after { display: none; }
+}
+
 /* the light runs THROUGH the girders (Max's call — no extra line): the comet's
    path is the girder centerline; it threads the lattice and slides under the
    gusset nodes and bridges, which sit a layer above */

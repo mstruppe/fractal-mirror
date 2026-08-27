@@ -91,6 +91,8 @@ const WIN_MIN = { w: 300, h: 260 };
 
 let dragV = 0;                                   // smoothed pointer speed of the live drag, px/ms
 let reflowInput = () => {};                      // re-clamps the composer; bound by initInputResize
+let lampX = -9999, lampY = -9999;                // the lamp's viewport position (station)
+const vc = { x: 0, y: 0, canvas: null, ctx: null, raf: 0 };   // the void canvas' pan + handles
 /* the magnet's ATTACH reach grows with drag intensity — a fling toward a border
    docks from further out; detach thresholds stay at base SNAP, so pulling off
    stays predictable (velocity reads intent, length would punish deliberate moves) */
@@ -116,12 +118,14 @@ buildQuest();
 els.tierLocal.addEventListener('click', useLocalTier);
 initTheme();
 initSkin();
+initVoidCanvas();
 initNavResize();
 initCockpit();
 initOrb();
 initLayoutMenu();
 initReader();
 setStatus(`published estate · root ${state.publicBase.pathname}`);
+requestAnimationFrame(() => renderCockpit());    // settle all geometry after first real layout
 
 /* ── the rail's width (drag 180–300px; the text keeps its design width and clips) ── */
 function initNavResize() {
@@ -187,9 +191,70 @@ function initSkin() {
   });
   window.addEventListener('pointermove', e => {
     if (document.documentElement.dataset.skin !== 'station') return;
-    document.documentElement.style.setProperty('--mx', e.clientX + 'px');
-    document.documentElement.style.setProperty('--my', e.clientY + 'px');
+    lampX = e.clientX; lampY = e.clientY;
+    document.documentElement.style.setProperty('--mx', lampX + 'px');
+    document.documentElement.style.setProperty('--my', lampY + 'px');
+    drawVoid();                                  // the ground's proximity glow follows
   }, { passive: true });
+}
+
+/* ── the void canvas — the TouchDesigner mechanic (Max's direction, now built):
+      the workspace ground inside the frame is an INFINITE PLANE — grab empty
+      ground and drag to pan; the frame and menus hold still. The ground wears
+      the dot grid (his picked look) with the lamp's proximity glow; future
+      canvas objects translate by the same (vc.x, vc.y). Station skin only. ── */
+function initVoidCanvas() {
+  vc.canvas = document.getElementById('void-canvas');
+  vc.ctx = vc.canvas.getContext('2d');
+  vc.canvas.addEventListener('pointerdown', e => {
+    const p0 = { x: e.clientX, y: e.clientY, vx: vc.x, vy: vc.y };
+    vc.canvas.classList.add('grabbing');
+    startDrag(e, {
+      onMove: ev => {
+        vc.x = p0.vx + (ev.clientX - p0.x);
+        vc.y = p0.vy + (ev.clientY - p0.y);
+        drawVoid();
+      },
+      onEnd: () => vc.canvas.classList.remove('grabbing'),
+    });
+  });
+}
+
+function layoutVoid(ws) {
+  const c = vc.canvas;
+  if (!c) return;
+  const dpr = window.devicePixelRatio || 1;
+  c.style.left = ws.x + 'px'; c.style.top = ws.y + 'px';
+  c.style.width = ws.w + 'px'; c.style.height = ws.h + 'px';
+  const w = Math.max(1, Math.round(ws.w * dpr)), h = Math.max(1, Math.round(ws.h * dpr));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  drawVoid();
+}
+
+function drawVoid() {
+  // synchronous by design: ~900 dots is sub-millisecond, and a deferred draw
+  // can starve in a backgrounded tab — the ground must never lag its pan
+  const c = vc.canvas, ctx = vc.ctx;
+  if (!c || !ctx || document.documentElement.dataset.skin !== 'station') return;
+  const dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = c.width / dpr, h = c.height / dpr;
+  ctx.clearRect(0, 0, w, h);
+  const SP = 26, R = 1.2, REACH = 140 * 140;
+  const rect = c.getBoundingClientRect();
+  const mx = lampX - rect.left, my = lampY - rect.top;
+  const ox = ((vc.x % SP) + SP) % SP, oy = ((vc.y % SP) + SP) % SP;
+  for (let x = ox; x < w; x += SP) {
+    for (let y = oy; y < h; y += SP) {
+      const dX = x - mx, dY = y - my;
+      const d2 = dX * dX + dY * dY;
+      const a = d2 < REACH ? 0.10 + 0.25 * (1 - d2 / REACH) : 0.10;
+      ctx.fillStyle = `rgba(245, 245, 247, ${a})`;
+      ctx.beginPath();
+      ctx.arc(x, y, R, 0, 6.2832);
+      ctx.fill();
+    }
+  }
 }
 
 /* ── the orb — the bubble's face (Max's pick: the 21st.dev voice orb, absorbed
@@ -597,11 +662,11 @@ function showMessage(title, html) {
   els.content.replaceChildren(wrap);
 }
 function showVoid() {
-  // the reader closed or empty → the bare background (Max's call, 2026-08-26).
-  // #screen-idle is the mount for the subtle graphics that may live here later.
-  // BANKED DIRECTION (Max, 2026-08-27, TouchDesigner-inspired): the void later
-  // becomes an INFINITELY DRAGGABLE CANVAS — content pans out of the picture
-  // while the frame and menu hold still. Nothing here may block that.
+  // the reader closed or empty → the ground shows (Max's call, 2026-08-26).
+  // Since 2026-08-27 the ground IS the void canvas (station): the infinite
+  // pannable plane — in station this idle surface goes transparent and
+  // pointer-inert so the plane beneath takes the drag. BANKED NEXT STEP:
+  // the Reader itself becomes a canvas object riding the pan offset.
   const idle = document.createElement('div');
   idle.id = 'screen-idle';
   els.content.replaceChildren(idle);
@@ -756,6 +821,7 @@ function renderFrame() {
   const peri = Math.round(2 * (gw + gh));
   r.setAttribute('stroke-dasharray', `170 ${Math.max(1, peri - 170)}`);
   svg.style.setProperty('--perim', peri + 'px');
+  layoutVoid(ws);                                // the ground spans the same framed workspace
 }
 
 /* one generic drag engine — a gesture may change its meaning mid-flight (rider → window);

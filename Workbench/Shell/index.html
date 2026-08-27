@@ -43,6 +43,12 @@
   <button data-layout="cr" role="menuitem">◨&ensp;Screen left · cockpit right</button>
 </div>
 
+<!-- the void canvas — the workspace ground (station skin): an infinite plane in
+     the TouchDesigner grammar — grab empty ground, drag, the plane pans; the
+     frame and the menus hold still. Carries the dot grid; future canvas
+     objects ride the same pan offset. -->
+<canvas id="void-canvas" aria-hidden="true"></canvas>
+
 <aside id="nav">
   <!-- the published estate is the GROUND STATE, not a mode — it needs no button (Max's call,
        2026-08-27). One control: the instance grant; a granted read that misses falls back to
