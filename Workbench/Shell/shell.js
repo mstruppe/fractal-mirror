@@ -723,7 +723,7 @@ function topBottom() {
    beams' width, so everything docks INSIDE the frame, on the visible line */
 function frameInset() {
   return (window.innerWidth > 760 &&
-          document.documentElement.dataset.skin === 'station') ? 12 : 0;
+          document.documentElement.dataset.skin === 'station') ? 18 : 0;
 }
 
 /* the workspace box — below the topbar, beside the rail; its four borders are the dock */

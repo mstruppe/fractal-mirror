@@ -662,22 +662,51 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 }
 [data-skin="station"] #win-shadow { background: rgba(245, 245, 247, 0.03); }
 
-/* ── the structure — the frame that holds everything (Max's layout sketch):
-      grey beams with overshooting joints; the MAGNETIC DOCK LINE just inside
-      them — the snap law's own boundary made visible, a light looping it ── */
+/* ── the structure — the frame that holds everything (Max's correction: real
+      girders, not bars — two chords with diagonal lattice web between them,
+      spans cut to length, butting into corner gusset NODES; clean square
+      edges, nothing overshooting. The MAGNETIC DOCK LINE runs just inside —
+      the snap law's own boundary made visible, a light looping it. ── */
 #frame { display: none; }
-#frame .beam {
-  position: fixed; z-index: 3;
-  background: #2c3037;
-  border-radius: 4px;
-  pointer-events: none;
+#frame .beam, #frame .node { position: fixed; z-index: 3; pointer-events: none; }
+#frame .beam.h {
+  height: 14px;
+  border-top: 2px solid #454b54;               /* the chords */
+  border-bottom: 2px solid #454b54;
+  background:                                   /* the lattice web */
+    repeating-linear-gradient(45deg, rgba(69, 75, 84, 0.85) 0 2px, transparent 2px 9px),
+    #17191d;
 }
-#frame .beam.h { height: 8px; }
-#frame .beam.v { width: 8px; }
-#frame .top  { top: 66px; left: calc(var(--nav-w) - 6px); right: 0; }
-#frame .bot  { bottom: 2px; left: calc(var(--nav-w) - 6px); right: 0; }
-#frame .left  { left: calc(var(--nav-w) + 2px); top: 56px; bottom: 0; }
-#frame .right { right: 2px; top: 56px; bottom: 0; }
+#frame .beam.v {
+  width: 14px;
+  border-left: 2px solid #454b54;
+  border-right: 2px solid #454b54;
+  background:
+    repeating-linear-gradient(-45deg, rgba(69, 75, 84, 0.85) 0 2px, transparent 2px 9px),
+    #17191d;
+}
+/* spans: girders butt into the nodes — computed, never eyeballed */
+#frame .top  { top: 66px; left: calc(var(--nav-w) + 20px); right: 22px; }
+#frame .bot  { bottom: 2px; left: calc(var(--nav-w) + 20px); right: 22px; }
+#frame .left  { left: calc(var(--nav-w) + 2px); top: 84px; bottom: 22px; }
+#frame .right { right: 2px; top: 84px; bottom: 22px; }
+/* the gusset nodes — the four joints that resolve the frame */
+#frame .node {
+  width: 22px; height: 22px; z-index: 4;
+  background: linear-gradient(180deg, #363b43, #24272d);
+  border: 1px solid #454b54;
+  border-radius: 3px;
+}
+#frame .node::after {                           /* the fastener */
+  content: "";
+  position: absolute; inset: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #4d545e, #23262b 70%);
+}
+#frame .tl { left: calc(var(--nav-w) - 2px); top: 62px; }
+#frame .tr { right: 0; top: 62px; }
+#frame .bl { left: calc(var(--nav-w) - 2px); bottom: 0; }
+#frame .br { right: 0; bottom: 0; }
 #dockline {
   position: fixed; z-index: 3;
   pointer-events: none;
@@ -706,11 +735,11 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
   [data-skin="station"] body.cockpit-open.cockpit-left { grid-template: "top top top" 64px "nav cockpit main" 1fr / var(--nav-w) var(--cockpit-w) 1fr; }
   [data-skin="station"] #topbar { margin: 10px 10px 0 10px; }
   [data-skin="station"] #nav { margin: 10px 5px 10px 10px; }
-  [data-skin="station"] #content { margin: 22px 22px 22px 17px; }
+  [data-skin="station"] #content { margin: 28px 28px 28px 23px; }
   [data-skin="station"] body.cockpit-open:not(.cockpit-left) #content { margin-right: 6px; }
-  [data-skin="station"] #cockpit.as-pane { margin: 22px 22px 22px 6px; border-left: 1px solid var(--hairline-soft); border-right: 1px solid var(--hairline-soft); }
-  [data-skin="station"] body.cockpit-left #cockpit.as-pane { margin: 22px 6px 22px 17px; }
-  [data-skin="station"] body.cockpit-left #content { margin: 22px 22px 22px 6px; }
+  [data-skin="station"] #cockpit.as-pane { margin: 28px 28px 28px 6px; border-left: 1px solid var(--hairline-soft); border-right: 1px solid var(--hairline-soft); }
+  [data-skin="station"] body.cockpit-left #cockpit.as-pane { margin: 28px 6px 28px 23px; }
+  [data-skin="station"] body.cockpit-left #content { margin: 28px 28px 28px 6px; }
   [data-skin="station"] #nav-resize, [data-skin="station"] #cockpit-resize { top: 64px; }
   [data-skin="station"] #layout-menu {
     top: 70px; right: 14px;
@@ -718,11 +747,11 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
     border: 1px solid var(--hairline-soft);
     background: var(--card);
   }
-  /* the bubbles dock on the line, inside the beams: border + 6px standoff */
-  [data-skin="station"] #rider[data-edge="bottom"] { bottom: 18px; }
-  [data-skin="station"] #rider[data-edge="top"]    { top: 82px; }
-  [data-skin="station"] #rider[data-edge="left"]   { left: calc(var(--nav-w) + 18px); }
-  [data-skin="station"] #rider[data-edge="right"]  { right: 18px; }
+  /* the bubbles dock on the line, inside the girders: border + 6px standoff */
+  [data-skin="station"] #rider[data-edge="bottom"] { bottom: 24px; }
+  [data-skin="station"] #rider[data-edge="top"]    { top: 88px; }
+  [data-skin="station"] #rider[data-edge="left"]   { left: calc(var(--nav-w) + 24px); }
+  [data-skin="station"] #rider[data-edge="right"]  { right: 24px; }
 }
 
 /* the arrival — out of the void, blur to sharp (releases after; drags stay 1:1) */
