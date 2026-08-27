@@ -15,7 +15,12 @@
   along an edge, carries it to another, or (pulled past the magnetic reach) detaches it.
   Three states, fluid: rider (folded) · window (one object — "mini" when one border is held
   magnetically on a workspace border, floating when free; one default size) · pane (in the
-  layout flow). Position is law: where the cockpit sits decides which side it unfolds to.
+  layout flow). Position is law: where the cockpit sits decides which side it unfolds to —
+  read from the seat at the moment of unfolding. Three borders in reach unfold the window
+  into the pane by themselves (it spans a full axis — a pane in all but name). The magnet's
+  reach is SNAP=37px (+15%) and grows with drag speed — a fling docks from further out;
+  detach thresholds stay static. The composer's top edge is a drag seam: 12 rows max, never
+  closer than 3 text lines to the cockpit's own top border — the lower cap governs.
   Buttons are the fixed layer (deterministic sizes/paths), drags the free layer.
 -->
 <html lang="en">
@@ -79,6 +84,7 @@
   </div>
   <div id="cockpit-log"></div>
   <form id="cockpit-form">
+    <div id="input-seam" title="Drag to grow the input · double-click to reset"></div>
     <textarea id="cockpit-input" rows="2" placeholder="Speak to the agent — Enter sends, Shift+Enter for a new line"></textarea>
     <div id="cockpit-controls">
       <button id="cockpit-stop" type="button" hidden>■ stop</button>

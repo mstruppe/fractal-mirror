@@ -462,10 +462,16 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 .gate-btn:hover { color: var(--ink); border-color: var(--ink); }
 .gate-btn.allow:hover { background: var(--ink); color: var(--bg); }
 #cockpit-form {
+  position: relative;                /* hosts the composer's top-edge drag seam */
   display: flex; align-items: flex-end; gap: 0.5rem;
   padding: 0.7rem 0.9rem 0.9rem;
   border-top: 1px solid var(--hairline-soft);
 }
+#input-seam {
+  position: absolute; top: -4px; left: 0; right: 0; height: 8px;
+  cursor: ns-resize; z-index: 2; touch-action: none;
+}
+#input-seam:hover { background: linear-gradient(to bottom, transparent 3px, var(--hairline) 4px, var(--hairline) 5px, transparent 6px); }
 #cockpit-input {
   flex: 1; resize: none;
   font: inherit; font-size: 0.92rem; line-height: 1.5;

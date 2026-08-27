@@ -84,9 +84,16 @@ const state = {
    no bar object. One cockpit, three states — rider (folded, resting on a border) ·
    window (floating; "mini" = the same window with one border held on a workspace
    border, a corner held by two) · pane (in the layout flow). */
-const TOPBAR = 46, SNAP = 32;                    // px — the magnetic reach
+const TOPBAR = 46, SNAP = 37;                    // px — the magnetic reach (32 +15%, Max's call)
 const WIN_DEF = { w: 400, h: 460 };              // the one default window size (button unfolds)
 const WIN_MIN = { w: 300, h: 260 };
+
+let dragV = 0;                                   // smoothed pointer speed of the live drag, px/ms
+let reflowInput = () => {};                      // re-clamps the composer; bound by initInputResize
+/* the magnet's ATTACH reach grows with drag intensity — a fling toward a border
+   docks from further out; detach thresholds stay at base SNAP, so pulling off
+   stays predictable (velocity reads intent, length would punish deliberate moves) */
+function reach() { return SNAP * (1 + Math.min(dragV / 2, 1) * 0.75); }
 
 const dk = { edge: 'bottom', t: 0.8 };           // the rider's home: which border, how far along
 
@@ -440,6 +447,7 @@ function initCockpit() {
   initCockpitResize();
   initRider();
   initWindowChrome();
+  initInputResize();
 
   // restore the home + the state (migrates the pre-rider keys: layout → home, open → pane)
   try {
@@ -474,17 +482,26 @@ function workspace() {
   return { x: navw, y: TOPBAR, w: window.innerWidth - navw, h: window.innerHeight - TOPBAR };
 }
 
-/* one generic drag engine — a gesture may change its meaning mid-flight (rider → window) */
+/* one generic drag engine — a gesture may change its meaning mid-flight (rider → window);
+   it also meters the pointer's smoothed velocity, which feeds the magnet's reach */
 function startDrag(e, handlers) {
   e.preventDefault();
   document.body.classList.add('dragging');
-  const move = ev => handlers.onMove && handlers.onMove(ev);
+  let lx = e.clientX, ly = e.clientY, lt = performance.now();
+  dragV = 0;
+  const move = ev => {
+    const t = performance.now(), dt = Math.max(1, t - lt);
+    dragV = 0.75 * dragV + 0.25 * (Math.hypot(ev.clientX - lx, ev.clientY - ly) / dt);
+    lx = ev.clientX; ly = ev.clientY; lt = t;
+    handlers.onMove && handlers.onMove(ev);
+  };
   const up = ev => {
     window.removeEventListener('pointermove', move);
     window.removeEventListener('pointerup', up);
     window.removeEventListener('pointercancel', up);
     document.body.classList.remove('dragging');
     handlers.onEnd && handlers.onEnd(ev);
+    dragV = 0;
   };
   window.addEventListener('pointermove', move);
   window.addEventListener('pointerup', up);
@@ -550,8 +567,16 @@ function renderCockpit() {
   } else {
     st.left = st.top = st.width = st.height = '';
   }
-  if (pane) { cp.layout = paneSide(); applyLayout(); }
+  if (pane) applyLayout();     // the side was decided at the unfold (unfoldPane) — apply only
+  if (!els.cockpit.hidden) reflowInput();      // the composer honors its caps live
   renderRider();
+}
+
+/* every unfold passes here: the law reads the seat BEFORE the state flips —
+   a rider unfolds by its home, a window by where it stands right now */
+function unfoldPane() {
+  cp.layout = paneSide();
+  setState('pane');
 }
 
 function renderRider() {
@@ -580,6 +605,7 @@ function snapWinTo(side) {
 }
 
 function clampWin() {
+  if (!window.innerWidth || !window.innerHeight) return;   // a zero-sized moment
   cp.win.w = clampN(cp.win.w, WIN_MIN.w, window.innerWidth);
   cp.win.h = clampN(cp.win.h, WIN_MIN.h, window.innerHeight - TOPBAR);
   cp.win.x = clampN(cp.win.x, 0, window.innerWidth - cp.win.w);
@@ -588,19 +614,35 @@ function clampWin() {
 
 /* the magnetic law, per axis: a border within reach holds its side of the window —
    one border makes the "mini", a corner holds two; forcing away releases each.
-   Judged on the clamped (on-screen) rect: pushing past an edge IS arriving at it. */
+   Judged on the clamped (on-screen) rect: pushing past an edge IS arriving at it.
+   attReach counts every border in reach: at three the window spans a full axis
+   and has become a pane in all but name — the caller unfolds it (Max's rule). */
 function magnetize() {
+  if (!window.innerWidth || !window.innerHeight) return;   // never judge a zero viewport
   clampWin();
   const ws = workspace();
+  const r = reach();
   const dl = Math.abs(cp.win.x - ws.x);
   const dr = Math.abs((ws.x + ws.w) - (cp.win.x + cp.win.w));
   const dt = Math.abs(cp.win.y - ws.y);
   const db = Math.abs((ws.y + ws.h) - (cp.win.y + cp.win.h));
+  cp.attReach = (dl < r) + (dr < r) + (dt < r) + (db < r);
   const att = [];
-  if (Math.min(dl, dr) < SNAP) att.push(dl <= dr ? 'left' : 'right');
-  if (Math.min(dt, db) < SNAP) att.push(dt <= db ? 'top' : 'bottom');
+  if (Math.min(dl, dr) < r) att.push(dl <= dr ? 'left' : 'right');
+  if (Math.min(dt, db) < r) att.push(dt <= db ? 'top' : 'bottom');
   cp.attSides = att;
   for (const s of att) snapWinTo(s);
+}
+
+/* one window-move step: follow the pointer, magnetize — and at three borders in
+   reach the window spans a full axis: it unfolds into the pane by itself (the
+   gesture ends there; later pointer events find no window and do nothing) */
+function moveWinTo(x, y) {
+  if (cp.state !== 'window') return;
+  cp.win.x = x; cp.win.y = y;
+  magnetize();
+  if (cp.attReach >= 3) { unfoldPane(); return; }
+  renderCockpit();
 }
 
 /* folding home — an ATTACHED window already stands on the dock, so it folds where
@@ -648,8 +690,7 @@ function initRider() {
     startDrag(e, {
       onMove: ev => {
         if (mode === 'window') {
-          cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
-          magnetize(); renderCockpit();
+          moveWinTo(ev.clientX - off.x, ev.clientY - off.y);
           return;
         }
         if (mode === 'tap' && Math.hypot(ev.clientX - p0.x, ev.clientY - p0.y) <= 4) return;
@@ -679,14 +720,14 @@ function initRider() {
         renderRider();
       },
       onEnd: () => {
-        if (mode === 'tap') { setState('pane'); return; }    // the click unfold
+        if (mode === 'tap') { unfoldPane(); return; }        // the click unfold
         if (mode === 'stick') rememberHome();
         if (mode === 'window') rememberCockpit();
       },
     });
   });
   els.rider.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setState('pane'); }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); unfoldPane(); }
   });
   els.riderMini.addEventListener('pointerdown', e => e.stopPropagation());
   els.riderMini.addEventListener('click', () => openWindowAtHome());
@@ -698,7 +739,7 @@ function initRider() {
 
 /* ── the window's chrome: quick actions, the header move, the eight handles ── */
 function initWindowChrome() {
-  els.cpToPane.addEventListener('click', () => setState('pane'));
+  els.cpToPane.addEventListener('click', () => unfoldPane());
   els.cpHome.addEventListener('click', () => foldHome());          // the homing button
   els.cpFold.addEventListener('click', () => foldHome());
   els.cpToWindow.addEventListener('click', () => openWindowAtHome());
@@ -708,10 +749,7 @@ function initWindowChrome() {
     if (cp.state !== 'window' || e.target.closest('button')) return;
     const off = { x: e.clientX - cp.win.x, y: e.clientY - cp.win.y };
     startDrag(e, {
-      onMove: ev => {
-        cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
-        magnetize(); renderCockpit();
-      },
+      onMove: ev => moveWinTo(ev.clientX - off.x, ev.clientY - off.y),
       onEnd: () => rememberCockpit(),
     });
   });
@@ -743,10 +781,10 @@ function initWindowChrome() {
             return;
           }
           if (mode === 'move') {
-            cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
-            magnetize(); renderCockpit();
+            moveWinTo(ev.clientX - off.x, ev.clientY - off.y);
             return;
           }
+          if (cp.state !== 'window') return;
           if (dir.includes('e')) cp.win.w = s0.w + dx;
           if (dir.includes('s')) cp.win.h = s0.h + dy;
           if (dir.includes('w')) {
@@ -759,10 +797,59 @@ function initWindowChrome() {
           }
           renderCockpit();
         },
-        onEnd: () => rememberCockpit(),
+        onEnd: () => {
+          // a resize can bring a border into reach — the magnet takes it on release,
+          // and at three borders the window unfolds into the pane (Max's rule)
+          if (cp.state === 'window') {
+            magnetize();
+            if (cp.attReach >= 3) { unfoldPane(); return; }
+            renderCockpit();
+          }
+          rememberCockpit();
+        },
       });
     });
   }
+}
+
+/* ── the composer's growth — the input's top edge is a drag seam (Max's call):
+      grow up to 12 rows, and never closer than 3 text lines to the cockpit's own
+      top border (head included) — the lower cap governs. Shrinking the cockpit
+      re-clamps live; growing it back restores the wanted height. ── */
+function initInputResize() {
+  const KEY = 'fractal-shell-inputh';
+  const seam = document.getElementById('input-seam');
+  const inp = els.cockpitInput;
+  let want = null;
+  try { want = parseInt(localStorage.getItem(KEY), 10) || null; } catch {}
+  const bounds = () => {
+    const cs = getComputedStyle(inp);
+    const l = parseFloat(cs.lineHeight) || 22;
+    const extra = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)
+                + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    const min = Math.round(2 * l + extra);
+    const formExtra = els.cockpitForm.offsetHeight - inp.offsetHeight;
+    const byWin = els.cockpit.clientHeight - els.cockpitHead.offsetHeight - 3 * l - formExtra;
+    return { min, max: Math.max(min, Math.round(Math.min(12 * l + extra, byWin))) };
+  };
+  const apply = () => {
+    if (want == null) { inp.style.height = ''; return; }
+    const b = bounds();
+    inp.style.height = clampN(want, b.min, b.max) + 'px';
+  };
+  reflowInput = apply;
+  apply();
+  seam.addEventListener('pointerdown', e => {
+    const h0 = inp.getBoundingClientRect().height, y0 = e.clientY;
+    startDrag(e, {
+      onMove: ev => { want = Math.round(h0 + (y0 - ev.clientY)); apply(); },
+      onEnd: () => { try { localStorage.setItem(KEY, String(want)); } catch {} },
+    });
+  });
+  seam.addEventListener('dblclick', () => {
+    want = null; apply();
+    try { localStorage.removeItem(KEY); } catch {}
+  });
 }
 
 /* ── the layout menu — the split icon stays (the later custom-layout menu grows here).
@@ -784,6 +871,7 @@ function initLayoutMenu() {
         dk.t = 1 - dk.t;                         // mirror the home along its border
       }
       rememberHome();
+      cp.layout = want;                          // the menu named the side; the home now agrees
       setState('pane');                          // choosing a split means wanting the split
       els.layoutMenu.hidden = true;
       els.layoutBtn.setAttribute('aria-expanded', 'false');
