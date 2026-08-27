@@ -199,10 +199,14 @@ function initSkin() {
 }
 
 /* ── the void canvas — the TouchDesigner mechanic (Max's direction, now built):
-      the workspace ground inside the frame is an INFINITE PLANE — grab empty
-      ground and drag to pan; the frame and menus hold still. The ground wears
-      the dot grid (his picked look) with the lamp's proximity glow; future
-      canvas objects translate by the same (vc.x, vc.y). Station skin only. ── */
+      an INFINITE PLANE — grab empty ground and drag to pan; the structure
+      holds still. THE LAYER MODEL (Max's two-layer ruling): LAYER 0 is this
+      ground — the fundamental plane, spanning the whole viewport beneath
+      everything; LAYER 1 is the structure rendered above it — the girders,
+      the cards, the menus; LAYER 2 the floaters — windows, rider, ghost.
+      The magnetic law belongs to the structure, not to rendering. The ground
+      wears the dot grid with the lamp's proximity glow; future canvas objects
+      translate by the same (vc.x, vc.y). Station skin only. ── */
 function initVoidCanvas() {
   vc.canvas = document.getElementById('void-canvas');
   vc.ctx = vc.canvas.getContext('2d');
@@ -220,13 +224,15 @@ function initVoidCanvas() {
   });
 }
 
-function layoutVoid(ws) {
+function layoutVoid() {
+  // Layer 0 spans the WHOLE viewport — the plane underlies the structure
   const c = vc.canvas;
   if (!c) return;
   const dpr = window.devicePixelRatio || 1;
-  c.style.left = ws.x + 'px'; c.style.top = ws.y + 'px';
-  c.style.width = ws.w + 'px'; c.style.height = ws.h + 'px';
-  const w = Math.max(1, Math.round(ws.w * dpr)), h = Math.max(1, Math.round(ws.h * dpr));
+  c.style.left = '0'; c.style.top = '0';
+  c.style.width = window.innerWidth + 'px'; c.style.height = window.innerHeight + 'px';
+  const w = Math.max(1, Math.round(window.innerWidth * dpr));
+  const h = Math.max(1, Math.round(window.innerHeight * dpr));
   if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
   drawVoid();
 }
@@ -821,7 +827,7 @@ function renderFrame() {
   const peri = Math.round(2 * (gw + gh));
   r.setAttribute('stroke-dasharray', `170 ${Math.max(1, peri - 170)}`);
   svg.style.setProperty('--perim', peri + 'px');
-  layoutVoid(ws);                                // the ground spans the same framed workspace
+  layoutVoid();                                  // Layer 0 re-fits the viewport
 }
 
 /* one generic drag engine — a gesture may change its meaning mid-flight (rider → window);
