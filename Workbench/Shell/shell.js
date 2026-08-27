@@ -115,6 +115,7 @@ const rd = {                                     // reader state (the document w
 buildQuest();
 els.tierLocal.addEventListener('click', useLocalTier);
 initTheme();
+initSkin();
 initNavResize();
 initCockpit();
 initLayoutMenu();
@@ -153,6 +154,40 @@ function initNavResize() {
   handle.addEventListener('pointerup', end);
   handle.addEventListener('pointercancel', end);
   handle.addEventListener('dblclick', () => { set(300); remember(); });
+}
+
+/* ── skins — the theme axis (Max's call, 2026-08-27; hidden for now): 'classic'
+      is the default and the permanent fallback — byte-identical, untouched;
+      experimental looks land beside it and are kept only when they earn a name.
+      Toggle: Alt/Option-click the FRACTAL mark · or ?skin=station. Remembered.
+      The station's lamp: the cursor is the one light source in the void — its
+      viewport position feeds every surface via two root variables. ── */
+function initSkin() {
+  const KEY = 'fractal-shell-skin';
+  const KNOWN = ['classic', 'station'];
+  let skin = null;
+  try {
+    skin = new URLSearchParams(location.search).get('skin') || localStorage.getItem(KEY);
+  } catch {}
+  if (!KNOWN.includes(skin)) skin = 'classic';
+  const apply = () => {
+    if (skin === 'classic') delete document.documentElement.dataset.skin;
+    else document.documentElement.dataset.skin = skin;
+  };
+  apply();
+  document.getElementById('brand').addEventListener('click', e => {
+    if (!e.altKey) return;                       // the hidden handle
+    skin = KNOWN[(KNOWN.indexOf(skin) + 1) % KNOWN.length];
+    try { localStorage.setItem(KEY, skin); } catch {}
+    apply();
+    setStatus('theme: ' + skin);
+    renderCockpit();                             // the top row may have moved
+  });
+  window.addEventListener('pointermove', e => {
+    if (document.documentElement.dataset.skin !== 'station') return;
+    document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+    document.documentElement.style.setProperty('--my', e.clientY + 'px');
+  }, { passive: true });
 }
 
 /* ── appearance (auto ◐ → light ○ → dark ●; remembered locally, never written to the estate) ── */
@@ -370,6 +405,9 @@ function showMessage(title, html) {
 function showVoid() {
   // the reader closed or empty → the bare background (Max's call, 2026-08-26).
   // #screen-idle is the mount for the subtle graphics that may live here later.
+  // BANKED DIRECTION (Max, 2026-08-27, TouchDesigner-inspired): the void later
+  // becomes an INFINITELY DRAGGABLE CANVAS — content pans out of the picture
+  // while the frame and menu hold still. Nothing here may block that.
   const idle = document.createElement('div');
   idle.id = 'screen-idle';
   els.content.replaceChildren(idle);
@@ -481,11 +519,18 @@ function clamp01(v) { return Math.max(0, Math.min(1, v)); }
 function clampN(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 function horizontal() { return dk.edge === 'top' || dk.edge === 'bottom'; }
 
+/* the topbar's real lower edge — measured, because skins may deepen the top row */
+function topBottom() {
+  const tb = document.getElementById('topbar');
+  return tb ? Math.round(tb.getBoundingClientRect().bottom) : TOPBAR;
+}
+
 /* the workspace box — below the topbar, beside the rail; its four borders are the dock */
 function workspace() {
   const navw = window.innerWidth <= 760 ? 0 :
     (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-w'), 10) || 300);
-  return { x: navw, y: TOPBAR, w: window.innerWidth - navw, h: window.innerHeight - TOPBAR };
+  const top = topBottom();
+  return { x: navw, y: top, w: window.innerWidth - navw, h: window.innerHeight - top };
 }
 
 /* one generic drag engine — a gesture may change its meaning mid-flight (rider → window);
@@ -613,10 +658,11 @@ function snapWinTo(side) {
 
 function clampWin() {
   if (!window.innerWidth || !window.innerHeight) return;   // a zero-sized moment
+  const top = topBottom();
   cp.win.w = clampN(cp.win.w, WIN_MIN.w, window.innerWidth);
-  cp.win.h = clampN(cp.win.h, WIN_MIN.h, window.innerHeight - TOPBAR);
+  cp.win.h = clampN(cp.win.h, WIN_MIN.h, window.innerHeight - top);
   cp.win.x = clampN(cp.win.x, 0, window.innerWidth - cp.win.w);
-  cp.win.y = clampN(cp.win.y, TOPBAR, window.innerHeight - cp.win.h);
+  cp.win.y = clampN(cp.win.y, top, window.innerHeight - cp.win.h);
 }
 
 /* the magnetic law, per axis: a border within reach holds its side of the window —
@@ -821,7 +867,7 @@ function initWindowChrome() {
             cp.win.x = s0.x + s0.w - w2; cp.win.w = w2;
           }
           if (dir.includes('n')) {
-            const h2 = clampN(s0.h - dy, WIN_MIN.h, s0.y + s0.h - TOPBAR);
+            const h2 = clampN(s0.h - dy, WIN_MIN.h, s0.y + s0.h - topBottom());
             cp.win.y = s0.y + s0.h - h2; cp.win.h = h2;
           }
           renderCockpit();

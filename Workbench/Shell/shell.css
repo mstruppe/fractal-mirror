@@ -553,3 +553,129 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
   #status { display: none; }
   #rider[data-edge="left"] { left: 6px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SKIN · station — the first experimental theme (hidden; Max's direction,
+   2026-08-27). Black cards floating in dark empty space as one coherent
+   structure: no stars, no scenery — the void, the cards, the light. The docks
+   live in the void channels between the cards and the outer frame; the
+   bubbles float there, gated by the frame. 'classic' (default, no data-skin)
+   stays byte-identical — the permanent fallback.
+   Absorbed from the 21st.dev examples as TECHNIQUES, never identity:
+   the radial top glow · the hairline light seam · card elevation on dark ·
+   the blur-in arrival · the pointer-tracked border spotlight (the lamp) —
+   stripped white, no hue. The dot pattern was deliberately not absorbed
+   ("no stars"). Toggle: Alt/Option-click the FRACTAL mark · ?skin=station.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root[data-skin="station"],
+:root[data-skin="station"][data-theme="light"] {
+  /* the station is night-side by nature — its palette overrides both modes */
+  --bg: #000000;
+  --card: #0a0a0d;
+  --ink: #f5f5f7;
+  --muted: #9a9aa1;
+  --faint: #5c5c63;
+  --hairline: rgba(245, 245, 247, 0.15);
+  --hairline-soft: rgba(245, 245, 247, 0.07);
+  --code-bg: rgba(245, 245, 247, 0.05);
+  --nav-bg: #0a0a0d;
+}
+[data-skin="station"] body { background: #000; }
+[data-skin="station"] #content iframe { background: #000; }
+
+/* the cards — one structure, four bodies; lit from above, a seam at the top
+   edge, and the lamp's sheen drifting across (fixed-attachment radial) */
+[data-skin="station"] #topbar,
+[data-skin="station"] #nav,
+[data-skin="station"] #content {
+  position: relative;      /* NOT the cockpit — .as-window must keep its fixed */
+}
+[data-skin="station"] #cockpit.as-pane { position: relative; }
+[data-skin="station"] #topbar,
+[data-skin="station"] #nav,
+[data-skin="station"] #content,
+[data-skin="station"] #cockpit {
+  background:
+    radial-gradient(240px 240px at var(--mx, -9999px) var(--my, -9999px),
+      rgba(255, 255, 255, 0.04), transparent 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.09) 0, transparent 2px),
+    radial-gradient(45% 70px at 50% 0%, rgba(255, 255, 255, 0.05), transparent),
+    var(--card);
+  background-attachment: fixed, scroll, scroll, scroll;
+  border: 1px solid var(--hairline-soft);
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+[data-skin="station"] #cockpit.as-window { box-shadow: 0 40px 110px rgba(0, 0, 0, 0.7); }
+[data-skin="station"] #cockpit.as-window.in-hand { box-shadow: 0 48px 130px rgba(0, 0, 0, 0.8); }
+
+/* the lamp on the borders — the cursor lights the ring it passes (masked to
+   the border band; sits just inside the clip so scrolling cards keep it) */
+[data-skin="station"] #topbar::after,
+[data-skin="station"] #content::after,
+[data-skin="station"] #cockpit::after,
+[data-skin="station"] #rider::after,
+[data-skin="station"] #rider .sat::after {
+  content: "";
+  position: absolute; inset: 1px;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(170px 170px at var(--mx, -9999px) var(--my, -9999px),
+    rgba(255, 255, 255, 0.35), transparent 72%) border-box;
+  background-attachment: fixed;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite: xor;
+  z-index: 4;
+}
+
+/* the bubbles are small cards — the same light language */
+[data-skin="station"] #rider,
+[data-skin="station"] #rider .sat {
+  background:
+    radial-gradient(60% 50% at 50% 14%, rgba(255, 255, 255, 0.07), transparent),
+    var(--card);
+}
+[data-skin="station"] #win-shadow { background: rgba(245, 245, 247, 0.03); }
+
+/* the structure floats: void channels between the cards (desktop grammar only) */
+@media (min-width: 761px) {
+  [data-skin="station"] body { grid-template: "top top" 64px "nav main" 1fr / var(--nav-w) 1fr; }
+  [data-skin="station"] body.cockpit-open { grid-template: "top top top" 64px "nav main cockpit" 1fr / var(--nav-w) 1fr var(--cockpit-w); }
+  [data-skin="station"] body.cockpit-open.cockpit-left { grid-template: "top top top" 64px "nav cockpit main" 1fr / var(--nav-w) var(--cockpit-w) 1fr; }
+  [data-skin="station"] #topbar { margin: 10px 10px 0 10px; }
+  [data-skin="station"] #nav { margin: 10px 5px 10px 10px; }
+  [data-skin="station"] #content { margin: 10px 10px 10px 5px; }
+  [data-skin="station"] body.cockpit-open:not(.cockpit-left) #content { margin-right: 5px; }
+  [data-skin="station"] #cockpit.as-pane { margin: 10px 10px 10px 5px; border-left: 1px solid var(--hairline-soft); border-right: 1px solid var(--hairline-soft); }
+  [data-skin="station"] body.cockpit-left #cockpit.as-pane { margin: 10px 5px 10px 5px; }
+  [data-skin="station"] #nav-resize, [data-skin="station"] #cockpit-resize { top: 64px; }
+  [data-skin="station"] #layout-menu {
+    top: 70px; right: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--hairline-soft);
+    background: var(--card);
+  }
+  [data-skin="station"] #rider[data-edge="top"] { top: 70px; }
+}
+
+/* the arrival — out of the void, blur to sharp (releases after; drags stay 1:1) */
+@media (prefers-reduced-motion: no-preference) {
+  [data-skin="station"] #topbar,
+  [data-skin="station"] #nav,
+  [data-skin="station"] #content,
+  [data-skin="station"] #cockpit,
+  [data-skin="station"] #rider {
+    animation: station-arrive 0.55s ease backwards;
+  }
+  [data-skin="station"] #nav { animation-delay: 0.06s; }
+  [data-skin="station"] #content { animation-delay: 0.12s; }
+  [data-skin="station"] #cockpit { animation-delay: 0.10s; }
+  [data-skin="station"] #rider { animation-delay: 0.18s; }
+}
+@keyframes station-arrive {
+  from { opacity: 0; transform: translateY(8px); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
