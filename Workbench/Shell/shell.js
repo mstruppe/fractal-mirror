@@ -169,7 +169,8 @@ function initSkin() {
   try {
     skin = new URLSearchParams(location.search).get('skin') || localStorage.getItem(KEY);
   } catch {}
-  if (!KNOWN.includes(skin)) skin = 'classic';
+  if (!KNOWN.includes(skin)) skin = 'station';   // the working theme (Max's call, 2026-08-27);
+                                                 // 'classic' stays the fallback: Alt-click · ?skin=classic
   const apply = () => {
     if (skin === 'classic') delete document.documentElement.dataset.skin;
     else document.documentElement.dataset.skin = skin;
