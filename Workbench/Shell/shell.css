@@ -378,13 +378,13 @@ body.cockpit-open #cockpit-resize { display: block; }
 }
 #rider:hover .r-label { color: var(--ink); }
 #rider[data-edge="left"] .r-label, #rider[data-edge="right"] .r-label { writing-mode: vertical-rl; }
-#rider-mini {
+#rider button {
   background: none; border: none; cursor: pointer;
   color: var(--faint); font-size: 0.8rem; line-height: 1;
   padding: 0.05rem 0.1rem;
   transition: color 120ms ease;
 }
-#rider-mini:hover { color: var(--ink); }
+#rider button:hover { color: var(--ink); }
 
 /* ── the window — the same cockpit, floating. "Mini" is not a second thing:
       it is this window with one border held on a workspace border (a corner: two).

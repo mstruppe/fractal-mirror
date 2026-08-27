@@ -44,8 +44,10 @@
 </div>
 
 <aside id="nav">
+  <!-- the published estate is the GROUND STATE, not a mode — it needs no button (Max's call,
+       2026-08-27). One control: the instance grant; a granted read that misses falls back to
+       the published estate by itself. Later this button births and enters projects. -->
   <div id="tiers">
-    <button id="tier-public" class="tier active" title="Read the published estate served beside this page">Public tier</button>
     <button id="tier-local" class="tier" title="Grant this page read access to your instance folder (Chromium browsers)">My instance…</button>
   </div>
   <div id="quest"></div>
@@ -65,6 +67,7 @@
 <div id="rider" data-edge="bottom" role="button" tabindex="0"
      title="Cockpit — click to unfold · drag to slide or detach">
   <span class="r-label">⎈ Cockpit</span>
+  <button id="rider-pane" type="button" title="Unfold to pane">◨</button>
   <button id="rider-mini" type="button" title="Open as mini window (default size)">❐</button>
 </div>
 

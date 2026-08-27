@@ -48,7 +48,6 @@ const els = {
   quest: document.getElementById('quest'),
   content: document.getElementById('content'),
   status: document.getElementById('status'),
-  tierPublic: document.getElementById('tier-public'),
   tierLocal: document.getElementById('tier-local'),
   explorerWrap: document.getElementById('explorer-wrap'),
   explorer: document.getElementById('explorer'),
@@ -57,6 +56,7 @@ const els = {
   cockpitHead: document.getElementById('cockpit-head'),
   rider: document.getElementById('rider'),
   riderMini: document.getElementById('rider-mini'),
+  riderPane: document.getElementById('rider-pane'),
   cpToPane: document.getElementById('cp-to-pane'),
   cpHome: document.getElementById('cp-home'),
   cpToWindow: document.getElementById('cp-to-window'),
@@ -112,14 +112,13 @@ const rd = {                                     // reader state (the document w
 
 /* ── boot ── */
 buildQuest();
-els.tierPublic.addEventListener('click', usePublicTier);
 els.tierLocal.addEventListener('click', useLocalTier);
 initTheme();
 initNavResize();
 initCockpit();
 initLayoutMenu();
 initReader();
-setStatus(`public tier · root ${state.publicBase.pathname}`);
+setStatus(`published estate · root ${state.publicBase.pathname}`);
 
 /* ── the rail's width (drag 180–300px; the text keeps its design width and clips) ── */
 function initNavResize() {
@@ -176,13 +175,10 @@ function initTheme() {
   });
 }
 
-/* ── tiers ── */
-function usePublicTier() {
-  state.tier = 'public';
-  reflectTier();
-  setStatus(`public tier · root ${state.publicBase.pathname}`);
-}
-
+/* ── tiers — the published estate is the GROUND STATE, not a mode (Max's call,
+      2026-08-27): no button switches to it; the shell stands on it before any
+      grant, and a granted read that misses falls back to it by itself.
+      Reload = back on the ground (a folder grant is per-session by design). ── */
 async function useLocalTier() {
   if (!window.showDirectoryPicker) {
     setStatus('this browser has no folder-grant API — the local tier needs a Chromium browser (Chrome, Edge, Arc) for now', true);
@@ -195,14 +191,13 @@ async function useLocalTier() {
     reflectTier();
     els.rootName.textContent = '· ' + handle.name;
     els.explorer.replaceChildren(await dirNode(handle, ''));
-    setStatus(`local tier · reading “${handle.name}” (nothing is ever written)`);
+    setStatus(`your instance · reading “${handle.name}” (nothing is ever written)`);
   } catch (e) {
     if (e.name !== 'AbortError') setStatus('folder grant failed: ' + e.message, true);
   }
 }
 
 function reflectTier() {
-  els.tierPublic.classList.toggle('active', state.tier === 'public');
   els.tierLocal.classList.toggle('active', state.tier === 'local');
   els.explorerWrap.hidden = state.tier !== 'local';
 }
@@ -243,20 +238,29 @@ async function openStation(st, btn) {
   if (btn) btn.classList.add('active');
   try {
     setStatus('opening ' + st.path + ' …');
+    let read = state.tier === 'local' ? 'your instance' : 'published';
     if (st.kind === 'html') {
       if (state.tier === 'public') showFrameSrc(publicUrl(st.path));
-      else showFrameDoc(await readLocalText(st.path));
+      else {
+        try { showFrameDoc(await readLocalText(st.path)); }
+        catch { showFrameSrc(publicUrl(st.path)); read = 'published (not in your folder)'; }
+      }
     } else {
-      const text = state.tier === 'public' ? await fetchPublic(st.path) : await readLocalText(st.path);
+      let text;
+      if (state.tier === 'public') text = await fetchPublic(st.path);
+      else {
+        try { text = await readLocalText(st.path); }
+        catch { text = await fetchPublic(st.path); read = 'published (not in your folder)'; }
+      }
       showMarkdown(text);
     }
     readerShowing(() => openStation(st, btn), state.tier === 'public' ? st : null);
-    setStatus(`${state.tier} tier · ${st.path}`);
+    setStatus(`${read} · ${st.path}`);
   } catch (e) {
     showMessage(`Could not open <b>${escapeHtml(st.title)}</b>`, e.message +
       (state.tier === 'public'
-        ? '<br><span class="hint">The public tier reads relative paths beside the served shell — this station may not be published at this address. Try the local tier.</span>'
-        : '<br><span class="hint">Is the granted folder the estate root (the folder holding README.md and GENESIS.md)?</span>'));
+        ? '<br><span class="hint">This station may not be published at this address. Granting your instance folder (“My instance…”) reads it from your own machine.</span>'
+        : '<br><span class="hint">Not in the granted folder, and not published beside this shell either. Is the granted folder the estate root (the folder holding README.md and GENESIS.md)?</span>'));
     setStatus(e.message, true);
   }
 }
@@ -321,7 +325,7 @@ async function openLocalFile(path, name) {
     else if (TEXT_EXT.has(ext) || !name.includes('.')) showPlain(await readLocalText(path));
     else showMessage(escapeHtml(name), 'No renderer for this file type yet — the shell is a prototype; the quest map is its paved road.');
     readerShowing(() => openLocalFile(path, name), null);
-    setStatus(`local tier · ${path}`);
+    setStatus(`your instance · ${path}`);
   } catch (e) { setStatus(e.message, true); }
 }
 
@@ -463,6 +467,7 @@ function initCockpit() {
   if (s && ['rider', 'window', 'pane'].includes(s.state)) {
     cp.attSides = Array.isArray(s.attSides)
       ? s.attSides.filter(x => ['top', 'bottom', 'left', 'right'].includes(x)) : [];
+    if (s.layout === 'cl' || s.layout === 'cr') cp.layout = s.layout;   // the decided side survives
     if (s.win && +s.win.w) cp.win = {
       x: +s.win.x || 0, y: +s.win.y || 0,
       w: +s.win.w || WIN_DEF.w, h: +s.win.h || WIN_DEF.h,
@@ -520,7 +525,7 @@ function setState(s) {
 function rememberCockpit() {
   try {
     localStorage.setItem('fractal-shell-cockpit',
-      JSON.stringify({ state: cp.state, attSides: cp.attSides, win: cp.win }));
+      JSON.stringify({ state: cp.state, attSides: cp.attSides, win: cp.win, layout: cp.layout }));
   } catch {}
 }
 function rememberHome() {
@@ -583,6 +588,7 @@ function renderRider() {
   els.rider.dataset.edge = dk.edge;
   els.rider.hidden = cp.state !== 'rider';
   if (els.rider.hidden) return;
+  els.riderPane.textContent = paneSide() === 'cl' ? '◧' : '◨';   // the side the law will pick
   const ws = workspace();
   if (horizontal()) {
     els.rider.style.top = '';                    // the edge's own CSS holds the cross coordinate
@@ -683,7 +689,7 @@ function openWindowAtHome() {
       or pull it past the magnetic reach and it becomes the window in your hand ── */
 function initRider() {
   els.rider.addEventListener('pointerdown', e => {
-    if (e.target.closest('#rider-mini')) return;
+    if (e.target.closest('button')) return;      // the quick-actions are not drag handles
     let mode = 'tap';                            // tap → stick | window
     const p0 = { x: e.clientX, y: e.clientY };
     let off = null;
@@ -731,6 +737,8 @@ function initRider() {
   });
   els.riderMini.addEventListener('pointerdown', e => e.stopPropagation());
   els.riderMini.addEventListener('click', () => openWindowAtHome());
+  els.riderPane.addEventListener('pointerdown', e => e.stopPropagation());
+  els.riderPane.addEventListener('click', () => unfoldPane());
 
   // the rail's width and the viewport move the borders — the rider and window follow
   new ResizeObserver(() => renderCockpit()).observe(document.getElementById('nav'));
