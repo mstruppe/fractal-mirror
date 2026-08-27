@@ -662,17 +662,55 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 }
 [data-skin="station"] #win-shadow { background: rgba(245, 245, 247, 0.03); }
 
-/* the structure floats: void channels between the cards (desktop grammar only) */
+/* ── the structure — the frame that holds everything (Max's layout sketch):
+      grey beams with overshooting joints; the MAGNETIC DOCK LINE just inside
+      them — the snap law's own boundary made visible, a light looping it ── */
+#frame { display: none; }
+#frame .beam {
+  position: fixed; z-index: 3;
+  background: #2c3037;
+  border-radius: 4px;
+  pointer-events: none;
+}
+#frame .beam.h { height: 8px; }
+#frame .beam.v { width: 8px; }
+#frame .top  { top: 66px; left: calc(var(--nav-w) - 6px); right: 0; }
+#frame .bot  { bottom: 2px; left: calc(var(--nav-w) - 6px); right: 0; }
+#frame .left  { left: calc(var(--nav-w) + 2px); top: 56px; bottom: 0; }
+#frame .right { right: 2px; top: 56px; bottom: 0; }
+#dockline {
+  position: fixed; z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+#dockline rect { fill: none; }
+#dockline rect.base { stroke: rgba(140, 190, 255, 0.16); stroke-width: 1.5; }
+#dockline rect.comet {
+  stroke: rgba(150, 200, 255, 0.85);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(150, 200, 255, 0.8));
+  animation: dock-run 9s linear infinite;
+}
+@keyframes dock-run { to { stroke-dashoffset: var(--perim, 4000px); } }
+@media (prefers-reduced-motion: reduce) {
+  #dockline rect.comet { animation: none; visibility: hidden; }
+}
+
+/* the structure floats: the frame band (12px) gates the workspace; the cards
+   inside sit clear of the dock line (desktop grammar only) */
 @media (min-width: 761px) {
+  [data-skin="station"] #frame { display: block; }
   [data-skin="station"] body { grid-template: "top top" 64px "nav main" 1fr / var(--nav-w) 1fr; }
   [data-skin="station"] body.cockpit-open { grid-template: "top top top" 64px "nav main cockpit" 1fr / var(--nav-w) 1fr var(--cockpit-w); }
   [data-skin="station"] body.cockpit-open.cockpit-left { grid-template: "top top top" 64px "nav cockpit main" 1fr / var(--nav-w) var(--cockpit-w) 1fr; }
   [data-skin="station"] #topbar { margin: 10px 10px 0 10px; }
   [data-skin="station"] #nav { margin: 10px 5px 10px 10px; }
-  [data-skin="station"] #content { margin: 10px 10px 10px 5px; }
-  [data-skin="station"] body.cockpit-open:not(.cockpit-left) #content { margin-right: 5px; }
-  [data-skin="station"] #cockpit.as-pane { margin: 10px 10px 10px 5px; border-left: 1px solid var(--hairline-soft); border-right: 1px solid var(--hairline-soft); }
-  [data-skin="station"] body.cockpit-left #cockpit.as-pane { margin: 10px 5px 10px 5px; }
+  [data-skin="station"] #content { margin: 22px 22px 22px 17px; }
+  [data-skin="station"] body.cockpit-open:not(.cockpit-left) #content { margin-right: 6px; }
+  [data-skin="station"] #cockpit.as-pane { margin: 22px 22px 22px 6px; border-left: 1px solid var(--hairline-soft); border-right: 1px solid var(--hairline-soft); }
+  [data-skin="station"] body.cockpit-left #cockpit.as-pane { margin: 22px 6px 22px 17px; }
+  [data-skin="station"] body.cockpit-left #content { margin: 22px 22px 22px 6px; }
   [data-skin="station"] #nav-resize, [data-skin="station"] #cockpit-resize { top: 64px; }
   [data-skin="station"] #layout-menu {
     top: 70px; right: 14px;
@@ -680,7 +718,11 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
     border: 1px solid var(--hairline-soft);
     background: var(--card);
   }
-  [data-skin="station"] #rider[data-edge="top"] { top: 70px; }
+  /* the bubbles dock on the line, inside the beams: border + 6px standoff */
+  [data-skin="station"] #rider[data-edge="bottom"] { bottom: 18px; }
+  [data-skin="station"] #rider[data-edge="top"]    { top: 82px; }
+  [data-skin="station"] #rider[data-edge="left"]   { left: calc(var(--nav-w) + 18px); }
+  [data-skin="station"] #rider[data-edge="right"]  { right: 18px; }
 }
 
 /* the arrival — out of the void, blur to sharp (releases after; drags stay 1:1) */

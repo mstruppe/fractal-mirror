@@ -719,12 +719,43 @@ function topBottom() {
   return tb ? Math.round(tb.getBoundingClientRect().bottom) : TOPBAR;
 }
 
+/* the station's frame band: in that skin the magnetic borders inset by the
+   beams' width, so everything docks INSIDE the frame, on the visible line */
+function frameInset() {
+  return (window.innerWidth > 760 &&
+          document.documentElement.dataset.skin === 'station') ? 12 : 0;
+}
+
 /* the workspace box — below the topbar, beside the rail; its four borders are the dock */
 function workspace() {
   const navw = window.innerWidth <= 760 ? 0 :
     (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-w'), 10) || 300);
   const top = topBottom();
-  return { x: navw, y: top, w: window.innerWidth - navw, h: window.innerHeight - top };
+  const f = frameInset();
+  return { x: navw + f, y: top + f,
+           w: window.innerWidth - navw - f * 2, h: window.innerHeight - top - f * 2 };
+}
+
+/* the dock line — the snap boundary made visible (station): the SVG traces the
+   workspace rect exactly; the comet's dash loop is sized to its perimeter */
+function renderFrame() {
+  if (document.documentElement.dataset.skin !== 'station') return;
+  const svg = document.getElementById('dockline');
+  if (!svg || window.innerWidth <= 760) return;
+  const ws = workspace();
+  svg.style.left = ws.x + 'px'; svg.style.top = ws.y + 'px';
+  svg.style.width = ws.w + 'px'; svg.style.height = ws.h + 'px';
+  svg.setAttribute('viewBox', `0 0 ${ws.w} ${ws.h}`);
+  for (const r of svg.querySelectorAll('rect')) {
+    r.setAttribute('x', 1); r.setAttribute('y', 1);
+    r.setAttribute('rx', 10); r.setAttribute('ry', 10);
+    r.setAttribute('width', Math.max(0, ws.w - 2));
+    r.setAttribute('height', Math.max(0, ws.h - 2));
+  }
+  const peri = Math.round(2 * (ws.w + ws.h));
+  svg.querySelector('rect.comet')
+     .setAttribute('stroke-dasharray', `140 ${Math.max(1, peri - 140)}`);
+  svg.style.setProperty('--perim', peri + 'px');
 }
 
 /* one generic drag engine — a gesture may change its meaning mid-flight (rider → window);
@@ -815,6 +846,7 @@ function renderCockpit() {
   if (pane) applyLayout();     // the side was decided at the unfold (unfoldPane) — apply only
   if (!els.cockpit.hidden) reflowInput();      // the composer honors its caps live
   renderRider();
+  renderFrame();
 }
 
 /* every unfold passes here: the law reads the seat BEFORE the state flips —
