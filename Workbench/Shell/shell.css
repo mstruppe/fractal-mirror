@@ -356,51 +356,68 @@ body.cockpit-open #cockpit-resize { display: block; }
       There is no bar object: the top/bottom/left/right borders themselves are the
       dock — all four magnetic, for the rider and for the window's edges. ── */
 /* depth grammar (Max's 3D pass, restrained): what floats casts shadow and lifts
-   in the hand; what docks flattens into the frame. Elevation, never perspective. */
+   in the hand; what docks flattens into the frame. Elevation, never perspective.
+   The rider is a BUBBLE (Max's sketch): the ⎈ mark on the border; hover blooms
+   the menu — the two doors emerge as satellite bubbles fanned into the workspace. */
 #rider {
   position: fixed; z-index: 16;
-  display: flex; align-items: center; gap: 0.45rem;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
   background: var(--bg);
   border: 1px solid var(--hairline);
-  padding: 0.26rem 0.85rem;
   cursor: grab; user-select: none;
-  white-space: nowrap;
   touch-action: none;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
   transition: box-shadow 160ms ease, transform 160ms ease;
 }
 #rider:hover { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16); }
-#rider.lift { transform: scale(1.05); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28); }
+#rider.lift { transform: scale(1.06); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28); }
 #rider[hidden] { display: none; }
-#rider[data-edge="bottom"] { bottom: 0; border-bottom: none; border-radius: 10px 10px 0 0; }
-#rider[data-edge="top"]    { top: 46px; border-top: none; border-radius: 0 0 10px 10px; }
-#rider[data-edge="left"]   { left: var(--nav-w); border-left: none; border-radius: 0 10px 10px 0; flex-direction: column; padding: 0.85rem 0.26rem; }
-#rider[data-edge="right"]  { right: 0; border-right: none; border-radius: 10px 0 0 10px; flex-direction: column; padding: 0.85rem 0.26rem; }
-#rider .r-label {
-  font-size: 0.68rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase;
+#rider[data-edge="bottom"] { bottom: 6px; }
+#rider[data-edge="top"]    { top: 52px; }                       /* 46 topbar + the standoff */
+#rider[data-edge="left"]   { left: calc(var(--nav-w) + 6px); }
+#rider[data-edge="right"]  { right: 6px; }
+#rider .r-mark {
+  font-size: 1.05rem; line-height: 1;
   color: var(--muted);
   transition: color 120ms ease;
 }
-#rider:hover .r-label { color: var(--ink); }
-#rider[data-edge="left"] .r-label, #rider[data-edge="right"] .r-label { writing-mode: vertical-rl; }
-#rider button {
-  background: none; border: none; cursor: pointer;
-  color: var(--faint); font-size: 0.8rem; line-height: 1;
-  padding: 0.05rem 0.1rem;
-  transition: color 120ms ease;
-}
-#rider button:hover { color: var(--ink); }
-/* free = beyond every border's reach: a horizontal tab riding the hand (after the
-   data-edge rules on purpose — it overrides their anchors and orientation) */
-#rider.free {
-  inset: auto;
-  flex-direction: row;
-  padding: 0.26rem 0.85rem;
+#rider:hover .r-mark { color: var(--ink); }
+
+/* the bloom — hidden satellites scale out on hover/focus; a hide delay keeps them
+   alive while the pointer crosses the small gap; the lift (dragging) closes them */
+#rider .sat {
+  position: absolute;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
   border: 1px solid var(--hairline);
-  border-radius: 10px;
+  color: var(--muted); font-size: 0.82rem; line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  opacity: 0; transform: scale(0.4); pointer-events: none;
+  transition: opacity 140ms ease, transform 140ms ease, color 120ms ease, border-color 120ms ease;
+  transition-delay: 180ms;
 }
-#rider.free .r-label { writing-mode: horizontal-tb; }
+#rider:hover .sat, #rider:focus .sat, #rider:focus-within .sat {
+  opacity: 1; transform: scale(1); pointer-events: auto;
+  transition-delay: 0ms;
+}
+#rider.lift .sat { opacity: 0; pointer-events: none; transition-delay: 0ms; }
+#rider .sat:hover { color: var(--ink); border-color: var(--ink); }
+#rider[data-edge="bottom"] #rider-pane { bottom: 44px; left: -16px; }
+#rider[data-edge="bottom"] #rider-mini { bottom: 44px; right: -16px; }
+#rider[data-edge="top"]    #rider-pane { top: 44px; left: -16px; }
+#rider[data-edge="top"]    #rider-mini { top: 44px; right: -16px; }
+#rider[data-edge="left"]   #rider-pane { left: 44px; top: -16px; }
+#rider[data-edge="left"]   #rider-mini { left: 44px; bottom: -16px; }
+#rider[data-edge="right"]  #rider-pane { right: 44px; top: -16px; }
+#rider[data-edge="right"]  #rider-mini { right: 44px; bottom: -16px; }
+/* free = beyond every border's reach: the bubble rides the hand — only the edge
+   anchors release (after the data-edge rules on purpose); inline left/top steer */
+#rider.free { inset: auto; }
 
 /* the window's shadow — the deferred morph's ghost */
 #win-shadow {
@@ -534,5 +551,5 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
   #cockpit.as-pane { border-left: none; border-top: 1px solid var(--hairline-soft); }
   body.cockpit-open #cockpit-resize { display: none; }
   #status { display: none; }
-  #rider[data-edge="left"] { left: 0; }
+  #rider[data-edge="left"] { left: 6px; }
 }
