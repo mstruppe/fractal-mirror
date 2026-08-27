@@ -70,6 +70,10 @@
   <button id="rider-pane" type="button" title="Unfold to pane">◨</button>
   <button id="rider-mini" type="button" title="Open as mini window (default size)">❐</button>
 </div>
+<!-- the window's shadow — the deferred morph's preview (Max's step, 2026-08-27):
+     while the rider is dragged beyond every border's reach, this ghost shows what
+     releasing would make; back in reach it vanishes and the rider simply redocks. -->
+<div id="win-shadow" hidden></div>
 
 <div id="cockpit-resize" title="Drag to resize · double-click to reset"></div>
 <aside id="cockpit" hidden>

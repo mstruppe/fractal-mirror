@@ -57,6 +57,7 @@ const els = {
   rider: document.getElementById('rider'),
   riderMini: document.getElementById('rider-mini'),
   riderPane: document.getElementById('rider-pane'),
+  winShadow: document.getElementById('win-shadow'),
   cpToPane: document.getElementById('cp-to-pane'),
   cpHome: document.getElementById('cp-home'),
   cpToWindow: document.getElementById('cp-to-window'),
@@ -685,50 +686,69 @@ function openWindowAtHome() {
   setState('window');
 }
 
-/* ── the rider: ONE drag — slide along a border, carry it to another border,
-      or pull it past the magnetic reach and it becomes the window in your hand ── */
+/* ── the rider: ONE drag — slide along a border, carry it around corners to any
+      other border, or pull it past every border's reach: there the rider stays in
+      the hand and the window's SHADOW appears — the deferred morph (Max's step).
+      Release in the open → the shadow becomes the window; drift back into a
+      border's reach → the shadow vanishes and the rider simply redocks. ── */
+function shadowShow(ev) {
+  els.winShadow.hidden = false;
+  els.winShadow.style.left = Math.round(ev.clientX - WIN_DEF.w / 2) + 'px';
+  els.winShadow.style.top = Math.round(ev.clientY - 18) + 'px';
+  els.winShadow.style.width = WIN_DEF.w + 'px';
+  els.winShadow.style.height = WIN_DEF.h + 'px';
+}
+function shadowHide() { els.winShadow.hidden = true; }
+
 function initRider() {
   els.rider.addEventListener('pointerdown', e => {
     if (e.target.closest('button')) return;      // the quick-actions are not drag handles
-    let mode = 'tap';                            // tap → stick | window
+    let mode = 'tap';                            // tap → stick | free (the shadow step)
     const p0 = { x: e.clientX, y: e.clientY };
-    let off = null;
     startDrag(e, {
       onMove: ev => {
-        if (mode === 'window') {
-          moveWinTo(ev.clientX - off.x, ev.clientY - off.y);
-          return;
-        }
         if (mode === 'tap' && Math.hypot(ev.clientX - p0.x, ev.clientY - p0.y) <= 4) return;
+        els.rider.classList.add('lift');         // picked up — the depth grammar
         const ws = workspace();
         const d = {
           left: ev.clientX - ws.x, right: ws.x + ws.w - ev.clientX,
           top: ev.clientY - ws.y, bottom: ws.y + ws.h - ev.clientY,
         };
         const edge = Object.keys(d).reduce((a, b) => (d[a] < d[b] ? a : b));
-        if (d[edge] > SNAP) {
-          // past every border's reach — the rider becomes the window under the pointer
-          mode = 'window';
+        if (d[edge] <= SNAP) {
+          mode = 'stick';                        // a border holds the rider — no morph
+          shadowHide();
+          els.rider.classList.remove('free');
+          dk.edge = edge;
+          const horiz = edge === 'top' || edge === 'bottom';
+          const rl = horiz ? els.rider.offsetWidth : els.rider.offsetHeight;
+          const span = Math.max(1, (horiz ? ws.w : ws.h) - rl);
+          dk.t = clamp01(((horiz ? ev.clientX - ws.x : ev.clientY - ws.y) - rl / 2) / span);
+          renderRider();
+        } else {
+          mode = 'free';                         // in the hand — the ghost says what release makes
+          els.rider.classList.add('free');
+          els.rider.style.left = Math.round(ev.clientX - els.rider.offsetWidth / 2) + 'px';
+          els.rider.style.top = Math.round(ev.clientY - els.rider.offsetHeight / 2) + 'px';
+          shadowShow(ev);
+        }
+      },
+      onEnd: ev => {
+        els.rider.classList.remove('lift');
+        shadowHide();
+        if (mode === 'tap') { unfoldPane(); return; }        // the click unfold
+        if (mode === 'stick') { rememberHome(); return; }
+        if (mode === 'free') {
+          // released in the open — the shadow becomes the window, right where it stood
+          els.rider.classList.remove('free');
+          els.rider.style.left = ''; els.rider.style.top = '';
           cp.win.w = WIN_DEF.w; cp.win.h = WIN_DEF.h;
-          cp.win.x = ev.clientX - cp.win.w / 2;
+          cp.win.x = ev.clientX - WIN_DEF.w / 2;
           cp.win.y = ev.clientY - 18;
           cp.attSides = [];
           setState('window');
-          off = { x: ev.clientX - cp.win.x, y: ev.clientY - cp.win.y };
-          return;
+          rememberCockpit();
         }
-        mode = 'stick';                          // the nearest border holds the rider
-        dk.edge = edge;
-        const horiz = edge === 'top' || edge === 'bottom';
-        const rl = horiz ? els.rider.offsetWidth : els.rider.offsetHeight;
-        const span = Math.max(1, (horiz ? ws.w : ws.h) - rl);
-        dk.t = clamp01(((horiz ? ev.clientX - ws.x : ev.clientY - ws.y) - rl / 2) / span);
-        renderRider();
-      },
-      onEnd: () => {
-        if (mode === 'tap') { unfoldPane(); return; }        // the click unfold
-        if (mode === 'stick') rememberHome();
-        if (mode === 'window') rememberCockpit();
       },
     });
   });
@@ -756,9 +776,10 @@ function initWindowChrome() {
   els.cockpitHead.addEventListener('pointerdown', e => {
     if (cp.state !== 'window' || e.target.closest('button')) return;
     const off = { x: e.clientX - cp.win.x, y: e.clientY - cp.win.y };
+    els.cockpit.classList.add('in-hand');        // deeper shadow while it rides the hand
     startDrag(e, {
       onMove: ev => moveWinTo(ev.clientX - off.x, ev.clientY - off.y),
-      onEnd: () => rememberCockpit(),
+      onEnd: () => { els.cockpit.classList.remove('in-hand'); rememberCockpit(); },
     });
   });
 

@@ -355,8 +355,10 @@ body.cockpit-open #cockpit-resize { display: block; }
 /* ── the rider — the cockpit folded, resting on a workspace border (2026-08-27).
       There is no bar object: the top/bottom/left/right borders themselves are the
       dock — all four magnetic, for the rider and for the window's edges. ── */
+/* depth grammar (Max's 3D pass, restrained): what floats casts shadow and lifts
+   in the hand; what docks flattens into the frame. Elevation, never perspective. */
 #rider {
-  position: fixed; z-index: 6;
+  position: fixed; z-index: 16;
   display: flex; align-items: center; gap: 0.45rem;
   background: var(--bg);
   border: 1px solid var(--hairline);
@@ -364,7 +366,11 @@ body.cockpit-open #cockpit-resize { display: block; }
   cursor: grab; user-select: none;
   white-space: nowrap;
   touch-action: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+  transition: box-shadow 160ms ease, transform 160ms ease;
 }
+#rider:hover { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16); }
+#rider.lift { transform: scale(1.05); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28); }
 #rider[hidden] { display: none; }
 #rider[data-edge="bottom"] { bottom: 0; border-bottom: none; border-radius: 10px 10px 0 0; }
 #rider[data-edge="top"]    { top: 46px; border-top: none; border-radius: 0 0 10px 10px; }
@@ -385,6 +391,26 @@ body.cockpit-open #cockpit-resize { display: block; }
   transition: color 120ms ease;
 }
 #rider button:hover { color: var(--ink); }
+/* free = beyond every border's reach: a horizontal tab riding the hand (after the
+   data-edge rules on purpose — it overrides their anchors and orientation) */
+#rider.free {
+  inset: auto;
+  flex-direction: row;
+  padding: 0.26rem 0.85rem;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+}
+#rider.free .r-label { writing-mode: horizontal-tb; }
+
+/* the window's shadow — the deferred morph's ghost */
+#win-shadow {
+  position: fixed; z-index: 14;
+  border: 1px dashed var(--hairline);
+  border-radius: 14px;
+  background: var(--code-bg);
+  pointer-events: none;
+}
+#win-shadow[hidden] { display: none; }
 
 /* ── the window — the same cockpit, floating. "Mini" is not a second thing:
       it is this window with one border held on a workspace border (a corner: two).
@@ -395,8 +421,10 @@ body.cockpit-open #cockpit-resize { display: block; }
   border-radius: 14px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
   overflow: hidden;
+  transition: box-shadow 160ms ease, border-radius 160ms ease;   /* attach morphs, drags stay 1:1 */
 }
 #cockpit.as-window #cockpit-head { cursor: grab; }
+#cockpit.as-window.in-hand { box-shadow: 0 34px 96px rgba(0, 0, 0, 0.30); }
 #cockpit.as-window.attached { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14); }
 #cockpit.as-window.attached[data-att~="bottom"] { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 #cockpit.as-window.attached[data-att~="top"]    { border-top-left-radius: 0; border-top-right-radius: 0; }
