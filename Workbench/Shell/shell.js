@@ -55,6 +55,9 @@ const els = {
   rootName: document.getElementById('root-name'),
   cockpit: document.getElementById('cockpit'),
   cockpitToggle: document.getElementById('cockpit-toggle'),
+  readerBtn: document.getElementById('reader-btn'),
+  layoutBtn: document.getElementById('layout-btn'),
+  layoutMenu: document.getElementById('layout-menu'),
   cockpitState: document.getElementById('cockpit-state'),
   cockpitLog: document.getElementById('cockpit-log'),
   cockpitForm: document.getElementById('cockpit-form'),
@@ -72,7 +75,12 @@ const state = {
 
 const cp = {                                     // cockpit state (summonable-pane #1)
   open: false, live: false, es: null, turn: false,
+  layout: 'cr',           // 'cr' = reader left · cockpit right; 'cl' = the mirror
   agentEl: null,          // the streaming agent-text element of the current turn
+};
+
+const rd = {                                     // reader state (the document window)
+  open: true, reopen: null, station: null,
 };
 
 /* ── boot ── */
@@ -82,7 +90,8 @@ els.tierLocal.addEventListener('click', useLocalTier);
 initTheme();
 initNavResize();
 initCockpit();
-showWelcome();
+initLayoutMenu();
+initReader();
 setStatus(`public tier · root ${state.publicBase.pathname}`);
 
 /* ── the rail's width (drag 180–300px; the text keeps its design width and clips) ── */
@@ -214,6 +223,7 @@ async function openStation(st, btn) {
       const text = state.tier === 'public' ? await fetchPublic(st.path) : await readLocalText(st.path);
       showMarkdown(text);
     }
+    readerShowing(() => openStation(st, btn), state.tier === 'public' ? st : null);
     setStatus(`${state.tier} tier · ${st.path}`);
   } catch (e) {
     showMessage(`Could not open <b>${escapeHtml(st.title)}</b>`, e.message +
@@ -283,6 +293,7 @@ async function openLocalFile(path, name) {
     else if (ext === 'md') showMarkdown(await readLocalText(path));
     else if (TEXT_EXT.has(ext) || !name.includes('.')) showPlain(await readLocalText(path));
     else showMessage(escapeHtml(name), 'No renderer for this file type yet — the shell is a prototype; the quest map is its paved road.');
+    readerShowing(() => openLocalFile(path, name), null);
     setStatus(`local tier · ${path}`);
   } catch (e) { setStatus(e.message, true); }
 }
@@ -324,16 +335,63 @@ function showMessage(title, html) {
   wrap.innerHTML = `<article><h1>${title}</h1><p>${html}</p></article>`;
   els.content.replaceChildren(wrap);
 }
-function showWelcome() {
-  showMessage('The Shell', `
-    <p>A <b>prototype frame</b> around FRACTAL — the hangar build. One frame, two tiers:</p>
-    <blockquote><b>Public tier</b> — reads the published estate served beside this page.<br>
-    <b>My instance…</b> — grants this page <i>read-only</i> access to a FRACTAL folder on your machine
-    (Chromium browsers), and your live board, roadmap and canon render right here.</blockquote>
-    <p>The left rail is the <b>quest map</b> — a paved road through the estate: orient, then the work,
-    then the law, then the machine. On the local tier an estate explorer opens below it.</p>
-    <p class="hint">Exploratory by declaration (Workspace Foundation §6, v0.3): we build to find out.
-    Nothing here writes anything, ever.</p>`);
+function showVoid() {
+  // the reader closed or empty → the bare background (Max's call, 2026-08-26).
+  // #screen-idle is the mount for the subtle graphics that may live here later.
+  const idle = document.createElement('div');
+  idle.id = 'screen-idle';
+  els.content.replaceChildren(idle);
+}
+
+/* ── the reader — the document window (Max's naming, 2026-08-26): one estate
+      artifact at a time, rendered readable; everything the rail points at
+      opens in it. A window like every other: open, close, arrange —
+      closing yields the screen to the void; opening restores what was read. ── */
+function initReader() {
+  els.readerBtn.addEventListener('click', readerToggle);
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem('fractal-shell-reader') || 'null'); } catch {}
+  if (saved && saved.open === false) rd.open = false;
+  if (saved && saved.station) {            // remember the station even while closed,
+    rd.station = saved.station;            // so close → reload → open restores it
+    rd.reopen = () => openStation(saved.station, null);
+  }
+  if (rd.open && rd.reopen) rd.reopen();    // opening restores what was read
+  else showVoid();
+  reflectReader();
+}
+
+function readerToggle() {
+  rd.open = !rd.open;
+  if (!rd.open) {
+    if (state.activeBtn) { state.activeBtn.classList.remove('active'); state.activeBtn = null; }
+    showVoid();
+    setStatus('reader closed');
+  } else if (rd.reopen) {
+    rd.reopen();
+  } else {
+    setStatus('reader open — choose a station from the rail');
+  }
+  reflectReader();
+  readerRemember();
+}
+
+function reflectReader() { els.readerBtn.classList.toggle('on', rd.open); }
+
+function readerRemember() {
+  try {
+    localStorage.setItem('fractal-shell-reader',
+      JSON.stringify({ open: rd.open, station: rd.station }));
+  } catch {}
+}
+
+function readerShowing(reopen, station) {
+  // every successful render reports here — the reader knows what it holds
+  rd.open = true;
+  rd.reopen = reopen;
+  rd.station = station || null;
+  reflectReader();
+  readerRemember();
 }
 
 /* ── status ── */
@@ -350,6 +408,8 @@ function setStatus(msg, isErr) {
 function initCockpit() {
   const KEY = 'fractal-shell-cockpit';
   els.cockpitSend.disabled = true;               // enabled by the first snapshot — live seats only
+  try { cp.layout = localStorage.getItem('fractal-shell-layout') === 'cl' ? 'cl' : 'cr'; } catch {}
+  applyLayout();
   els.cockpitToggle.addEventListener('click', () => cockpitSetOpen(!cp.open));
   els.cockpitForm.addEventListener('submit', e => { e.preventDefault(); cockpitSend(); });
   els.cockpitInput.addEventListener('keydown', e => {
@@ -360,6 +420,39 @@ function initCockpit() {
   let openAtBoot = false;
   try { openAtBoot = localStorage.getItem(KEY) === 'open'; } catch {}
   if (openAtBoot) cockpitSetOpen(true);
+}
+
+/* ── the layout menu — the split icon picks a default arrangement (Max's two).
+      Direction of record: every window is the same shell — open, close, arrange;
+      settings grow as need appears, never sooner. ── */
+function initLayoutMenu() {
+  els.layoutBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const show = els.layoutMenu.hidden;
+    els.layoutMenu.hidden = !show;
+    els.layoutBtn.setAttribute('aria-expanded', String(show));
+  });
+  for (const b of els.layoutMenu.querySelectorAll('button')) {
+    b.addEventListener('click', () => {
+      cp.layout = b.dataset.layout === 'cl' ? 'cl' : 'cr';
+      try { localStorage.setItem('fractal-shell-layout', cp.layout); } catch {}
+      applyLayout();
+      if (!cp.open) cockpitSetOpen(true);        // choosing a split means wanting the split
+      els.layoutMenu.hidden = true;
+      els.layoutBtn.setAttribute('aria-expanded', 'false');
+    });
+  }
+  document.addEventListener('click', e => {
+    if (!els.layoutMenu.hidden && !els.layoutMenu.contains(e.target)) {
+      els.layoutMenu.hidden = true;
+      els.layoutBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+function applyLayout() {
+  document.body.classList.toggle('cockpit-left', cp.layout === 'cl');
+  els.layoutBtn.textContent = cp.layout === 'cl' ? '◧' : '◨';
 }
 
 function cockpitSetOpen(open) {
@@ -577,7 +670,8 @@ function initCockpitResize() {
   });
   handle.addEventListener('pointermove', e => {
     if (!handle.hasPointerCapture(e.pointerId)) return;
-    set(startW - (e.clientX - startX));   // dragging left widens the right-hand pane
+    const dir = cp.layout === 'cl' ? 1 : -1;     // the seam widens toward the screen
+    set(startW + dir * (e.clientX - startX));
   });
   const end = e => {
     if (handle.hasPointerCapture(e.pointerId)) handle.releasePointerCapture(e.pointerId);

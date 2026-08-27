@@ -20,16 +20,22 @@
 <body>
 <header id="topbar">
   <div id="brand"><span class="mark">FRACTAL</span> · the Shell <em>· hangar prototype</em></div>
+  <div id="status" role="status">—</div>
+  <button id="layout-btn" title="Layout — where the windows sit" aria-haspopup="menu" aria-expanded="false">◨</button>
+  <button id="reader-btn" title="Reader — open / close" aria-label="Toggle the reader window">▤</button>
+  <button id="cockpit-toggle" title="Cockpit — open / close" aria-label="Toggle the cockpit pane">⎈</button>
+  <button id="theme" title="Appearance: auto" aria-label="Toggle light/dark mode">◐</button>
+</header>
+<div id="layout-menu" hidden role="menu" aria-label="Default layouts">
+  <button data-layout="cl" role="menuitem">◧&ensp;Cockpit left · screen right</button>
+  <button data-layout="cr" role="menuitem">◨&ensp;Screen left · cockpit right</button>
+</div>
+
+<aside id="nav">
   <div id="tiers">
     <button id="tier-public" class="tier active" title="Read the published estate served beside this page">Public tier</button>
     <button id="tier-local" class="tier" title="Grant this page read access to your instance folder (Chromium browsers)">My instance…</button>
   </div>
-  <div id="status" role="status">—</div>
-  <button id="cockpit-toggle" title="Cockpit — the agent's seat" aria-label="Toggle the cockpit pane">◨</button>
-  <button id="theme" title="Appearance: auto" aria-label="Toggle light/dark mode">◐</button>
-</header>
-
-<aside id="nav">
   <div id="quest"></div>
   <div id="explorer-wrap" hidden>
     <h3>The estate <span id="root-name"></span></h3>

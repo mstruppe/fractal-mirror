@@ -68,9 +68,10 @@ button { font: inherit; }
 #brand { font-size: 0.78rem; white-space: nowrap; color: var(--muted); }
 #brand .mark { color: var(--ink); font-weight: 600; letter-spacing: 0.08em; }
 #brand em { font-style: normal; color: var(--faint); }
-#tiers { display: flex; gap: 0.55rem; }
+/* the tier pills live at the top of the rail (Max's call, 2026-08-26) */
+#tiers { display: flex; gap: 0.5rem; padding: 0.95rem 1rem 0.1rem; }
 .tier {
-  font-size: 0.8rem; padding: 0.3rem 0.85rem;
+  font-size: 0.78rem; padding: 0.3rem 0.85rem;
   border-radius: 999px; border: 1px solid var(--hairline);
   background: transparent; color: var(--muted); cursor: pointer;
   transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
@@ -78,6 +79,37 @@ button { font: inherit; }
 }
 .tier:hover { color: var(--ink); border-color: var(--ink); }
 .tier.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+/* the layout menu — the split icon opens it; a window arrangement is a choice, not a mode */
+#layout-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted);
+  font-size: 0.95rem; line-height: 1;
+  padding: 0.25rem 0.1rem;
+  transition: color 120ms ease;
+}
+#layout-btn:hover, #layout-btn[aria-expanded="true"] { color: var(--ink); }
+#layout-menu {
+  position: fixed; top: 46px; right: 0.6rem; z-index: 20;
+  display: flex; flex-direction: column;
+  min-width: 15rem;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  backdrop-filter: saturate(1.6) blur(18px);
+  border: 1px solid var(--hairline-soft);
+  border-radius: 0 0 12px 12px;
+  padding: 0.35rem;
+}
+#layout-menu[hidden] { display: none; }
+#layout-menu button {
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: none; border: none; border-radius: 8px;
+  padding: 0.45rem 0.7rem; cursor: pointer;
+  transition: color 120ms ease;
+  white-space: nowrap;
+}
+#layout-menu button:hover { color: var(--ink); }
 #status {
   margin-left: auto;
   font-size: 0.72rem; letter-spacing: 0.01em;
@@ -104,7 +136,7 @@ button { font: inherit; }
   overflow-x: hidden;          /* narrowing clips the fixed-width text — no reflow */
   background: var(--bg);
 }
-#quest, #explorer-wrap, #nav-foot { width: 300px; min-width: 300px; }
+#tiers, #quest, #explorer-wrap, #nav-foot { width: 300px; min-width: 300px; }
 
 /* the drag handle — a hairline seam that follows the rail's edge */
 #nav-resize {
@@ -258,10 +290,18 @@ body.resizing iframe { pointer-events: none; }   /* keep the drag alive over fra
 .welcome h1 { font-weight: 700; letter-spacing: -0.02em; }
 .welcome .hint { color: var(--faint); font-size: 0.85rem; }
 
+/* the idle screen — no window selected: just the bare background.
+   Future home of the subtle graphics (they mount here, nowhere else). */
+#screen-idle { flex: 1; background: var(--bg); }
+
 /* ── the cockpit — summonable-pane #1 (the pattern later panes repeat:
-      a grid column, the hidden-attribute toggle, a topbar button) ── */
+      a grid column, the hidden-attribute toggle, a topbar button).
+      Two default layouts (Max's call): screen left · cockpit right, or the mirror.
+      Direction of record: all windows behave as the same shell — open, close, arrange. ── */
 body.cockpit-open { grid-template: "top top top" 46px "nav main cockpit" 1fr / var(--nav-w) 1fr var(--cockpit-w); }
-#cockpit-toggle {
+body.cockpit-open.cockpit-left { grid-template: "top top top" 46px "nav cockpit main" 1fr / var(--nav-w) var(--cockpit-w) 1fr; }
+body.cockpit-left #cockpit { border-left: none; border-right: 1px solid var(--hairline-soft); }
+#cockpit-toggle, #reader-btn {
   background: none; border: none; cursor: pointer;
   color: var(--muted);
   font-size: 0.95rem; line-height: 1;
@@ -269,6 +309,7 @@ body.cockpit-open { grid-template: "top top top" 46px "nav main cockpit" 1fr / v
   transition: color 120ms ease;
 }
 #cockpit-toggle:hover, body.cockpit-open #cockpit-toggle { color: var(--ink); }
+#reader-btn:hover, #reader-btn.on { color: var(--ink); }
 #cockpit {
   grid-area: cockpit;
   display: flex; flex-direction: column;
@@ -286,6 +327,7 @@ body.cockpit-open { grid-template: "top top top" 46px "nav main cockpit" 1fr / v
   cursor: col-resize;
   z-index: 5;
 }
+body.cockpit-left #cockpit-resize { right: auto; left: calc(var(--nav-w) + var(--cockpit-w) - 3px); }
 body.cockpit-open #cockpit-resize { display: block; }
 #cockpit-resize:hover { background: linear-gradient(to right, transparent 2px, var(--hairline) 3px, var(--hairline) 4px, transparent 5px); }
 #cockpit-head {
@@ -372,9 +414,9 @@ body.cockpit-open #cockpit-resize { display: block; }
 /* ── small screens: the rail folds under, the cockpit docks below ── */
 @media (max-width: 760px) {
   body { grid-template: "top" 46px "nav" auto "main" 1fr / 1fr; }
-  body.cockpit-open { grid-template: "top" 46px "nav" auto "main" 1fr "cockpit" 46vh / 1fr; }
+  body.cockpit-open, body.cockpit-open.cockpit-left { grid-template: "top" 46px "nav" auto "main" 1fr "cockpit" 46vh / 1fr; }
   #nav { grid-area: nav; max-height: 38vh; border-right: none; border-bottom: 1px solid var(--hairline-soft); }
-  #quest, #explorer-wrap, #nav-foot { width: auto; min-width: 0; }
+  #tiers, #quest, #explorer-wrap, #nav-foot { width: auto; min-width: 0; }
   #nav-resize { display: none; }
   #content { grid-area: main; }
   #cockpit { border-left: none; border-top: 1px solid var(--hairline-soft); }
