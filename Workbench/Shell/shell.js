@@ -54,7 +54,13 @@ const els = {
   explorer: document.getElementById('explorer'),
   rootName: document.getElementById('root-name'),
   cockpit: document.getElementById('cockpit'),
-  cockpitToggle: document.getElementById('cockpit-toggle'),
+  cockpitHead: document.getElementById('cockpit-head'),
+  rider: document.getElementById('rider'),
+  riderMini: document.getElementById('rider-mini'),
+  cpToPane: document.getElementById('cp-to-pane'),
+  cpHome: document.getElementById('cp-home'),
+  cpToWindow: document.getElementById('cp-to-window'),
+  cpFold: document.getElementById('cp-fold'),
   readerBtn: document.getElementById('reader-btn'),
   layoutBtn: document.getElementById('layout-btn'),
   layoutMenu: document.getElementById('layout-menu'),
@@ -73,9 +79,23 @@ const state = {
   activeBtn: null,
 };
 
+/* the rider grammar (Max's sketch, 2026-08-27; simplified same day): the workspace
+   BORDERS are the dock — all four magnetic, for the rider and for the window's edges;
+   no bar object. One cockpit, three states — rider (folded, resting on a border) ·
+   window (floating; "mini" = the same window with one border held on a workspace
+   border, a corner held by two) · pane (in the layout flow). */
+const TOPBAR = 46, SNAP = 32;                    // px — the magnetic reach
+const WIN_DEF = { w: 400, h: 460 };              // the one default window size (button unfolds)
+const WIN_MIN = { w: 300, h: 260 };
+
+const dk = { edge: 'bottom', t: 0.8 };           // the rider's home: which border, how far along
+
 const cp = {                                     // cockpit state (summonable-pane #1)
-  open: false, live: false, es: null, turn: false,
-  layout: 'cr',           // 'cr' = reader left · cockpit right; 'cl' = the mirror
+  state: 'rider',         // 'rider' | 'window' | 'pane'
+  attSides: [],           // window sub-property: borders currently held (≤2 — one per axis)
+  win: { x: 0, y: 0, w: 400, h: 460 },
+  live: false, es: null, turn: false,
+  layout: 'cr',           // derived by the position law at each unfold; feeds the split glyphs
   agentEl: null,          // the streaming agent-text element of the current turn
 };
 
@@ -404,27 +424,350 @@ function setStatus(msg, isErr) {
       Live only when this page is served by the engine room (same origin, by design);
       anywhere else the seat is a door, never an engine. The pane writes nothing —
       the engine's agent acts, and only through the in-pane C-008 permission moment.
-      Rituals stay words: /fractal and /close are typed, never buttons. ── */
+      Rituals stay words: /fractal and /close are typed, never buttons.
+
+      The rider grammar (2026-08-27): the cockpit's home is a RIDER on a general DOCK.
+      Buttons are the fixed layer — deterministic paths, the one default window size;
+      drags are the free layer — slide, detach, attach, move, resize, all magnetic.
+      Position is law: where the cockpit sits decides the side it unfolds to. ── */
 function initCockpit() {
-  const KEY = 'fractal-shell-cockpit';
   els.cockpitSend.disabled = true;               // enabled by the first snapshot — live seats only
-  try { cp.layout = localStorage.getItem('fractal-shell-layout') === 'cl' ? 'cl' : 'cr'; } catch {}
-  applyLayout();
-  els.cockpitToggle.addEventListener('click', () => cockpitSetOpen(!cp.open));
   els.cockpitForm.addEventListener('submit', e => { e.preventDefault(); cockpitSend(); });
   els.cockpitInput.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); cockpitSend(); }
   });
   els.cockpitStop.addEventListener('click', () => enginePost('/engine/interrupt', {}));
   initCockpitResize();
-  let openAtBoot = false;
-  try { openAtBoot = localStorage.getItem(KEY) === 'open'; } catch {}
-  if (openAtBoot) cockpitSetOpen(true);
+  initRider();
+  initWindowChrome();
+
+  // restore the home + the state (migrates the pre-rider keys: layout → home, open → pane)
+  try {
+    const d = JSON.parse(localStorage.getItem('fractal-shell-dock') || 'null');
+    if (d && ['top', 'bottom', 'left', 'right'].includes(d.edge)) {
+      dk.edge = d.edge; dk.t = clamp01(+d.t || 0);
+    } else if (localStorage.getItem('fractal-shell-layout') === 'cl') dk.t = 0.2;
+  } catch {}
+  let s = null, raw = null;
+  try { raw = localStorage.getItem('fractal-shell-cockpit'); } catch {}
+  if (raw === 'open') s = { state: 'pane' };
+  else if (raw && raw !== 'closed') { try { s = JSON.parse(raw); } catch {} }
+  if (s && ['rider', 'window', 'pane'].includes(s.state)) {
+    cp.attSides = Array.isArray(s.attSides)
+      ? s.attSides.filter(x => ['top', 'bottom', 'left', 'right'].includes(x)) : [];
+    if (s.win && +s.win.w) cp.win = {
+      x: +s.win.x || 0, y: +s.win.y || 0,
+      w: +s.win.w || WIN_DEF.w, h: +s.win.h || WIN_DEF.h,
+    };
+    setState(s.state);
+  } else setState('rider');
 }
 
-/* ── the layout menu — the split icon picks a default arrangement (Max's two).
-      Direction of record: every window is the same shell — open, close, arrange;
-      settings grow as need appears, never sooner. ── */
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+function clampN(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function horizontal() { return dk.edge === 'top' || dk.edge === 'bottom'; }
+
+/* the workspace box — below the topbar, beside the rail; its four borders are the dock */
+function workspace() {
+  const navw = window.innerWidth <= 760 ? 0 :
+    (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-w'), 10) || 300);
+  return { x: navw, y: TOPBAR, w: window.innerWidth - navw, h: window.innerHeight - TOPBAR };
+}
+
+/* one generic drag engine — a gesture may change its meaning mid-flight (rider → window) */
+function startDrag(e, handlers) {
+  e.preventDefault();
+  document.body.classList.add('dragging');
+  const move = ev => handlers.onMove && handlers.onMove(ev);
+  const up = ev => {
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+    window.removeEventListener('pointercancel', up);
+    document.body.classList.remove('dragging');
+    handlers.onEnd && handlers.onEnd(ev);
+  };
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', up);
+  window.addEventListener('pointercancel', up);
+}
+
+/* ── state — rider disconnects; window and pane share the living connection ── */
+function setState(s) {
+  cp.state = s;
+  if (s !== 'rider' && !cp.es) cockpitConnect();
+  if (s === 'rider' && cp.es) { cp.es.close(); cp.es = null; cp.live = false; }
+  renderCockpit();
+  rememberCockpit();
+}
+
+function rememberCockpit() {
+  try {
+    localStorage.setItem('fractal-shell-cockpit',
+      JSON.stringify({ state: cp.state, attSides: cp.attSides, win: cp.win }));
+  } catch {}
+}
+function rememberHome() {
+  try { localStorage.setItem('fractal-shell-dock', JSON.stringify({ edge: dk.edge, t: dk.t })); } catch {}
+}
+
+/* the position law — where the cockpit sits decides the side it unfolds to
+   (a corner seat counts by its left/right member: bottom-left unfolds left) */
+function paneSide() {
+  if (cp.state === 'window') {
+    if (cp.attSides.includes('left')) return 'cl';
+    if (cp.attSides.includes('right')) return 'cr';
+    const ws = workspace();
+    return (cp.win.x + cp.win.w / 2) < (ws.x + ws.w / 2) ? 'cl' : 'cr';
+  }
+  if (dk.edge === 'left') return 'cl';
+  if (dk.edge === 'right') return 'cr';
+  return dk.t < 0.5 ? 'cl' : 'cr';
+}
+
+function applyLayout() {
+  document.body.classList.toggle('cockpit-left', cp.layout === 'cl');
+  els.layoutBtn.textContent = cp.layout === 'cl' ? '◧' : '◨';
+}
+
+/* ── rendering — one element, its presentation per state ── */
+function renderCockpit() {
+  const pane = cp.state === 'pane', win = cp.state === 'window';
+  els.cockpit.hidden = cp.state === 'rider';
+  els.cockpit.classList.toggle('as-pane', pane);
+  els.cockpit.classList.toggle('as-window', win);
+  const att = win && cp.attSides.length > 0;
+  els.cockpit.classList.toggle('attached', att);
+  if (att) els.cockpit.dataset.att = cp.attSides.join(' ');
+  else delete els.cockpit.dataset.att;
+  document.body.classList.toggle('cockpit-open', pane);
+  const st = els.cockpit.style;
+  if (win) {
+    for (const s of cp.attSides) snapWinTo(s);   // held borders stay flush (a corner holds two)
+    clampWin();
+    st.left = cp.win.x + 'px'; st.top = cp.win.y + 'px';
+    st.width = cp.win.w + 'px'; st.height = cp.win.h + 'px';
+    els.cpToPane.textContent = paneSide() === 'cl' ? '◧' : '◨';
+  } else {
+    st.left = st.top = st.width = st.height = '';
+  }
+  if (pane) { cp.layout = paneSide(); applyLayout(); }
+  renderRider();
+}
+
+function renderRider() {
+  els.rider.dataset.edge = dk.edge;
+  els.rider.hidden = cp.state !== 'rider';
+  if (els.rider.hidden) return;
+  const ws = workspace();
+  if (horizontal()) {
+    els.rider.style.top = '';                    // the edge's own CSS holds the cross coordinate
+    const span = Math.max(0, ws.w - els.rider.offsetWidth);
+    els.rider.style.left = Math.round(ws.x + dk.t * span) + 'px';
+  } else {
+    els.rider.style.left = '';
+    const span = Math.max(0, ws.h - els.rider.offsetHeight);
+    els.rider.style.top = Math.round(ws.y + dk.t * span) + 'px';
+  }
+}
+
+/* flush onto one workspace border, leaving the other axis alone */
+function snapWinTo(side) {
+  const ws = workspace();
+  if (side === 'bottom') cp.win.y = ws.y + ws.h - cp.win.h;
+  else if (side === 'top') cp.win.y = ws.y;
+  else if (side === 'left') cp.win.x = ws.x;
+  else cp.win.x = ws.x + ws.w - cp.win.w;
+}
+
+function clampWin() {
+  cp.win.w = clampN(cp.win.w, WIN_MIN.w, window.innerWidth);
+  cp.win.h = clampN(cp.win.h, WIN_MIN.h, window.innerHeight - TOPBAR);
+  cp.win.x = clampN(cp.win.x, 0, window.innerWidth - cp.win.w);
+  cp.win.y = clampN(cp.win.y, TOPBAR, window.innerHeight - cp.win.h);
+}
+
+/* the magnetic law, per axis: a border within reach holds its side of the window —
+   one border makes the "mini", a corner holds two; forcing away releases each.
+   Judged on the clamped (on-screen) rect: pushing past an edge IS arriving at it. */
+function magnetize() {
+  clampWin();
+  const ws = workspace();
+  const dl = Math.abs(cp.win.x - ws.x);
+  const dr = Math.abs((ws.x + ws.w) - (cp.win.x + cp.win.w));
+  const dt = Math.abs(cp.win.y - ws.y);
+  const db = Math.abs((ws.y + ws.h) - (cp.win.y + cp.win.h));
+  const att = [];
+  if (Math.min(dl, dr) < SNAP) att.push(dl <= dr ? 'left' : 'right');
+  if (Math.min(dt, db) < SNAP) att.push(dt <= db ? 'top' : 'bottom');
+  cp.attSides = att;
+  for (const s of att) snapWinTo(s);
+}
+
+/* folding home — an ATTACHED window already stands on the dock, so it folds where
+   it is (the rider takes that spot as the new home); a FREE window folds back to
+   the remembered home ("the position it was before it got detached"). */
+function foldHome() {
+  if (cp.state === 'window' && cp.attSides.length) {
+    const side = cp.attSides[0];
+    const ws = workspace();
+    dk.edge = side;
+    dk.t = (side === 'top' || side === 'bottom')
+      ? clamp01((cp.win.x + cp.win.w / 2 - ws.x) / Math.max(1, ws.w))
+      : clamp01((cp.win.y + cp.win.h / 2 - ws.y) / Math.max(1, ws.h));
+    rememberHome();
+  }
+  setState('rider');
+}
+
+/* the button unfold — the fixed layer: the default-size window at the rider's home;
+   whichever border(s) are in reach there take hold (a corner home is held by two) */
+function openWindowAtHome() {
+  cp.win.w = WIN_DEF.w; cp.win.h = WIN_DEF.h;
+  const ws = workspace();
+  if (horizontal()) {
+    const cx = ws.x + dk.t * ws.w;
+    cp.win.x = clampN(cx - cp.win.w / 2, ws.x, Math.max(ws.x, ws.x + ws.w - cp.win.w));
+    cp.win.y = dk.edge === 'top' ? ws.y : ws.y + ws.h - cp.win.h;
+  } else {
+    const cy = ws.y + dk.t * ws.h;
+    cp.win.y = clampN(cy - cp.win.h / 2, ws.y, Math.max(ws.y, ws.y + ws.h - cp.win.h));
+    cp.win.x = dk.edge === 'left' ? ws.x : ws.x + ws.w - cp.win.w;
+  }
+  magnetize();
+  setState('window');
+}
+
+/* ── the rider: ONE drag — slide along a border, carry it to another border,
+      or pull it past the magnetic reach and it becomes the window in your hand ── */
+function initRider() {
+  els.rider.addEventListener('pointerdown', e => {
+    if (e.target.closest('#rider-mini')) return;
+    let mode = 'tap';                            // tap → stick | window
+    const p0 = { x: e.clientX, y: e.clientY };
+    let off = null;
+    startDrag(e, {
+      onMove: ev => {
+        if (mode === 'window') {
+          cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
+          magnetize(); renderCockpit();
+          return;
+        }
+        if (mode === 'tap' && Math.hypot(ev.clientX - p0.x, ev.clientY - p0.y) <= 4) return;
+        const ws = workspace();
+        const d = {
+          left: ev.clientX - ws.x, right: ws.x + ws.w - ev.clientX,
+          top: ev.clientY - ws.y, bottom: ws.y + ws.h - ev.clientY,
+        };
+        const edge = Object.keys(d).reduce((a, b) => (d[a] < d[b] ? a : b));
+        if (d[edge] > SNAP) {
+          // past every border's reach — the rider becomes the window under the pointer
+          mode = 'window';
+          cp.win.w = WIN_DEF.w; cp.win.h = WIN_DEF.h;
+          cp.win.x = ev.clientX - cp.win.w / 2;
+          cp.win.y = ev.clientY - 18;
+          cp.attSides = [];
+          setState('window');
+          off = { x: ev.clientX - cp.win.x, y: ev.clientY - cp.win.y };
+          return;
+        }
+        mode = 'stick';                          // the nearest border holds the rider
+        dk.edge = edge;
+        const horiz = edge === 'top' || edge === 'bottom';
+        const rl = horiz ? els.rider.offsetWidth : els.rider.offsetHeight;
+        const span = Math.max(1, (horiz ? ws.w : ws.h) - rl);
+        dk.t = clamp01(((horiz ? ev.clientX - ws.x : ev.clientY - ws.y) - rl / 2) / span);
+        renderRider();
+      },
+      onEnd: () => {
+        if (mode === 'tap') { setState('pane'); return; }    // the click unfold
+        if (mode === 'stick') rememberHome();
+        if (mode === 'window') rememberCockpit();
+      },
+    });
+  });
+  els.rider.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setState('pane'); }
+  });
+  els.riderMini.addEventListener('pointerdown', e => e.stopPropagation());
+  els.riderMini.addEventListener('click', () => openWindowAtHome());
+
+  // the rail's width and the viewport move the borders — the rider and window follow
+  new ResizeObserver(() => renderCockpit()).observe(document.getElementById('nav'));
+  window.addEventListener('resize', () => renderCockpit());
+}
+
+/* ── the window's chrome: quick actions, the header move, the eight handles ── */
+function initWindowChrome() {
+  els.cpToPane.addEventListener('click', () => setState('pane'));
+  els.cpHome.addEventListener('click', () => foldHome());          // the homing button
+  els.cpFold.addEventListener('click', () => foldHome());
+  els.cpToWindow.addEventListener('click', () => openWindowAtHome());
+
+  // move — drag the head (buttons excluded); magnetic against every border
+  els.cockpitHead.addEventListener('pointerdown', e => {
+    if (cp.state !== 'window' || e.target.closest('button')) return;
+    const off = { x: e.clientX - cp.win.x, y: e.clientY - cp.win.y };
+    startDrag(e, {
+      onMove: ev => {
+        cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
+        magnetize(); renderCockpit();
+      },
+      onEnd: () => rememberCockpit(),
+    });
+  });
+
+  // resize — a HELD border's handle is a pull-away grip (moving an attached border
+  // IS the detach gesture; the rule is the geometry); free borders resize normally,
+  // and a held border keeps itself flush while the opposite one resizes
+  const CHAR = { bottom: 's', top: 'n', left: 'w', right: 'e' };
+  for (const h of els.cockpit.querySelectorAll('.win-h')) {
+    h.addEventListener('pointerdown', e => {
+      if (cp.state !== 'window') return;
+      const dir = h.classList[1];
+      const held = cp.attSides.find(s => dir.includes(CHAR[s]));
+      const s0 = { px: e.clientX, py: e.clientY, x: cp.win.x, y: cp.win.y, w: cp.win.w, h: cp.win.h };
+      let mode = held ? 'pull' : 'resize';
+      let off = null;
+      startDrag(e, {
+        onMove: ev => {
+          const dx = ev.clientX - s0.px, dy = ev.clientY - s0.py;
+          if (mode === 'pull') {
+            if (Math.hypot(dx, dy) <= SNAP) return;
+            mode = 'move';                       // forced off — the border grab becomes a move
+            if (held === 'bottom') cp.win.y = ev.clientY - cp.win.h;
+            else if (held === 'top') cp.win.y = ev.clientY;
+            else if (held === 'left') cp.win.x = ev.clientX;
+            else cp.win.x = ev.clientX - cp.win.w;
+            magnetize(); renderCockpit();
+            off = { x: ev.clientX - cp.win.x, y: ev.clientY - cp.win.y };
+            return;
+          }
+          if (mode === 'move') {
+            cp.win.x = ev.clientX - off.x; cp.win.y = ev.clientY - off.y;
+            magnetize(); renderCockpit();
+            return;
+          }
+          if (dir.includes('e')) cp.win.w = s0.w + dx;
+          if (dir.includes('s')) cp.win.h = s0.h + dy;
+          if (dir.includes('w')) {
+            const w2 = clampN(s0.w - dx, WIN_MIN.w, s0.x + s0.w);
+            cp.win.x = s0.x + s0.w - w2; cp.win.w = w2;
+          }
+          if (dir.includes('n')) {
+            const h2 = clampN(s0.h - dy, WIN_MIN.h, s0.y + s0.h - TOPBAR);
+            cp.win.y = s0.y + s0.h - h2; cp.win.h = h2;
+          }
+          renderCockpit();
+        },
+        onEnd: () => rememberCockpit(),
+      });
+    });
+  }
+}
+
+/* ── the layout menu — the split icon stays (the later custom-layout menu grows here).
+      Its two defaults now act by moving the cockpit's HOME: the position law stays the
+      one source of truth — the menu mirrors the home, the home decides the side. ── */
 function initLayoutMenu() {
   els.layoutBtn.addEventListener('click', e => {
     e.stopPropagation();
@@ -434,10 +777,14 @@ function initLayoutMenu() {
   });
   for (const b of els.layoutMenu.querySelectorAll('button')) {
     b.addEventListener('click', () => {
-      cp.layout = b.dataset.layout === 'cl' ? 'cl' : 'cr';
-      try { localStorage.setItem('fractal-shell-layout', cp.layout); } catch {}
-      applyLayout();
-      if (!cp.open) cockpitSetOpen(true);        // choosing a split means wanting the split
+      const want = b.dataset.layout === 'cl' ? 'cl' : 'cr';
+      if (dk.edge === 'left' || dk.edge === 'right') {
+        dk.edge = want === 'cl' ? 'left' : 'right';
+      } else if ((dk.t < 0.5 ? 'cl' : 'cr') !== want) {
+        dk.t = 1 - dk.t;                         // mirror the home along its border
+      }
+      rememberHome();
+      setState('pane');                          // choosing a split means wanting the split
       els.layoutMenu.hidden = true;
       els.layoutBtn.setAttribute('aria-expanded', 'false');
     });
@@ -448,20 +795,6 @@ function initLayoutMenu() {
       els.layoutBtn.setAttribute('aria-expanded', 'false');
     }
   });
-}
-
-function applyLayout() {
-  document.body.classList.toggle('cockpit-left', cp.layout === 'cl');
-  els.layoutBtn.textContent = cp.layout === 'cl' ? '◧' : '◨';
-}
-
-function cockpitSetOpen(open) {
-  cp.open = open;
-  document.body.classList.toggle('cockpit-open', open);
-  els.cockpit.hidden = !open;
-  try { localStorage.setItem('fractal-shell-cockpit', open ? 'open' : 'closed'); } catch {}
-  if (open && !cp.es) cockpitConnect();
-  if (!open && cp.es) { cp.es.close(); cp.es = null; cp.live = false; }
 }
 
 async function cockpitConnect() {

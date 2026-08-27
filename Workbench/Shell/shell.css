@@ -301,14 +301,13 @@ body.resizing iframe { pointer-events: none; }   /* keep the drag alive over fra
 body.cockpit-open { grid-template: "top top top" 46px "nav main cockpit" 1fr / var(--nav-w) 1fr var(--cockpit-w); }
 body.cockpit-open.cockpit-left { grid-template: "top top top" 46px "nav cockpit main" 1fr / var(--nav-w) var(--cockpit-w) 1fr; }
 body.cockpit-left #cockpit { border-left: none; border-right: 1px solid var(--hairline-soft); }
-#cockpit-toggle, #reader-btn {
+#reader-btn {
   background: none; border: none; cursor: pointer;
   color: var(--muted);
   font-size: 0.95rem; line-height: 1;
   padding: 0.25rem 0.1rem;
   transition: color 120ms ease;
 }
-#cockpit-toggle:hover, body.cockpit-open #cockpit-toggle { color: var(--ink); }
 #reader-btn:hover, #reader-btn.on { color: var(--ink); }
 #cockpit {
   grid-area: cockpit;
@@ -331,7 +330,7 @@ body.cockpit-left #cockpit-resize { right: auto; left: calc(var(--nav-w) + var(-
 body.cockpit-open #cockpit-resize { display: block; }
 #cockpit-resize:hover { background: linear-gradient(to right, transparent 2px, var(--hairline) 3px, var(--hairline) 4px, transparent 5px); }
 #cockpit-head {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: baseline; gap: 0.7rem;
   padding: 0.75rem 1.1rem 0.55rem;
   border-bottom: 1px solid var(--hairline-soft);
 }
@@ -340,8 +339,85 @@ body.cockpit-open #cockpit-resize { display: block; }
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--faint);
 }
-#cockpit-state { font-size: 0.72rem; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#cockpit-state { flex: 1; text-align: right; font-size: 0.72rem; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #cockpit-state.live { color: var(--muted); }
+#cockpit-btns { display: flex; gap: 0.15rem; align-self: center; }
+.cp-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--faint); font-size: 0.85rem; line-height: 1;
+  padding: 0.1rem 0.2rem;
+  transition: color 120ms ease;
+}
+.cp-btn:hover { color: var(--ink); }
+#cockpit.as-pane .win-only { display: none; }
+#cockpit.as-window .pane-only { display: none; }
+
+/* ── the rider — the cockpit folded, resting on a workspace border (2026-08-27).
+      There is no bar object: the top/bottom/left/right borders themselves are the
+      dock — all four magnetic, for the rider and for the window's edges. ── */
+#rider {
+  position: fixed; z-index: 6;
+  display: flex; align-items: center; gap: 0.45rem;
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  padding: 0.26rem 0.85rem;
+  cursor: grab; user-select: none;
+  white-space: nowrap;
+  touch-action: none;
+}
+#rider[hidden] { display: none; }
+#rider[data-edge="bottom"] { bottom: 0; border-bottom: none; border-radius: 10px 10px 0 0; }
+#rider[data-edge="top"]    { top: 46px; border-top: none; border-radius: 0 0 10px 10px; }
+#rider[data-edge="left"]   { left: var(--nav-w); border-left: none; border-radius: 0 10px 10px 0; flex-direction: column; padding: 0.85rem 0.26rem; }
+#rider[data-edge="right"]  { right: 0; border-right: none; border-radius: 10px 0 0 10px; flex-direction: column; padding: 0.85rem 0.26rem; }
+#rider .r-label {
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  transition: color 120ms ease;
+}
+#rider:hover .r-label { color: var(--ink); }
+#rider[data-edge="left"] .r-label, #rider[data-edge="right"] .r-label { writing-mode: vertical-rl; }
+#rider-mini {
+  background: none; border: none; cursor: pointer;
+  color: var(--faint); font-size: 0.8rem; line-height: 1;
+  padding: 0.05rem 0.1rem;
+  transition: color 120ms ease;
+}
+#rider-mini:hover { color: var(--ink); }
+
+/* ── the window — the same cockpit, floating. "Mini" is not a second thing:
+      it is this window with one border held on a workspace border (a corner: two).
+      Held sides flatten; data-att lists them space-separated. ── */
+#cockpit.as-window {
+  position: fixed; z-index: 15;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+#cockpit.as-window #cockpit-head { cursor: grab; }
+#cockpit.as-window.attached { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14); }
+#cockpit.as-window.attached[data-att~="bottom"] { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+#cockpit.as-window.attached[data-att~="top"]    { border-top-left-radius: 0; border-top-right-radius: 0; }
+#cockpit.as-window.attached[data-att~="left"]   { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+#cockpit.as-window.attached[data-att~="right"]  { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+
+/* resize handles — live only in window state; the dock-side ones become
+   pull-away grips when attached (moving that border IS the detach gesture) */
+.win-h { display: none; position: absolute; z-index: 3; touch-action: none; }
+#cockpit.as-window .win-h { display: block; }
+.win-h.n  { top: 0; left: 12px; right: 12px; height: 6px; cursor: ns-resize; }
+.win-h.s  { bottom: 0; left: 12px; right: 12px; height: 6px; cursor: ns-resize; }
+.win-h.e  { right: 0; top: 12px; bottom: 12px; width: 6px; cursor: ew-resize; }
+.win-h.w  { left: 0; top: 12px; bottom: 12px; width: 6px; cursor: ew-resize; }
+.win-h.ne { top: 0; right: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+.win-h.nw { top: 0; left: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+.win-h.se { bottom: 0; right: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+.win-h.sw { bottom: 0; left: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+
+body.dragging { user-select: none; cursor: grabbing; }
+body.dragging iframe { pointer-events: none; }   /* keep the drag alive over framed docs */
 #cockpit-log { flex: 1; overflow-y: auto; padding: 0.9rem 1.1rem; font-size: 0.92rem; }
 #cockpit-log .who {
   margin: 1.1rem 0 0.3rem;
@@ -399,6 +475,8 @@ body.cockpit-open #cockpit-resize { display: block; }
   outline: none;
 }
 #cockpit-input:focus { border-color: var(--hairline); }
+#cockpit-input { scrollbar-width: none; }        /* two rows; overflow scrolls with the caret */
+#cockpit-input::-webkit-scrollbar { display: none; }
 #cockpit-controls { display: flex; flex-direction: column; gap: 0.35rem; align-items: stretch; }
 #cockpit-send, #cockpit-stop {
   font-size: 0.85rem; padding: 0.3rem 0.7rem;
@@ -419,7 +497,8 @@ body.cockpit-open #cockpit-resize { display: block; }
   #tiers, #quest, #explorer-wrap, #nav-foot { width: auto; min-width: 0; }
   #nav-resize { display: none; }
   #content { grid-area: main; }
-  #cockpit { border-left: none; border-top: 1px solid var(--hairline-soft); }
+  #cockpit.as-pane { border-left: none; border-top: 1px solid var(--hairline-soft); }
   body.cockpit-open #cockpit-resize { display: none; }
   #status { display: none; }
+  #rider[data-edge="left"] { left: 0; }
 }

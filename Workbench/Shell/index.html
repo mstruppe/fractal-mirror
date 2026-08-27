@@ -9,6 +9,14 @@
   /engine/* seam to the local engine room when this page is served by it — otherwise the seat is
   a door, never an engine. The pane itself still writes nothing; the engine's agent acts only
   through the in-pane C-008 permission moment. Rituals stay words: /fractal and /close are typed.
+  The rider grammar (Max's sketch, 2026-08-27): the workspace BORDERS themselves are the dock —
+  all four edges are magnetic, for the rider and for the window's edges; there is no bar object.
+  The cockpit's home is a RIDER resting on whichever border it was left on; one drag slides it
+  along an edge, carries it to another, or (pulled past the magnetic reach) detaches it.
+  Three states, fluid: rider (folded) · window (one object — "mini" when one border is held
+  magnetically on a workspace border, floating when free; one default size) · pane (in the
+  layout flow). Position is law: where the cockpit sits decides which side it unfolds to.
+  Buttons are the fixed layer (deterministic sizes/paths), drags the free layer.
 -->
 <html lang="en">
 <head>
@@ -23,7 +31,6 @@
   <div id="status" role="status">—</div>
   <button id="layout-btn" title="Layout — where the windows sit" aria-haspopup="menu" aria-expanded="false">◨</button>
   <button id="reader-btn" title="Reader — open / close" aria-label="Toggle the reader window">▤</button>
-  <button id="cockpit-toggle" title="Cockpit — open / close" aria-label="Toggle the cockpit pane">⎈</button>
   <button id="theme" title="Appearance: auto" aria-label="Toggle light/dark mode">◐</button>
 </header>
 <div id="layout-menu" hidden role="menu" aria-label="Default layouts">
@@ -47,9 +54,29 @@
 <div id="nav-resize" title="Drag to resize · double-click to reset"></div>
 <main id="content"></main>
 
+<!-- the rider — the cockpit folded, resting on a workspace border (the borders are the dock).
+     Click it to unfold the pane; ❐ opens the default-size mini window; one drag slides it
+     along its edge, carries it to another, or pulls it free into the floating window. -->
+<div id="rider" data-edge="bottom" role="button" tabindex="0"
+     title="Cockpit — click to unfold · drag to slide or detach">
+  <span class="r-label">⎈ Cockpit</span>
+  <button id="rider-mini" type="button" title="Open as mini window (default size)">❐</button>
+</div>
+
 <div id="cockpit-resize" title="Drag to resize · double-click to reset"></div>
 <aside id="cockpit" hidden>
-  <div id="cockpit-head"><span class="label">Cockpit</span><span id="cockpit-state">—</span></div>
+  <div class="win-h n"></div><div class="win-h s"></div><div class="win-h e"></div><div class="win-h w"></div>
+  <div class="win-h ne"></div><div class="win-h nw"></div><div class="win-h se"></div><div class="win-h sw"></div>
+  <div id="cockpit-head">
+    <span class="label">Cockpit</span>
+    <span id="cockpit-state">—</span>
+    <span id="cockpit-btns">
+      <button id="cp-to-pane" class="cp-btn win-only" type="button" title="Unfold to pane">◨</button>
+      <button id="cp-home" class="cp-btn win-only" type="button" title="Home — fold to the dock">⌂</button>
+      <button id="cp-to-window" class="cp-btn pane-only" type="button" title="To window (default size, at home)">❐</button>
+      <button id="cp-fold" class="cp-btn pane-only" type="button" title="Fold to the dock">–</button>
+    </span>
+  </div>
   <div id="cockpit-log"></div>
   <form id="cockpit-form">
     <textarea id="cockpit-input" rows="2" placeholder="Speak to the agent — Enter sends, Shift+Enter for a new line"></textarea>
