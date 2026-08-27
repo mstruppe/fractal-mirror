@@ -707,6 +707,27 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 #frame .tr { right: 0; top: 62px; }
 #frame .bl { left: calc(var(--nav-w) - 2px); bottom: 0; }
 #frame .br { right: 0; bottom: 0; }
+/* the bridges — the top menu and the side menu attach to the structure through
+   mounting clamps: each strut bites both the card's edge and the girder's chord */
+#frame .bridge {
+  position: fixed; z-index: 4; pointer-events: none;
+  border: 1px solid #454b54;
+  border-radius: 2px;
+}
+#frame .bridge.tb {
+  width: 12px; height: 16px; top: 55px;
+  background: linear-gradient(180deg, #3a3f47, #262a30);
+}
+#frame .bridge.rl {
+  width: 16px; height: 12px; left: calc(var(--nav-w) - 9px);
+  background: linear-gradient(90deg, #3a3f47, #262a30);
+}
+#frame .b1 { left: calc(var(--nav-w) + 44px); }
+#frame .b2 { left: calc(50% + var(--nav-w) / 2 - 6px); }
+#frame .b3 { right: 64px; }
+#frame .b4 { top: 110px; }
+#frame .b5 { top: calc(50% + 26px); }
+#frame .b6 { bottom: 110px; }
 #dockline {
   position: fixed; z-index: 3;
   pointer-events: none;
