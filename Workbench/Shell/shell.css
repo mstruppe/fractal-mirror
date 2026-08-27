@@ -728,18 +728,20 @@ body.dragging iframe { pointer-events: none; }   /* keep the drag alive over fra
 #frame .b4 { top: 110px; }
 #frame .b5 { top: calc(50% + 26px); }
 #frame .b6 { bottom: 110px; }
+/* the light runs THROUGH the girders (Max's call — no extra line): the comet's
+   path is the girder centerline; it threads the lattice and slides under the
+   gusset nodes and bridges, which sit a layer above */
 #dockline {
   position: fixed; z-index: 3;
   pointer-events: none;
   overflow: visible;
 }
 #dockline rect { fill: none; }
-#dockline rect.base { stroke: rgba(140, 190, 255, 0.16); stroke-width: 1.5; }
 #dockline rect.comet {
-  stroke: rgba(150, 200, 255, 0.85);
-  stroke-width: 1.5;
+  stroke: rgba(150, 200, 255, 0.75);
+  stroke-width: 7;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px rgba(150, 200, 255, 0.8));
+  filter: drop-shadow(0 0 6px rgba(150, 200, 255, 0.7));
   animation: dock-run 9s linear infinite;
 }
 @keyframes dock-run { to { stroke-dashoffset: var(--perim, 4000px); } }

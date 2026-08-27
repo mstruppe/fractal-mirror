@@ -736,25 +736,25 @@ function workspace() {
            w: window.innerWidth - navw - f * 2, h: window.innerHeight - top - f * 2 };
 }
 
-/* the dock line — the snap boundary made visible (station): the SVG traces the
-   workspace rect exactly; the comet's dash loop is sized to its perimeter */
+/* the light in the girders (Max's call — no extra line): the comet's path is
+   the GIRDER CENTERLINE — the frame band is 18, the girders centered 9 in it,
+   so the loop is the workspace rect grown by 9 on every side */
 function renderFrame() {
   if (document.documentElement.dataset.skin !== 'station') return;
   const svg = document.getElementById('dockline');
   if (!svg || window.innerWidth <= 760) return;
   const ws = workspace();
-  svg.style.left = ws.x + 'px'; svg.style.top = ws.y + 'px';
-  svg.style.width = ws.w + 'px'; svg.style.height = ws.h + 'px';
-  svg.setAttribute('viewBox', `0 0 ${ws.w} ${ws.h}`);
-  for (const r of svg.querySelectorAll('rect')) {
-    r.setAttribute('x', 1); r.setAttribute('y', 1);
-    r.setAttribute('rx', 10); r.setAttribute('ry', 10);
-    r.setAttribute('width', Math.max(0, ws.w - 2));
-    r.setAttribute('height', Math.max(0, ws.h - 2));
-  }
-  const peri = Math.round(2 * (ws.w + ws.h));
-  svg.querySelector('rect.comet')
-     .setAttribute('stroke-dasharray', `140 ${Math.max(1, peri - 140)}`);
+  const gx = ws.x - 9, gy = ws.y - 9, gw = ws.w + 18, gh = ws.h + 18;
+  svg.style.left = gx + 'px'; svg.style.top = gy + 'px';
+  svg.style.width = gw + 'px'; svg.style.height = gh + 'px';
+  svg.setAttribute('viewBox', `0 0 ${gw} ${gh}`);
+  const r = svg.querySelector('rect.comet');
+  r.setAttribute('x', 1); r.setAttribute('y', 1);
+  r.setAttribute('rx', 6); r.setAttribute('ry', 6);
+  r.setAttribute('width', Math.max(0, gw - 2));
+  r.setAttribute('height', Math.max(0, gh - 2));
+  const peri = Math.round(2 * (gw + gh));
+  r.setAttribute('stroke-dasharray', `170 ${Math.max(1, peri - 170)}`);
   svg.style.setProperty('--perim', peri + 'px');
 }
 
