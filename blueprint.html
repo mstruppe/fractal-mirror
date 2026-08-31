@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRACTAL — Blueprint</title>
+<meta name="description" content="The whole machine on one sheet — the origin instance opened into engine and hangar, the serving chain, the governed instances, the seed path, and the gates that move only on the owner's word.">
+<link rel="stylesheet" href="site.css">
+<!-- BLUEPRINT (Max's direction, 2026-08-31 — the fourth top-menu section): the machine drawn
+     as one sheet. Lineage: sheet no. 1 drawn by the owner's hand on his canvas; sheet no. 2
+     drawn by the session in answer; this page is that sheet converted into the site identity.
+     Sorting class: updated-in-place-to-stay-true (the Concepts class) — the drawing sheds
+     volatile counters and internal register references by design (the rule register stays
+     concept-level on the site; no new public surface carries the KNET name until clearance).
+     The estate map of record remains the Architecture State in the repository. -->
+<script>if (location.search.indexOf("nofade") !== -1) document.documentElement.classList.add("nofade");</script>
+<noscript><style>.float { opacity: 1; transform: none; }</style></noscript>
+<style>
+  /* the sheet — page-local: the one drawing this page exists for */
+  figure.sheetwrap { max-width: 1360px; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+  .sheetscroll {
+    overflow-x: auto;
+    border: 1px solid var(--hairline-soft);
+    border-radius: 14px;
+    background: var(--bg);
+  }
+  .sheetscroll svg { display: block; min-width: 1480px; width: 100%; height: auto; }
+  figure.sheetwrap figcaption {
+    margin-top: 0.7rem;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  svg.bp text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .bp .ln     { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+  .bp .lnthin { stroke: var(--ink); stroke-width: 1.1; fill: none; }
+  .bp .lndash { stroke: var(--muted); stroke-width: 1.2; fill: none; stroke-dasharray: 7 6; }
+  .bp .lnfaint{ stroke: var(--hairline); stroke-width: 1; fill: none; }
+  .bp .node   { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+  .bp .nodedash { fill: var(--bg); stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 8 6; }
+  .bp .nodedim  { fill: var(--bg); stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 6 5; }
+  .bp .room   { fill: none; stroke: var(--faint); stroke-width: 1; }
+  .bp .t  { fill: var(--ink); }
+  .bp .td { fill: var(--muted); }
+  .bp .tt { font-weight: 600; letter-spacing: 0.08em; }
+  .bp .gate { fill: var(--ink); }
+  .bp .griddot { fill: var(--hairline); }
+  .bp .mA { fill: var(--ink); }
+  .bp .mB { fill: var(--muted); }
+  .bp .gaugebox { fill: none; stroke: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Site">
+  <a href="fractal-site.html">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="blueprint.html" aria-current="page">Blueprint</a>
+  <a href="blog.html">Blog</a>
+  <a href="labs.html">Research Labs</a>
+  <a class="mark" href="Workbench/Shell/" title="The Shell — FRACTAL’s room">FRACTAL</a>
+</nav>
+
+<nav class="subnav" aria-label="Blueprint sections">
+  <a href="#sheet">The sheet</a>
+  <a href="#grammar">The grammar</a>
+  <a href="#reading">How to read it</a>
+</nav>
+
+<header class="hero-lite">
+  <h1>Blueprint</h1>
+  <p class="lede">The whole machine on one sheet &mdash; every part in its place, every flow drawn, every gate marked. The parts are the real ones, and the sheet is updated in place as they move.</p>
+</header>
+
+<main>
+
+<section id="sheet" class="float">
+  <p class="kicker">The sheet</p>
+  <h2>One drawing, opened one level.</h2>
+  <p>The origin instance sits at the center, opened downward into its <strong>engine</strong> &mdash; the memory, the law, the machinery, the context spine &mdash; and its <strong>hangar</strong>, where the workspace develops unserved. Above it, the serving chain: signed tag, external timestamp, the mirror, this website. Beside it, two <strong>governed instances</strong> born from the seed, corresponding through the envelope post. And in the corner, the <strong>owner</strong> &mdash; the diamond. The legend rides the sheet.</p>
+</section>
+
+<figure class="sheetwrap float">
+<div class="sheetscroll">
+<svg class="bp" viewBox="0 0 1840 1540" role="img"
+     aria-label="Blueprint of FRACTAL: the origin instance at center with its UI dome, opened by cones into its engine and its hangar; the serving chain up to the website; two governed instances on the envelope fabric; the seed path every birth takes; and diamond gates marking everything that moves only on the owner's word.">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <polygon class="mA" points="0,0.5 10,5 0,9.5"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <polygon class="mB" points="0,0.5 10,5 0,9.5"/>
+    </marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle class="griddot" cx="1.2" cy="1.2" r="1.2"/>
+    </pattern>
+  </defs>
+
+  <!-- paper -->
+  <rect x="20" y="20" width="1800" height="1500" fill="url(#grid)"/>
+  <rect x="20" y="20" width="1800" height="1500" class="lnfaint"/>
+
+  <!-- cones: open the origin inward (engine, hangar) — the same shape that grows it outward -->
+  <line class="lnthin" x1="700" y1="736" x2="220" y2="1000"/>
+  <line class="lnthin" x1="700" y1="736" x2="660" y2="1000"/>
+  <line class="lnthin" x1="1060" y1="736" x2="1120" y2="1000"/>
+  <line class="lnthin" x1="1060" y1="736" x2="1780" y2="1000"/>
+
+  <!-- serving trunk and chain -->
+  <line class="ln" x1="700" y1="584" x2="700" y2="234" marker-end="url(#a)"/>
+  <text class="td" transform="translate(686,530) rotate(-90)" font-size="12">each release — curated sync</text>
+  <line class="ln" x1="742" y1="190" x2="786" y2="190" marker-end="url(#a)"/>
+  <line class="ln" x1="992" y1="190" x2="1070" y2="190" marker-end="url(#a)"/>
+  <text class="td" x="1030" y="176" font-size="11" text-anchor="middle">serves</text>
+
+  <!-- public intake -->
+  <line class="ln" x1="1170" y1="247" x2="1170" y2="996" marker-end="url(#a)"/>
+  <text class="td" transform="translate(1188,980) rotate(-90)" font-size="12">public intake — issues, the open field door</text>
+
+  <!-- the distribution route -->
+  <polyline class="ln" points="1267,190 1500,190 1500,466" marker-end="url(#a)"/>
+  <text class="td" x="1514" y="332" font-size="12">derives the site&rsquo;s material</text>
+  <line class="ln" x1="1604" y1="570" x2="1748" y2="570" marker-end="url(#a)"/>
+  <text class="td" x="1676" y="556" font-size="11" text-anchor="middle">distributes</text>
+
+  <!-- the envelope fabric -->
+  <line class="ln" x1="455" y1="568" x2="648" y2="618" marker-end="url(#a)"/>
+  <line class="ln" x1="645" y1="648" x2="452" y2="598" marker-end="url(#a)"/>
+  <text class="td" x="540" y="548" font-size="12" text-anchor="middle">envelope post — a pairing</text>
+  <line class="ln" x1="1112" y1="612" x2="1398" y2="566" marker-end="url(#a)"/>
+  <line class="ln" x1="1400" y1="592" x2="1122" y2="640" marker-end="url(#a)"/>
+  <text class="td" x="1256" y="545" font-size="12" text-anchor="middle">envelope post — a pairing</text>
+
+  <!-- federation, armed -->
+  <path class="lndash" d="M 398 498 Q 560 405, 790 552" marker-end="url(#ad)"/>
+  <path class="lndash" d="M 1428 498 Q 1200 400, 968 552" marker-end="url(#ad)"/>
+  <text class="td" x="984" y="388" font-size="12.5" text-anchor="middle">FEDERATION — armed, not built</text>
+  <text class="td" x="984" y="406" font-size="11.5" text-anchor="middle">child knowledge worth ingesting will flow back</text>
+
+  <!-- the seed path -->
+  <line class="ln" x1="880" y1="776" x2="880" y2="864" marker-end="url(#a)"/>
+  <path class="ln" d="M 762 895 Q 540 700, 430 650" marker-end="url(#a)"/>
+  <path class="ln" d="M 998 895 Q 1230 690, 1417 625" marker-end="url(#a)"/>
+  <text class="td" x="566" y="726" font-size="11.5">birth</text>
+  <text class="td" x="1176" y="722" font-size="11.5">birth</text>
+
+  <!-- the owner -->
+  <polygon points="190,114 226,150 190,186 154,150" style="fill:var(--ink);fill-opacity:0.08;stroke:var(--ink);stroke-width:1.6"/>
+  <text class="t tt" x="190" y="220" font-size="15" text-anchor="middle">THE OWNER</text>
+  <text class="td" x="190" y="240" font-size="12" text-anchor="middle">one person — creator and admin</text>
+  <text class="t" x="190" y="259" font-size="12" text-anchor="middle">every ◆ is the owner&rsquo;s word at a gate</text>
+
+  <!-- serving stations -->
+  <rect class="node" x="500" y="150" width="240" height="80"/>
+  <text class="t tt" x="620" y="184" font-size="13" text-anchor="middle">SIGNED TAG + TIMESTAMP</text>
+  <text class="td" x="620" y="204" font-size="12" text-anchor="middle">Provenance/ — the anchor</text>
+  <rect class="node" x="790" y="150" width="200" height="80"/>
+  <text class="t tt" x="890" y="184" font-size="13" text-anchor="middle">THE MIRROR</text>
+  <text class="td" x="890" y="204" font-size="12" text-anchor="middle">fractal-mirror · gh-pages</text>
+  <polygon class="node" points="1122,135 1218,135 1265,162 1265,218 1218,245 1122,245 1075,218 1075,162"/>
+  <text class="t tt" x="1170" y="180" font-size="15" text-anchor="middle">WEBSITE</text>
+  <text class="td" x="1170" y="200" font-size="12" text-anchor="middle">knet.network</text>
+  <text class="td" x="1170" y="218" font-size="11" text-anchor="middle">the public home</text>
+
+  <!-- the origin instance -->
+  <circle class="node" cx="880" cy="522" r="50"/>
+  <ellipse class="node" cx="880" cy="660" rx="240" ry="115"/>
+  <text class="t" x="880" y="514" font-size="15" text-anchor="middle">UI</text>
+  <text class="td" x="944" y="468" font-size="11.5">SHELL — view-state</text>
+  <text class="td" x="944" y="486" font-size="11.5">the served room</text>
+  <text class="t tt" x="880" y="650" font-size="29" text-anchor="middle" letter-spacing="4">FRACTAL</text>
+  <text class="td" x="880" y="680" font-size="13" text-anchor="middle">the origin instance — beta-0.8 shipped · beta-0.9 forming</text>
+  <text class="td" x="880" y="700" font-size="12" text-anchor="middle">agent: Claude Code — the tested reference</text>
+  <text class="td" x="880" y="718" font-size="12" text-anchor="middle">the close: the owner&rsquo;s word · the push rides every close</text>
+
+  <!-- the governed instances -->
+  <circle class="node" cx="350" cy="590" r="100"/>
+  <text class="t tt" x="350" y="580" font-size="19" text-anchor="middle" letter-spacing="2">RESEARCH</text>
+  <text class="td" x="350" y="604" font-size="12" text-anchor="middle">a governed instance</text>
+  <text class="td" x="350" y="622" font-size="12" text-anchor="middle">kernel: beta-0.8</text>
+  <text class="td" x="350" y="640" font-size="12" text-anchor="middle">resident agent: Codex</text>
+
+  <circle class="node" cx="1500" cy="570" r="100"/>
+  <text class="t tt" x="1500" y="558" font-size="16" text-anchor="middle" letter-spacing="2">DISTRIBUTION</text>
+  <text class="td" x="1500" y="584" font-size="12" text-anchor="middle">a governed instance</text>
+  <text class="td" x="1500" y="602" font-size="12" text-anchor="middle">kernel: beta-0.8</text>
+  <text class="td" x="1500" y="620" font-size="12" text-anchor="middle">the media branch</text>
+
+  <!-- the seed -->
+  <rect class="node" x="760" y="868" width="240" height="64" rx="32"/>
+  <text class="t tt" x="880" y="896" font-size="13.5" text-anchor="middle">THE SEED</text>
+  <text class="td" x="880" y="915" font-size="11.5" text-anchor="middle">FRACTAL-seed-&lt;tag&gt;.tar.gz</text>
+  <text class="td" x="880" y="958" font-size="12" text-anchor="middle">kernel + MIDWIFE.md — births: the same shape, one scale down</text>
+  <text class="td" x="880" y="976" font-size="12" text-anchor="middle">every newborn born plugged · proven from the bare seed</text>
+
+  <!-- the hangar -->
+  <rect class="nodedash" x="220" y="1000" width="440" height="340"/>
+  <text class="t tt" x="240" y="1032" font-size="15">WORKBENCH — THE HANGAR</text>
+  <text class="td" x="240" y="1054" font-size="12">armed, not fired · develops unserved by design</text>
+  <rect class="room" x="240" y="1078" width="190" height="88"/>
+  <text class="t" x="252" y="1102" font-size="13">SHELL</text>
+  <text class="td" x="252" y="1120" font-size="11.5">stations · the row law</text>
+  <text class="td" x="252" y="1136" font-size="11.5">serving lags the hangar</text>
+  <rect class="room" x="450" y="1078" width="190" height="88"/>
+  <text class="t" x="462" y="1102" font-size="13">COCKPIT</text>
+  <text class="td" x="462" y="1120" font-size="11.5">the governed desk</text>
+  <rect class="room" x="240" y="1178" width="190" height="88"/>
+  <text class="t" x="252" y="1202" font-size="13">ENGINE ROOM</text>
+  <text class="td" x="252" y="1220" font-size="11.5">the machinery bay</text>
+  <rect class="room" x="450" y="1178" width="190" height="88"/>
+  <text class="t" x="462" y="1202" font-size="13">STUDIO</text>
+  <text class="td" x="462" y="1220" font-size="11.5">build 1 — papers</text>
+  <text class="td" x="462" y="1236" font-size="11.5">build 2 — the pen</text>
+  <rect class="room" x="240" y="1284" width="400" height="34"/>
+  <text class="t" x="440" y="1306" font-size="12" text-anchor="middle">REGRESSION SUITE — green before any serving</text>
+
+  <!-- the engine -->
+  <rect class="node" x="1120" y="1000" width="660" height="420"/>
+  <text class="t tt" x="1140" y="1034" font-size="16">THE ENGINE</text>
+  <text class="td" x="1268" y="1034" font-size="12.5">— &ldquo;the engine is everything&rdquo; · the Shell doctrine</text>
+  <line class="lnfaint" x1="1120" y1="1050" x2="1780" y2="1050"/>
+  <line class="lnfaint" x1="1450" y1="1050" x2="1450" y2="1420"/>
+  <line class="lnfaint" x1="1120" y1="1240" x2="1780" y2="1240"/>
+
+  <text class="t tt" x="1140" y="1080" font-size="13">MACHINERY</text>
+  <text class="t" x="1140" y="1104" font-size="12.5">close.py <tspan class="td">— the close ritual · red blocks</tspan></text>
+  <text class="t" x="1140" y="1124" font-size="12.5">genesis.py <tspan class="td">— births</tspan></text>
+  <text class="t" x="1140" y="1144" font-size="12.5">postman.py <tspan class="td">— the envelope post</tspan></text>
+  <text class="t" x="1140" y="1164" font-size="12.5">fieldnote.py <tspan class="td">— the buffer</tspan></text>
+  <g>
+    <rect class="gaugebox" x="1140" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1158" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1176" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1194" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1212" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1230" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1248" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1266" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1284" y="1180" width="14" height="14"/>
+    <rect class="gaugebox" x="1302" y="1180" width="14" height="14"/>
+    <text class="td" x="1330" y="1192" font-size="11.5">10 slots</text>
+  </g>
+  <text class="td" x="1140" y="1222" font-size="11">checks: verify · versions · scan · hangar gate</text>
+
+  <text class="t tt" x="1470" y="1080" font-size="13">MEMORY</text>
+  <text class="t" x="1470" y="1104" font-size="12.5">the KG Store <tspan class="td">— the live corpus</tspan></text>
+  <text class="t" x="1470" y="1124" font-size="12.5">the Decision Register <tspan class="td">— every ruling</tspan></text>
+  <text class="t" x="1470" y="1144" font-size="12.5">the Protocol series <tspan class="td">— the history</tspan></text>
+  <text class="t" x="1470" y="1164" font-size="12">frozen records <tspan class="td">— returns · flights · scans</tspan></text>
+  <text class="td" x="1470" y="1188" font-size="11.5">verify.py — the count of record</text>
+
+  <text class="t tt" x="1140" y="1272" font-size="13">LAW</text>
+  <text class="t" x="1140" y="1296" font-size="12.5">Conversation Settings <tspan class="td">— the source</tspan></text>
+  <text class="t" x="1140" y="1316" font-size="12.5">→ adapters: CLAUDE.md · AGENTS.md</text>
+  <text class="t" x="1140" y="1336" font-size="12.5">the Rule Overview · the Registry</text>
+  <text class="t" x="1140" y="1356" font-size="12.5">procedures: diets · pairs · migration</text>
+  <text class="t" x="1140" y="1378" font-size="12">◆ draft → law: only the owner ratifies</text>
+
+  <text class="t tt" x="1470" y="1272" font-size="13">THE SPINE</text>
+  <text class="t" x="1470" y="1296" font-size="12.5">Global ↔ Local <tspan class="td">— the two poles</tspan></text>
+  <text class="t" x="1470" y="1316" font-size="12.5">the pair series <tspan class="td">— two reader faces</tspan></text>
+  <text class="t" x="1470" y="1336" font-size="12.5">→ User Documents/ <tspan class="td">— the owner&rsquo;s windows</tspan></text>
+  <text class="td" x="1470" y="1356" font-size="11.5">Board · Roadmap · Handout · Update Plan</text>
+
+  <!-- the shelf + the dormant -->
+  <text class="td" x="40" y="760" font-size="11.5" letter-spacing="1">THE SHELF — summoned, not wired</text>
+  <rect class="node" x="40" y="776" width="170" height="76"/>
+  <text class="t" x="52" y="802" font-size="12.5">MATH TOOL</text>
+  <text class="td" x="52" y="820" font-size="11.5">MRC — the convention</text>
+  <text class="td" x="52" y="836" font-size="11.5">summoned by /mrc</text>
+  <rect class="node" x="40" y="872" width="170" height="60"/>
+  <text class="t" x="52" y="898" font-size="12.5">MINING TOOL</text>
+  <text class="td" x="52" y="916" font-size="11">trigger not yet fired</text>
+
+  <text class="td" x="40" y="1062" font-size="10.5" letter-spacing="1">DORMANT — governed, asleep</text>
+  <rect class="nodedim" x="40" y="1078" width="170" height="58"/>
+  <text class="t" x="52" y="1102" font-size="12.5">the annex</text>
+  <text class="td" x="52" y="1120" font-size="11">private · personal-class</text>
+  <rect class="nodedim" x="40" y="1152" width="170" height="58"/>
+  <text class="t" x="52" y="1176" font-size="12.5">the alpha archive</text>
+  <text class="td" x="52" y="1194" font-size="11">frozen — pointer-only</text>
+  <rect class="nodedim" x="40" y="1226" width="170" height="58"/>
+  <text class="t" x="52" y="1250" font-size="12.5">a frozen grant</text>
+  <text class="td" x="52" y="1268" font-size="11">beta-0.4 · held</text>
+
+  <!-- the gates -->
+  <polygon class="gate" points="700,333 707,340 700,347 693,340"/>
+  <text class="t" x="714" y="344" font-size="11.5">◆ the refresh word — serving moves only on it</text>
+  <polygon class="gate" points="880,813 887,820 880,827 873,820"/>
+  <text class="t" x="898" y="812" font-size="11.5">◆ the pack</text>
+  <text class="td" x="898" y="830" font-size="11">emitted at a close</text>
+  <text class="td" x="898" y="848" font-size="11">shipped on the word</text>
+  <polygon class="gate" points="440,993 447,1000 440,1007 433,1000"/>
+  <text class="t" x="440" y="984" font-size="11.5" text-anchor="middle">◆ the exit — the owner&rsquo;s declaration only</text>
+
+  <!-- legend -->
+  <rect class="node" x="700" y="1040" width="380" height="304"/>
+  <text class="t tt" x="718" y="1066" font-size="12">LEGEND — the shape grammar</text>
+  <text class="td" x="718" y="1082" font-size="10.5">the owner&rsquo;s grammar, extended</text>
+  <ellipse class="lnthin" cx="733" cy="1104" rx="17" ry="8"/>
+  <text class="td" x="762" y="1108" font-size="12">the origin — the governing instance</text>
+  <circle class="lnthin" cx="733" cy="1134" r="9"/>
+  <text class="td" x="762" y="1138" font-size="12">a living instance — a child</text>
+  <polygon class="lnthin" points="726,1156 740,1156 747,1161 747,1171 740,1176 726,1176 719,1171 719,1161"/>
+  <text class="td" x="762" y="1170" font-size="12">a served surface — not an instance</text>
+  <rect class="lnthin" x="722" y="1190" width="22" height="15"/>
+  <text class="td" x="762" y="1202" font-size="12">a component · a tool</text>
+  <path class="lnthin" d="M 721 1234 a 12 12 0 0 1 24 0"/>
+  <line class="lnthin" x1="716" y1="1234" x2="750" y2="1234"/>
+  <text class="td" x="762" y="1232" font-size="12">a face — view-state on the machine</text>
+  <line class="lnthin" x1="719" y1="1260" x2="748" y2="1252"/>
+  <line class="lnthin" x1="719" y1="1260" x2="748" y2="1266"/>
+  <text class="td" x="762" y="1262" font-size="12">one shape both ways: zoom in · grow out</text>
+  <line class="lnthin" x1="719" y1="1286" x2="746" y2="1286" marker-end="url(#a)"/>
+  <line class="lnthin" x1="748" y1="1294" x2="721" y2="1294" marker-end="url(#a)"/>
+  <text class="td" x="762" y="1294" font-size="12">two-way flow — envelopes · serve/intake</text>
+  <rect class="nodedim" x="720" y="1310" width="26" height="15"/>
+  <text class="td" x="762" y="1322" font-size="12">unserved · frozen · private · armed</text>
+  <polygon class="gate" points="733,1332 739,1338 733,1344 727,1338"/>
+  <text class="td" x="762" y="1342" font-size="12">a gate — crosses only on the owner&rsquo;s word</text>
+
+  <!-- title block -->
+  <rect class="node" x="700" y="1372" width="380" height="120"/>
+  <text class="t tt" x="712" y="1396" font-size="13.5">FRACTAL — THE FULL PICTURE</text>
+  <line class="lnfaint" x1="700" y1="1408" x2="1080" y2="1408"/>
+  <text class="td" x="712" y="1428" font-size="11.5">drawn: Claude — after the owner&rsquo;s sheet no. 1</text>
+  <text class="td" x="712" y="1446" font-size="11.5">first served: 2026-08-31 · updated in place</text>
+  <line class="lnfaint" x1="700" y1="1458" x2="1080" y2="1458"/>
+  <text class="td" x="712" y="1478" font-size="11.5">LIVING DRAWING · of record: the Architecture State</text>
+</svg>
+</div>
+<figcaption>FIG. 1 — the machine at instance grain, opened one level: the engine and the hangar, the serving chain, the governed instances on the envelope fabric, the seed path, the owner&rsquo;s gates.</figcaption>
+</figure>
+
+<section id="grammar" class="float">
+  <p class="kicker">The grammar</p>
+  <h2>Shapes carry the meaning.</h2>
+  <p>The <strong>ellipse</strong> is the origin instance; <strong>circles</strong> are living instances born from it; the <strong>octagon</strong> is a served surface &mdash; a projection, not an instance; <strong>squares</strong> are components and tools. The <strong>dome</strong> riding the ellipse is a face: view-state on the machine, never the machine. <strong>Dashes</strong> mark what is governed but not live &mdash; unserved, frozen, private, armed.</p>
+  <p>The <strong>cone</strong> is the sheet&rsquo;s one thesis. Pointing inward, it opens the origin into its engine and its hangar; pointing outward, the same shape is a birth &mdash; the seed casting the whole pattern one scale down. Zooming in and growing out produce the same drawing. That is recursive simplicity, drawn.</p>
+  <p>The grammar is the owner&rsquo;s: sheet no. 1 was drawn by hand, and this sheet answers it, keeping the vocabulary and adding four marks &mdash; the dome, the seed capsule, the diamond, the dashes.</p>
+</section>
+
+<section id="reading" class="float">
+  <p class="kicker">How to read it</p>
+  <h2>Follow the word, not the arrows.</h2>
+  <p>Every flow on the sheet moves on its own &mdash; envelopes travel, the intake accepts, releases sync &mdash; except where a <strong>diamond</strong> sits. A diamond is a gate, and a gate crosses on one thing only: the owner&rsquo;s word. The refresh word serves the site; the pack is emitted at a close but ships on the word; a draft becomes law by ratification alone. The large diamond in the corner is the owner; every gate is a small copy.</p>
+  <p>The sheet is also honest about lag. The hangar develops unserved by design &mdash; the room behind the <strong>FRACTAL</strong> button in the menu is the served build, and it trails the hangar deliberately until the refresh word is given. The regression suite stands before any serving.</p>
+  <p>Some parts are deliberately not wired. The shelf floats free because conventions are summoned into sessions, not connected. The dormant column is dashed, not absent: governed, asleep. Federation is dashed because it is armed future &mdash; nothing here is built before its trigger fires. And this page is a drawing, updated in place to stay true; the map of record is the <a href="https://github.com/mstruppe/fractal-mirror/blob/main/Claude/Architecture/Architecture%20State/Fractal_Architecture_State.md">Architecture State</a>, in the repository like everything else.</p>
+</section>
+
+</main>
+
+<footer>
+  <div><a href="mailto:fractal@knet.network">fractal@knet.network</a></div>
+  <div class="row">Apache-2.0 &middot; docs CC BY 4.0 &middot; releases signed and externally timestamped</div>
+  <div class="row">Built with Claude Code &mdash; the repository&rsquo;s <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace;">Claude/</span> folder is that heritage, not a dependency. Independent project; not affiliated with Anthropic.</div>
+  <div class="row"><a href="legal.html">Legal notice &amp; privacy</a></div>
+</footer>
+
+<script src="site.js" defer></script>
+
+</body>
+</html>
