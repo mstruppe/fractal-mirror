@@ -5,32 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FRACTAL — Procedures</title>
 <meta name="description" content="Governed procedures for AI-agent-assisted work, distilled from real use and ratified as standards: multi-agent flight programs, commissioned reviews, and memory diets with measured safety.">
+<link rel="stylesheet" href="site.css">
 <style>
   /* Procedures blog (Site/procedures.html) — sibling of the site source of record (Site/fractal-site.html),
-     same design brief: black & white, luxury-minimal, sans, both modes, content floating in space. */
-  :root {
-    --bg: #ffffff;
-    --ink: #0a0a0a;
-    --muted: #6e6e73;
-    --faint: #a1a1a6;
-    --hairline: rgba(10, 10, 10, 0.12);
-    --hairline-soft: rgba(10, 10, 10, 0.06);
-    --code-bg: rgba(10, 10, 10, 0.035);
-    --nav-bg: rgba(255, 255, 255, 0.72);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #000000;
-      --ink: #f5f5f7;
-      --muted: #86868b;
-      --faint: #58585c;
-      --hairline: rgba(245, 245, 247, 0.16);
-      --hairline-soft: rgba(245, 245, 247, 0.08);
-      --code-bg: rgba(245, 245, 247, 0.055);
-      --nav-bg: rgba(0, 0, 0, 0.65);
-    }
-  }
-
+     same design brief: black & white, luxury-minimal, sans, both modes, content floating in space.
+     The design tokens come from site.css (linked above — one source of truth, SW1-4.2, 2026-09-24);
+     this block holds the page's own layout only, and its later rules win at equal specificity. */
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

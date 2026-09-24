@@ -14,6 +14,7 @@ Open the C-096 observation window on the target named in the argument: **$ARGUME
 | Target | Path | What it is |
 |---|---|---|
 | `knet` | `~/Desktop/Knowledge Network/knet` | The first foreign instance (C-078 arc 2) — research instance on knowledge-network information economics; its own jurisdiction |
+| `pr` | `~/Desktop/Knowledge Network/PR` | The second child (born 2026-08-21 from the beta-0.7 tag, `fa5418a`) — head of public relations; its own jurisdiction (row added 2026-08-22 on Max's word — his direction to read PR's interface) |
 
 Adding a target is an ordinary edit to this roster, on Max's word.
 

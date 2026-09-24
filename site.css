@@ -167,6 +167,16 @@ header.hero {
 }
 .hero-cue a { color: var(--muted); border-bottom: 1px solid var(--hairline); }
 .hero-cue a:hover { color: var(--ink); border-color: var(--ink); }
+.pause-note {
+  display: inline-block;
+  margin: 1.4rem auto 0;
+  max-width: 34rem;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+}
 
 /* ---------- hero (compact, section pages) ---------- */
 header.hero-lite {
